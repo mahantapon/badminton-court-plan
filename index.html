@@ -860,24 +860,26 @@ function quad(a,b,c,d,m){
   return new THREE.Mesh(g,m);
 }
 function courtTex(){
-  const c=document.createElement('canvas');c.width=256;c.height=548;
+  /* เสื่อยางเขียวแบบสนามแบดไทย + เส้นขาวหนาคมชัด (ผังเส้นมาตรฐานจริง) */
+  const c=document.createElement('canvas');c.width=512;c.height=1088;
   const g=c.getContext('2d');
-  g.fillStyle='#1f6f4a';g.fillRect(0,0,256,548);            // สนามสีเขียวขอบ
-  g.fillStyle='#2f6fa8';g.fillRect(6,6,244,536);            // พื้นเล่นสีน้ำเงิน
-  g.strokeStyle='#fff';g.lineWidth=4;
-  g.strokeRect(18,18,220,512);
+  g.fillStyle='#1b6b3f';g.fillRect(0,0,512,1088);          // ขอบเสื่อเขียวเข้ม
+  g.fillStyle='#2f9e63';g.fillRect(26,38,460,1012);        // พื้นเล่นเขียวสด
+  g.strokeStyle='#ffffff';g.lineWidth=6;g.lineCap='butt';
+  g.strokeRect(26,38,460,1012);                            // เส้นเขตคู่ (นอกสุด)
   g.beginPath();
-  g.moveTo(18,274);g.lineTo(238,274);
-  g.moveTo(40,18);g.lineTo(40,530);
-  g.moveTo(216,18);g.lineTo(216,530);
-  g.moveTo(18,96);g.lineTo(238,96);
-  g.moveTo(18,452);g.lineTo(238,452);
-  g.moveTo(18,202);g.lineTo(238,202);
-  g.moveTo(18,346);g.lineTo(238,346);
-  g.moveTo(128,18);g.lineTo(128,202);
-  g.moveTo(128,346);g.lineTo(128,530);
+  g.moveTo(61,38);g.lineTo(61,1050);                       // ข้างเดี่ยว ซ้าย
+  g.moveTo(451,38);g.lineTo(451,1050);                     // ข้างเดี่ยว ขวา
+  g.moveTo(26,95);g.lineTo(486,95);                        // เสิร์ฟยาวคู่ (หลังบน)
+  g.moveTo(26,993);g.lineTo(486,993);                      // เสิร์ฟยาวคู่ (หลังล่าง)
+  g.moveTo(26,395);g.lineTo(486,395);                      // เสิร์ฟสั้น บน
+  g.moveTo(26,693);g.lineTo(486,693);                      // เสิร์ฟสั้น ล่าง
+  g.moveTo(256,38);g.lineTo(256,395);                      // เส้นกลาง บน
+  g.moveTo(256,693);g.lineTo(256,1050);                    // เส้นกลาง ล่าง
   g.stroke();
-  const t=new THREE.CanvasTexture(c);t.anisotropy=8;return t;
+  g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=3;
+  g.strokeRect(3,3,506,1082);                              // ขอบเสื่อ (ตัดกับพื้นโถง)
+  const t=new THREE.CanvasTexture(c);t.anisotropy=16;t.colorSpace=THREE.SRGBColorSpace;return t;
 }
 function bannerTex(txt,bg,fg){
   const c=document.createElement('canvas');c.width=1024;c.height=192;
@@ -886,7 +888,7 @@ function bannerTex(txt,bg,fg){
   g.fillStyle='rgba(255,255,255,.12)';g.fillRect(0,0,1024,26);
   g.fillStyle=fg;g.font='bold 96px Prompt,sans-serif';g.textAlign='center';g.textBaseline='middle';
   g.fillText(txt,512,104);
-  const t=new THREE.CanvasTexture(c);t.anisotropy=8;return t;
+  const t=new THREE.CanvasTexture(c);t.anisotropy=8;t.colorSpace=THREE.SRGBColorSpace;return t;
 }
 function signTex(txt){
   const c=document.createElement('canvas');c.width=640;c.height=96;
@@ -895,7 +897,7 @@ function signTex(txt){
   g.strokeStyle='#e8a03c';g.lineWidth=5;g.strokeRect(4,4,632,88);
   g.fillStyle='#fff';g.font='bold 40px Prompt,sans-serif';g.textAlign='center';g.textBaseline='middle';
   g.fillText(txt,320,52);
-  return new THREE.CanvasTexture(c);
+  const st=new THREE.CanvasTexture(c);st.colorSpace=THREE.SRGBColorSpace;return st;
 }
 
 window.init3D=function(){
@@ -917,8 +919,8 @@ window.init3D=function(){
   controls.enableDamping=true;controls.maxPolarAngle=Math.PI/2-.02;
   controls.minDistance=1.2;controls.maxDistance=340;controls.target.set(0,3,0);
   controls.addEventListener('start',()=>{camDest=null;});   /* ลากเมื่อไหร่ = ยกเลิกการเคลื่อนกล้องอัตโนมัติ */
-  hemi=new THREE.HemisphereLight(0xffffff,0x88aa88,.85);scene.add(hemi);
-  ambient=new THREE.AmbientLight(0xdfe8f0,1.25);scene.add(ambient);
+  hemi=new THREE.HemisphereLight(0xffffff,0x88aa88,.6);scene.add(hemi);
+  ambient=new THREE.AmbientLight(0xdfe8f0,.55);scene.add(ambient);
   for(let z=-32;z<=32;z+=16){
     [-11,11].forEach(x=>{
       const pl=new THREE.PointLight(0xfff6e6,1.0,42,1.4);
@@ -931,6 +933,10 @@ window.init3D=function(){
   sun.shadow.camera.updateProjectionMatrix();scene.add(sun);
   buildStatic();
   buildCourts(curCourts);
+  /* หลังคา+ผนังต้องบังแดด ไม่งั้นแดดทะลุลงมาเผาสีสนาม */
+  roofGroup.traverse(o=>{if(o.isMesh)o.castShadow=true;});
+  sun.intensity=1.3;
+  renderer.toneMappingExposure=.95;
   window.addEventListener('resize',onResize);
   renderer.setAnimationLoop(()=>{
     if(camDest){camera.position.lerp(camDest,.06);controls.target.lerp(lookDest,.06);
@@ -951,10 +957,16 @@ function buildStatic(){
   ground.rotation.x=-Math.PI/2;ground.position.y=-.06;ground.receiveShadow=true;scene.add(ground);
   const plot=new THREE.Mesh(new THREE.PlaneGeometry(120,150),mat(0xb9b4aa));
   plot.rotation.x=-Math.PI/2;plot.position.set(0,-.03,0);plot.receiveShadow=true;scene.add(plot);
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W,HALL_L),mat(0x35404a));
+  /* พื้นโถงแบ่งโซนชัด: คอนกรีตเข้มใต้คอร์ท · ทางเดินกลางสีอ่อน · เส้นขาวคั่นโซน */
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W,HALL_L),mat(0x2e3236));
   floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
-  const aisle=new THREE.Mesh(new THREE.PlaneGeometry(8.2,HALL_L),mat(0x8a5f3a));
+  const aisle=new THREE.Mesh(new THREE.PlaneGeometry(8.2,HALL_L),mat(0xa8a49a));
   aisle.rotation.x=-Math.PI/2;aisle.position.y=.005;aisle.receiveShadow=true;scene.add(aisle);
+  const zoneLn=mat(0xf2f2ee);
+  [-4.15,4.15,-17.55,17.55].forEach(x=>{
+    const ln=new THREE.Mesh(new THREE.BoxGeometry(.14,.02,HALL_L-1),zoneLn);
+    ln.position.set(x,.012,0);scene.add(ln);
+  });
 
   const steel=mat(0x3a4046,{metalness:.5,roughness:.5});
   const colGeo=new THREE.BoxGeometry(.5,EAVE,.5);
@@ -1294,7 +1306,7 @@ function buildCourts(n){
   const tex=courtTex();
   const courtMat=new THREE.MeshStandardMaterial({map:tex});
   const netMat=mat(0x22262a,{transparent:true,opacity:.82,side:THREE.DoubleSide});
-  const meshMat=mat(0x1b2a1f,{transparent:true,opacity:.34,side:THREE.DoubleSide});
+  const meshMat=mat(0x0f1a14,{transparent:true,opacity:.16,side:THREE.DoubleSide,depthWrite:false});
   const frameMat=mat(0x2e3338,{metalness:.5,roughness:.45});
   const chairMat=mat(0x1e5aa8), chairLeg=mat(0x30363c);
   const bagCols=[0xc0504d,0x2e7d4f,0x25303a,0xd8b56a,0x6b4a8a];
@@ -1322,10 +1334,10 @@ function buildCourts(n){
       });
 
       /* ตาข่ายกั้นระหว่างคอร์ท (ทุกช่อง) */
-      const div=new THREE.Mesh(new THREE.PlaneGeometry(COURT_L+2.2,2.6),meshMat);
-      div.position.set(cx,1.3,z+M.pitch/2);courtGroup.add(div);
-      const rail=new THREE.Mesh(new THREE.BoxGeometry(COURT_L+2.2,.06,.06),frameMat);
-      rail.position.set(cx,2.6,z+M.pitch/2);courtGroup.add(rail);
+      const div=new THREE.Mesh(new THREE.PlaneGeometry(COURT_L+1.2,2.2),meshMat);
+      div.position.set(cx,1.1,z+M.pitch/2);courtGroup.add(div);
+      const rail=new THREE.Mesh(new THREE.BoxGeometry(COURT_L+1.2,.06,.06),frameMat);
+      rail.position.set(cx,2.2,z+M.pitch/2);courtGroup.add(rail);
 
       /* เก้าอี้นั่งพัก 3 ตัว + กระเป๋า ด้านหลังคอร์ท (ฝั่งทางเดินกลาง) */
       const bx=sgn*(cxAbs-COURT_L/2-1.7);
@@ -1420,10 +1432,10 @@ window.toggleRoof=()=>{
   b.classList.toggle('active',!roofGroup.visible);
 };
 function applyNight(){
-  courtLights.forEach(s=>s.intensity=night?170:80);
-  if(lampMat)lampMat.emissiveIntensity=night?3.4:1.8;
-  if(ambient)ambient.intensity=night?.5:1.25;
-  indoorLights.forEach(p=>p.intensity=night?1.3:1.0);
+  courtLights.forEach(s=>s.intensity=night?170:38);
+  if(lampMat)lampMat.emissiveIntensity=night?3.4:1.6;
+  if(ambient)ambient.intensity=night?.32:.55;
+  indoorLights.forEach(p=>p.intensity=night?1.2:.75);
 }
 window.toggleNight=()=>{
   if(!started)return;
