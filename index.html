@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โครงการสนามแบดมินตัน — โรงงานบางขุนเทียน (แผนธุรกิจ)</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bad:#1e5aa8; --bad-dark:#0e3d6b; --amb:#e8a03c; --bg:#f4f6f3;
+    --card:#fff; --ink:#22302a; --muted:#6b7a72; --red:#c0504d; --grn:#1b7a4a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Prompt',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+  .wrap{max-width:1020px;margin:0 auto;padding:22px 18px 60px}
+  header{background:linear-gradient(135deg,var(--bad-dark),var(--bad));color:#fff;padding:32px 20px 16px;text-align:center}
+  header h1{font-size:1.55rem;font-weight:700}
+  header p{opacity:.9;margin-top:6px;font-weight:300;font-size:.92rem}
+  nav{position:sticky;top:0;z-index:50;background:var(--bad-dark);display:flex;justify-content:center;flex-wrap:wrap;gap:4px;padding:9px 8px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  nav button{font-family:inherit;font-size:.88rem;border:none;background:transparent;color:#cfe0f0;padding:8px 14px;border-radius:999px;cursor:pointer;transition:.15s}
+  nav button:hover{background:rgba(255,255,255,.12);color:#fff}
+  nav button.active{background:#fff;color:var(--bad-dark);font-weight:600}
+  .page{display:none}
+  .page.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-size:1.28rem;margin:8px 0 14px;color:var(--bad-dark)}
+  h3{font-size:1.02rem;margin:22px 0 10px;color:var(--bad-dark)}
+  .card{background:var(--card);border-radius:14px;padding:22px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:18px}
+  table{width:100%;border-collapse:collapse;font-size:.93rem}
+  th,td{padding:8px 11px;text-align:left;border-bottom:1px solid #eef1ee}
+  th{color:var(--muted);font-weight:500;font-size:.83rem}
+  td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.total td{font-weight:700;border-top:2px solid var(--bad);border-bottom:none;font-size:1rem}
+  tr.sec td{background:#f2f6fa;font-weight:600;color:var(--bad-dark)}
+  .sub{color:var(--muted);font-size:.81rem}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:14px 0}
+  .ctrl label{font-size:.84rem;color:var(--muted);display:block;margin-bottom:4px}
+  .ctrl .val{font-weight:600;color:var(--bad-dark)}
+  input[type=range]{width:100%;accent-color:var(--bad)}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px;align-items:center}
+  .btnrow .lbl{font-size:.84rem;color:var(--muted);width:100%}
+  .btn{border:1.5px solid var(--bad);background:#fff;color:var(--bad-dark);padding:7px 15px;border-radius:999px;font-family:inherit;font-size:.87rem;cursor:pointer;transition:.15s}
+  .btn:hover{background:#eaf1fa}
+  .btn.active{background:var(--bad);color:#fff}
+  .btn.ghost{border-color:#c8d2dc;color:var(--muted)}
+  .modebar{display:flex;gap:10px;flex-wrap:wrap;background:#eef4fb;border:1px solid #d3e1f0;border-radius:12px;padding:11px;margin-bottom:16px}
+  .modebar .mb{flex:1;min-width:230px;border:2px solid #c8d6e6;background:#fff;border-radius:10px;padding:11px 15px;cursor:pointer;transition:.15s}
+  .modebar .mb.active{border-color:var(--bad);background:#eaf1fa}
+  .modebar .mb .tt{font-weight:600;color:var(--bad-dark);font-size:.96rem}
+  .modebar .mb .ss{font-size:.81rem;color:var(--muted);margin-top:2px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin-top:14px}
+  .kpi{background:linear-gradient(160deg,#fff,#eef4fb);border:1px solid #d9e4f0;border-radius:12px;padding:13px 16px}
+  .kpi.big{grid-column:1/-1;text-align:center;background:linear-gradient(160deg,#eef4fb,#e2ecf8)}
+  .kpi .t{font-size:.78rem;color:var(--muted)}
+  .kpi .v{font-size:1.35rem;font-weight:700;color:var(--bad-dark);font-variant-numeric:tabular-nums}
+  .kpi.big .v{font-size:1.9rem}
+  .kpi .v.warn{color:var(--red)}
+  .kpi .s{font-size:.76rem;color:var(--muted)}
+  .note{background:#fff8ec;border-left:4px solid var(--amb);border-radius:8px;padding:13px 16px;font-size:.88rem;margin-top:14px}
+  .note b{color:#9a6a1c}
+  .note.blue{background:#eef4fb;border-left-color:var(--bad)}
+  .note.blue b{color:var(--bad-dark)}
+  svg{width:100%;height:auto;display:block}
+  .blueprint{background:#fdfefe;border:1px solid #dfe7ea;border-radius:10px;padding:8px}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:.81rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:13px;height:13px;border-radius:4px;display:inline-block}
+  #view3d{position:relative;width:100%;height:480px;border-radius:12px;overflow:hidden;background:#0d1b2e;touch-action:none}
+  #view3d canvas{display:block}
+  #view3d .load3d{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#9fb8d0;font-size:.92rem;text-align:center;padding:20px}
+  .hint3d{font-size:.8rem;color:var(--muted);margin-top:8px}
+  .pagenav{display:flex;justify-content:space-between;margin-top:8px}
+  .pagenav .btn{font-size:.93rem;padding:10px 20px}
+  .steps{counter-reset:s}
+  .step{display:flex;gap:13px;margin-bottom:12px;align-items:flex-start}
+  .step .n{counter-increment:s;background:var(--bad);color:#fff;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.86rem}
+  .step .n::before{content:counter(s)}
+  details{background:#fff;border:1px solid #e2eae4;border-radius:12px;margin-bottom:9px;overflow:hidden}
+  details summary{cursor:pointer;padding:12px 16px;font-weight:600;color:var(--bad-dark);list-style:none;display:flex;align-items:center;gap:9px}
+  details summary::before{content:'＋';color:var(--bad);font-weight:700}
+  details[open] summary::before{content:'－'}
+  details summary:hover{background:#f2f8fa}
+  details .body{padding:0 16px 14px 40px;font-size:.9rem;color:#3c4a43}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:36px}
+  @media(max-width:600px){header h1{font-size:1.1rem}nav button{padding:7px 9px;font-size:.76rem}#view3d{height:340px}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏸 โครงการสนามแบดมินตัน — แปลงโรงงาน บางขุนเทียน</h1>
+  <p>โถง 40 × 80 ม. · เพดาน 6.33–9.42 ม. · คอร์ทแนวตั้ง indoor ทั้งหมด · เลือกได้ 2 ผัง: มาตรฐาน BWF หรือ อัดเต็มพื้นที่</p>
+</header>
+
+<nav id="nav">
+  <button class="active" data-page="p1" onclick="go('p1',this)">🏟️ ผัง &amp; จำนวนคอร์ท</button>
+  <button data-page="p2" onclick="go('p2',this)">🧊 ภาพ 3D</button>
+  <button data-page="p3" onclick="go('p3',this)">🏢 ภายในอาคาร</button>
+  <button data-page="p4" onclick="go('p4',this)">🌳 พื้นที่รอบนอก</button>
+  <button data-page="p5" onclick="go('p5',this)">💵 ราคายาง/เกรด</button>
+  <button data-page="p6" onclick="go('p6',this)">💰 งบลงทุนรวม</button>
+  <button data-page="p7" onclick="go('p7',this)">📈 รายได้ &amp; คืนทุน</button>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= P1 LAYOUT ================= -->
+<section class="page active" id="p1">
+  <h2>เลือกผัง &amp; จำนวนคอร์ท</h2>
+
+  <div class="modebar">
+    <div class="mb active" data-mode="dense" onclick="setMode('dense')">
+      <div class="tt">🔷 อัดเต็มพื้นที่ (แนะนำ)</div>
+      <div class="ss">เว้นข้างคอร์ท 0.5 ม. · สูงสุด <b>20 คอร์ท</b> · เน้นปริมาณ รับคนได้มากสุด</div>
+    </div>
+    <div class="mb" data-mode="bwf" onclick="setMode('bwf')">
+      <div class="tt">🏆 มาตรฐาน BWF</div>
+      <div class="ss">เว้นข้างคอร์ท 2.0 ม. · สูงสุด <b>16 คอร์ท</b> · จัดแข่งขันได้ ตีสบาย</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="controls">
+      <div class="ctrl">
+        <label>จำนวนคอร์ทที่จะเปิดใช้: <span class="val" id="courtsVal">18</span> คอร์ท <span class="sub" id="maxHint"></span></label>
+        <input type="range" id="courts" min="8" max="20" step="2" value="18" oninput="recalc()">
+      </div>
+      <div class="ctrl">
+        <label>ที่ดิน / อาคารโรงงาน: <span class="val" id="landVal">32</span> ล้านบาท <span class="sub">(ราคาซื้อหรือค่าเซ้ง)</span></label>
+        <input type="range" id="landCost" min="0" max="60" step="1" value="32" oninput="recalc()">
+      </div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="t">ผังที่เลือก</div><div class="v" id="kMode" style="font-size:1.05rem"></div><div class="s" id="kModeSub"></div></div>
+      <div class="kpi"><div class="t">คอร์ทต่อฝั่ง (ซ้าย/ขวาของม่าน)</div><div class="v" id="kPerSide"></div><div class="s">แบ่ง 2 ฝั่งเท่ากัน</div></div>
+      <div class="kpi"><div class="t">พื้นที่ว่างเหลือในโถง</div><div class="v" id="kSpare"></div><div class="s">ขยายคอร์ทเพิ่มภายหลังได้</div></div>
+      <div class="kpi"><div class="t">ที่จอดรถที่ต้องการ ณ พีค</div><div class="v" id="kPark"></div><div class="s" id="kParkSub"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📐 ผังพื้น (มองจากบน) — ปรับตามจำนวนคอร์ทที่เลือก</h3>
+    <div class="blueprint">
+      <svg viewBox="0 0 860 470" xmlns="http://www.w3.org/2000/svg" font-family="Prompt,sans-serif" fill="none">
+        <rect x="150" y="30" width="640" height="320" fill="#fbfcfd" stroke="#1e3a5f" stroke-width="2.5"/>
+        <text x="470" y="22" font-size="11.5" fill="#1e3a5f" text-anchor="middle">โถงหลัก ยาว 80.00 ม. (ช่วงเสา 5.00 ม.)</text>
+        <text x="140" y="190" font-size="11.5" fill="#1e3a5f" text-anchor="middle" transform="rotate(-90 140 190)">กว้าง 40.00 ม.</text>
+
+        <!-- office block -->
+        <rect x="150" y="30" width="80" height="160" fill="#faf0dd" stroke="#1e3a5f" stroke-width="1.6"/>
+        <text x="190" y="98" font-size="10.5" fill="#8a6a2a" text-anchor="middle">อาคาร 2 ชั้น</text>
+        <text x="190" y="114" font-size="9.5" fill="#8a6a2a" text-anchor="middle">แอดมิน · คาเฟ่</text>
+        <text x="190" y="128" font-size="9.5" fill="#8a6a2a" text-anchor="middle">ชั้น2 ห้องพัก</text>
+        <rect x="150" y="190" width="80" height="160" fill="#eef7f1" stroke="#1e3a5f" stroke-width="1.2"/>
+        <text x="190" y="258" font-size="10.5" fill="#125935" text-anchor="middle">ห้องน้ำ+อาบน้ำ</text>
+        <text x="190" y="274" font-size="9.5" fill="#125935" text-anchor="middle">โซนนั่งพักแอร์</text>
+
+        <!-- courts drawn by JS -->
+        <g id="planCourts"></g>
+
+        <!-- center curtain -->
+        <line x1="230" y1="190" x2="790" y2="190" stroke="#c0504d" stroke-width="2.5" stroke-dasharray="9 5"/>
+        <g fill="#5b7089">
+          <circle cx="250" cy="190" r="3.4"/><circle cx="290" cy="190" r="3.4"/><circle cx="330" cy="190" r="3.4"/><circle cx="370" cy="190" r="3.4"/><circle cx="410" cy="190" r="3.4"/><circle cx="450" cy="190" r="3.4"/><circle cx="490" cy="190" r="3.4"/><circle cx="530" cy="190" r="3.4"/><circle cx="570" cy="190" r="3.4"/><circle cx="610" cy="190" r="3.4"/><circle cx="650" cy="190" r="3.4"/><circle cx="690" cy="190" r="3.4"/><circle cx="730" cy="190" r="3.4"/><circle cx="770" cy="190" r="3.4"/>
+        </g>
+        <text x="786" y="184" font-size="9.5" fill="#c0504d" text-anchor="end">ม่านกั้นกลาง + เสากลาง (ทางเดิน 7.4 ม.)</text>
+
+        <!-- side shed -->
+        <rect x="150" y="362" width="640" height="66" fill="#eceff1" stroke="#7a9184" stroke-width="1.4"/>
+        <text x="470" y="388" font-size="11" fill="#5b7089" text-anchor="middle">เพิงข้าง 14.18 × 80 ม. (สูง 4.5–5.6 ม. — เตี้ยเกินเล่นแบด)</text>
+        <text x="470" y="406" font-size="10" fill="#5b7089" text-anchor="middle">จอดรถในร่ม ~35 คัน · คลังของ · ห้องเครื่อง · โซนยืดเส้น-วอร์ม</text>
+
+        <!-- height gradient bar -->
+        <rect x="800" y="30" width="22" height="320" fill="url(#hg)"/>
+        <defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7d9a0"/><stop offset="0.5" stop-color="#c8e0f5"/><stop offset="1" stop-color="#f7d9a0"/></linearGradient></defs>
+        <text x="811" y="70" font-size="9" fill="#8a6a2a" text-anchor="middle" transform="rotate(90 811 70)">6.33 ม.</text>
+        <text x="811" y="190" font-size="9" fill="#1e5aa8" text-anchor="middle" transform="rotate(90 811 190)">9.42 ม.</text>
+        <text x="811" y="312" font-size="9" fill="#8a6a2a" text-anchor="middle" transform="rotate(90 811 312)">6.33 ม.</text>
+
+        <text x="470" y="452" font-size="10.5" fill="#5b7089" text-anchor="middle" id="planCaption"></text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:#b5d4f4;border:1px solid #185fa5"></span> คอร์ทที่เปิดใช้</span>
+      <span><span class="dot" style="background:#f2f6fa;border:1px dashed #9bb4cc"></span> ตำแหน่งสำรอง (ขยายทีหลัง)</span>
+      <span><span class="dot" style="background:#faf0dd;border:1px solid #1e3a5f"></span> อาคาร 2 ชั้น</span>
+      <span><span class="dot" style="background:#eef7f1;border:1px solid #1e3a5f"></span> ห้องน้ำ/พักผ่อน</span>
+      <span><span class="dot" style="background:#eceff1;border:1px solid #7a9184"></span> เพิงข้าง</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📏 ทำไมได้เท่านี้ — ตัวเลขจากแบบที่สถาปนิกวัดมา</h3>
+    <table>
+      <tr><th>รายการ</th><th class="r">ตัวเลขจริง</th><th>ผลต่อการวางคอร์ท</th></tr>
+      <tr><td>ความกว้างโถง (แบ่งด้วยเสากลาง)</td><td class="r">19.56 + 19.60 ม.</td><td>คอร์ทยาว 13.4 ม. วางขวางได้พอดี เหลือหลังเส้น 2.5 + 3.7 ม.</td></tr>
+      <tr><td>ความยาวโถง</td><td class="r">~80 ม. (16 ช่วง × 5.00)</td><td>หักอาคาร 2 ชั้น 10 ม. เหลือวางคอร์ทได้ ~67 ม.</td></tr>
+      <tr><td>ความสูงท้อง truss ริมอาคาร</td><td class="r">6.33 ม.</td><td>ตรงหัวคอร์ท — ลูกช่วงนั้นอยู่ต่ำ กระทบน้อย</td></tr>
+      <tr><td>ความสูงท้อง truss กลางอาคาร</td><td class="r">9.42 ม.</td><td>ตรงท้ายคอร์ท/กลางคอร์ท — โซนที่ลูกโด่งสูงสุด ✅</td></tr>
+      <tr><td>เพิงข้าง</td><td class="r">14.18 ม. สูง 4.5–5.6</td><td>เล่นแบดไม่ได้ → จอดรถในร่ม + คลัง</td></tr>
+      <tr><td>อาคารเดิม 2 ชั้น</td><td class="r">พื้นถึงท้องคาน 2.65 ม.</td><td>ใช้เป็นแอดมิน/คาเฟ่/ห้องพัก (ไม่ต้องทุบ)</td></tr>
+    </table>
+    <div class="note">⚠️ <b>ยังต้องยืนยันจากหน้างาน:</b> จุดต่ำสุดจริงของสิ่งที่ห้อยใต้ truss (แป ท่อ ไฟเดิม พัดลม) · บ่อซ่อมรถ/แท่นเครื่องในพื้น · ช่องแสง skylight บนหลังคา · ขนาดหม้อแปลงไฟ — ตัวเลขพวกนี้กระทบงบปรับปรุงโดยตรง</div>
+  </div>
+
+  <div class="pagenav"><span></span><button class="btn" onclick="go('p2')">ถัดไป: ภาพ 3D →</button></div>
+</section>
+
+<!-- ================= P2 3D ================= -->
+<section class="page" id="p2">
+  <h2>ภาพ 3 มิติ — อัปเดตตามจำนวนคอร์ทที่เลือก</h2>
+  <div class="card">
+    <div class="btnrow">
+      <span class="lbl">มุมมอง</span>
+      <button class="btn vw active" onclick="setView('persp',this)">🏞️ มุมเฉียง</button>
+      <button class="btn vw" onclick="setView('bird',this)">🚁 มุมสูง</button>
+      <button class="btn vw" onclick="setView('inside',this)">🏸 ยืนในสนาม</button>
+      <button class="btn vw" onclick="setView('front',this)">🚪 หน้าอาคาร</button>
+      <button class="btn vw" onclick="setView('lobby',this)">🛋️ โซนพัก/คาเฟ่</button>
+    </div>
+    <div class="btnrow">
+      <span class="lbl">ตัวเลือกฉาก</span>
+      <button class="btn" id="btnRoof" onclick="toggleRoof()">🏚️ ซ่อนหลังคา (ดูข้างใน)</button>
+      <button class="btn" id="btnNight" onclick="toggleNight()">🌙 กลางคืน (เปิดไฟ)</button>
+    </div>
+    <div class="controls" style="margin-top:6px">
+      <div class="ctrl">
+        <label>จำนวนคอร์ท (ปรับได้ที่นี่ด้วย): <span class="val" id="courtsVal2">18</span></label>
+        <input type="range" id="courts2" min="8" max="20" step="2" value="18" oninput="syncCourts(this.value)">
+      </div>
+    </div>
+    <div id="view3d"><div class="load3d">กำลังโหลดโมเดล 3D… (ครั้งแรกต้องต่ออินเทอร์เน็ต)</div></div>
+    <p class="hint3d">🖱️ ลากซ้าย = หมุน · ลูกกลิ้ง = ซูม · ลากขวา = เลื่อน · มือถือ: 1 นิ้วหมุน / 2 นิ้วซูม — เลื่อนสไลเดอร์คอร์ทแล้วโมเดลจะสร้างใหม่ทันที</p>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง</button><button class="btn" onclick="go('p3')">ถัดไป: ภายในอาคาร →</button></div>
+</section>
+
+<!-- ================= P3 INTERIOR ================= -->
+<section class="page" id="p3">
+  <h2>ผังภายในอาคาร (ส่วนบริการ)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">🏢 อาคาร 2 ชั้นเดิม + โซนบริการ — ไม่ต้องทุบ ใช้ของเดิมต่อยอด</h3>
+    <div class="blueprint">
+      <svg viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg" font-family="Prompt,sans-serif" fill="none">
+        <text x="215" y="20" font-size="12.5" fill="#0e3d6b" text-anchor="middle" font-weight="600">ชั้น 1 — ส่วนบริการลูกค้า</text>
+        <rect x="30" y="30" width="370" height="330" fill="#fbfcfd" stroke="#1e3a5f" stroke-width="2"/>
+        <rect x="42" y="42" width="120" height="86" fill="#dce9f7" stroke="#185fa5" stroke-width="1.4"/>
+        <text x="102" y="80" font-size="11" fill="#0e3d6b" text-anchor="middle">ห้องแอดมิน</text>
+        <text x="102" y="96" font-size="9.5" fill="#4a6076" text-anchor="middle">จองคอร์ท · เก็บเงิน</text>
+        <text x="102" y="110" font-size="9.5" fill="#4a6076" text-anchor="middle">จอมอนิเตอร์ CCTV</text>
+        <rect x="172" y="42" width="216" height="86" fill="#e8f5e9" stroke="#2e7d4f" stroke-width="1.4"/>
+        <text x="280" y="74" font-size="11" fill="#1b5e34" text-anchor="middle">โซนนั่งพัก ปรับอากาศ</text>
+        <text x="280" y="92" font-size="9.5" fill="#3c6b4c" text-anchor="middle">โซฟา · ทีวีถ่ายทอดแบด · ปลั๊กชาร์จ</text>
+        <text x="280" y="108" font-size="9.5" fill="#3c6b4c" text-anchor="middle">กระจกมองเห็นคอร์ท</text>
+        <rect x="42" y="140" width="160" height="96" fill="#fff3e0" stroke="#c07a1e" stroke-width="1.4"/>
+        <text x="122" y="176" font-size="11" fill="#8a5a12" text-anchor="middle">โซนนั่งกินข้าว</text>
+        <text x="122" y="194" font-size="9.5" fill="#8a5a12" text-anchor="middle">โต๊ะ 8–10 ตัว</text>
+        <text x="122" y="210" font-size="9.5" fill="#8a5a12" text-anchor="middle">ครัวเล็ก/ให้เช่าร้าน</text>
+        <rect x="212" y="140" width="176" height="96" fill="#fce4ec" stroke="#b0405f" stroke-width="1.4"/>
+        <text x="300" y="172" font-size="11" fill="#8a2a44" text-anchor="middle">เคาน์เตอร์ขายน้ำ + โปรช็อป</text>
+        <text x="300" y="190" font-size="9.5" fill="#8a2a44" text-anchor="middle">ตู้แช่ · ขายไม้-เอ็น-ลูก</text>
+        <text x="300" y="206" font-size="9.5" fill="#8a2a44" text-anchor="middle">เครื่องขึ้นเอ็น</text>
+        <rect x="42" y="248" width="170" height="100" fill="#e3f2fd" stroke="#1565a0" stroke-width="1.4"/>
+        <text x="127" y="282" font-size="11" fill="#0d4f7c" text-anchor="middle">ห้องน้ำ + อาบน้ำ ชาย</text>
+        <text x="127" y="300" font-size="9.5" fill="#3a6b8c" text-anchor="middle">ส้วม 4 · ปัสสาวะ 4</text>
+        <text x="127" y="316" font-size="9.5" fill="#3a6b8c" text-anchor="middle">ฝักบัว 4 · ล็อกเกอร์</text>
+        <rect x="222" y="248" width="166" height="100" fill="#f3e5f5" stroke="#7b3f8c" stroke-width="1.4"/>
+        <text x="305" y="282" font-size="11" fill="#5a2a68" text-anchor="middle">ห้องน้ำ + อาบน้ำ หญิง</text>
+        <text x="305" y="300" font-size="9.5" fill="#6b4a78" text-anchor="middle">ส้วม 5 · ฝักบัว 4</text>
+        <text x="305" y="316" font-size="9.5" fill="#6b4a78" text-anchor="middle">โต๊ะเครื่องแป้ง · ล็อกเกอร์</text>
+
+        <text x="645" y="20" font-size="12.5" fill="#0e3d6b" text-anchor="middle" font-weight="600">ชั้น 2 — ที่พักส่วนตัว</text>
+        <rect x="460" y="30" width="370" height="330" fill="#fbfcfd" stroke="#1e3a5f" stroke-width="2"/>
+        <rect x="472" y="42" width="180" height="120" fill="#ede7f6" stroke="#5e4b8b" stroke-width="1.4"/>
+        <text x="562" y="92" font-size="11" fill="#42356b" text-anchor="middle">ห้องนอนใหญ่</text>
+        <text x="562" y="110" font-size="9.5" fill="#5a4c80" text-anchor="middle">+ ห้องน้ำในตัว · walk-in</text>
+        <rect x="662" y="42" width="156" height="120" fill="#e0f2f1" stroke="#2a6b64" stroke-width="1.4"/>
+        <text x="740" y="92" font-size="11" fill="#1d5049" text-anchor="middle">ห้องนั่งเล่น</text>
+        <text x="740" y="110" font-size="9.5" fill="#3a6b64" text-anchor="middle">+ ครัว + โต๊ะทานข้าว</text>
+        <rect x="472" y="174" width="140" height="90" fill="#ede7f6" stroke="#5e4b8b" stroke-width="1.4"/>
+        <text x="542" y="214" font-size="11" fill="#42356b" text-anchor="middle">ห้องนอน 2</text>
+        <rect x="622" y="174" width="196" height="90" fill="#f5f5f5" stroke="#6b7a72" stroke-width="1.4"/>
+        <text x="720" y="208" font-size="11" fill="#4a5a52" text-anchor="middle">ห้องทำงาน / ออฟฟิศบริษัท</text>
+        <text x="720" y="226" font-size="9.5" fill="#6b7a72" text-anchor="middle">มองลงเห็นสนามได้</text>
+        <rect x="472" y="276" width="346" height="72" fill="#e8f5e9" stroke="#2e7d4f" stroke-width="1.4"/>
+        <text x="645" y="308" font-size="11" fill="#1b5e34" text-anchor="middle">ระเบียง / โซนซักล้าง · ทางขึ้นแยกจากลูกค้า</text>
+        <text x="645" y="326" font-size="9.5" fill="#3c6b4c" text-anchor="middle">บันไดส่วนตัวไม่ผ่านโซนลูกค้า = ความเป็นส่วนตัว</text>
+      </svg>
+    </div>
+    <p class="sub" style="margin-top:8px">พื้นที่อาคาร 2 ชั้นเดิมอยู่ด้านหน้าโถง — ชั้น 1 กั้นเป็นส่วนบริการ ชั้น 2 (พื้นถึงท้องคาน 2.65 ม.) ทำเป็นที่พักได้สบาย เพราะเป็นอาคารสำนักงานอยู่แล้ว</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🔑 หัวใจของแต่ละโซน (กดอ่าน)</h3>
+    <details><summary>ห้องแอดมิน / เคาน์เตอร์จองคอร์ท</summary><div class="body">วางไว้<b>ตรงทางเข้าและมองเห็นคอร์ทได้ทั้งแถว</b> — พนักงาน 1 คนคุมได้ทั้งการจอง เก็บเงิน ขายน้ำ และดูกล้อง ควรมีจอแสดงตารางคอร์ทว่างแบบเรียลไทม์ให้ลูกค้าเห็นจากด้านนอก ลดการถามซ้ำ</div></details>
+    <details><summary>โซนนั่งพักปรับอากาศ</summary><div class="body">นี่คือ<b>จุดขายที่สนามคู่แข่งในโซนนี้ไม่มี</b> — ก๊วนแบดพักระหว่างเกมนานพอๆ กับเวลาเล่น ห้องแอร์ + โซฟา + ทีวี + ปลั๊กชาร์จ ทำให้คนอยู่นาน ซื้อน้ำ/ของกินเพิ่ม และบอกต่อ ควรมีกระจกใหญ่มองเห็นคอร์ทเพื่อรอคิวได้</div></details>
+    <details><summary>ห้องน้ำ + ห้องอาบน้ำ</summary><div class="body">แบดเป็นกีฬาที่เหงื่อออกมาก คนส่วนใหญ่ตีเสร็จแล้วไปต่อ — <b>ห้องอาบน้ำสะอาดคือเหตุผลที่คนเลือกสนาม</b> แนะนำฝักบัวฝั่งละ 4 ห้อง น้ำอุ่น ที่แขวนของ ล็อกเกอร์ และแม่บ้านเช็ดทุก 2 ชม. ลงทุนตรงนี้คุ้มกว่าลงกับคอร์ทเพิ่ม 1 คอร์ท</div></details>
+    <details><summary>โซนกินข้าว + ขายน้ำ + โปรช็อป</summary><div class="body">ให้เช่าพื้นที่ร้านอาหารเล็ก (ข้าวกล่อง ก๋วยเตี๋ยว) ได้ค่าเช่า+ไม่ต้องบริหารเอง · เคาน์เตอร์น้ำ/โปรช็อปดูแลโดยแอดมินคนเดียวกัน · <b>เครื่องขึ้นเอ็นคืนทุนเร็วมาก</b> (เอ็นแบดขาดบ่อย ครั้งละ 150–250 บาท ต้นทุนเอ็น ~60)</div></details>
+    <details><summary>ชั้น 2 ที่พักส่วนตัว</summary><div class="body">ข้อดีคือ<b>อยู่เฝ้ากิจการเองได้</b> ประหยัดค่าจ้าง รปภ. กะดึก และเปิด-ปิดสนามเองได้ · ต้องทำ<b>บันไดขึ้นแยกจากโซนลูกค้า</b> + กันเสียง (สนามแบดเสียงดังถึงเที่ยงคืน ควรทำฝ้ากันเสียงและผนังสองชั้นบริเวณห้องนอน)</div></details>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p2')">← ภาพ 3D</button><button class="btn" onclick="go('p4')">ถัดไป: พื้นที่รอบนอก →</button></div>
+</section>
+
+<!-- ================= P4 OUTDOOR ================= -->
+<section class="page" id="p4">
+  <h2>พื้นที่รอบนอก — ใช้ทุกตารางเมตรให้ทำเงิน</h2>
+  <div class="card">
+    <h3 style="margin-top:0">🌳 ผังบริเวณ (ที่ดิน ~4 ไร่)</h3>
+    <div class="blueprint">
+      <svg viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" font-family="Prompt,sans-serif" fill="none">
+        <rect x="20" y="20" width="820" height="390" rx="6" fill="#eef3ef" stroke="#9db8a5" stroke-width="2.5" stroke-dasharray="9 6"/>
+        <rect x="180" y="60" width="500" height="200" fill="#dce9f7" stroke="#1e5aa8" stroke-width="2"/>
+        <text x="430" y="150" font-size="14" fill="#0e3d6b" text-anchor="middle" font-weight="600">อาคารสนามแบด (โรงงานเดิม)</text>
+        <text x="430" y="172" font-size="11" fill="#4a6076" text-anchor="middle">40 × 80 ม.</text>
+        <rect x="180" y="262" width="500" height="46" fill="#eceff1" stroke="#7a9184" stroke-width="1.4"/>
+        <text x="430" y="290" font-size="10.5" fill="#5b7089" text-anchor="middle">เพิงข้าง — จอดในร่ม ~35 คัน</text>
+
+        <rect x="700" y="60" width="120" height="248" fill="#e3e9e3" stroke="#7a9184" stroke-width="1.4"/>
+        <g stroke="#b8c4bb" stroke-width="1.2">
+          <path d="M710 80h100M710 108h100M710 136h100M710 164h100M710 192h100M710 220h100M710 248h100M710 276h100"/>
+        </g>
+        <text x="760" y="182" font-size="10.5" fill="#5d7466" text-anchor="middle" transform="rotate(-90 760 182)">ลานจอด A ~30 คัน</text>
+
+        <rect x="40" y="60" width="120" height="248" fill="#e3e9e3" stroke="#7a9184" stroke-width="1.4"/>
+        <g stroke="#b8c4bb" stroke-width="1.2">
+          <path d="M50 80h100M50 108h100M50 136h100M50 164h100M50 192h100M50 220h100M50 248h100M50 276h100"/>
+        </g>
+        <text x="100" y="182" font-size="10.5" fill="#5d7466" text-anchor="middle" transform="rotate(-90 100 182)">ลานจอด B ~28 คัน</text>
+
+        <rect x="180" y="326" width="230" height="66" fill="#fff3e0" stroke="#c07a1e" stroke-width="1.4"/>
+        <text x="295" y="352" font-size="11" fill="#8a5a12" text-anchor="middle">ลานอเนกประสงค์ / ตลาดนัดเย็น</text>
+        <text x="295" y="370" font-size="9.5" fill="#8a5a12" text-anchor="middle">ให้เช่าแผงอาหาร 6–8 แผง (รายได้เสริม)</text>
+        <text x="295" y="386" font-size="9.5" fill="#8a5a12" text-anchor="middle">หรือคอร์ทกลางแจ้ง/ลานบาส 3×3</text>
+
+        <rect x="430" y="326" width="140" height="66" fill="#e8f5e9" stroke="#2e7d4f" stroke-width="1.4"/>
+        <text x="500" y="352" font-size="11" fill="#1b5e34" text-anchor="middle">สวนหย่อม + ที่นั่งรอ</text>
+        <text x="500" y="370" font-size="9.5" fill="#3c6b4c" text-anchor="middle">ผู้ปกครองรอเด็กเรียนแบด</text>
+
+        <rect x="590" y="326" width="90" height="66" fill="#e3f2fd" stroke="#1565a0" stroke-width="1.4"/>
+        <text x="635" y="356" font-size="10.5" fill="#0d4f7c" text-anchor="middle">จุดล้างรถ /</text>
+        <text x="635" y="372" font-size="10.5" fill="#0d4f7c" text-anchor="middle">EV charger</text>
+
+        <rect x="700" y="326" width="120" height="66" fill="#f5f5f5" stroke="#6b7a72" stroke-width="1.4"/>
+        <text x="760" y="352" font-size="10.5" fill="#4a5a52" text-anchor="middle">ป้อม รปภ. + </text>
+        <text x="760" y="370" font-size="10.5" fill="#4a5a52" text-anchor="middle">ซุ้มทางเข้า</text>
+
+        <path d="M760 392 L760 420" stroke="#4a5d50" stroke-width="2.5" marker-end="url(#ar)"/>
+        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0L8 4L0 8z" fill="#4a5d50"/></marker></defs>
+        <text x="806" y="416" font-size="10.5" fill="#4a5d50" text-anchor="middle">ถ.บางขุนเทียน-ชายทะเล</text>
+
+        <rect x="40" y="326" width="120" height="66" fill="#fce4ec" stroke="#b0405f" stroke-width="1.4"/>
+        <text x="100" y="352" font-size="10.5" fill="#8a2a44" text-anchor="middle">ป้ายไฟ LED</text>
+        <text x="100" y="370" font-size="10.5" fill="#8a2a44" text-anchor="middle">ริมถนน</text>
+      </svg>
+    </div>
+    <div class="legend">
+      <span><span class="dot" style="background:#e3e9e3;border:1px solid #7a9184"></span> ลานจอด (รวม ~93 คัน)</span>
+      <span><span class="dot" style="background:#fff3e0;border:1px solid #c07a1e"></span> ลานอเนกประสงค์</span>
+      <span><span class="dot" style="background:#e8f5e9;border:1px solid #2e7d4f"></span> สวน/ที่นั่งรอ</span>
+      <span><span class="dot" style="background:#e3f2fd;border:1px solid #1565a0"></span> บริการเสริม</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">💡 ข้อเสนอการใช้พื้นที่รอบนอก (เรียงตามความคุ้ม)</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>ที่จอดรถ คือสิ่งสำคัญที่สุด — ห้ามลด</b> · รวมในร่ม+ลานนอก ~93 คัน · 18 คอร์ทพีคเต็มต้องการ ~90 คัน พอดีตัว ที่ดิน 4 ไร่ทำให้เราชนะสนามในเมืองที่จอดไม่พอทุกแห่ง ควรตีเส้นให้ชัด แยกทางเข้า-ออก และมีไฟส่องสว่างทั้งลาน</div></div>
+      <div class="step"><span class="n"></span><div><b>ลานอเนกประสงค์หน้าอาคาร → ตลาดนัดเย็น</b> · ให้เช่าแผงอาหาร 6–8 แผงช่วง 17:00–22:00 (ตรงกับพีคแบดพอดี) เก็บค่าแผง 150–250 บาท/วัน = <b>~30,000–50,000 บาท/เดือน</b> โดยแทบไม่ต้องลงทุน แถมทำให้สนามคึกคักและลูกค้ามีของกิน</div></div>
+      <div class="step"><span class="n"></span><div><b>ป้ายไฟ LED ริมถนน</b> · ถนนบางขุนเทียน-ชายทะเลรถผ่านเยอะ — ป้ายใหญ่ตัวเดียวคือการตลาดที่คุ้มที่สุด และช่วงที่ไม่ได้โฆษณาตัวเองก็<b>ให้เช่าลงโฆษณาได้อีก 10,000–20,000/เดือน</b></div></div>
+      <div class="step"><span class="n"></span><div><b>สวนหย่อม + ที่นั่งรอ</b> · กลุ่มลูกค้าใหญ่ของสนามแบดคือ<b>เด็กเรียนแบด</b> ผู้ปกครองต้องนั่งรอ 1–2 ชม. ทำที่นั่งร่มรื่นมีปลั๊ก+wifi ทำให้เปิดคลาสสอนได้ง่ายขึ้นมาก (คลาสสอนคือรายได้ที่มาร์จิ้นสูงสุด)</div></div>
+      <div class="step"><span class="n"></span><div><b>ลานบาส 3×3 กลางแจ้ง (ทางเลือก)</b> · ถ้ายังอยากได้บาส วางไว้นอกอาคารถูกกว่ามาก (~350,000 พื้น+แป้น+ไฟ) ใช้ลานอเนกประสงค์ร่วมกัน ไม่กินคอร์ทแบดแม้แต่คอร์ทเดียว</div></div>
+      <div class="step"><span class="n"></span><div><b>EV charger + จุดล้างรถ</b> · เฟส 2 · คนตีแบด 1.5–2 ชม. = เวลาชาร์จพอดี เก็บค่าไฟ+ค่าบริการได้ และดึงกลุ่มรถ EV ซึ่งกำลังโตเร็วในกรุงเทพฯ</div></div>
+    </div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p3')">← ภายในอาคาร</button><button class="btn" onclick="go('p5')">ถัดไป: ราคายาง →</button></div>
+</section>
+
+<!-- ================= P5 MAT GRADES ================= -->
+<section class="page" id="p5">
+  <h2>ราคาพื้นยาง &amp; อุปกรณ์ต่อคอร์ท — ทุกเกรด</h2>
+  <div class="card">
+    <p class="sub" style="margin-bottom:12px">ราคาต่อ <b>1 คอร์ท</b> (13.4 × 6.1 ม. + ขอบ ≈ 100 ตร.ม.) — กดเลือกเกรด แล้วงบทั้งเว็บจะคิดตามเกรดนั้น</p>
+    <div class="btnrow">
+      <span class="lbl">เกรดพื้นยาง</span>
+      <button class="btn gr" data-grade="eco" onclick="setGrade('eco')">🔸 ประหยัด</button>
+      <button class="btn gr" data-grade="std" onclick="setGrade('std')">🔹 มาตรฐาน</button>
+      <button class="btn gr active" data-grade="pro" onclick="setGrade('pro')">⭐ พรีเมียม</button>
+      <button class="btn gr" data-grade="bwf" onclick="setGrade('bwf')">🏆 BWF Certified</button>
+    </div>
+    <div style="overflow-x:auto"><table id="gradeTable"></table></div>
+    <div class="kpis" id="gradeKpis"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">🧵 อธิบายเกรดยางแบบเข้าใจง่าย</h3>
+    <details><summary>🔸 ประหยัด — PVC 3.5–4.5 มม. ไม่มีแบรนด์</summary><div class="body">ยางม้วนจีน/โนเนม ผิวลื่นกว่า ยืดหยุ่นน้อย เล่นได้แต่เข่า-ข้อเท้ารับแรงมากกว่า อายุใช้งาน 3–5 ปี · <b>เหมาะกับ:</b> คอร์ทซ้อม คอร์ทเด็ก หรือเปิดก่อนแล้วค่อยอัปเกรด · ราคาม้วน ~200–280 บ./ตร.ม.</div></details>
+    <details><summary>🔹 มาตรฐาน — PVC 4.5 มม. มีแบรนด์รอง</summary><div class="body">เกรดที่<b>สนามให้เช่าในไทยใช้มากที่สุด</b> ผิวหน้าลายลิ่น (litchi) กันลื่นดี ชั้นโฟมรองรับแรงกระแทกพอควร อายุ 5–8 ปี · คุ้มที่สุดสำหรับสนามเชิงพาณิชย์ · ราคา ~450–600 บ./ตร.ม.</div></details>
+    <details><summary>⭐ พรีเมียม — PVC 5.0 มม. แบรนด์ดัง (Yonex / Victor / Li-Ning)</summary><div class="body">เด้งดี แรงกระแทกเข่าน้อย สีสวยถ่ายรูปขึ้น มีโลโก้แบรนด์บนพื้น <b>ลูกค้าจริงจังดูออกและยอมจ่ายแพงกว่า</b> อายุ 8–10 ปี · เป็นจุดขายทางการตลาดได้เลย ("พื้น Yonex") · ราคา ~800–1,100 บ./ตร.ม.</div></details>
+    <details><summary>🏆 BWF Certified — 5.0–6.0 มม. ผ่านรับรองสหพันธ์</summary><div class="body">มาตรฐานที่ใช้ในรายการแข่งระดับนานาชาติ มีใบรับรอง ใช้จัดทัวร์นาเมนต์ที่ต้องส่งผลอย่างเป็นทางการได้ · แพงกว่าพรีเมียมเกือบเท่าตัวโดยที่คนเล่นทั่วไปแทบแยกไม่ออก · <b>แนะนำ:</b> ทำเฉพาะ 2–4 คอร์ทโชว์ ที่เหลือใช้พรีเมียม · ราคา ~1,300–1,800 บ./ตร.ม.</div></details>
+    <div class="note blue">💡 <b>กลยุทธ์ที่คุ้มที่สุด:</b> ปูพรีเมียมทั้งสนาม แล้วกันไว้ 2 คอร์ทเป็น BWF สำหรับจัดแข่ง/ก๊วนจริงจัง — ได้ทั้งภาพลักษณ์และไม่บานงบ · ในหน้า "งบลงทุนรวม" มีปุ่มให้เลือกโหมดผสมนี้ได้</div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p4')">← รอบนอก</button><button class="btn" onclick="go('p6')">ถัดไป: งบลงทุนรวม →</button></div>
+</section>
+
+<!-- ================= P6 BUDGET ================= -->
+<section class="page" id="p6">
+  <h2>งบลงทุนรวม (โมเดลปรับปรุงโรงงานเดิม)</h2>
+  <div class="card">
+    <div class="btnrow">
+      <span class="lbl">โหมดพื้นยาง</span>
+      <button class="btn mx active" data-mix="single" onclick="setMix('single')">ใช้เกรดเดียวทั้งสนาม</button>
+      <button class="btn mx" data-mix="mixed" onclick="setMix('mixed')">ผสม: BWF 2 คอร์ท + ที่เหลือพรีเมียม</button>
+    </div>
+    <table>
+      <tr><th>รายการ</th><th class="r">บาท</th></tr>
+      <tr class="sec"><td colspan="2">1) ที่ดิน + อาคารโรงงาน</td></tr>
+      <tr><td>ค่าซื้อ/เซ้งที่ดินพร้อมอาคาร <span class="sub">(ปรับได้ที่หน้าแรก)</span></td><td class="r" id="bLand"></td></tr>
+      <tr class="sec"><td colspan="2">2) งานปรับปรุงอาคาร</td></tr>
+      <tr><td>ปรับพื้น ขัดปรับระดับ ถมบ่อซ่อมรถ <span class="sub">พื้นต้องเรียบก่อนปูยาง</span></td><td class="r">1,200,000</td></tr>
+      <tr><td>ปิด skylight + ฉนวนกันร้อนใต้หลังคา <span class="sub">แบดห้ามแสงแยงตา</span></td><td class="r">2,000,000</td></tr>
+      <tr><td>ระบบระบายอากาศ (พัดลมท่อ ไม่เป่าลงคอร์ท) <span class="sub">หัวใจของสนามแบด</span></td><td class="r">2,500,000</td></tr>
+      <tr><td>ทาสีผนัง-โครงสร้างสีเข้มกัน glare + ม่านกั้นคอร์ท</td><td class="r">900,000</td></tr>
+      <tr><td>ระบบไฟฟ้าหลัก + หม้อแปลง + ตู้ควบคุม</td><td class="r">1,500,000</td></tr>
+      <tr><td>ซ่อมหลังคารั่ว + เสริมโครงสร้างจุดจำเป็น</td><td class="r">800,000</td></tr>
+      <tr class="sec"><td colspan="2">3) คอร์ทและอุปกรณ์</td></tr>
+      <tr><td>พื้นยาง <span class="sub" id="bMatSub"></span></td><td class="r" id="bMat"></td></tr>
+      <tr><td>ไฟส่องคอร์ท <span class="sub" id="bLightSub"></span></td><td class="r" id="bLight"></td></tr>
+      <tr><td>เสา + เน็ต + ตีเส้น + ติดตั้ง</td><td class="r" id="bNet"></td></tr>
+      <tr class="sec"><td colspan="2">4) ส่วนบริการภายใน</td></tr>
+      <tr><td>ห้องแอดมิน/เคาน์เตอร์จองคอร์ท</td><td class="r">350,000</td></tr>
+      <tr><td>โซนนั่งพักปรับอากาศ (แอร์ เฟอร์ฯ กระจก)</td><td class="r">1,200,000</td></tr>
+      <tr><td>ห้องน้ำ + ห้องอาบน้ำ มาตรฐาน ช/ญ</td><td class="r">1,800,000</td></tr>
+      <tr><td>โซนนั่งกินข้าว + ครัวเล็ก</td><td class="r">900,000</td></tr>
+      <tr><td>เคาน์เตอร์ขายน้ำ + โปรช็อป + เครื่องขึ้นเอ็น</td><td class="r">600,000</td></tr>
+      <tr><td>ชั้น 2 — ปรับปรุงเป็นที่พักส่วนตัว</td><td class="r">1,500,000</td></tr>
+      <tr class="sec"><td colspan="2">5) พื้นที่รอบนอก</td></tr>
+      <tr><td>ลานจอดรถ ตีเส้น ไฟส่องสว่าง</td><td class="r">1,500,000</td></tr>
+      <tr><td>ซุ้มทางเข้า + ป้ายไฟ LED ริมถนน</td><td class="r">600,000</td></tr>
+      <tr><td>ภูมิทัศน์ สวนหย่อม ทางเดิน</td><td class="r">400,000</td></tr>
+      <tr><td>รั้ว ป้อม รปภ. CCTV</td><td class="r">500,000</td></tr>
+      <tr class="sec"><td colspan="2">6) ระบบและอื่นๆ</td></tr>
+      <tr><td>ระบบจองออนไลน์ + POS + คอมพิวเตอร์</td><td class="r">300,000</td></tr>
+      <tr><td>ออกแบบ ขออนุญาตเปลี่ยนการใช้อาคาร + เผื่อ 10%</td><td class="r" id="bDesign"></td></tr>
+      <tr class="total"><td>รวมเงินลงทุนทั้งโครงการ</td><td class="r" id="bTotal"></td></tr>
+    </table>
+    <div class="kpis">
+      <div class="kpi big"><div class="t">ราคาต่อคอร์ท (ทั้งโครงการ ÷ จำนวนคอร์ท)</div><div class="v" id="bPerCourt"></div><div class="s" id="bPerCourtSub"></div></div>
+      <div class="kpi"><div class="t">ค่าปรับปรุงอย่างเดียว (ไม่รวมที่ดิน)</div><div class="v" id="bReno"></div><div class="s">เงินที่ต้องใช้จริงหลังได้อาคาร</div></div>
+      <div class="kpi"><div class="t">เทียบ: สร้างอาคารใหม่</div><div class="v" id="bVsNew"></div><div class="s">ประหยัดจากการใช้โรงงานเดิม</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🏦 เงินกู้</h3>
+    <div class="controls">
+      <div class="ctrl"><label>สัดส่วนเงินกู้: <span class="val" id="loanPctVal">70</span>%</label><input type="range" id="loanPct" min="40" max="80" step="5" value="70" oninput="recalc()"></div>
+      <div class="ctrl"><label>ดอกเบี้ย: <span class="val" id="rateVal">7.0</span>% ต่อปี</label><input type="range" id="rate" min="4" max="10" step="0.25" value="7" oninput="recalc()"></div>
+      <div class="ctrl"><label>ระยะผ่อน: <span class="val" id="yearsVal">12</span> ปี</label><input type="range" id="years" min="7" max="20" step="1" value="12" oninput="recalc()"></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="t">วงเงินกู้</div><div class="v" id="kLoan"></div></div>
+      <div class="kpi"><div class="t">เงินทุนตัวเอง</div><div class="v" id="kEquity"></div></div>
+      <div class="kpi"><div class="t">ผ่อนต่อเดือน</div><div class="v" id="kPmt"></div></div>
+      <div class="kpi"><div class="t">ดอกเบี้ยรวม</div><div class="v" id="kInterest"></div></div>
+    </div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p5')">← ราคายาง</button><button class="btn" onclick="go('p7')">ถัดไป: รายได้ &amp; คืนทุน →</button></div>
+</section>
+
+<!-- ================= P7 REVENUE ================= -->
+<section class="page" id="p7">
+  <h2>รายได้ &amp; คืนทุน</h2>
+  <div class="card">
+    <p class="sub" id="ceilNote" style="margin-bottom:10px"></p>
+    <div class="btnrow">
+      <span class="lbl">อัตราการจองเฉลี่ย (โซนนี้พีคเย็นแน่น กลางวันเบา)</span>
+      <button class="btn oc" onclick="setOcc(38,this)">😐 ระวัง 38%</button>
+      <button class="btn oc active" onclick="setOcc(50,this)">🙂 สมจริง 50%</button>
+      <button class="btn oc" onclick="setOcc(62,this)">😄 ดี 62%</button>
+    </div>
+    <div class="controls">
+      <div class="ctrl"><label>อัตราการจอง: <span class="val" id="occVal">50</span>%</label><input type="range" id="occ" min="20" max="85" step="1" value="50" oninput="recalc();clearOc()"></div>
+      <div class="ctrl"><label>ราคากลางวัน: <span class="val" id="dayRateVal">150</span> ฿/ชม./คอร์ท</label><input type="range" id="dayRate" min="80" max="400" step="10" value="150" oninput="recalc()"></div>
+      <div class="ctrl"><label>ราคากลางคืน: <span class="val" id="nightRateVal">220</span> ฿/ชม./คอร์ท</label><input type="range" id="nightRate" min="100" max="500" step="10" value="220" oninput="recalc()"></div>
+      <div class="ctrl"><label>เวลาเปิด: <span class="val" id="openVal">10:00–24:00</span></label><input type="range" id="openHrs" min="10" max="16" step="1" value="14" oninput="recalc()"></div>
+    </div>
+    <table>
+      <tr><th>รายได้ต่อเดือน</th><th class="r">บาท</th></tr>
+      <tr><td>ค่าคอร์ทแบด</td><td class="r" id="rCourt"></td></tr>
+      <tr><td>โปรช็อป + ขึ้นเอ็น + ขายน้ำ</td><td class="r" id="rShop"></td></tr>
+      <tr><td>ค่าเช่าแผงตลาดนัด + ป้ายโฆษณา</td><td class="r" id="rRent"></td></tr>
+      <tr><td>คลาสสอนแบด (ส่วนแบ่งจากโค้ช)</td><td class="r" id="rClass"></td></tr>
+      <tr class="total"><td>รวมรายได้</td><td class="r" id="rTotal"></td></tr>
+    </table>
+    <div class="controls" style="margin-top:6px">
+      <div class="ctrl"><label>กำไรร้าน+ขึ้นเอ็น: <span class="val" id="shopVal">70,000</span> ฿/ด.</label><input type="range" id="shop" min="0" max="200000" step="10000" value="70000" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าเช่าแผง+ป้าย: <span class="val" id="rentVal">45,000</span> ฿/ด.</label><input type="range" id="rent" min="0" max="120000" step="5000" value="45000" oninput="recalc()"></div>
+      <div class="ctrl"><label>ส่วนแบ่งคลาสสอน: <span class="val" id="classVal">40,000</span> ฿/ด.</label><input type="range" id="cls" min="0" max="150000" step="5000" value="40000" oninput="recalc()"></div>
+    </div>
+    <table style="margin-top:14px">
+      <tr><th>รายจ่ายต่อเดือน</th><th class="r">บาท</th></tr>
+      <tr><td>พนักงาน <span class="sub" id="staffSub"></span></td><td class="r" id="eStaff"></td></tr>
+      <tr><td>ค่าไฟ (ไฟคอร์ท + ระบายอากาศ + แอร์โซนพัก) + น้ำ</td><td class="r" id="eUtil"></td></tr>
+      <tr><td>ซ่อมบำรุง + กันเงินเปลี่ยนยาง</td><td class="r" id="eMaint"></td></tr>
+      <tr><td>การตลาด + ระบบจอง + เบ็ดเตล็ด</td><td class="r">45,000</td></tr>
+      <tr class="total"><td>รวมรายจ่าย (ไม่รวมค่างวด)</td><td class="r" id="eTotal"></td></tr>
+    </table>
+    <div class="kpis">
+      <div class="kpi"><div class="t">กำไรก่อนผ่อน</div><div class="v" id="kNet"></div><div class="s">ต่อเดือน</div></div>
+      <div class="kpi"><div class="t">เงินสดหลังผ่อนธนาคาร</div><div class="v" id="kCash"></div><div class="s" id="kCashSub"></div></div>
+      <div class="kpi"><div class="t">DSCR (เกณฑ์ ≥1.2)</div><div class="v" id="kDscr"></div></div>
+      <div class="kpi"><div class="t">จุดคุ้มทุน (อัตราจอง)</div><div class="v" id="kBE"></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="kpis">
+      <div class="kpi"><div class="t">คืนทุน (ไม่คิดดอกเบี้ย)</div><div class="v" id="kPB"></div></div>
+      <div class="kpi"><div class="t">คืนทุน (รวมดอกเบี้ย)</div><div class="v" id="kPBi"></div></div>
+      <div class="kpi"><div class="t">ROI ต่อปี</div><div class="v" id="kRoi"></div></div>
+      <div class="kpi"><div class="t">กำไรต่อปี</div><div class="v" id="kNetY"></div></div>
+    </div>
+    <div class="note" id="verdict" style="font-size:.98rem"></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p6')">← งบลงทุน</button><span></span></div>
+</section>
+
+<footer>ตัวเลขทั้งหมดเป็นประมาณการเบื้องต้นเพื่อการตัดสินใจ ยังไม่ใช่ราคาก่อสร้างจริง · อ้างอิงแบบวัดหน้างานของสถาปนิก ก.ค. 2569</footer>
+</div>
+
+<script>
+const fmt=n=>Math.round(n).toLocaleString('th-TH');
+const fmtM=n=>(n/1e6).toLocaleString('th-TH',{maximumFractionDigits:1})+' ลบ.';
+const el=id=>document.getElementById(id);
+const val=id=>+el(id).value;
+
+/* ---------- layout model (from architect's survey) ---------- */
+const HALL_W=40, HALL_L=80, OFFICE_L=10;
+const COURT_L=13.4, COURT_W=6.1;
+const USABLE_L=HALL_L-OFFICE_L;               // 70 m of length for courts
+const MODES={
+  dense:{pitch:6.6, maxPerSide:10, label:'อัดเต็มพื้นที่', gap:'0.5 ม.'},
+  bwf:  {pitch:8.1, maxPerSide:8,  label:'มาตรฐาน BWF',  gap:'2.0 ม.'}
+};
+let mode='dense', grade='pro', mix='single';
+
+const GRADES={
+  eco:{n:'ประหยัด',  sub:'PVC 3.5–4.5 มม. โนเนม',  mat:20000, light:12000, net:8000,  life:'3–5 ปี'},
+  std:{n:'มาตรฐาน',  sub:'PVC 4.5 มม. แบรนด์รอง',  mat:45000, light:30000, net:12000, life:'5–8 ปี'},
+  pro:{n:'พรีเมียม', sub:'PVC 5 มม. Yonex/Victor', mat:85000, light:50000, net:17000, life:'8–10 ปี'},
+  bwf:{n:'BWF Cert', sub:'5–6 มม. รับรองสหพันธ์',  mat:130000,light:75000, net:25000, life:'10+ ปี'}
+};
+const gSum=g=>g.mat+g.light+g.net;
+const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mode].pitch))*2;
+
+function go(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  el(id).classList.add('active');
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='p2'&&window.init3D) window.init3D();
+}
+function setMode(m){
+  mode=m;
+  window.__mode3d=m;
+  document.querySelectorAll('.modebar .mb').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));
+  const mx=maxCourts();
+  el('courts').max=mx; el('courts2').max=mx;
+  if(val('courts')>mx){el('courts').value=mx; el('courts2').value=mx;}
+  recalc();
+}
+function setGrade(g){
+  grade=g;
+  document.querySelectorAll('.btn.gr').forEach(b=>b.classList.toggle('active',b.dataset.grade===g));
+  recalc();
+}
+function setMix(m){
+  mix=m;
+  document.querySelectorAll('.btn.mx').forEach(b=>b.classList.toggle('active',b.dataset.mix===m));
+  recalc();
+}
+function setOcc(v,btn){el('occ').value=v;clearOc();btn.classList.add('active');recalc();}
+function clearOc(){document.querySelectorAll('.btn.oc').forEach(b=>b.classList.remove('active'));}
+function syncCourts(v){el('courts').value=v;recalc();}
+function pmtCalc(P,r,n){const i=r/12,m=n*12;return P*i*Math.pow(1+i,m)/(Math.pow(1+i,m)-1);}
+
+/* ---------- 2D plan ---------- */
+function drawPlan(courts){
+  const M=MODES[mode], perSide=courts/2, maxPer=Math.min(M.maxPerSide,Math.floor(USABLE_L/M.pitch));
+  const X0=230, X1=790, span=X1-X0;                 // 70 m of hall length in px
+  const pxPerM=span/USABLE_L;
+  const cw=COURT_W*pxPerM, pitch=M.pitch*pxPerM;
+  const topY=30+ (2.5/HALL_W)*320, ch=COURT_L*(320/HALL_W);
+  const botY=350-(2.5/HALL_W)*320-ch;
+  let s='';
+  for(let i=0;i<maxPer;i++){
+    const x=X0+8+i*pitch;
+    [[topY,i+1],[botY,maxPer+i+1]].forEach(([y,num],row)=>{
+      const on=i<perSide;
+      s+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${cw.toFixed(1)}" height="${ch.toFixed(1)}" fill="${on?'#b5d4f4':'#f2f6fa'}" stroke="${on?'#185fa5':'#9bb4cc'}" stroke-width="1.2" ${on?'':'stroke-dasharray="4 3"'}/>`;
+      if(on){
+        s+=`<line x1="${x.toFixed(1)}" y1="${(y+ch/2).toFixed(1)}" x2="${(x+cw).toFixed(1)}" y2="${(y+ch/2).toFixed(1)}" stroke="#185fa5" stroke-width="1.6"/>`;
+        s+=`<text x="${(x+cw/2).toFixed(1)}" y="${(y+ch/2-4).toFixed(1)}" font-size="9.5" fill="#0e3d6b" text-anchor="middle">${row===0?i+1:perSide+i+1}</text>`;
+      }
+    });
+  }
+  el('planCourts').innerHTML=s;
+  el('planCaption').textContent=`ผัง${M.label} · เว้นระหว่างคอร์ท ${M.gap} · เปิดใช้ ${courts} คอร์ท จากตำแหน่งทั้งหมด ${maxPer*2} · หลังเส้นถึงผนัง 2.5 ม. / ถึงม่านกลาง 3.7 ม.`;
+}
+
+/* ---------- grade table ---------- */
+function drawGrades(courts){
+  const cols=['eco','std','pro','bwf'];
+  const hl=k=>k===grade?' style="background:#eaf1fa"':'';
+  let t=`<tr><th>รายการ (ต่อคอร์ท)</th>`+cols.map(k=>`<th class="r"${hl(k)}>${GRADES[k].n}<div class="sub" style="font-weight:400">${GRADES[k].sub}</div></th>`).join('')+`</tr>`;
+  t+=`<tr><td>พื้นยาง ~100 ตร.ม.</td>`+cols.map(k=>`<td class="r"${hl(k)}>${fmt(GRADES[k].mat)}</td>`).join('')+`</tr>`;
+  t+=`<tr><td>ไฟส่องคอร์ท</td>`+cols.map(k=>`<td class="r"${hl(k)}>${fmt(GRADES[k].light)}</td>`).join('')+`</tr>`;
+  t+=`<tr><td>เสา+เน็ต+ตีเส้น+ติดตั้ง</td>`+cols.map(k=>`<td class="r"${hl(k)}>${fmt(GRADES[k].net)}</td>`).join('')+`</tr>`;
+  t+=`<tr class="total"><td>รวมต่อคอร์ท</td>`+cols.map(k=>`<td class="r"${hl(k)}>${fmt(gSum(GRADES[k]))}</td>`).join('')+`</tr>`;
+  t+=`<tr><td>รวม ${courts} คอร์ท</td>`+cols.map(k=>`<td class="r"${hl(k)}>${fmtM(gSum(GRADES[k])*courts)}</td>`).join('')+`</tr>`;
+  t+=`<tr><td>อายุใช้งาน</td>`+cols.map(k=>`<td class="r sub"${hl(k)}>${GRADES[k].life}</td>`).join('')+`</tr>`;
+  el('gradeTable').innerHTML=t;
+  const g=GRADES[grade];
+  el('gradeKpis').innerHTML=`<div class="kpi big"><div class="t">เกรดที่เลือก: ${g.n} — ${g.sub}</div><div class="v">${fmt(gSum(g))} ฿/คอร์ท</div><div class="s">× ${courts} คอร์ท = ${fmtM(gSum(g)*courts)} (เฉพาะพื้น+ไฟ+เน็ต)</div></div>`;
+}
+
+/* ---------- main ---------- */
+function recalc(){
+  const mx=maxCourts();
+  el('courts').max=mx; el('courts2').max=mx;
+  let courts=Math.min(val('courts'),mx);
+  el('courts').value=courts; el('courts2').value=courts;
+  el('courtsVal').textContent=courts;
+  el('courtsVal2').textContent=courts;
+  el('maxHint').textContent=`(สูงสุด ${mx} ในผังนี้)`;
+
+  const M=MODES[mode], perSide=courts/2, maxPer=mx/2;
+  el('kMode').textContent=M.label;
+  el('kModeSub').textContent=`เว้นข้างคอร์ท ${M.gap} · สูงสุด ${mx} คอร์ท`;
+  el('kPerSide').textContent=perSide+' / '+perSide;
+  el('kSpare').textContent=(mx-courts)+' ตำแหน่ง';
+  const park=Math.round(courts*5);
+  el('kPark').textContent='~'+park+' คัน';
+  el('kParkSub').textContent=park<=93?'ที่ดินรองรับได้ (~93 คัน) ✅':'เกินที่จอด ~93 คัน ⚠️';
+  drawPlan(courts); drawGrades(courts);
+  if(window.rebuild3D) window.rebuild3D(courts);
+
+  /* budget */
+  const landCost=val('landCost')*1e6;
+  el('landVal').textContent=val('landCost');
+  const g=GRADES[grade];
+  let matCost,lightCost,netCost,matLabel;
+  if(mix==='mixed'){
+    const nb=Math.min(2,courts), np=courts-nb;
+    matCost=nb*GRADES.bwf.mat+np*GRADES.pro.mat;
+    lightCost=nb*GRADES.bwf.light+np*GRADES.pro.light;
+    netCost=nb*GRADES.bwf.net+np*GRADES.pro.net;
+    matLabel=`ผสม: BWF ${nb} คอร์ท + พรีเมียม ${np} คอร์ท`;
+  }else{
+    matCost=g.mat*courts; lightCost=g.light*courts; netCost=g.net*courts;
+    matLabel=`เกรด${g.n} × ${courts} คอร์ท (${fmt(g.mat)}/คอร์ท)`;
+  }
+  el('bMat').textContent=fmt(matCost);
+  el('bMatSub').textContent=matLabel;
+  el('bLight').textContent=fmt(lightCost);
+  el('bLightSub').textContent=mix==='mixed'?'ตามเกรดผสม':`${fmt(g.light)}/คอร์ท`;
+  el('bNet').textContent=fmt(netCost);
+  el('bLand').textContent=fmt(landCost);
+
+  const renoFixed=1200000+2000000+2500000+900000+1500000+800000;
+  const interior=350000+1200000+1800000+900000+600000+1500000;
+  const outdoor=1500000+600000+400000+500000;
+  const systems=300000;
+  const preDesign=renoFixed+matCost+lightCost+netCost+interior+outdoor+systems;
+  const design=Math.round(preDesign*0.10);
+  el('bDesign').textContent=fmt(design);
+  const reno=preDesign+design;
+  const total=landCost+reno;
+  el('bTotal').textContent=fmt(total)+'  ('+fmtM(total)+')';
+  el('bPerCourt').textContent=fmtM(total/courts);
+  el('bPerCourtSub').textContent=`= ${fmt(total/courts)} ฿/คอร์ท (รวมที่ดิน อาคาร ทุกอย่าง ÷ ${courts})`;
+  el('bReno').textContent=fmtM(reno);
+  const newBuild=(HALL_W*HALL_L*11000)+landCost+interior+outdoor+systems+matCost+lightCost+netCost;
+  el('bVsNew').textContent='ถูกกว่า ~'+fmtM(newBuild-total);
+
+  /* loan */
+  const loanPct=val('loanPct')/100, rate=val('rate')/100, yrs=val('years');
+  el('loanPctVal').textContent=Math.round(loanPct*100);
+  el('rateVal').textContent=(rate*100)%1?(rate*100).toFixed(2):(rate*100).toFixed(1);
+  el('yearsVal').textContent=yrs;
+  const loan=total*loanPct, equity=total-loan;
+  const pmt=pmtCalc(loan,rate,yrs), totalInt=pmt*yrs*12-loan;
+  el('kLoan').textContent=fmtM(loan);
+  el('kEquity').textContent=fmtM(equity);
+  el('kPmt').textContent=fmt(pmt)+' ฿';
+  el('kInterest').textContent=fmtM(totalInt);
+
+  /* revenue */
+  const occ=val('occ')/100, dayRate=val('dayRate'), nightRate=val('nightRate');
+  const totalHrs=val('openHrs'), nightHrs=Math.min(7,totalHrs), dayHrs=totalHrs-nightHrs;
+  el('openVal').textContent=(24-totalHrs)+':00–24:00';
+  el('occVal').textContent=Math.round(occ*100);
+  el('dayRateVal').textContent=fmt(dayRate);
+  el('nightRateVal').textContent=fmt(nightRate);
+  const perCourtDay=dayHrs*dayRate+nightHrs*nightRate;
+  const maxMonth=courts*perCourtDay*30;
+  const courtRev=maxMonth*occ;
+  el('ceilNote').innerHTML=`เพดานรายได้คอร์ท = ${courts} คอร์ท × (กลางวัน ${dayHrs} ชม.×${dayRate} + กลางคืน ${nightHrs} ชม.×${nightRate}) × 30 วัน = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100%`;
+  const shop=val('shop'), rent=val('rent'), cls=val('cls');
+  el('shopVal').textContent=fmt(shop); el('rentVal').textContent=fmt(rent); el('classVal').textContent=fmt(cls);
+  el('rCourt').textContent=fmt(courtRev);
+  el('rShop').textContent='+'+fmt(shop);
+  el('rRent').textContent='+'+fmt(rent);
+  el('rClass').textContent='+'+fmt(cls);
+  const rev=courtRev+shop+rent+cls;
+  el('rTotal').textContent=fmt(rev);
+
+  const staffN=courts<=12?5:(courts<=16?6:7);
+  const staff=staffN*19000;
+  const util=Math.round(courts*4200+45000);
+  const maint=Math.round(courts*2200+15000);
+  el('staffSub').textContent=`${staffN} คน (แอดมิน 2 · ดูแลสนาม ${staffN-4} · แม่บ้าน 2)`;
+  el('eStaff').textContent=fmt(staff);
+  el('eUtil').textContent=fmt(util);
+  el('eMaint').textContent=fmt(maint);
+  const exp=staff+util+maint+45000;
+  el('eTotal').textContent=fmt(exp);
+
+  const net=rev-exp, cash=net-pmt, dscr=net*12/(pmt*12);
+  el('kNet').textContent=fmt(net)+' ฿';
+  const kc=el('kCash'); kc.textContent=(cash>=0?'+':'')+fmt(cash)+' ฿'; kc.classList.toggle('warn',cash<0);
+  el('kCashSub').textContent=`หลังผ่อน ${fmt(pmt)} ฿`;
+  const kd=el('kDscr'); kd.textContent=dscr.toFixed(2); kd.classList.toggle('warn',dscr<1.2);
+  const need=exp+pmt-shop-rent-cls, occBE=Math.max(need,0)/maxMonth;
+  el('kBE').textContent=(occBE*100).toFixed(0)+'%';
+
+  const pb=net>0?total/(net*12):Infinity, pbi=net>0?(total+totalInt)/(net*12):Infinity, roi=net*12/total*100;
+  el('kPB').textContent=isFinite(pb)?pb.toFixed(1)+' ปี':'—';
+  el('kPBi').textContent=isFinite(pbi)?pbi.toFixed(1)+' ปี':'—';
+  el('kRoi').textContent=roi.toFixed(1)+'%/ปี';
+  el('kNetY').textContent=fmtM(net*12);
+
+  const v=el('verdict');
+  if(cash<0) v.innerHTML=`⚠️ <b>เงินสดติดลบ ${fmt(-cash)} ฿/เดือน</b> ที่จอง ${Math.round(occ*100)}% — ลองลดราคาที่ดิน/เจรจาค่าเซ้ง, ยืดเวลาผ่อน, เพิ่มอัตราจอง หรือลดเกรดพื้น`;
+  else if(dscr<1.2) v.innerHTML=`🟡 เงินสดเหลือ <b>${fmt(cash)} ฿/เดือน</b> แต่ DSCR ${dscr.toFixed(2)} ต่ำกว่าเกณฑ์ธนาคาร (1.2) — ปรับโครงสร้างเงินกู้หรือเพิ่มรายได้เสริม`;
+  else v.innerHTML=`✅ ที่จอง <b>${Math.round(occ*100)}%</b> เหลือเงินสด <b>${fmt(cash)} ฿/เดือน</b>, DSCR ${dscr.toFixed(2)} ผ่านเกณฑ์, คืนทุน <b>~${pbi.toFixed(1)} ปี</b> · ${courts} คอร์ท เกรด${mix==='mixed'?'ผสม':GRADES[grade].n}`;
+}
+setMode('dense');
+</script>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+let started=false,scene,camera,renderer,controls,courtGroup,roofGroup,hemi,sun,night=false;
+let camDest=null,lookDest=null,lampMat,courtLights=[],curCourts=18;
+const SKY_D=0xbfe0f5,SKY_N=0x0b1524;
+const HALL_W=40,HALL_L=80,OFFICE_L=10,COURT_L=13.4,COURT_W=6.1;
+const EAVE=6.33,RIDGE=9.42;
+const mat=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c},o));
+
+function quad(a,b,c,d,m){
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(new Float32Array([...a,...b,...c,...a,...c,...d]),3));
+  g.computeVertexNormals();
+  return new THREE.Mesh(g,m);
+}
+function courtTex(){
+  const c=document.createElement('canvas');c.width=244;c.height=536;
+  const g=c.getContext('2d');
+  g.fillStyle='#2f6fa8';g.fillRect(0,0,244,536);
+  g.strokeStyle='#fff';g.lineWidth=4;
+  g.strokeRect(12,12,220,512);
+  g.beginPath();
+  g.moveTo(12,268);g.lineTo(232,268);
+  g.moveTo(34,12);g.lineTo(34,524);
+  g.moveTo(210,12);g.lineTo(210,524);
+  g.moveTo(12,90);g.lineTo(232,90);
+  g.moveTo(12,446);g.lineTo(232,446);
+  g.moveTo(12,196);g.lineTo(232,196);
+  g.moveTo(12,340);g.lineTo(232,340);
+  g.moveTo(122,12);g.lineTo(122,196);
+  g.moveTo(122,340);g.lineTo(122,524);
+  g.stroke();
+  const t=new THREE.CanvasTexture(c);t.anisotropy=8;return t;
+}
+function signTex(txt){
+  const c=document.createElement('canvas');c.width=640;c.height=96;
+  const g=c.getContext('2d');
+  g.fillStyle='#0e3d6b';g.fillRect(0,0,640,96);
+  g.strokeStyle='#e8a03c';g.lineWidth=5;g.strokeRect(4,4,632,88);
+  g.fillStyle='#fff';g.font='bold 40px Prompt,sans-serif';g.textAlign='center';g.textBaseline='middle';
+  g.fillText(txt,320,52);
+  return new THREE.CanvasTexture(c);
+}
+
+window.init3D=function(){
+  const box=document.getElementById('view3d');
+  if(started){onResize();return;}
+  started=true;
+  scene=new THREE.Scene();
+  scene.background=new THREE.Color(SKY_D);
+  scene.fog=new THREE.Fog(SKY_D,180,600);
+  camera=new THREE.PerspectiveCamera(50,box.clientWidth/box.clientHeight,.1,1200);
+  camera.position.set(-78,46,86);
+  renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(box.clientWidth,box.clientHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+  box.innerHTML='';box.appendChild(renderer.domElement);
+  controls=new OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true;controls.maxPolarAngle=Math.PI/2-.02;
+  controls.minDistance=5;controls.maxDistance=340;controls.target.set(0,3,0);
+  hemi=new THREE.HemisphereLight(0xffffff,0x88aa88,.85);scene.add(hemi);
+  sun=new THREE.DirectionalLight(0xfff2d9,1.45);
+  sun.position.set(-70,95,55);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
+  Object.assign(sun.shadow.camera,{left:-110,right:110,top:110,bottom:-110,far:320});
+  sun.shadow.camera.updateProjectionMatrix();scene.add(sun);
+  buildStatic();
+  buildCourts(curCourts);
+  window.addEventListener('resize',onResize);
+  renderer.setAnimationLoop(()=>{
+    if(camDest){camera.position.lerp(camDest,.06);controls.target.lerp(lookDest,.06);
+      if(camera.position.distanceTo(camDest)<.2)camDest=null;}
+    controls.update();renderer.render(scene,camera);
+  });
+};
+function onResize(){
+  if(!renderer)return;
+  const box=document.getElementById('view3d');
+  camera.aspect=box.clientWidth/box.clientHeight;camera.updateProjectionMatrix();
+  renderer.setSize(box.clientWidth,box.clientHeight);
+}
+
+function buildStatic(){
+  const hw=HALL_W/2,hl=HALL_L/2;
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(420,420),mat(0x9dbb8f));
+  ground.rotation.x=-Math.PI/2;ground.position.y=-.06;ground.receiveShadow=true;scene.add(ground);
+  const plot=new THREE.Mesh(new THREE.PlaneGeometry(120,150),mat(0xb9b4aa));
+  plot.rotation.x=-Math.PI/2;plot.position.set(0,-.03,0);plot.receiveShadow=true;scene.add(plot);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W,HALL_L),mat(0xd8d5cd));
+  floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+
+  const steel=mat(0x3a4046,{metalness:.5,roughness:.5});
+  const colGeo=new THREE.BoxGeometry(.5,EAVE,.5);
+  for(let z=-hl;z<=hl+.1;z+=5){
+    [-hw,hw].forEach(x=>{const c=new THREE.Mesh(colGeo,steel);c.position.set(x,EAVE/2,z);c.castShadow=true;scene.add(c);});
+    const cc=new THREE.Mesh(new THREE.BoxGeometry(.55,RIDGE,.55),steel);
+    cc.position.set(0,RIDGE/2,z);cc.castShadow=true;scene.add(cc);
+  }
+  roofGroup=new THREE.Group();scene.add(roofGroup);
+  const roofMat=mat(0x4a5158,{side:THREE.DoubleSide,metalness:.35,roughness:.6});
+  roofGroup.add(quad([0,RIDGE+.6,-hl],[hw,EAVE+.4,-hl],[hw,EAVE+.4,hl],[0,RIDGE+.6,hl],roofMat));
+  roofGroup.add(quad([0,RIDGE+.6,-hl],[-hw,EAVE+.4,-hl],[-hw,EAVE+.4,hl],[0,RIDGE+.6,hl],roofMat));
+  const wallMat=mat(0xe9ece9,{side:THREE.DoubleSide});
+  roofGroup.add(quad([-hw,0,-hl],[hw,0,-hl],[hw,EAVE+.4,-hl],[-hw,EAVE+.4,-hl],wallMat));
+  roofGroup.add(quad([-hw,0,hl],[hw,0,hl],[hw,EAVE+.4,hl],[-hw,EAVE+.4,hl],wallMat));
+  const sideW=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L,EAVE),wallMat);
+  sideW.rotation.y=Math.PI/2;sideW.position.set(hw,EAVE/2,0);roofGroup.add(sideW);
+  for(let z=-hl;z<=hl+.1;z+=5){
+    const t=new THREE.Mesh(new THREE.BoxGeometry(HALL_W,.35,.3),steel);
+    t.position.set(0,EAVE+.2,z);roofGroup.add(t);
+  }
+  /* side shed */
+  const shedMat=mat(0xc9ccc7,{side:THREE.DoubleSide});
+  roofGroup.add(quad([-hw,5.62,-hl],[-hw-14.18,4.48,-hl],[-hw-14.18,4.48,hl],[-hw,5.62,hl],shedMat));
+  for(let z=-hl;z<=hl+.1;z+=5){
+    const c=new THREE.Mesh(new THREE.BoxGeometry(.35,4.48,.35),steel);
+    c.position.set(-hw-14.18,2.24,z);c.castShadow=true;scene.add(c);
+  }
+  const shedFloor=new THREE.Mesh(new THREE.PlaneGeometry(14.18,HALL_L),mat(0x8f938d));
+  shedFloor.rotation.x=-Math.PI/2;shedFloor.position.set(-hw-7.09,.01,0);shedFloor.receiveShadow=true;scene.add(shedFloor);
+
+  /* 2-storey office inside hall front */
+  const off=new THREE.Group();
+  const ow=18,od=OFFICE_L,oh=6;
+  const body=new THREE.Mesh(new THREE.BoxGeometry(ow,oh,od),mat(0xf3ead8));
+  body.position.y=oh/2;body.castShadow=true;off.add(body);
+  const slab=new THREE.Mesh(new THREE.BoxGeometry(ow+.6,.3,od+.6),mat(0x3a4046));
+  slab.position.y=oh+.15;off.add(slab);
+  const glass=mat(0x9fc8e8,{metalness:.6,roughness:.15});
+  for(let i=0;i<4;i++){
+    const w=new THREE.Mesh(new THREE.BoxGeometry(3,1.6,.14),glass);
+    w.position.set(-6.5+i*4.3,4.4,od/2+.02);off.add(w);
+  }
+  const lounge=new THREE.Mesh(new THREE.BoxGeometry(11,2.4,.14),glass);
+  lounge.position.set(-2,1.6,od/2+.02);off.add(lounge);
+  const door=new THREE.Mesh(new THREE.BoxGeometry(2,2.3,.16),mat(0x5a4632));
+  door.position.set(6.5,1.15,od/2+.03);off.add(door);
+  const sign=new THREE.Mesh(new THREE.PlaneGeometry(12,1.8),new THREE.MeshBasicMaterial({map:signTex('BADMINTON ARENA')}));
+  sign.position.set(0,7.2,od/2-.2);off.add(sign);
+  off.position.set(-HALL_W/2+ow/2+1,0,hl-od/2-.5);
+  scene.add(off);
+
+  /* outdoor: parking + trees + entrance */
+  const asphalt=mat(0x6f7678);
+  [[-46,0,22,120],[46,0,22,120]].forEach(([x,,w,l])=>{
+    const p=new THREE.Mesh(new THREE.PlaneGeometry(w,l),asphalt);
+    p.rotation.x=-Math.PI/2;p.position.set(x,.02,0);p.receiveShadow=true;scene.add(p);
+  });
+  const front=new THREE.Mesh(new THREE.PlaneGeometry(120,26),asphalt);
+  front.rotation.x=-Math.PI/2;front.position.set(0,.02,hl+18);front.receiveShadow=true;scene.add(front);
+  const lineMat=mat(0xffffff);
+  for(let z=-55;z<=55;z+=5.5){
+    [46,-46].forEach(x=>{const l=new THREE.Mesh(new THREE.BoxGeometry(9,.02,.14),lineMat);l.position.set(x,.04,z);scene.add(l);});
+  }
+  const mkCar=(x,z,col,rot)=>{
+    const g=new THREE.Group();
+    const b=new THREE.Mesh(new THREE.BoxGeometry(1.85,.6,4.3),mat(col,{metalness:.6,roughness:.4}));
+    b.position.y=.6;g.add(b);
+    const c=new THREE.Mesh(new THREE.BoxGeometry(1.65,.55,2.1),mat(0x222a30,{metalness:.5,roughness:.3}));
+    c.position.set(0,1.15,-.2);g.add(c);
+    const wg=new THREE.CylinderGeometry(.32,.32,.25,12),wm=mat(0x1a1a1a);
+    [[-.85,1.4],[.85,1.4],[-.85,-1.4],[.85,-1.4]].forEach(([dx,dz])=>{
+      const w=new THREE.Mesh(wg,wm);w.rotation.z=Math.PI/2;w.position.set(dx,.32,dz);g.add(w);});
+    g.rotation.y=rot;g.position.set(x,0,z);g.traverse(o=>o.castShadow=true);scene.add(g);
+  };
+  const cols=[0xb0413e,0xc8ccd0,0x3a5f8a,0x2e2e2e,0xdedad2,0x5a7a5a];
+  for(let i=0;i<10;i++){mkCar(46,-50+i*11,cols[i%6],Math.PI/2);mkCar(-46,-46+i*11,cols[(i+3)%6],Math.PI/2);}
+  for(let i=0;i<6;i++){mkCar(-30+i*12,hl+22,cols[(i+2)%6],0);}
+  /* covered parking under shed */
+  for(let i=0;i<7;i++){mkCar(-HALL_W/2-7,-45+i*14,cols[(i+1)%6],Math.PI/2);}
+
+  const mkTree=(x,z,s=1)=>{
+    const tr=new THREE.Mesh(new THREE.CylinderGeometry(.16*s,.24*s,2.2*s,8),mat(0x7a5a3a));
+    tr.position.set(x,1.1*s,z);tr.castShadow=true;
+    const fo=new THREE.Mesh(new THREE.IcosahedronGeometry(1.8*s,1),mat(0x4c8a4f));
+    fo.position.set(x,2.9*s,z);fo.castShadow=true;scene.add(tr,fo);
+  };
+  [[-58,-40],[-58,-10],[-58,20],[-58,50],[58,-40],[58,-8],[58,24],[58,52],[-20,hl+34],[10,hl+34],[36,hl+30],[-44,hl+30]].forEach(([x,z],i)=>mkTree(x,z,1+(i%3)*.12));
+
+  /* entrance canopy + road sign */
+  const pole=new THREE.Mesh(new THREE.BoxGeometry(.7,9,.7),mat(0x2e3338));
+  pole.position.set(40,4.5,hl+40);pole.castShadow=true;scene.add(pole);
+  const board=new THREE.Mesh(new THREE.PlaneGeometry(9,2.6),new THREE.MeshBasicMaterial({map:signTex('BADMINTON'),side:THREE.DoubleSide}));
+  board.position.set(40,9.6,hl+40);scene.add(board);
+  const guard=new THREE.Mesh(new THREE.BoxGeometry(3,2.8,3),mat(0xe6e2d8));
+  guard.position.set(30,1.4,hl+38);guard.castShadow=true;scene.add(guard);
+  /* market stalls */
+  for(let i=0;i<6;i++){
+    const s=new THREE.Mesh(new THREE.BoxGeometry(3,.15,3),mat(0xd8b56a));
+    s.position.set(-34+i*7,2.4,hl+30);s.castShadow=true;scene.add(s);
+    const p1=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,2.4),mat(0x888888));
+    p1.position.set(-34+i*7,1.2,hl+30);scene.add(p1);
+  }
+}
+
+function buildCourts(n){
+  if(courtGroup){scene.remove(courtGroup);courtGroup.traverse(o=>{if(o.geometry)o.geometry.dispose();});}
+  courtGroup=new THREE.Group();scene.add(courtGroup);
+  courtLights=[];
+  const M=(window.__mode3d==='bwf')?{pitch:8.1,maxPerSide:8}:{pitch:6.6,maxPerSide:10};
+  const perSide=n/2, hl=HALL_L/2;
+  const startZ=-hl+2.5;
+  const tex=courtTex();
+  const courtMat=new THREE.MeshStandardMaterial({map:tex});
+  const netMat=mat(0x2b2b2b,{transparent:true,opacity:.8,side:THREE.DoubleSide});
+  lampMat=new THREE.MeshStandardMaterial({color:0xf4f9ff,emissive:0xf4f9ff,emissiveIntensity:.2});
+  for(let side=0;side<2;side++){
+    const sgn=side===0?-1:1;
+    for(let i=0;i<perSide;i++){
+      const z=startZ+i*M.pitch+COURT_W/2;
+      const p=new THREE.Mesh(new THREE.PlaneGeometry(COURT_L,COURT_W),courtMat);
+      p.rotation.x=-Math.PI/2;p.rotation.z=Math.PI/2;
+      p.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),.02,z);
+      p.receiveShadow=true;courtGroup.add(p);
+      const net=new THREE.Mesh(new THREE.PlaneGeometry(COURT_W+.6,.78),netMat);
+      net.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),.79,z);
+      net.rotation.y=Math.PI/2;courtGroup.add(net);
+      [-1,1].forEach(d=>{
+        const po=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,1.55),mat(0x333));
+        po.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),.78,z+d*(COURT_W+.6)/2);courtGroup.add(po);
+      });
+      const bar=new THREE.Mesh(new THREE.BoxGeometry(COURT_L*.75,.14,.3),lampMat);
+      bar.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),EAVE+.9,z);courtGroup.add(bar);
+      const sp=new THREE.SpotLight(0xeef4ff,0,26,Math.PI/3,.5,1);
+      sp.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),EAVE+.7,z);
+      sp.target.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),0,z);
+      courtGroup.add(sp);courtGroup.add(sp.target);courtLights.push(sp);
+    }
+  }
+  const curtain=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L-4,4),mat(0x1e5aa8,{transparent:true,opacity:.35,side:THREE.DoubleSide}));
+  curtain.rotation.y=Math.PI/2;curtain.position.set(0,2.6,0);courtGroup.add(curtain);
+  if(night)applyNight();
+}
+window.rebuild3D=function(n){curCourts=n;if(started)buildCourts(n);};
+
+const VIEWS={
+  persp:{c:[-78,46,86],t:[0,3,0]},
+  bird:{c:[0,140,4],t:[0,0,2]},
+  inside:{c:[-12,1.8,-20],t:[-12,1.6,10]},
+  front:{c:[6,7,96],t:[0,4,30]},
+  lobby:{c:[-14,3.5,52],t:[-14,3,34]}
+};
+window.setView=(k,btn)=>{
+  if(!started)return;
+  const v=VIEWS[k];camDest=new THREE.Vector3(...v.c);lookDest=new THREE.Vector3(...v.t);
+  if(btn){document.querySelectorAll('.btn.vw').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+};
+window.toggleRoof=()=>{
+  if(!started)return;
+  roofGroup.visible=!roofGroup.visible;
+  const b=document.getElementById('btnRoof');
+  b.textContent=roofGroup.visible?'🏚️ ซ่อนหลังคา (ดูข้างใน)':'🏠 แสดงหลังคา';
+  b.classList.toggle('active',!roofGroup.visible);
+};
+function applyNight(){
+  courtLights.forEach(s=>s.intensity=night?150:0);
+  if(lampMat)lampMat.emissiveIntensity=night?3.2:.2;
+}
+window.toggleNight=()=>{
+  if(!started)return;
+  night=!night;
+  const sky=new THREE.Color(night?SKY_N:SKY_D);
+  scene.background=sky;scene.fog.color=sky;
+  hemi.intensity=night?.13:.85;sun.intensity=night?.05:1.45;
+  applyNight();
+  const b=document.getElementById('btnNight');
+  b.textContent=night?'☀️ กลางวัน':'🌙 กลางคืน (เปิดไฟ)';
+  b.classList.toggle('active',night);
+};
+if(document.getElementById('p2').classList.contains('active'))window.init3D();
+</script>
+</body>
+</html>
