@@ -234,8 +234,12 @@
       <button class="btn vw active" onclick="setView('persp',this)">🏞️ มุมเฉียง</button>
       <button class="btn vw" onclick="setView('bird',this)">🚁 มุมสูง</button>
       <button class="btn vw" onclick="setView('inside',this)">🏸 ยืนในสนาม</button>
+      <button class="btn vw" onclick="setView('court',this)">🎾 ริมคอร์ท (ใกล้)</button>
+      <button class="btn vw" onclick="setView('shop',this)">🛍️ ชั้น 1 ร้านแบด</button>
+      <button class="btn vw" onclick="setView('lounge',this)">🛋️ ชั้น 1 คาเฟ่/พัก</button>
+      <button class="btn vw" onclick="setView('f2',this)">🏠 ชั้น 2 ห้องพัก</button>
       <button class="btn vw" onclick="setView('front',this)">🚪 หน้าอาคาร</button>
-      <button class="btn vw" onclick="setView('lobby',this)">🛋️ โซนพัก/คาเฟ่</button>
+      <button class="btn vw" onclick="setView('out',this)">🌳 รอบนอก</button>
     </div>
     <div class="btnrow">
       <span class="lbl">ตัวเลือกฉาก</span>
@@ -249,7 +253,7 @@
       </div>
     </div>
     <div id="view3d"><div class="load3d">กำลังโหลดโมเดล 3D… (ครั้งแรกต้องต่ออินเทอร์เน็ต)</div></div>
-    <p class="hint3d">🖱️ ลากซ้าย = หมุน · ลูกกลิ้ง = ซูม · ลากขวา = เลื่อน · มือถือ: 1 นิ้วหมุน / 2 นิ้วซูม — เลื่อนสไลเดอร์คอร์ทแล้วโมเดลจะสร้างใหม่ทันที</p>
+    <p class="hint3d">🖱️ ลากซ้าย = หมุน · ลูกกลิ้ง = ซูม · ลากขวา = เลื่อน · มือถือ: 1 นิ้วหมุน / 2 นิ้วซูม — เลื่อนสไลเดอร์คอร์ทแล้วโมเดลจะสร้างใหม่ทันที · <b>มุมภายในอาคาร (ร้านแบด/คาเฟ่/ชั้น 2) จะซ่อนผนังให้อัตโนมัติ</b></p>
   </div>
   <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง</button><button class="btn" onclick="go('p3')">ถัดไป: ภายในอาคาร →</button></div>
 </section>
@@ -842,6 +846,8 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 let started=false,scene,camera,renderer,controls,courtGroup,roofGroup,hemi,sun,night=false;
 let camDest=null,lookDest=null,lampMat,courtLights=[],curCourts=18,ambient,indoorLights=[];
+let officeGroup,officeShell;
+const INDOOR_VIEWS=['shop','lounge','f2'];
 const SKY_D=0xbfe0f5,SKY_N=0x0b1524;
 const HALL_W=40,HALL_L=80,OFFICE_L=10,COURT_L=13.4,COURT_W=6.1;
 const EAVE=6.33,RIDGE=9.42;
@@ -909,7 +915,8 @@ window.init3D=function(){
   box.innerHTML='';box.appendChild(renderer.domElement);
   controls=new OrbitControls(camera,renderer.domElement);
   controls.enableDamping=true;controls.maxPolarAngle=Math.PI/2-.02;
-  controls.minDistance=5;controls.maxDistance=340;controls.target.set(0,3,0);
+  controls.minDistance=1.2;controls.maxDistance=340;controls.target.set(0,3,0);
+  controls.addEventListener('start',()=>{camDest=null;});   /* ลากเมื่อไหร่ = ยกเลิกการเคลื่อนกล้องอัตโนมัติ */
   hemi=new THREE.HemisphereLight(0xffffff,0x88aa88,.85);scene.add(hemi);
   ambient=new THREE.AmbientLight(0xdfe8f0,1.25);scene.add(ambient);
   for(let z=-32;z<=32;z+=16){
@@ -1006,26 +1013,8 @@ function buildStatic(){
   const shedFloor=new THREE.Mesh(new THREE.PlaneGeometry(14.18,HALL_L),mat(0x8f938d));
   shedFloor.rotation.x=-Math.PI/2;shedFloor.position.set(-hw-7.09,.01,0);shedFloor.receiveShadow=true;scene.add(shedFloor);
 
-  /* 2-storey office inside hall front */
-  const off=new THREE.Group();
-  const ow=18,od=OFFICE_L,oh=6;
-  const body=new THREE.Mesh(new THREE.BoxGeometry(ow,oh,od),mat(0xf3ead8));
-  body.position.y=oh/2;body.castShadow=true;off.add(body);
-  const slab=new THREE.Mesh(new THREE.BoxGeometry(ow+.6,.3,od+.6),mat(0x3a4046));
-  slab.position.y=oh+.15;off.add(slab);
-  const glass=mat(0x9fc8e8,{metalness:.6,roughness:.15});
-  for(let i=0;i<4;i++){
-    const w=new THREE.Mesh(new THREE.BoxGeometry(3,1.6,.14),glass);
-    w.position.set(-6.5+i*4.3,4.4,od/2+.02);off.add(w);
-  }
-  const lounge=new THREE.Mesh(new THREE.BoxGeometry(11,2.4,.14),glass);
-  lounge.position.set(-2,1.6,od/2+.02);off.add(lounge);
-  const door=new THREE.Mesh(new THREE.BoxGeometry(2,2.3,.16),mat(0x5a4632));
-  door.position.set(6.5,1.15,od/2+.03);off.add(door);
-  const sign=new THREE.Mesh(new THREE.PlaneGeometry(12,1.8),new THREE.MeshBasicMaterial({map:signTex('BADMINTON ARENA')}));
-  sign.position.set(0,7.2,od/2-.2);off.add(sign);
-  off.position.set(-HALL_W/2+ow/2+1,0,hl-od/2-.5);
-  scene.add(off);
+  /* ================= อาคาร 2 ชั้น (ภายในละเอียด) ================= */
+  buildOffice(hw,hl);
 
   /* outdoor: parking + trees + entrance */
   const asphalt=mat(0x6f7678);
@@ -1077,6 +1066,221 @@ function buildStatic(){
     s.position.set(-34+i*7,2.4,hl+30);s.castShadow=true;scene.add(s);
     const p1=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,2.4),mat(0x888888));
     p1.position.set(-34+i*7,1.2,hl+30);scene.add(p1);
+  }
+}
+
+/* ---------- อาคาร 2 ชั้น: เปลือก (ซ่อนได้) + ภายในละเอียด ---------- */
+function buildOffice(hw,hl){
+  const OW=18,OD=OFFICE_L,H1=3.2,H2=2.9;
+  const ox=-hw+OW/2+1, oz=hl-OD/2-.5;          // ศูนย์กลางอาคาร
+  const g=new THREE.Group(); g.position.set(ox,0,oz); scene.add(g);
+  officeGroup=g;
+  /* เปลือกอาคารอยู่ใน roofGroup → กด "ซ่อนหลังคา" แล้วเห็นภายใน (ตั้งพิกัดเองเพราะคนละ parent) */
+  const shell=new THREE.Group(); shell.position.set(ox,0,oz);
+  roofGroup.add(shell); officeShell=shell;
+
+  const wallM=mat(0xf3ead8,{side:THREE.DoubleSide});
+  const glass=mat(0x9fc8e8,{metalness:.55,roughness:.15,transparent:true,opacity:.42});
+  const slabM=mat(0xdad6cc), trimM=mat(0x3a4046);
+
+  /* พื้นชั้น 1-2 + ฝ้า (มองเห็นเสมอ) */
+  [[0,0x9a8f7d],[H1,0xcfc7b8]].forEach(([y,c])=>{
+    const f=new THREE.Mesh(new THREE.PlaneGeometry(OW,OD),mat(c));
+    f.rotation.x=-Math.PI/2;f.position.y=y+.02;f.receiveShadow=true;g.add(f);
+  });
+  const slab2=new THREE.Mesh(new THREE.BoxGeometry(OW,.22,OD),slabM);
+  slab2.position.y=H1-.11;g.add(slab2);
+  const roofS=new THREE.Mesh(new THREE.BoxGeometry(OW+.6,.26,OD+.6),trimM);
+  roofS.position.y=H1+H2+.13;shell.add(roofS);
+
+  /* ผนัง (อยู่ใน shell → ซ่อนได้) */
+  const mkWall=(w,h,x,y,z,ry=0,m=wallM)=>{
+    const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),m);
+    p.position.set(x,y,z);p.rotation.y=ry;shell.add(p);
+  };
+  mkWall(OW,H1,0,H1/2,-OD/2);  mkWall(OW,H2,0,H1+H2/2,-OD/2);      // ฝั่งคอร์ท
+  mkWall(OW,H1,0,H1/2,OD/2);   mkWall(OW,H2,0,H1+H2/2,OD/2);       // ฝั่งหน้า
+  mkWall(OD,H1,-OW/2,H1/2,0,Math.PI/2); mkWall(OD,H2,-OW/2,H1+H2/2,0,Math.PI/2);
+  mkWall(OD,H1,OW/2,H1/2,0,Math.PI/2);  mkWall(OD,H2,OW/2,H1+H2/2,0,Math.PI/2);
+  /* กระจกฝั่งมองเห็นคอร์ท + หน้าต่างชั้น 2 */
+  const gw=new THREE.Mesh(new THREE.PlaneGeometry(10,2.1),glass);
+  gw.position.set(-3,1.6,-OD/2+.03);shell.add(gw);
+  for(let i=0;i<4;i++){
+    const w=new THREE.Mesh(new THREE.PlaneGeometry(3,1.5),glass);
+    w.position.set(-6.5+i*4.3,H1+1.6,OD/2-.03);shell.add(w);
+  }
+  const sign=new THREE.Mesh(new THREE.PlaneGeometry(12,1.7),
+    new THREE.MeshBasicMaterial({map:signTex('BADMINTON ARENA'),side:THREE.DoubleSide}));
+  sign.position.set(0,H1+H2+.9,OD/2-.1);shell.add(sign);
+
+  /* ---------- ชั้น 1 ---------- */
+  const wood=mat(0x9a7b52), dark=mat(0x2e3338), white=mat(0xf2f2ee);
+  const red=mat(0xb0413e), blue=mat(0x1e5aa8), green=mat(0x2e7d4f);
+
+  /* เคาน์เตอร์แอดมิน/จองคอร์ท */
+  const cnt=new THREE.Mesh(new THREE.BoxGeometry(4.4,1.05,.7),wood);
+  cnt.position.set(5.8,.53,2.4);cnt.castShadow=true;g.add(cnt);
+  const cntTop=new THREE.Mesh(new THREE.BoxGeometry(4.7,.07,.86),mat(0x40474d));
+  cntTop.position.set(5.8,1.08,2.4);g.add(cntTop);
+  const scr=new THREE.Mesh(new THREE.PlaneGeometry(1.5,.85),
+    new THREE.MeshBasicMaterial({map:signTex('COURT 1-18'),side:THREE.DoubleSide}));
+  scr.position.set(5.8,2.05,2.9);scr.rotation.y=Math.PI;g.add(scr);
+
+  /* ---- ร้านแบด PRO SHOP: ผนังโชว์ไม้ + ชั้นวาง + เครื่องขึ้นเอ็น ---- */
+  const shopWall=new THREE.Mesh(new THREE.BoxGeometry(7,2.6,.16),mat(0x24303a));
+  shopWall.position.set(-4.6,1.3,OD/2-.5);g.add(shopWall);
+  const shopSign=new THREE.Mesh(new THREE.PlaneGeometry(6,.85),
+    new THREE.MeshBasicMaterial({map:signTex('PRO SHOP'),side:THREE.DoubleSide}));
+  shopSign.position.set(-4.6,2.55,OD/2-.62);shopSign.rotation.y=Math.PI;g.add(shopSign);
+  /* ไม้แบดแขวนโชว์ 12 อัน */
+  const rkCols=[0xd94f4f,0x2f6fd0,0xf0c020,0x27a567,0xe07b28,0x8a4fd0];
+  for(let r=0;r<2;r++)for(let c=0;c<6;c++){
+    const rq=new THREE.Group();
+    const head=new THREE.Mesh(new THREE.TorusGeometry(.19,.028,7,16),mat(rkCols[(r*6+c)%6]));
+    head.position.y=.42;
+    const shaft=new THREE.Mesh(new THREE.CylinderGeometry(.018,.022,.44),mat(0x2a2a2a));
+    shaft.position.y=.1;
+    const grip=new THREE.Mesh(new THREE.CylinderGeometry(.032,.032,.16),mat(0x1a1a1a));
+    grip.position.y=-.16;
+    rq.add(head,shaft,grip);
+    rq.position.set(-7.4+c*1.12,.95+r*1.15,OD/2-.62);
+    g.add(rq);
+  }
+  /* ชั้นวางลูกขนไก่/เสื้อผ้า */
+  for(let s=0;s<3;s++){
+    const sh=new THREE.Mesh(new THREE.BoxGeometry(3.2,.07,.5),wood);
+    sh.position.set(-1.0,.6+s*.55,OD/2-.75);g.add(sh);
+    for(let b=0;b<5;b++){
+      const tube=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,.28,8),
+        mat([0xffffff,0xf0e04a,0x4ad0f0][b%3]));
+      tube.position.set(-2.3+b*.65,.78+s*.55,OD/2-.75);g.add(tube);
+    }
+  }
+  /* เครื่องขึ้นเอ็น */
+  const smTable=new THREE.Mesh(new THREE.BoxGeometry(1.5,.12,.75),mat(0x37424a));
+  smTable.position.set(-8.6,.92,1.2);g.add(smTable);
+  [[-.6,-.28],[.6,-.28],[-.6,.28],[.6,.28]].forEach(([dx,dz])=>{
+    const lg=new THREE.Mesh(new THREE.BoxGeometry(.09,.9,.09),dark);
+    lg.position.set(-8.6+dx,.45,1.2+dz);g.add(lg);});
+  const clamp=new THREE.Mesh(new THREE.BoxGeometry(1.05,.18,.3),mat(0x8f989e,{metalness:.6,roughness:.35}));
+  clamp.position.set(-8.6,1.07,1.2);g.add(clamp);
+  const rkOn=new THREE.Mesh(new THREE.TorusGeometry(.21,.03,7,16),mat(0xd94f4f));
+  rkOn.rotation.x=Math.PI/2;rkOn.position.set(-8.6,1.2,1.2);g.add(rkOn);
+  const stool=new THREE.Mesh(new THREE.CylinderGeometry(.19,.19,.06,12),blue);
+  stool.position.set(-8.6,.55,2.3);g.add(stool);
+  const stoolLeg=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,.55),dark);
+  stoolLeg.position.set(-8.6,.28,2.3);g.add(stoolLeg);
+
+  /* ---- คาเฟ่ / โซนนั่งกินข้าว ---- */
+  const barM=new THREE.Mesh(new THREE.BoxGeometry(4.6,1.05,.72),mat(0x7a4a2a));
+  barM.position.set(5.6,.53,-2.6);barM.castShadow=true;g.add(barM);
+  const barTop=new THREE.Mesh(new THREE.BoxGeometry(4.9,.08,.9),mat(0x3d322a));
+  barTop.position.set(5.6,1.08,-2.6);g.add(barTop);
+  const fridge=new THREE.Mesh(new THREE.BoxGeometry(1.2,2,.7),mat(0x1f5f8f,{metalness:.35,roughness:.3}));
+  fridge.position.set(8.2,1,-2.6);fridge.castShadow=true;g.add(fridge);
+  const fridgeGl=new THREE.Mesh(new THREE.PlaneGeometry(.95,1.6),glass);
+  fridgeGl.position.set(8.2,1.05,-2.24);g.add(fridgeGl);
+  const cafeSign=new THREE.Mesh(new THREE.PlaneGeometry(4,.7),
+    new THREE.MeshBasicMaterial({map:signTex('CAFE & DRINKS'),side:THREE.DoubleSide}));
+  cafeSign.position.set(5.6,2.3,-3.0);g.add(cafeSign);
+  /* โต๊ะกินข้าว 4 ชุด */
+  for(let t=0;t<4;t++){
+    const tx=-.5+(t%2)*3.0, tz=-1.4-Math.floor(t/2)*2.6;
+    const top=new THREE.Mesh(new THREE.CylinderGeometry(.62,.62,.07,16),white);
+    top.position.set(tx,.75,tz);top.castShadow=true;g.add(top);
+    const leg=new THREE.Mesh(new THREE.CylinderGeometry(.07,.11,.75),dark);
+    leg.position.set(tx,.37,tz);g.add(leg);
+    for(let c=0;c<4;c++){
+      const a=c*Math.PI/2+.4, cx2=tx+Math.cos(a)*1.0, cz2=tz+Math.sin(a)*1.0;
+      const st=new THREE.Mesh(new THREE.BoxGeometry(.42,.06,.42),c%2?blue:green);
+      st.position.set(cx2,.45,cz2);g.add(st);
+      const bk=new THREE.Mesh(new THREE.BoxGeometry(.42,.44,.06),c%2?blue:green);
+      bk.position.set(cx2+Math.cos(a)*.2,.67,cz2+Math.sin(a)*.2);bk.rotation.y=-a;g.add(bk);
+      [[-.16,-.16],[.16,-.16],[-.16,.16],[.16,.16]].forEach(([dx,dz])=>{
+        const l=new THREE.Mesh(new THREE.BoxGeometry(.04,.45,.04),dark);
+        l.position.set(cx2+dx,.22,cz2+dz);g.add(l);});
+    }
+  }
+  /* โซฟานั่งพัก (ติดกระจกมองคอร์ท) */
+  for(let s=0;s<2;s++){
+    const sx=-6.5+s*4.2;
+    const base=new THREE.Mesh(new THREE.BoxGeometry(2.6,.42,.9),mat(0x3a5f8a));
+    base.position.set(sx,.28,-3.4);base.castShadow=true;g.add(base);
+    const bk=new THREE.Mesh(new THREE.BoxGeometry(2.6,.62,.22),mat(0x2f4f75));
+    bk.position.set(sx,.72,-3.78);g.add(bk);
+    const tbl=new THREE.Mesh(new THREE.BoxGeometry(1.1,.07,.6),wood);
+    tbl.position.set(sx,.42,-2.3);g.add(tbl);
+  }
+  const tv=new THREE.Mesh(new THREE.BoxGeometry(2.2,1.25,.09),mat(0x14181c));
+  tv.position.set(-8.7,1.9,-3.9);tv.rotation.y=.35;g.add(tv);
+  /* แอร์ + ไฟชั้น 1 */
+  [-6,2,7].forEach(x=>{
+    const ac=new THREE.Mesh(new THREE.BoxGeometry(1.1,.32,.34),white);
+    ac.position.set(x,2.75,-OD/2+.3);g.add(ac);
+  });
+  const l1=new THREE.PointLight(0xfff0d8,1.5,26,1.3);l1.position.set(0,2.9,0);g.add(l1);indoorLights.push(l1);
+  const l1b=new THREE.PointLight(0xfff0d8,1.3,24,1.3);l1b.position.set(-6,2.9,3);g.add(l1b);indoorLights.push(l1b);
+
+  /* ---------- ชั้น 2 : ที่พักเจ้าของ ---------- */
+  const Y=H1+.12;
+  /* เตียง */
+  const bed=new THREE.Mesh(new THREE.BoxGeometry(2.1,.42,2.0),mat(0x6b5a48));
+  bed.position.set(-6.4,Y+.28,-2.4);bed.castShadow=true;g.add(bed);
+  const matt=new THREE.Mesh(new THREE.BoxGeometry(2.0,.26,1.9),white);
+  matt.position.set(-6.4,Y+.6,-2.4);g.add(matt);
+  const quilt=new THREE.Mesh(new THREE.BoxGeometry(2.02,.1,1.25),mat(0x3f6b8a));
+  quilt.position.set(-6.4,Y+.76,-2.1);g.add(quilt);
+  [-.5,.5].forEach(d=>{
+    const pw=new THREE.Mesh(new THREE.BoxGeometry(.7,.16,.42),white);
+    pw.position.set(-6.4+d,Y+.8,-3.1);g.add(pw);});
+  const hb=new THREE.Mesh(new THREE.BoxGeometry(2.2,.9,.12),mat(0x584838));
+  hb.position.set(-6.4,Y+.7,-3.45);g.add(hb);
+  const ward=new THREE.Mesh(new THREE.BoxGeometry(2.4,2.1,.6),mat(0x7d6b57));
+  ward.position.set(-8.3,Y+1.05,.4);ward.rotation.y=Math.PI/2;ward.castShadow=true;g.add(ward);
+  /* ผนังกั้นห้องนอน */
+  const part=new THREE.Mesh(new THREE.BoxGeometry(.12,2.5,7),mat(0xeae4d8));
+  part.position.set(-3.6,Y+1.25,-1.5);g.add(part);
+  /* ห้องนั่งเล่น + ครัว */
+  const sofa=new THREE.Mesh(new THREE.BoxGeometry(2.9,.44,.95),mat(0x8a6f4f));
+  sofa.position.set(1.5,Y+.3,-2.8);sofa.castShadow=true;g.add(sofa);
+  const sofaB=new THREE.Mesh(new THREE.BoxGeometry(2.9,.66,.24),mat(0x765d41));
+  sofaB.position.set(1.5,Y+.75,-3.2);g.add(sofaB);
+  const tv2=new THREE.Mesh(new THREE.BoxGeometry(1.9,1.1,.08),mat(0x14181c));
+  tv2.position.set(1.5,Y+1.35,-.4);g.add(tv2);
+  const tvst=new THREE.Mesh(new THREE.BoxGeometry(2.2,.45,.45),wood);
+  tvst.position.set(1.5,Y+.22,-.5);g.add(tvst);
+  const kit=new THREE.Mesh(new THREE.BoxGeometry(4.0,.9,.65),mat(0xd8d2c6));
+  kit.position.set(6.0,Y+.45,-3.3);g.add(kit);
+  const kitTop=new THREE.Mesh(new THREE.BoxGeometry(4.2,.08,.75),mat(0x3d4248));
+  kitTop.position.set(6.0,Y+.93,-3.3);g.add(kitTop);
+  const upper=new THREE.Mesh(new THREE.BoxGeometry(3.6,.7,.4),mat(0xe4ded2));
+  upper.position.set(6.0,Y+1.9,-3.45);g.add(upper);
+  /* โต๊ะทานข้าว */
+  const dt=new THREE.Mesh(new THREE.BoxGeometry(1.7,.08,.95),wood);
+  dt.position.set(6.0,Y+.76,-.9);dt.castShadow=true;g.add(dt);
+  [[-.7,-.35],[.7,-.35],[-.7,.35],[.7,.35]].forEach(([dx,dz])=>{
+    const l=new THREE.Mesh(new THREE.BoxGeometry(.07,.76,.07),dark);
+    l.position.set(6.0+dx,Y+.38,-.9+dz);g.add(l);});
+  for(let c=0;c<4;c++){
+    const cx2=6.0+(c<2?-1.2:1.2), cz2=-.9+((c%2)?.42:-.42);
+    const st=new THREE.Mesh(new THREE.BoxGeometry(.4,.06,.4),mat(0x6b5a48));
+    st.position.set(cx2,Y+.45,cz2);g.add(st);
+    const bk=new THREE.Mesh(new THREE.BoxGeometry(.06,.42,.4),mat(0x6b5a48));
+    bk.position.set(cx2+(c<2?-.18:.18),Y+.68,cz2);g.add(bk);
+  }
+  /* โต๊ะทำงานมองลงเห็นสนาม */
+  const desk=new THREE.Mesh(new THREE.BoxGeometry(2.0,.07,.75),wood);
+  desk.position.set(-.6,Y+.75,3.0);g.add(desk);
+  const chair=new THREE.Mesh(new THREE.BoxGeometry(.5,.06,.5),mat(0x2e3338));
+  chair.position.set(-.6,Y+.45,2.1);g.add(chair);
+  const mon=new THREE.Mesh(new THREE.BoxGeometry(1.0,.6,.06),mat(0x14181c));
+  mon.position.set(-.6,Y+1.12,3.25);g.add(mon);
+  const l2=new THREE.PointLight(0xfff0d8,1.5,24,1.3);l2.position.set(0,Y+2.4,-1);g.add(l2);indoorLights.push(l2);
+  const l2b=new THREE.PointLight(0xfff0d8,1.2,22,1.3);l2b.position.set(-6,Y+2.4,-1);g.add(l2b);indoorLights.push(l2b);
+  /* บันไดขึ้นชั้น 2 (แยกจากโซนลูกค้า) */
+  for(let s=0;s<12;s++){
+    const st=new THREE.Mesh(new THREE.BoxGeometry(1.1,.14,.28),slabM);
+    st.position.set(8.2,.14+s*.27,4.2-s*.29);g.add(st);
   }
 }
 
@@ -1186,15 +1390,26 @@ function buildCourts(n){
 window.rebuild3D=function(n){curCourts=n;if(started)buildCourts(n);};
 
 const VIEWS={
-  persp:{c:[-78,46,86],t:[0,3,0]},
-  bird:{c:[0,140,4],t:[0,0,2]},
-  inside:{c:[-12,1.8,-20],t:[-12,1.6,10]},
-  front:{c:[6,7,96],t:[0,4,30]},
-  lobby:{c:[-14,3.5,52],t:[-14,3,34]}
+  persp: {c:[-78,46,86],   t:[0,3,0]},
+  bird:  {c:[0,140,4],     t:[0,0,2]},
+  inside:{c:[-11,1.75,-30],t:[-11,2.0,-24]},   /* จุดหมุนใกล้ตัว = ลากแล้วหันมองรอบตัวได้ */
+  court: {c:[-4.5,1.7,-8], t:[-8,1.6,-5]},
+  shop:  {c:[-6,1.7,32],   t:[-11,1.6,33.5]},
+  lounge:{c:[-8,1.65,36.5],t:[-15,1.4,31.5]},
+  f2:    {c:[-2.5,4.9,38], t:[-8.5,4.5,32]},
+  front: {c:[6,7,96],      t:[0,4,30]},
+  out:   {c:[0,26,120],    t:[0,2,40]}
 };
 window.setView=(k,btn)=>{
   if(!started)return;
-  const v=VIEWS[k];camDest=new THREE.Vector3(...v.c);lookDest=new THREE.Vector3(...v.t);
+  const v=VIEWS[k];
+  if(INDOOR_VIEWS.includes(k)){                 /* มุมภายในอาคาร: กระโดดเข้าเลย + ซ่อนผนัง */
+    if(roofGroup.visible) window.toggleRoof();
+    camDest=null;
+    camera.position.set(...v.c);controls.target.set(...v.t);controls.update();
+  }else{
+    camDest=new THREE.Vector3(...v.c);lookDest=new THREE.Vector3(...v.t);
+  }
   if(btn){document.querySelectorAll('.btn.vw').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
 };
 window.toggleRoof=()=>{
