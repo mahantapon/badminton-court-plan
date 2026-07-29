@@ -109,6 +109,17 @@
   <h2>เลือกผัง &amp; จำนวนคอร์ท</h2>
 
   <div class="modebar">
+    <div class="mb active" data-deal="rent" onclick="setDeal('rent')">
+      <div class="tt">📄 เช่าโรงงาน (ดีลที่ได้มา)</div>
+      <div class="ss">แปะเจี๊ยะ 2 ล้าน + เช่า 120,000/ด. · 20 ปี ขึ้น 10% ทุก 4 ปี · <b>ลงทุนต่ำกว่ามาก</b></div>
+    </div>
+    <div class="mb" data-deal="buy" onclick="setDeal('buy')">
+      <div class="tt">🏠 ซื้อขาด</div>
+      <div class="ss">จ่ายก้อนใหญ่ครั้งเดียว · ได้เป็นเจ้าของทรัพย์ · ไม่มีค่าเช่ารายเดือน</div>
+    </div>
+  </div>
+
+  <div class="modebar">
     <div class="mb active" data-mode="dense" onclick="setMode('dense')">
       <div class="tt">🔷 อัดเต็มพื้นที่ (แนะนำ)</div>
       <div class="ss">เว้นข้างคอร์ท 0.5 ม. · สูงสุด <b>20 คอร์ท</b> · เน้นปริมาณ รับคนได้มากสุด</div>
@@ -125,9 +136,17 @@
         <label>จำนวนคอร์ทที่จะเปิดใช้: <span class="val" id="courtsVal">18</span> คอร์ท <span class="sub" id="maxHint"></span></label>
         <input type="range" id="courts" min="8" max="20" step="2" value="18" oninput="recalc()">
       </div>
-      <div class="ctrl">
-        <label>ที่ดิน / อาคารโรงงาน: <span class="val" id="landVal">32</span> ล้านบาท <span class="sub">(ราคาซื้อหรือค่าเซ้ง)</span></label>
+      <div class="ctrl" id="ctrlBuy" style="display:none">
+        <label>ราคาซื้อที่ดิน+อาคาร: <span class="val" id="landVal">32</span> ล้านบาท</label>
         <input type="range" id="landCost" min="0" max="60" step="1" value="32" oninput="recalc()">
+      </div>
+      <div class="ctrl" id="ctrlKey">
+        <label>ค่าแปะเจี๊ยะ (จ่ายครั้งเดียว): <span class="val" id="keyVal">2.0</span> ล้านบาท</label>
+        <input type="range" id="keyMoney" min="0" max="10" step="0.5" value="2" oninput="recalc()">
+      </div>
+      <div class="ctrl" id="ctrlRent">
+        <label>ค่าเช่าเริ่มต้น: <span class="val" id="rentVal0">120,000</span> ฿/เดือน <span class="sub">(ขึ้น 10% ทุก 4 ปี · สัญญา 20 ปี)</span></label>
+        <input type="range" id="rentBase" min="60000" max="300000" step="5000" value="120000" oninput="recalc()">
       </div>
     </div>
     <div class="kpis">
@@ -412,8 +431,8 @@
     </div>
     <table>
       <tr><th>รายการ</th><th class="r">บาท</th></tr>
-      <tr class="sec"><td colspan="2">1) ที่ดิน + อาคารโรงงาน</td></tr>
-      <tr><td>ค่าซื้อ/เซ้งที่ดินพร้อมอาคาร <span class="sub">(ปรับได้ที่หน้าแรก)</span></td><td class="r" id="bLand"></td></tr>
+      <tr class="sec"><td colspan="2">1) ค่าสิทธิ์ในอาคาร</td></tr>
+      <tr><td id="bLandLabel"></td><td class="r" id="bLand"></td></tr>
       <tr class="sec"><td colspan="2">2) งานปรับปรุงอาคาร</td></tr>
       <tr><td>ปรับพื้น ขัดปรับระดับ ถมบ่อซ่อมรถ <span class="sub">พื้นต้องเรียบก่อนปูยาง</span></td><td class="r">1,200,000</td></tr>
       <tr><td>ปิด skylight + ฉนวนกันร้อนใต้หลังคา <span class="sub">แบดห้ามแสงแยงตา</span></td><td class="r">2,000,000</td></tr>
@@ -502,6 +521,7 @@
       <tr><td>ค่าไฟ (ไฟคอร์ท + ระบายอากาศ + แอร์โซนพัก) + น้ำ</td><td class="r" id="eUtil"></td></tr>
       <tr><td>ซ่อมบำรุง + กันเงินเปลี่ยนยาง</td><td class="r" id="eMaint"></td></tr>
       <tr><td>การตลาด + ระบบจอง + เบ็ดเตล็ด</td><td class="r">45,000</td></tr>
+      <tr id="rowRent"><td><b>ค่าเช่าโรงงาน</b> <span class="sub" id="rentNote"></span></td><td class="r" id="eRent"></td></tr>
       <tr class="total"><td>รวมรายจ่าย (ไม่รวมค่างวด)</td><td class="r" id="eTotal"></td></tr>
     </table>
     <div class="kpis">
@@ -520,6 +540,19 @@
     </div>
     <div class="note" id="verdict" style="font-size:.98rem"></div>
   </div>
+
+  <div class="card" id="rentCard">
+    <h3 style="margin-top:0">📄 ภาระค่าเช่าตลอดสัญญา 20 ปี (ขึ้น 10% ทุก 4 ปี)</h3>
+    <div style="overflow-x:auto"><table id="rentTable"></table></div>
+    <div class="kpis">
+      <div class="kpi"><div class="t">ค่าเช่ารวม 20 ปี</div><div class="v" id="kRentTotal"></div><div class="s">+ แปะเจี๊ยะ = ต้นทุนสิทธิ์ทั้งหมด</div></div>
+      <div class="kpi"><div class="t">เฉลี่ยต่อเดือนตลอดสัญญา</div><div class="v" id="kRentAvg"></div><div class="s">ใช้ตัวเลขนี้ประเมินระยะยาว</div></div>
+      <div class="kpi"><div class="t">จุดคุ้มทุน ณ ปีที่ 1</div><div class="v" id="kBE1"></div><div class="s" id="kBE1Sub"></div></div>
+      <div class="kpi"><div class="t">จุดคุ้มทุน ณ ปีที่ 17–20</div><div class="v" id="kBE20"></div><div class="s">ตอนค่าเช่าขึ้นสูงสุด</div></div>
+    </div>
+    <div class="note blue" id="rentVerdict"></div>
+  </div>
+
   <div class="pagenav"><button class="btn ghost" onclick="go('p6')">← งบลงทุน</button><span></span></div>
 </section>
 
@@ -540,7 +573,25 @@ const MODES={
   dense:{pitch:6.6, maxPerSide:10, label:'อัดเต็มพื้นที่', gap:'0.5 ม.'},
   bwf:  {pitch:8.1, maxPerSide:8,  label:'มาตรฐาน BWF',  gap:'2.0 ม.'}
 };
-let mode='dense', grade='pro', mix='single';
+let mode='dense', grade='pro', mix='single', deal='rent';
+function setDeal(d){
+  deal=d;
+  document.querySelectorAll('.modebar .mb[data-deal]').forEach(b=>b.classList.toggle('active',b.dataset.deal===d));
+  el('ctrlBuy').style.display=d==='buy'?'':'none';
+  el('ctrlKey').style.display=d==='rent'?'':'none';
+  el('ctrlRent').style.display=d==='rent'?'':'none';
+  el('rowRent').style.display=d==='rent'?'':'none';
+  el('rentCard').style.display=d==='rent'?'':'none';
+  recalc();
+}
+function rentSchedule(base){
+  const rows=[]; let r=base, total=0;
+  for(let p=0;p<5;p++){
+    const sum=r*48; rows.push({y1:p*4+1,y2:p*4+4,m:r,sum}); total+=sum;
+    r=Math.round(r*1.10);
+  }
+  return {rows,total};
+}
 
 const GRADES={
   eco:{n:'ประหยัด',  sub:'PVC 3.5–4.5 มม. โนเนม',  mat:20000, light:12000, net:8000,  life:'3–5 ปี'},
@@ -644,8 +695,15 @@ function recalc(){
   if(window.rebuild3D) window.rebuild3D(courts);
 
   /* budget */
-  const landCost=val('landCost')*1e6;
+  const isRent=deal==='rent';
+  const keyMoney=val('keyMoney')*1e6, rentBase=val('rentBase');
+  el('keyVal').textContent=val('keyMoney').toFixed(1);
+  el('rentVal0').textContent=fmt(rentBase);
   el('landVal').textContent=val('landCost');
+  const landCost=isRent?keyMoney:val('landCost')*1e6;
+  el('bLandLabel').innerHTML=isRent
+    ?`ค่าแปะเจี๊ยะ (เงินกินเปล่า) <span class="sub">จ่ายครั้งเดียวตอนเซ็นสัญญา — ไม่ได้คืน</span>`
+    :`ค่าซื้อที่ดินพร้อมอาคาร <span class="sub">(ปรับได้ที่หน้าแรก)</span>`;
   const g=GRADES[grade];
   let matCost,lightCost,netCost,matLabel;
   if(mix==='mixed'){
@@ -678,8 +736,8 @@ function recalc(){
   el('bPerCourt').textContent=fmtM(total/courts);
   el('bPerCourtSub').textContent=`= ${fmt(total/courts)} ฿/คอร์ท (รวมที่ดิน อาคาร ทุกอย่าง ÷ ${courts})`;
   el('bReno').textContent=fmtM(reno);
-  const newBuild=(HALL_W*HALL_L*11000)+landCost+interior+outdoor+systems+matCost+lightCost+netCost;
-  el('bVsNew').textContent='ถูกกว่า ~'+fmtM(newBuild-total);
+  const newShell=HALL_W*HALL_L*11000;   // สร้างโครงอาคารใหม่ 3,200 ตร.ม.
+  el('bVsNew').textContent='ประหยัด ~'+fmtM(newShell-8900000);
 
   /* loan */
   const loanPct=val('loanPct')/100, rate=val('rate')/100, yrs=val('years');
@@ -721,7 +779,10 @@ function recalc(){
   el('eStaff').textContent=fmt(staff);
   el('eUtil').textContent=fmt(util);
   el('eMaint').textContent=fmt(maint);
-  const exp=staff+util+maint+45000;
+  const rentMo=isRent?rentBase:0;
+  el('eRent').textContent=fmt(rentMo);
+  el('rentNote').textContent=isRent?`ปี 1–4 · ขึ้น 10% ทุก 4 ปี`:'';
+  const exp=staff+util+maint+45000+rentMo;
   el('eTotal').textContent=fmt(exp);
 
   const net=rev-exp, cash=net-pmt, dscr=net*12/(pmt*12);
@@ -742,7 +803,33 @@ function recalc(){
   if(cash<0) v.innerHTML=`⚠️ <b>เงินสดติดลบ ${fmt(-cash)} ฿/เดือน</b> ที่จอง ${Math.round(occ*100)}% — ลองลดราคาที่ดิน/เจรจาค่าเซ้ง, ยืดเวลาผ่อน, เพิ่มอัตราจอง หรือลดเกรดพื้น`;
   else if(dscr<1.2) v.innerHTML=`🟡 เงินสดเหลือ <b>${fmt(cash)} ฿/เดือน</b> แต่ DSCR ${dscr.toFixed(2)} ต่ำกว่าเกณฑ์ธนาคาร (1.2) — ปรับโครงสร้างเงินกู้หรือเพิ่มรายได้เสริม`;
   else v.innerHTML=`✅ ที่จอง <b>${Math.round(occ*100)}%</b> เหลือเงินสด <b>${fmt(cash)} ฿/เดือน</b>, DSCR ${dscr.toFixed(2)} ผ่านเกณฑ์, คืนทุน <b>~${pbi.toFixed(1)} ปี</b> · ${courts} คอร์ท เกรด${mix==='mixed'?'ผสม':GRADES[grade].n}`;
+
+  /* rent schedule */
+  if(isRent){
+    const sch=rentSchedule(rentBase);
+    const opexNoRent=staff+util+maint+45000;
+    let t=`<tr><th>ช่วงสัญญา</th><th class="r">ค่าเช่า/เดือน</th><th class="r">รวมช่วงนั้น (48 ด.)</th><th class="r">จุดคุ้มทุน (อัตราจอง)</th></tr>`;
+    sch.rows.forEach(r=>{
+      const nd=opexNoRent+r.m+pmt-shop-rent-cls;
+      const bo=Math.max(nd,0)/maxMonth*100;
+      const warn=bo>55?' style="color:#c0504d;font-weight:600"':'';
+      t+=`<tr><td>ปี ${r.y1}–${r.y2}</td><td class="r">${fmt(r.m)}</td><td class="r">${fmt(r.sum)}</td><td class="r"${warn}>${bo.toFixed(0)}%</td></tr>`;
+    });
+    t+=`<tr class="total"><td>รวมค่าเช่า 20 ปี</td><td class="r">—</td><td class="r">${fmt(sch.total)}</td><td class="r">—</td></tr>`;
+    el('rentTable').innerHTML=t;
+    el('kRentTotal').textContent=fmtM(sch.total);
+    el('kRentAvg').textContent=fmt((sch.total+keyMoney)/240)+' ฿';
+    const be1=Math.max(opexNoRent+sch.rows[0].m+pmt-shop-rent-cls,0)/maxMonth*100;
+    const be20=Math.max(opexNoRent+sch.rows[4].m+pmt-shop-rent-cls,0)/maxMonth*100;
+    el('kBE1').textContent=be1.toFixed(0)+'%';
+    el('kBE1Sub').textContent='= ขาย ~'+(be1/100*totalHrs).toFixed(1)+' ชม./วัน/คอร์ท';
+    el('kBE20').textContent=be20.toFixed(0)+'%';
+    const rv=el('rentVerdict');
+    if(be20<55) rv.innerHTML=`✅ <b>ดีลนี้รับได้ตลอด 20 ปี</b> — แม้ปีท้ายๆ ที่ค่าเช่าขึ้นเป็น ${fmt(sch.rows[4].m)} ฿/ด. จุดคุ้มทุนยังอยู่ที่ ${be20.toFixed(0)}% ซึ่งต่ำกว่าที่สนามในโซนนี้ทำได้ · ข้อดีของการเช่า: ลงทุนแรกเข้าต่ำกว่าซื้อมาก (${fmtM(total)} เทียบกับ ~57 ลบ.) เงินเหลือไปทำสนามให้ดีและมีทุนสำรอง`;
+    else rv.innerHTML=`⚠️ ปีท้ายสัญญาค่าเช่าขึ้นเป็น ${fmt(sch.rows[4].m)} ฿/ด. ทำให้จุดคุ้มทุนขยับไป <b>${be20.toFixed(0)}%</b> — ควรเจรจาเพดานการขึ้นค่าเช่า (เช่น ขึ้นไม่เกิน 7%/4ปี) หรือขอสิทธิ์ต่อสัญญาในราคาที่ตกลงไว้ล่วงหน้า`;
+  }
 }
+setDeal('rent');
 setMode('dense');
 </script>
 
@@ -754,7 +841,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 let started=false,scene,camera,renderer,controls,courtGroup,roofGroup,hemi,sun,night=false;
-let camDest=null,lookDest=null,lampMat,courtLights=[],curCourts=18;
+let camDest=null,lookDest=null,lampMat,courtLights=[],curCourts=18,ambient,indoorLights=[];
 const SKY_D=0xbfe0f5,SKY_N=0x0b1524;
 const HALL_W=40,HALL_L=80,OFFICE_L=10,COURT_L=13.4,COURT_W=6.1;
 const EAVE=6.33,RIDGE=9.42;
@@ -767,22 +854,32 @@ function quad(a,b,c,d,m){
   return new THREE.Mesh(g,m);
 }
 function courtTex(){
-  const c=document.createElement('canvas');c.width=244;c.height=536;
+  const c=document.createElement('canvas');c.width=256;c.height=548;
   const g=c.getContext('2d');
-  g.fillStyle='#2f6fa8';g.fillRect(0,0,244,536);
+  g.fillStyle='#1f6f4a';g.fillRect(0,0,256,548);            // สนามสีเขียวขอบ
+  g.fillStyle='#2f6fa8';g.fillRect(6,6,244,536);            // พื้นเล่นสีน้ำเงิน
   g.strokeStyle='#fff';g.lineWidth=4;
-  g.strokeRect(12,12,220,512);
+  g.strokeRect(18,18,220,512);
   g.beginPath();
-  g.moveTo(12,268);g.lineTo(232,268);
-  g.moveTo(34,12);g.lineTo(34,524);
-  g.moveTo(210,12);g.lineTo(210,524);
-  g.moveTo(12,90);g.lineTo(232,90);
-  g.moveTo(12,446);g.lineTo(232,446);
-  g.moveTo(12,196);g.lineTo(232,196);
-  g.moveTo(12,340);g.lineTo(232,340);
-  g.moveTo(122,12);g.lineTo(122,196);
-  g.moveTo(122,340);g.lineTo(122,524);
+  g.moveTo(18,274);g.lineTo(238,274);
+  g.moveTo(40,18);g.lineTo(40,530);
+  g.moveTo(216,18);g.lineTo(216,530);
+  g.moveTo(18,96);g.lineTo(238,96);
+  g.moveTo(18,452);g.lineTo(238,452);
+  g.moveTo(18,202);g.lineTo(238,202);
+  g.moveTo(18,346);g.lineTo(238,346);
+  g.moveTo(128,18);g.lineTo(128,202);
+  g.moveTo(128,346);g.lineTo(128,530);
   g.stroke();
+  const t=new THREE.CanvasTexture(c);t.anisotropy=8;return t;
+}
+function bannerTex(txt,bg,fg){
+  const c=document.createElement('canvas');c.width=1024;c.height=192;
+  const g=c.getContext('2d');
+  g.fillStyle=bg;g.fillRect(0,0,1024,192);
+  g.fillStyle='rgba(255,255,255,.12)';g.fillRect(0,0,1024,26);
+  g.fillStyle=fg;g.font='bold 96px Prompt,sans-serif';g.textAlign='center';g.textBaseline='middle';
+  g.fillText(txt,512,104);
   const t=new THREE.CanvasTexture(c);t.anisotropy=8;return t;
 }
 function signTex(txt){
@@ -814,6 +911,13 @@ window.init3D=function(){
   controls.enableDamping=true;controls.maxPolarAngle=Math.PI/2-.02;
   controls.minDistance=5;controls.maxDistance=340;controls.target.set(0,3,0);
   hemi=new THREE.HemisphereLight(0xffffff,0x88aa88,.85);scene.add(hemi);
+  ambient=new THREE.AmbientLight(0xdfe8f0,1.25);scene.add(ambient);
+  for(let z=-32;z<=32;z+=16){
+    [-11,11].forEach(x=>{
+      const pl=new THREE.PointLight(0xfff6e6,1.0,42,1.4);
+      pl.position.set(x,6.6,z);scene.add(pl);indoorLights.push(pl);
+    });
+  }
   sun=new THREE.DirectionalLight(0xfff2d9,1.45);
   sun.position.set(-70,95,55);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);
   Object.assign(sun.shadow.camera,{left:-110,right:110,top:110,bottom:-110,far:320});
@@ -840,8 +944,10 @@ function buildStatic(){
   ground.rotation.x=-Math.PI/2;ground.position.y=-.06;ground.receiveShadow=true;scene.add(ground);
   const plot=new THREE.Mesh(new THREE.PlaneGeometry(120,150),mat(0xb9b4aa));
   plot.rotation.x=-Math.PI/2;plot.position.set(0,-.03,0);plot.receiveShadow=true;scene.add(plot);
-  const floor=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W,HALL_L),mat(0xd8d5cd));
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W,HALL_L),mat(0x35404a));
   floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+  const aisle=new THREE.Mesh(new THREE.PlaneGeometry(8.2,HALL_L),mat(0x8a5f3a));
+  aisle.rotation.x=-Math.PI/2;aisle.position.y=.005;aisle.receiveShadow=true;scene.add(aisle);
 
   const steel=mat(0x3a4046,{metalness:.5,roughness:.5});
   const colGeo=new THREE.BoxGeometry(.5,EAVE,.5);
@@ -854,11 +960,38 @@ function buildStatic(){
   const roofMat=mat(0x4a5158,{side:THREE.DoubleSide,metalness:.35,roughness:.6});
   roofGroup.add(quad([0,RIDGE+.6,-hl],[hw,EAVE+.4,-hl],[hw,EAVE+.4,hl],[0,RIDGE+.6,hl],roofMat));
   roofGroup.add(quad([0,RIDGE+.6,-hl],[-hw,EAVE+.4,-hl],[-hw,EAVE+.4,hl],[0,RIDGE+.6,hl],roofMat));
-  const wallMat=mat(0xe9ece9,{side:THREE.DoubleSide});
-  roofGroup.add(quad([-hw,0,-hl],[hw,0,-hl],[hw,EAVE+.4,-hl],[-hw,EAVE+.4,-hl],wallMat));
-  roofGroup.add(quad([-hw,0,hl],[hw,0,hl],[hw,EAVE+.4,hl],[-hw,EAVE+.4,hl],wallMat));
-  const sideW=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L,EAVE),wallMat);
-  sideW.rotation.y=Math.PI/2;sideW.position.set(hw,EAVE/2,0);roofGroup.add(sideW);
+  /* ---- ผนังปิดทึบทั้งอาคาร (ด้านล่างสีเข้มกัน glare / ด้านบนสีอ่อน) ---- */
+  const wallLow=mat(0x2a3640,{side:THREE.DoubleSide});
+  const wallHigh=mat(0xe4e8e6,{side:THREE.DoubleSide});
+  const WLOW=3.6;
+  [[-hl,-1],[hl,1]].forEach(([z])=>{
+    roofGroup.add(quad([-hw,0,z],[hw,0,z],[hw,WLOW,z],[-hw,WLOW,z],wallLow));
+    roofGroup.add(quad([-hw,WLOW,z],[hw,WLOW,z],[hw,EAVE+.4,z],[-hw,EAVE+.4,z],wallHigh));
+  });
+  [[hw,1],[-hw,-1]].forEach(([x])=>{
+    const lo=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L,WLOW),wallLow);
+    lo.rotation.y=Math.PI/2;lo.position.set(x,WLOW/2,0);roofGroup.add(lo);
+    const hi=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L,EAVE-WLOW),wallHigh);
+    hi.rotation.y=Math.PI/2;hi.position.set(x,WLOW+(EAVE-WLOW)/2,0);roofGroup.add(hi);
+  });
+  /* ---- ผ้าสปอนเซอร์ผืนใหญ่บนผนังยาว 2 ฝั่ง ---- */
+  const SPON=[['SPONSOR','#1b4d8f','#ffffff'],['YONEX','#0d3b6e','#e8f0ff'],['BADMINTON ARENA','#8a2a44','#ffe9f0'],
+              ['PRO SHOP','#125935','#e9f7ee'],['SPONSOR','#8a5a12','#fff3e0'],['ONLINE BOOKING','#2a3f6b','#dbe6ff']];
+  SPON.forEach((s,i)=>{
+    const b=new THREE.Mesh(new THREE.PlaneGeometry(11,2.05),
+      new THREE.MeshBasicMaterial({map:bannerTex(s[0],s[1],s[2]),side:THREE.DoubleSide}));
+    const side=i%2===0?1:-1, idx=Math.floor(i/2);
+    b.rotation.y=side>0?-Math.PI/2:Math.PI/2;
+    b.position.set(side*(hw-.12),4.6,-24+idx*24);
+    roofGroup.add(b);
+  });
+  [['BADMINTON ARENA','#0e3d6b','#ffffff'],['SPONSOR','#8a2a44','#ffe9f0']].forEach((s,i)=>{
+    const b=new THREE.Mesh(new THREE.PlaneGeometry(16,2.6),
+      new THREE.MeshBasicMaterial({map:bannerTex(s[0],s[1],s[2]),side:THREE.DoubleSide}));
+    b.position.set(0,5,(i===0?-1:1)*(hl-.12));
+    b.rotation.y=i===0?0:Math.PI;
+    roofGroup.add(b);
+  });
   for(let z=-hl;z<=hl+.1;z+=5){
     const t=new THREE.Mesh(new THREE.BoxGeometry(HALL_W,.35,.3),steel);
     t.position.set(0,EAVE+.2,z);roofGroup.add(t);
@@ -956,34 +1089,99 @@ function buildCourts(n){
   const startZ=-hl+2.5;
   const tex=courtTex();
   const courtMat=new THREE.MeshStandardMaterial({map:tex});
-  const netMat=mat(0x2b2b2b,{transparent:true,opacity:.8,side:THREE.DoubleSide});
+  const netMat=mat(0x22262a,{transparent:true,opacity:.82,side:THREE.DoubleSide});
+  const meshMat=mat(0x1b2a1f,{transparent:true,opacity:.34,side:THREE.DoubleSide});
+  const frameMat=mat(0x2e3338,{metalness:.5,roughness:.45});
+  const chairMat=mat(0x1e5aa8), chairLeg=mat(0x30363c);
+  const bagCols=[0xc0504d,0x2e7d4f,0x25303a,0xd8b56a,0x6b4a8a];
   lampMat=new THREE.MeshStandardMaterial({color:0xf4f9ff,emissive:0xf4f9ff,emissiveIntensity:.2});
+  const cxAbs=HALL_W/2-2.5-COURT_L/2;
+
   for(let side=0;side<2;side++){
     const sgn=side===0?-1:1;
     for(let i=0;i<perSide;i++){
-      const z=startZ+i*M.pitch+COURT_W/2;
-      const p=new THREE.Mesh(new THREE.PlaneGeometry(COURT_L,COURT_W),courtMat);
+      const z=startZ+i*M.pitch+COURT_W/2, cx=sgn*cxAbs;
+
+      /* พื้นคอร์ท (มีขอบเขียวรอบ) */
+      const p=new THREE.Mesh(new THREE.PlaneGeometry(COURT_L+1,COURT_W+.7),courtMat);
       p.rotation.x=-Math.PI/2;p.rotation.z=Math.PI/2;
-      p.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),.02,z);
-      p.receiveShadow=true;courtGroup.add(p);
+      p.position.set(cx,.02,z);p.receiveShadow=true;courtGroup.add(p);
+
+      /* เน็ต + เสา */
       const net=new THREE.Mesh(new THREE.PlaneGeometry(COURT_W+.6,.78),netMat);
-      net.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),.79,z);
-      net.rotation.y=Math.PI/2;courtGroup.add(net);
+      net.position.set(cx,.79,z);net.rotation.y=Math.PI/2;courtGroup.add(net);
+      const tape=new THREE.Mesh(new THREE.BoxGeometry(.05,.07,COURT_W+.6),mat(0xffffff));
+      tape.position.set(cx,1.2,z);courtGroup.add(tape);
       [-1,1].forEach(d=>{
-        const po=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,1.55),mat(0x333));
-        po.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),.78,z+d*(COURT_W+.6)/2);courtGroup.add(po);
+        const po=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,1.55),frameMat);
+        po.position.set(cx,.78,z+d*(COURT_W+.6)/2);courtGroup.add(po);
       });
-      const bar=new THREE.Mesh(new THREE.BoxGeometry(COURT_L*.75,.14,.3),lampMat);
-      bar.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),EAVE+.9,z);courtGroup.add(bar);
-      const sp=new THREE.SpotLight(0xeef4ff,0,26,Math.PI/3,.5,1);
-      sp.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),EAVE+.7,z);
-      sp.target.position.set(sgn*(HALL_W/2-2.5-COURT_L/2),0,z);
+
+      /* ตาข่ายกั้นระหว่างคอร์ท (ทุกช่อง) */
+      const div=new THREE.Mesh(new THREE.PlaneGeometry(COURT_L+2.2,2.6),meshMat);
+      div.position.set(cx,1.3,z+M.pitch/2);courtGroup.add(div);
+      const rail=new THREE.Mesh(new THREE.BoxGeometry(COURT_L+2.2,.06,.06),frameMat);
+      rail.position.set(cx,2.6,z+M.pitch/2);courtGroup.add(rail);
+
+      /* เก้าอี้นั่งพัก 3 ตัว + กระเป๋า ด้านหลังคอร์ท (ฝั่งทางเดินกลาง) */
+      const bx=sgn*(cxAbs-COURT_L/2-1.7);
+      for(let k=0;k<3;k++){
+        const cz=z-1.8+k*1.8;
+        const seat=new THREE.Mesh(new THREE.BoxGeometry(.5,.07,.5),chairMat);
+        seat.position.set(bx,.44,cz);seat.castShadow=true;courtGroup.add(seat);
+        const back=new THREE.Mesh(new THREE.BoxGeometry(.09,.5,.5),chairMat);
+        back.position.set(bx-sgn*.24,.7,cz);courtGroup.add(back);
+        [[-.2,-.2],[.2,-.2],[-.2,.2],[.2,.2]].forEach(([dx,dz])=>{
+          const lg=new THREE.Mesh(new THREE.BoxGeometry(.05,.44,.05),chairLeg);
+          lg.position.set(bx+dx,.22,cz+dz);courtGroup.add(lg);
+        });
+        if(k!==1){
+          const bag=new THREE.Mesh(new THREE.BoxGeometry(.3,.26,.78),mat(bagCols[(i+k)%5]));
+          bag.position.set(bx,.61,cz);bag.rotation.y=.12;bag.castShadow=true;courtGroup.add(bag);
+        }
+      }
+      /* ถังขยะเล็กท้ายแถวเก้าอี้ */
+      const bin=new THREE.Mesh(new THREE.CylinderGeometry(.2,.17,.55,10),mat(0x4a5a52));
+      bin.position.set(bx,.28,z+2.6);courtGroup.add(bin);
+
+      /* พัดลมตั้งพื้นข้างเก้าอี้ */
+      const fanPole=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,1.5),mat(0x8a9098));
+      fanPole.position.set(bx-sgn*.5,.75,z+3.4);courtGroup.add(fanPole);
+      const fanBase=new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,.06,14),mat(0x6b7278));
+      fanBase.position.set(bx-sgn*.5,.05,z+3.4);courtGroup.add(fanBase);
+      const fanHead=new THREE.Mesh(new THREE.CylinderGeometry(.42,.42,.16,16),mat(0xc8ccd0,{metalness:.5,roughness:.4}));
+      fanHead.rotation.z=Math.PI/2;fanHead.rotation.y=sgn*Math.PI/2;
+      fanHead.position.set(bx-sgn*.5,1.55,z+3.4);fanHead.castShadow=true;courtGroup.add(fanHead);
+
+      /* โคมไฟเหนือคอร์ท 2 แถว */
+      [-2.6,2.6].forEach(off=>{
+        const bar=new THREE.Mesh(new THREE.BoxGeometry(.34,.12,COURT_W*.8),lampMat);
+        bar.position.set(cx+off,EAVE+.55,z);courtGroup.add(bar);
+      });
+      const sp=new THREE.SpotLight(0xeef4ff,0,24,Math.PI/2.8,.55,1);
+      sp.position.set(cx,EAVE+.5,z);sp.target.position.set(cx,0,z);
       courtGroup.add(sp);courtGroup.add(sp.target);courtLights.push(sp);
     }
   }
-  const curtain=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L-4,4),mat(0x1e5aa8,{transparent:true,opacity:.35,side:THREE.DoubleSide}));
-  curtain.rotation.y=Math.PI/2;curtain.position.set(0,2.6,0);courtGroup.add(curtain);
-  if(night)applyNight();
+
+  /* ม่านกั้นกลาง (ทึบขึ้น) + พัดลมโคจรเพดานเหนือทางเดิน */
+  const curtain=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L-3,4.4),
+    mat(0x14406e,{transparent:true,opacity:.72,side:THREE.DoubleSide}));
+  curtain.rotation.y=Math.PI/2;curtain.position.set(0,2.9,0);courtGroup.add(curtain);
+  const crail=new THREE.Mesh(new THREE.BoxGeometry(.08,.08,HALL_L-3),frameMat);
+  crail.position.set(0,5.1,0);courtGroup.add(crail);
+  for(let z=-HALL_L/2+8;z<HALL_L/2-6;z+=13){
+    const rod=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,1.4),mat(0x8a9098));
+    rod.position.set(0,RIDGE-.7,z);courtGroup.add(rod);
+    const hub=new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.18,12),mat(0x6b7278));
+    hub.position.set(0,RIDGE-1.45,z);courtGroup.add(hub);
+    for(let b=0;b<3;b++){
+      const bl=new THREE.Mesh(new THREE.BoxGeometry(1.5,.04,.34),mat(0xbfc6cc));
+      bl.position.set(0,RIDGE-1.45,z);bl.rotation.y=b*Math.PI*2/3;
+      bl.translateX(.85);courtGroup.add(bl);
+    }
+  }
+  applyNight();
 }
 window.rebuild3D=function(n){curCourts=n;if(started)buildCourts(n);};
 
@@ -1007,8 +1205,10 @@ window.toggleRoof=()=>{
   b.classList.toggle('active',!roofGroup.visible);
 };
 function applyNight(){
-  courtLights.forEach(s=>s.intensity=night?150:0);
-  if(lampMat)lampMat.emissiveIntensity=night?3.2:.2;
+  courtLights.forEach(s=>s.intensity=night?170:80);
+  if(lampMat)lampMat.emissiveIntensity=night?3.4:1.8;
+  if(ambient)ambient.intensity=night?.5:1.25;
+  indoorLights.forEach(p=>p.intensity=night?1.3:1.0);
 }
 window.toggleNight=()=>{
   if(!started)return;
