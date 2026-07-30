@@ -547,8 +547,9 @@
     </div>
     <div class="controls">
       <div class="ctrl"><label>อัตราการจอง: <span class="val" id="occVal">50</span>%</label><input type="range" id="occ" min="20" max="85" step="1" value="50" oninput="recalc();clearOc()"></div>
-      <div class="ctrl"><label>ราคากลางวัน: <span class="val" id="dayRateVal">150</span> ฿/ชม./คอร์ท</label><input type="range" id="dayRate" min="80" max="400" step="10" value="150" oninput="recalc()"></div>
-      <div class="ctrl"><label>ราคากลางคืน: <span class="val" id="nightRateVal">220</span> ฿/ชม./คอร์ท</label><input type="range" id="nightRate" min="100" max="500" step="10" value="220" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าคอร์ทแบด — <b>ราคาเดียวทั้งวัน</b>: <span class="val" id="rateVal2">200</span> ฿/ชม./คอร์ท</label><input type="range" id="rate2" min="80" max="400" step="10" value="200" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าคอร์ทบาส 3x3: <span class="val" id="bRateVal">800</span> ฿/ชม./สนาม</label><input type="range" id="brate" min="200" max="1500" step="50" value="800" oninput="recalc()"></div>
+      <div class="ctrl"><label>อัตราการจองสนามบาส: <span class="val" id="bOccVal">20</span>% <span class="sub">(บาสใช้เฉพาะเย็น-เสาร์อาทิตย์ ต่ำกว่าแบดปกติ)</span></label><input type="range" id="bocc" min="0" max="60" step="1" value="20" oninput="recalc()"></div>
       <div class="ctrl"><label>เวลาเปิด: <span class="val" id="openVal">10:00–24:00</span></label><input type="range" id="openHrs" min="10" max="16" step="1" value="14" oninput="recalc()"></div>
     </div>
     <table>
@@ -559,7 +560,8 @@
       <tr><td>คลาสสอน/จ้างโค้ช <span class="sub" id="coachSub"></span></td><td class="r" id="rClass"></td></tr>
       <tr><td>เหมาสนามทั้งวัน (จัดแข่ง/บริษัท) <span class="sub" id="rentAllSub"></span></td><td class="r" id="rWhole"></td></tr>
       <tr><td>อีเวนต์/ทัวร์นาเมนต์ของเราเอง <span class="sub" id="eventSub"></span></td><td class="r" id="rEvent"></td></tr>
-      <tr><td>สนามบาส 3x3 (พื้นที่ต่อเติม)</td><td class="r" id="rBask"></td></tr>
+      <tr><td>สนามบาส 3x3 <span class="sub" id="baskPerSub"></span></td><td class="r" id="rBask"></td></tr>
+      <tr><td>หัก: วันที่เหมาสนาม ขายรายชั่วโมงไม่ได้ <span class="sub" id="oppSub"></span></td><td class="r" id="rOpp"></td></tr>
       <tr class="total"><td>รวมรายได้</td><td class="r" id="rTotal"></td></tr>
     </table>
     <div class="controls" style="margin-top:6px">
@@ -570,7 +572,6 @@
       <div class="ctrl"><label>เหมาสนามทั้งวัน: <span class="val" id="wholeN">2</span> ครั้ง/เดือน</label><input type="range" id="whole" min="0" max="8" step="1" value="2" oninput="recalc()"></div>
       <div class="ctrl"><label>ค่าเหมา/ครั้ง: <span class="val" id="wholeFee">85,000</span> ฿ <span class="sub">(รวมค่าน้ำ-ไฟทั้งวันแล้ว · ตลาดจริง 70,000–100,000)</span></label><input type="range" id="wfee" min="40000" max="150000" step="5000" value="85000" oninput="recalc()"></div>
       <div class="ctrl"><label>อีเวนต์เราจัดเอง: <span class="val" id="evtN">0</span> ครั้ง/เดือน × กำไรสุทธิ <span class="val" id="evtFee">18,000</span> ฿ <span class="sub">(ยังไม่มีข้อมูลจริง — ตั้ง 0 ไว้ก่อน แผนจะ conservative)</span></label><input type="range" id="evt" min="0" max="4" step="1" value="0" oninput="recalc()"></div>
-      <div class="ctrl"><label>รายได้บาส 3x3: <span class="val" id="baskVal">35,000</span> ฿/ด. <span class="sub" id="baskPerSub"></span></label><input type="range" id="bask" min="0" max="200000" step="5000" value="35000" oninput="recalc()"></div>
     </div>
     <table style="margin-top:14px">
       <tr><th>รายจ่ายต่อเดือน</th><th class="r">บาท</th></tr>
@@ -617,15 +618,17 @@
     <h3 style="margin-top:0">🎫 ราคาสมาชิก — ควรตั้งเท่าไหร่ (กดปรับดูผลได้)</h3>
     <div class="btnrow">
       <span class="lbl">แพ็กเกจสำเร็จรูป — กดเลือกเพื่อดูตัวเลข</span>
-      <button class="btn mp active" data-mp="safe" onclick="setMemPreset('safe')">⭐ แนะนำ — 500฿ · ลดกลางวันเท่านั้น</button>
-      <button class="btn mp" data-mp="rec" onclick="setMemPreset('rec')">ลดกลางคืนด้วย (110/200)</button>
-      <button class="btn mp" data-mp="agg" onclick="setMemPreset('agg')">🔥 ดุดัน — ลดหนักทั้งวัน (เสี่ยงขาดทุน)</button>
+      <button class="btn mp active" data-mp="safe" onclick="setMemPreset('safe')">⭐ แนะนำ — 100/เดือน · 900/ปี · ลดเฉพาะนอกพีค</button>
+      <button class="btn mp" data-mp="rec" onclick="setMemPreset('rec')">ลดพีคด้วย (160/180)</button>
+      <button class="btn mp" data-mp="agg" onclick="setMemPreset('agg')">🔥 ดุดัน — ลดหนักทั้งวัน</button>
     </div>
     <div class="controls">
-      <div class="ctrl"><label>ค่าบัตรสมาชิก: <span class="val" id="mfeeV">500</span> ฿/ปี/คน</label><input type="range" id="mfee" min="0" max="2000" step="100" value="500" oninput="recalc();clearMP()"></div>
-      <div class="ctrl"><label>จำนวนสมาชิก: <span class="val" id="mnV">300</span> คน</label><input type="range" id="mn" min="0" max="800" step="25" value="300" oninput="recalc();clearMP()"></div>
-      <div class="ctrl"><label>ราคาสมาชิก กลางวัน: <span class="val" id="mdayV">110</span> ฿/ชม.</label><input type="range" id="mday" min="60" max="200" step="5" value="110" oninput="recalc();clearMP()"></div>
-      <div class="ctrl"><label>ราคาสมาชิก กลางคืน: <span class="val" id="mnightV">220</span> ฿/ชม. <span class="sub">(ตั้งเท่าราคาปกติ = ไม่ลดพีค)</span></label><input type="range" id="mnight" min="120" max="280" step="5" value="220" oninput="recalc();clearMP()"></div>
+      <div class="ctrl"><label>ค่าสมาชิก <b>รายเดือน</b>: <span class="val" id="mfeeMV">100</span> ฿/เดือน</label><input type="range" id="mfeeM" min="0" max="500" step="10" value="100" oninput="recalc();clearMP()"></div>
+      <div class="ctrl"><label>ค่าสมาชิก <b>รายปี</b>: <span class="val" id="mfeeYV">900</span> ฿/ปี <span class="sub" id="mSaveSub"></span></label><input type="range" id="mfeeY" min="0" max="3000" step="50" value="900" oninput="recalc();clearMP()"></div>
+      <div class="ctrl"><label>จำนวนสมาชิก: <span class="val" id="mnV">300</span> คน <span class="sub" id="mMixSub"></span></label><input type="range" id="mn" min="0" max="800" step="25" value="300" oninput="recalc();clearMP()"></div>
+      <div class="ctrl"><label>สัดส่วนที่เลือกรายปี: <span class="val" id="myV">40</span>% <span class="sub">(ที่เหลือจ่ายรายเดือน)</span></label><input type="range" id="myshare" min="0" max="100" step="5" value="40" oninput="recalc();clearMP()"></div>
+      <div class="ctrl"><label>ราคาสมาชิก <b>นอกพีค</b> (10:00–17:00): <span class="val" id="mdayV">160</span> ฿/ชม.</label><input type="range" id="mday" min="60" max="300" step="5" value="160" oninput="recalc();clearMP()"></div>
+      <div class="ctrl"><label>ราคาสมาชิก <b>พีค</b> (17:00–24:00): <span class="val" id="mnightV">200</span> ฿/ชม. <span class="sub" id="mPeakSub"></span></label><input type="range" id="mnight" min="100" max="400" step="5" value="200" oninput="recalc();clearMP()"></div>
       <div class="ctrl"><label>สัดส่วนชั่วโมงที่มาจากสมาชิก: <span class="val" id="mshV">40</span>%</label><input type="range" id="msh" min="0" max="80" step="5" value="40" oninput="recalc();clearMP()"></div>
       <div class="ctrl"><label>อัตราการจองที่เพิ่มจากระบบสมาชิก: <span class="val" id="mliftV">4</span>%</label><input type="range" id="mlift" min="0" max="12" step="1" value="4" oninput="recalc();clearMP()"></div>
     </div>
@@ -814,9 +817,9 @@ function setCoach(m){
 /* ---------- แพ็กเกจสมาชิกสำเร็จรูป ---------- */
 const MEM_MC=22;                       // ต้นทุนส่วนเพิ่มต่อคอร์ท-ชั่วโมง (ไฟคอร์ท+สึกหรอ)
 const MEM_PRESET={
-  safe:{mfee:500, mn:300, mday:110, mnight:220, msh:40, mlift:4},
-  rec: {mfee:500, mn:300, mday:110, mnight:200, msh:40, mlift:4},
-  agg: {mfee:300, mn:450, mday:90,  mnight:180, msh:55, mlift:7}
+  safe:{mfeeM:100, mfeeY:900,  myshare:40, mn:300, mday:160, mnight:200, msh:40, mlift:4},
+  rec: {mfeeM:100, mfeeY:900,  myshare:40, mn:300, mday:160, mnight:180, msh:40, mlift:4},
+  agg: {mfeeM:60,  mfeeY:500,  myshare:35, mn:450, mday:140, mnight:160, msh:55, mlift:7}
 };
 function setMemPreset(k){
   const p=MEM_PRESET[k];
@@ -1051,20 +1054,28 @@ function recalc(){
   el('kInterest').textContent=fmtM(totalInt);
 
   /* revenue */
-  const occ=val('occ')/100, dayRate=val('dayRate'), nightRate=val('nightRate');
+  const occ=val('occ')/100;
+  const RATE=val('rate2');                       // ค่าคอร์ทแบด ราคาเดียวทั้งวัน
+  const dayRate=RATE, nightRate=RATE;            // ใช้ชื่อเดิมต่อได้ทั้งไฟล์
   const totalHrs=val('openHrs'), nightHrs=Math.min(7,totalHrs), dayHrs=totalHrs-nightHrs;
   el('openVal').textContent=(24-totalHrs)+':00–24:00';
   el('occVal').textContent=Math.round(occ*100);
-  el('dayRateVal').textContent=fmt(dayRate);
-  el('nightRateVal').textContent=fmt(nightRate);
-  const perCourtDay=dayHrs*dayRate+nightHrs*nightRate;
-  const maxMonth=totalCourts*perCourtDay*30;
+  el('rateVal2').textContent=fmt(RATE);
+  /* วันที่เหมาสนามทั้งวัน ขายรายชั่วโมงไม่ได้ → หักออกจากวันขายปกติ */
+  const wholeDays=Math.min(val('whole'),12), normDays=30-wholeDays;
+  const perCourtDay=totalHrs*RATE;
+  const maxMonth=totalCourts*perCourtDay*normDays;   // เพดานรายชั่วโมงจากวันที่ขายปกติ
   const courtRev=maxMonth*occ;
-  el('ceilNote').innerHTML=`เพดานรายได้คอร์ท = ${totalCourts} คอร์ท × (กลางวัน ${dayHrs} ชม.×${dayRate} + กลางคืน ${nightHrs} ชม.×${nightRate}) × 30 วัน = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100%`;
+  el('ceilNote').innerHTML=`เพดานรายได้คอร์ทแบด = ${totalCourts} คอร์ท × ${totalHrs} ชม. × <b>${fmt(RATE)} ฿ (ราคาเดียวทั้งวัน)</b> × ${normDays} วันขายปกติ = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100% · อีก ${wholeDays} วันเป็นวันเหมาสนาม`;
   const shop=val('shop'), rent=val('rent');
   /* รายได้เสริม: คลาสสอน · เหมาสนามทั้งวัน · อีเวนต์ · บาส 3x3 */
   const WHOLE_FEE=val('wfee'), EVT_PROFIT=18000;
-  const coachN=val('coach'), wholeN=val('whole'), evtN=val('evt'), bask=val('bask');
+  const coachN=val('coach'), wholeN=val('whole'), evtN=val('evt');
+  /* บาส 3x3: คิดจากราคา × จำนวนสนาม × ชั่วโมงเปิด × อัตราการจองของบาสเอง */
+  const bRate=val('brate'), bOcc=val('bocc')/100;
+  const bask=Math.round(SD.bask*totalHrs*bRate*30*bOcc);
+  el('bRateVal').textContent=fmt(bRate); el('bOccVal').textContent=Math.round(bOcc*100);
+  el('baskPerSub').textContent=`${SD.bask} สนาม × ${totalHrs} ชม. × ${fmt(bRate)} ฿ × 30 วัน × จอง ${Math.round(bOcc*100)}%`;
   const cFee=val('cfee'), WK=52/12;
   const sessions=coachN*WK;                            // คลาสต่อเดือน
   const cc=coachCalc(coachM,sessions,cFee,dayRate);
@@ -1074,8 +1085,6 @@ function recalc(){
   el('coachN').textContent=coachN; el('coachFee').textContent=fmt(cFee);
   el('wholeN').textContent=wholeN; el('wholeFee').textContent=fmt(WHOLE_FEE);
   el('evtN').textContent=evtN; el('evtFee').textContent=fmt(EVT_PROFIT);
-  el('baskVal').textContent=fmt(bask);
-  el('baskPerSub').textContent=`(${SD.bask} สนาม ≈ ${fmt(bask/SD.bask)}/สนาม)`;
   el('coachSub').textContent=`${coachN} คลาส/สัปดาห์ · โมเดล ${coachM}: ${CM[coachM].n}`;
   /* ตารางเทียบ 4 โมเดล + คำอธิบายสูตร */
   let ct=`<tr><th>โมเดล</th><th>วิธีคิด</th><th class="r">สนามได้/เดือน</th><th>เหมาะเมื่อ</th></tr>`;
@@ -1093,17 +1102,29 @@ function recalc(){
      :coachM==='D'?`ค่าเรียน ${fmt(cc.gross)} − ค่าจ้างโค้ช (${cc.hrs.toFixed(1)} ชม. × ${fmt(COACH_RATE)} ฿) = <b>สนามได้ ${fmt(cls)} ฿</b>`
      :`${fmt(cc.gross)} × ${coachM==='B'?'40':'60'}% = <b>สนามได้ ${fmt(cls)} ฿</b> · โค้ชได้ ${fmt(cc.gross-cls)} ฿`);
   /* ---------- ระบบสมาชิก ---------- */
-  const mfee=val('mfee'), mn=val('mn'), mday=val('mday'), mnight=val('mnight');
+  const mfeeM=val('mfeeM'), mfeeY=val('mfeeY'), mn=val('mn');
+  const myshare=val('myshare')/100;
+  const mday=val('mday'), mnight=val('mnight');
   const msh=val('msh')/100, mlift=val('mlift')/100;
-  el('mfeeV').textContent=fmt(mfee); el('mnV').textContent=mn;
+  const nY=Math.round(mn*myshare), nM=mn-nY;
+  const mfee=myshare*mfeeY+(1-myshare)*mfeeM*12;   // ค่าสมาชิกเฉลี่ยต่อคนต่อปี
+  el('mfeeMV').textContent=fmt(mfeeM); el('mfeeYV').textContent=fmt(mfeeY);
+  el('myV').textContent=Math.round(myshare*100); el('mnV').textContent=mn;
   el('mdayV').textContent=mday; el('mnightV').textContent=mnight;
+  const saveY=mfeeM*12-mfeeY;
+  el('mSaveSub').textContent=saveY>0?`(ถูกกว่าจ่ายรายเดือน ${fmt(saveY)} ฿/ปี = ประหยัด ${Math.round(saveY/(mfeeM*12)*100)}%)`:'(ยังไม่จูงใจให้จ่ายรายปี)';
+  el('mMixSub').textContent=`รายปี ${nY} คน · รายเดือน ${nM} คน`;
+  el('mPeakSub').textContent=mnight>=RATE?'= ราคาปกติ (ไม่ลดพีค) ✅':`ลดจากปกติ ${fmt(RATE-mnight)} ฿`;
   el('mshV').textContent=Math.round(msh*100); el('mliftV').textContent=Math.round(mlift*100);
-  const capHrs=totalCourts*totalHrs*30;              // ชั่วโมงคอร์ทเต็มเพดาน/เดือน
+  const capHrs=totalCourts*totalHrs*normDays;        // ชั่วโมงคอร์ทเต็มเพดาน/เดือน
   const baseHrs=capHrs*occ, liftHrs=capHrs*mlift;
   const memHrs=(baseHrs+liftHrs)*msh;
-  const avgDisc=.5*(dayRate-mday)+.5*(nightRate-mnight);   // สมมุติสมาชิกเล่นกลางวัน 50% กลางคืน 50%
-  const avgMem=.5*mday+.5*mnight;
-  const discGiven=memHrs*avgDisc, incrRev=liftHrs*avgMem, feeRev=mn*mfee/12;
+  /* แบ่งชั่วโมงสมาชิกตามสัดส่วนชั่วโมงนอกพีค/พีคจริง */
+  const offFrac=dayHrs/totalHrs, peakFrac=nightHrs/totalHrs;
+  const avgDisc=offFrac*(RATE-mday)+peakFrac*(RATE-mnight);
+  const avgMem=offFrac*mday+peakFrac*mnight;
+  const discGiven=memHrs*avgDisc, incrRev=liftHrs*avgMem;
+  const feeRev=(nY*mfeeY)/12+nM*mfeeM;              // รายปีเฉลี่ยเป็นรายเดือน + รายเดือนจริง
   const memNet=feeRev+incrRev-discGiven;
   el('mFeeRev').textContent=fmt(feeRev)+' ฿';
   el('mDisc').textContent='−'+fmt(discGiven)+' ฿';
@@ -1119,29 +1140,34 @@ function recalc(){
   el('mBE').textContent=(denom>0&&isFinite(bePct))?bePct.toFixed(1)+'%':'—';
   /* ตารางราคาต่อหัว */
   let mt=`<tr><th>ช่วงเวลา / ประเภท</th><th class="r">฿/ชม./คอร์ท</th><th class="r">ต่อหัว 4 คน</th><th class="r">ต่อหัว 2 คน</th><th class="r">เล่น 2 ชม. ตกคนละ (4 คน)</th></tr>`;
-  [['กลางวัน — ราคาปกติ',dayRate,''],['กลางวัน — สมาชิก',mday,'background:#eef7f1'],
-   ['กลางคืน — ราคาปกติ',nightRate,''],['กลางคืน — สมาชิก',mnight,'background:#eef7f1']]
+  [['ราคาปกติ — ทั้งวัน (ไม่เป็นสมาชิก)',RATE,''],
+   ['สมาชิก — นอกพีค 10:00–17:00',mday,'background:#eef7f1'],
+   ['สมาชิก — พีค 17:00–24:00',mnight,'background:#eef7f1'],
+   ['บาส 3x3 (ต่อสนาม)',bRate,'background:#fff3e0']]
    .forEach(([n2,r,st])=>{
     mt+=`<tr${st?` style="${st}"`:''}><td>${n2}</td><td class="r">${fmt(r)}</td><td class="r">${(r/4).toFixed(1)}</td><td class="r">${(r/2).toFixed(1)}</td><td class="r">${(r/4*2).toFixed(0)}</td></tr>`;
   });
   mt+=`<tr class="total"><td>ต้นทุนส่วนเพิ่มของเรา (ไฟคอร์ท+สึกหรอ)</td><td class="r">${MEM_MC}</td><td class="r">${(MEM_MC/4).toFixed(1)}</td><td class="r">${(MEM_MC/2).toFixed(1)}</td><td class="r">${(MEM_MC/4*2).toFixed(0)}</td></tr>`;
   el('memTable').innerHTML=mt;
-  const beDay=(dayRate-mday)>0?Math.ceil(mfee/(dayRate-mday)):0;
+  const dOff=RATE-mday;
+  const beM=dOff>0?Math.ceil(mfeeM/dOff):0, beY=dOff>0?Math.ceil(mfeeY/dOff):0;
   el('memNote').innerHTML=
-    `📐 <b>จุดคุ้มค่าบัตรฝั่งลูกค้า:</b> ค่าบัตร ${fmt(mfee)} ฿/ปี ÷ ส่วนลดกลางวัน ${fmt(dayRate-mday)} ฿/ชม. = `+
-    `<b>เล่นกลางวัน ${beDay} ชม./ปี (≈${(beDay/12).toFixed(1)} ชม./เดือน) ก็คุ้มบัตรแล้ว</b> — ต่ำมาก ทำให้ตัดสินใจสมัครง่าย `+
-    `<br>💰 <b>กำไรส่วนเพิ่มของเรา:</b> ราคาสมาชิกกลางวัน ${fmt(mday)} − ต้นทุนส่วนเพิ่ม ${MEM_MC} = <b>เหลือ ${fmt(mday-MEM_MC)} ฿/คอร์ท-ชม.</b> `+
-    `(กลางคืน ${fmt(mnight-MEM_MC)} ฿) — ยังกำไรดีมาก เพราะต้นทุนจริงของคอร์ทว่างแทบเป็นศูนย์`;
-  el('memWarn').innerHTML= (mnight<nightRate)
-    ? `⚠️ <b>คุณกำลังลดราคาช่วงกลางคืนด้วย (${fmt(nightRate)} → ${fmt(mnight)})</b> — ช่วง 18:00–22:00 คอร์ทเต็มอยู่แล้ว การลดราคาตรงนั้นคือ<b>เสียเงินเปล่า</b> เพราะลูกค้าจะมาอยู่ดี `+
-      `· ลองกดปุ่ม "🛡️ ปลอดภัย" ดู — ตั้งกลางคืนเท่าราคาปกติ แล้วจุดคุ้มทุนจะลดจาก ${bePct.toFixed(1)}% เหลือประมาณครึ่งเดียว`
-    : `✅ <b>ตั้งราคาถูกแล้ว — ลดเฉพาะกลางวัน ไม่ลดกลางคืน</b> เพราะชั่วโมงพีคเต็มอยู่แล้วไม่ต้องจูงใจ ส่วนลดทั้งหมดถูกใช้ไปกับการเติมชั่วโมงที่ว่างจริง = ความเสี่ยงต่ำสุด`;
+    `📐 <b>จุดคุ้มค่าสมาชิกฝั่งลูกค้า</b> (ส่วนลดนอกพีค ${fmt(dOff)} ฿/ชม.)<br>`+
+    `• <b>รายเดือน ${fmt(mfeeM)} ฿</b> → เล่นนอกพีค <b>${beM} ชม./เดือน</b> ก็คุ้ม`+
+    `<br>• <b>รายปี ${fmt(mfeeY)} ฿</b> → เล่นนอกพีค <b>${beY} ชม./ปี (≈${(beY/12).toFixed(1)} ชม./เดือน)</b> ก็คุ้ม`+
+    `<br>💰 <b>กำไรส่วนเพิ่มของเรา:</b> สมาชิกนอกพีค ${fmt(mday)} − ต้นทุนส่วนเพิ่ม ${MEM_MC} = <b>เหลือ ${fmt(mday-MEM_MC)} ฿/คอร์ท-ชม.</b> `+
+    `· พีค ${fmt(mnight-MEM_MC)} ฿ · บาส 3x3 ${fmt(bRate-MEM_MC)} ฿`;
+  el('memWarn').innerHTML= (mnight<RATE)
+    ? `⚠️ <b>คุณกำลังลดราคาช่วงพีคด้วย (${fmt(RATE)} → ${fmt(mnight)})</b> — 17:00–24:00 คอร์ทเต็มอยู่แล้ว ลดตรงนั้นคือ<b>เสียเงินเปล่า</b> `+
+      `· กดปุ่ม "⭐ แนะนำ" ดู — ตั้งพีคเท่าราคาปกติ 200 แล้วจุดคุ้มทุนจะต่ำลงมาก (ตอนนี้ ${bePct.toFixed(1)}%)`
+    : `✅ <b>ตั้งถูกแล้ว — ราคาปกติเดียว ${fmt(RATE)} ฿ ทั้งวัน · สมาชิกได้ลดเฉพาะนอกพีคเหลือ ${fmt(mday)} ฿</b> `+
+      `ส่วนลดถูกใช้เติมชั่วโมงที่ว่างจริงเท่านั้น ความเสี่ยงต่ำสุด และราคาพีคยังเต็ม ${fmt(RATE)} ฿ ทุกคน`;
 
   el('coachWarn').innerHTML=
     `⏰ <b>ต้องจัดคลาสช่วงกลางวันวันธรรมดาเท่านั้น</b> — คลาสใช้คอร์ทไป <b>${cc.hrs.toFixed(0)} ชม./เดือน</b> `+
-    `ถ้าเอาไปสอนช่วงพีค (18:00–22:00) เท่ากับแย่งคอร์ทจากลูกค้าที่จ่ายเต็ม เสียโอกาสอีก ~${fmt(cc.hrs*nightRate)} ฿ `+
+    `ถ้าเอาไปสอนช่วงพีค (17:00–24:00) เท่ากับแย่งคอร์ทจากลูกค้าที่จ่ายเต็ม เสียโอกาสอีก ~${fmt(cc.hrs*RATE)} ฿ `+
     `· โซนนี้กลางวันคู่แข่งปิดกันหมด (เปิดบ่าย 3) คอร์ทเราว่างอยู่แล้ว → <b>จัดคลาสกลางวันคือรายได้เพิ่มแท้ๆ ไม่เบียดใคร</b>`;
-  el('rentAllSub').textContent=`${wholeN} ครั้ง/เดือน × ${fmt(WHOLE_FEE)} ฿ (รวมค่าน้ำ-ไฟ)`;
+  el('rentAllSub').textContent=`${wholeN} วัน/เดือน × ${fmt(WHOLE_FEE)} ฿ (รวมค่าน้ำ-ไฟ · วันนั้นไม่ขายรายชั่วโมง)`;
   el('eventSub').textContent=evtN?`${evtN} ครั้ง/เดือน · กำไรสุทธิหลังหักของรางวัล`:'ยังไม่นับ (ตั้ง 0 — เผื่อไว้เป็น upside)';
   el('rCourt').textContent=fmt(courtRev);
   el('rShop').textContent='+'+fmt(shop);
@@ -1150,6 +1176,8 @@ function recalc(){
   el('rWhole').textContent='+'+fmt(whole);
   el('rEvent').textContent='+'+fmt(evt);
   el('rBask').textContent='+'+fmt(bask);
+  el('rOpp').textContent=wholeDays?`(รวมในค่าเหมาแล้ว)`:'—';
+  el('oppSub').textContent=wholeDays?`${wholeDays} วัน/เดือน ถูกกันไว้เป็นวันเหมา — เพดานรายชั่วโมงคิดจาก ${normDays} วันแล้ว`:'ไม่มีวันเหมาสนาม';
   const extraRev=shop+rent+cls+whole+evt+bask;
   const rev=courtRev+extraRev;
   el('rTotal').textContent=fmt(rev);
