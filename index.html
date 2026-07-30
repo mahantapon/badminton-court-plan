@@ -145,9 +145,9 @@
     <h3 style="margin-top:0">🏀 สนามบาส 3x3 แนวตั้ง (พื้นที่ต่อเติมข้างโรงงาน) — ยกหลังคาเฉพาะโซนนี้</h3>
     <div class="btnrow">
       <span class="lbl">คอร์ทบาสวางแนวเดียวกับคอร์ทแบด (ยาว 15 ม. ขวางพื้นที่) · โถงโรงงานไม่ยกหลังคา คอร์ทแบดคงที่</span>
-      <button class="btn sb" data-sb="b1" onclick="setSide('b1')">1 สนาม (โซน 17×17 ม.)</button>
-      <button class="btn sb active" data-sb="b2" onclick="setSide('b2')">2 สนาม (โซน 17×30 ม.)</button>
-      <button class="btn sb" data-sb="b3" onclick="setSide('b3')">3 สนาม (โซน 17×43 ม.)</button>
+      <button class="btn sb" data-sb="b1" onclick="setSide('b1')">1 สนาม (โซน 19×17 ม.)</button>
+      <button class="btn sb active" data-sb="b2" onclick="setSide('b2')">2 สนาม (โซน 19×30 ม.)</button>
+      <button class="btn sb" data-sb="b3" onclick="setSide('b3')">3 สนาม (โซน 19×43 ม.)</button>
     </div>
     <div class="note" id="sideNote"></div>
     <div class="controls">
@@ -567,8 +567,9 @@
       <div class="ctrl"><label>ค่าเช่าแผง+ป้าย: <span class="val" id="rentVal">45,000</span> ฿/ด.</label><input type="range" id="rent" min="0" max="120000" step="5000" value="45000" oninput="recalc()"></div>
       <div class="ctrl"><label>คลาสสอน: <span class="val" id="coachN">6</span> คลาส/สัปดาห์</label><input type="range" id="coach" min="0" max="24" step="1" value="6" oninput="recalc()"></div>
       <div class="ctrl"><label>ค่าเรียน/คลาส: <span class="val" id="coachFee">1,200</span> ฿ <span class="sub">(คลาสกลุ่ม 4–6 คน เก็บคนละ 250–300)</span></label><input type="range" id="cfee" min="600" max="3000" step="100" value="1200" oninput="recalc()"></div>
-      <div class="ctrl"><label>เหมาสนามทั้งวัน: <span class="val" id="wholeN">2</span> ครั้ง/เดือน × <span class="val" id="wholeFee">28,000</span> ฿</label><input type="range" id="whole" min="0" max="8" step="1" value="2" oninput="recalc()"></div>
-      <div class="ctrl"><label>อีเวนต์เราจัดเอง: <span class="val" id="evtN">1</span> ครั้ง/เดือน (กำไรสุทธิ <span class="val" id="evtFee">18,000</span> ฿)</label><input type="range" id="evt" min="0" max="4" step="1" value="1" oninput="recalc()"></div>
+      <div class="ctrl"><label>เหมาสนามทั้งวัน: <span class="val" id="wholeN">2</span> ครั้ง/เดือน</label><input type="range" id="whole" min="0" max="8" step="1" value="2" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าเหมา/ครั้ง: <span class="val" id="wholeFee">85,000</span> ฿ <span class="sub">(รวมค่าน้ำ-ไฟทั้งวันแล้ว · ตลาดจริง 70,000–100,000)</span></label><input type="range" id="wfee" min="40000" max="150000" step="5000" value="85000" oninput="recalc()"></div>
+      <div class="ctrl"><label>อีเวนต์เราจัดเอง: <span class="val" id="evtN">0</span> ครั้ง/เดือน × กำไรสุทธิ <span class="val" id="evtFee">18,000</span> ฿ <span class="sub">(ยังไม่มีข้อมูลจริง — ตั้ง 0 ไว้ก่อน แผนจะ conservative)</span></label><input type="range" id="evt" min="0" max="4" step="1" value="0" oninput="recalc()"></div>
       <div class="ctrl"><label>รายได้บาส 3x3: <span class="val" id="baskVal">35,000</span> ฿/ด. <span class="sub" id="baskPerSub"></span></label><input type="range" id="bask" min="0" max="200000" step="5000" value="35000" oninput="recalc()"></div>
     </div>
     <table style="margin-top:14px">
@@ -768,17 +769,18 @@ function setCoach(m){
 }
 /* บาส 3x3 แนวตั้ง — ยกหลังคาเฉพาะโซนบาส (โซนลึก 17 ม. ล้ำเพิงเดิม ~3 ม.) */
 const SIDE={
-  b1:{bask:1, cost:2700000, area:'17 × 17 ม. (289 ตร.ม.)'},
-  b2:{bask:2, cost:4900000, area:'17 × 30 ม. (510 ตร.ม.)'},
-  b3:{bask:3, cost:6900000, area:'17 × 43 ม. (731 ตร.ม.)'}
+  b1:{bask:1, cost:3000000, area:'19 × 17 ม. (323 ตร.ม.)'},
+  b2:{bask:2, cost:5300000, area:'19 × 30 ม. (570 ตร.ม.)'},
+  b3:{bask:3, cost:7600000, area:'19 × 43 ม. (817 ตร.ม.)'}
 };
 function setSide(s){
   side=s;
   const S=SIDE[s];
   document.querySelectorAll('.btn.sb').forEach(b=>b.classList.toggle('active',b.dataset.sb===s));
   el('sideNote').innerHTML=`🏀 <b>${S.bask} สนาม 3x3 แนวตั้ง</b> — ยกหลังคาเฉพาะโซน ${S.area} เป็นสูง 9 ม. `+
-    `(เพิงเดิมลึก 14.18 ม. จึงล้ำออกนอกแนวเดิม ~3 ม. ใช้ที่ว่างรอบนอกที่มีเหลือ 5,005 ตร.ม.) · `+
+    `(เพิงเดิมลึก 14.18 ม. จึงล้ำออกนอกแนวเดิม ~4.8 ม. ใช้ที่ว่างรอบนอกที่มีเหลือ 5,005 ตร.ม.) · `+
     `คอร์ทยาว 15 ม. วางขวางพื้นที่ = <b>แนวเดียวกับคอร์ทแบดในโถง</b> · `+
+    `<b>รื้อเสาเพิงเดิมในโซนนี้ออก</b> เสาใหม่อยู่ริมนอกสุด → <b>ไม่มีเสากลางสนาม</b> และเหลือ run-off 2 ม.ทั้ง 2 ข้าง · `+
     `ค่ายกหลังคา+พื้น PU+แป้น+ไฟ รวม <b>${(S.cost/1e6).toFixed(1)} ลบ.</b> `+
     `<br>✅ <b>โถงโรงงานไม่ยกหลังคา คอร์ทแบดคงเดิม</b> — งานยกหลังคาจำกัดแค่โซนบาส ลดต้นทุนและความยุ่งยากในการขออนุญาต`;
   if(window.rebuildBask) window.rebuildBask(S.bask);
@@ -1003,7 +1005,7 @@ function recalc(){
   el('ceilNote').innerHTML=`เพดานรายได้คอร์ท = ${totalCourts} คอร์ท × (กลางวัน ${dayHrs} ชม.×${dayRate} + กลางคืน ${nightHrs} ชม.×${nightRate}) × 30 วัน = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100%`;
   const shop=val('shop'), rent=val('rent');
   /* รายได้เสริม: คลาสสอน · เหมาสนามทั้งวัน · อีเวนต์ · บาส 3x3 */
-  const WHOLE_FEE=28000, EVT_PROFIT=18000;
+  const WHOLE_FEE=val('wfee'), EVT_PROFIT=18000;
   const coachN=val('coach'), wholeN=val('whole'), evtN=val('evt'), bask=val('bask');
   const cFee=val('cfee'), WK=52/12;
   const sessions=coachN*WK;                            // คลาสต่อเดือน
@@ -1036,8 +1038,8 @@ function recalc(){
     `⏰ <b>ต้องจัดคลาสช่วงกลางวันวันธรรมดาเท่านั้น</b> — คลาสใช้คอร์ทไป <b>${cc.hrs.toFixed(0)} ชม./เดือน</b> `+
     `ถ้าเอาไปสอนช่วงพีค (18:00–22:00) เท่ากับแย่งคอร์ทจากลูกค้าที่จ่ายเต็ม เสียโอกาสอีก ~${fmt(cc.hrs*nightRate)} ฿ `+
     `· โซนนี้กลางวันคู่แข่งปิดกันหมด (เปิดบ่าย 3) คอร์ทเราว่างอยู่แล้ว → <b>จัดคลาสกลางวันคือรายได้เพิ่มแท้ๆ ไม่เบียดใคร</b>`;
-  el('rentAllSub').textContent=`${wholeN} ครั้ง/เดือน @ ${fmt(WHOLE_FEE)} ฿`;
-  el('eventSub').textContent=`${evtN} ครั้ง/เดือน · กำไรสุทธิหลังหักของรางวัล`;
+  el('rentAllSub').textContent=`${wholeN} ครั้ง/เดือน × ${fmt(WHOLE_FEE)} ฿ (รวมค่าน้ำ-ไฟ)`;
+  el('eventSub').textContent=evtN?`${evtN} ครั้ง/เดือน · กำไรสุทธิหลังหักของรางวัล`:'ยังไม่นับ (ตั้ง 0 — เผื่อไว้เป็น upside)';
   el('rCourt').textContent=fmt(courtRev);
   el('rShop').textContent='+'+fmt(shop);
   el('rRent').textContent='+'+fmt(rent);
@@ -1133,11 +1135,11 @@ const HALL_W=40, HALL_L=80, OFFICE_L=10;
 const COURT_L=13.4, COURT_W=6.1;
 const EAVE=6.33, RIDGE=9.42;          // ท้อง truss ริม → กลาง (ไม่ยกหลังคาโรงงาน)
 const SHED_W=14.18, SHED_LO=4.48, SHED_HI=5.62;
-const BAY_D=17, BAY_H=9.0;            // โซนบาสที่ยกหลังคาเฉพาะจุด
+const BAY_D=19, BAY_H=9.0;            // โซนบาสยกหลังคา ลึก 19 ม. = คอร์ท 15 + run-off 2 ม.ทั้ง 2 ข้าง
 const B_L=15, B_W=11;                 // สนาม 3x3 (ยาว × กว้าง)
 
 let started=false, scene, camera, renderer, controls;
-let roofGroup, courtGroup, baskGroup, shedLowSkin, bayGroup, officeShell;
+let roofGroup, courtGroup, baskGroup, shedLowSkin, bayGroup, officeShell, shedColGroup;
 let hemi, sun, ambient, hallLights=[], lampMat, courtTexCache=null;
 let camDest=null, lookDest=null;
 let night=false, roofOn=true, curCourts=18, curBask=2;
@@ -1384,34 +1386,22 @@ function buildSite(){
   const cl=[]; for(let x=-140;x<140;x+=9) cl.push([x,.01,64]);
   inst(g,new THREE.BoxGeometry(4.5,.02,.24),MT.line,cl);
 
-  /* ---- ลำคลองเลียบถนน (คั่นระหว่างที่ดินกับถนน) ---- */
-  const CW_=6, CZ=56.5;                        // กว้าง 6 ม. อยู่ระหว่างแปลง (z 52) กับถนน (z 64)
-  const bank=new THREE.Mesh(new THREE.PlaneGeometry(300,CW_+2.6),mat(0x8d8574));
+  /* ---- ลำคลอง: อยู่ "อีกฟากถนน" ไม่ใช่ฝั่งโรงงาน (ทางเข้าจึงต่อถนนได้ตรงๆ ไม่ต้องมีสะพาน) ---- */
+  const CW_=6, CZ=77;                          // ถนนอยู่ z 57.5–70.5 · คลองเลยไปที่ z 74–80
+  const bank=new THREE.Mesh(new THREE.PlaneGeometry(300,CW_+3.2),mat(0x8d8574));
   bank.rotation.x=-Math.PI/2;bank.position.set(0,-.03,CZ);g.add(bank);
   const water=new THREE.Mesh(new THREE.PlaneGeometry(300,CW_),
     mat(0x3f6f78,{metalness:.45,roughness:.22,transparent:true,opacity:.92}));
   water.rotation.x=-Math.PI/2;water.position.set(0,-.62,CZ);g.add(water);
-  /* ขอบคลอง 2 ฝั่ง */
-  [CZ-CW_/2-.5,CZ+CW_/2+.5].forEach(z=>
-    box(g,new THREE.BoxGeometry(300,.9,1.0),mat(0x9a9284),0,-.35,z));
-  /* กอหญ้าริมคลอง */
-  const reed=[];for(let x=-140;x<140;x+=11) reed.push([x,.15,CZ-CW_/2-.9]);
+  [CZ-CW_/2-.6,CZ+CW_/2+.6].forEach(z=>
+    box(g,new THREE.BoxGeometry(300,.9,1.1),mat(0x9a9284),0,-.35,z));
+  const reed=[];for(let x=-140;x<140;x+=11) reed.push([x,.15,CZ-CW_/2-1.0]);
   inst(g,new THREE.IcosahedronGeometry(.7,0),mat(0x5f8a4a),reed);
-
-  /* ---- สะพาน/ท่อลอดข้ามคลองตรงประตูทางเข้า ---- */
-  const BX=26, BW=8.2;                         // กว้างสะพาน ~8 ม. (ตัวจำกัดรถเข้า-ออก)
-  const deck=new THREE.Mesh(new THREE.BoxGeometry(BW,.5,CW_+3.4),MT.asphalt);
-  deck.position.set(BX,-.02,CZ);deck.castShadow=true;g.add(deck);
-  const rail=[];[-1,1].forEach(s=>rail.push([BX+s*(BW/2-.15),.55,CZ]));
-  inst(g,new THREE.BoxGeometry(.16,1.0,CW_+3.4),mat(0xc9ccc7),rail);
-  const bsign=new THREE.Mesh(new THREE.PlaneGeometry(7,1.2),
-    basic(signTex('สะพานทางเข้า ~8 ม. (ต้องวัดยืนยัน)','#8a5a12')));
-  bsign.position.set(BX,2.6,CZ-CW_/2-1.9);g.add(bsign);
   /* เสาไฟฟ้าริมถนน + ต้นไม้ฝั่งตรงข้าม (ตามรูปถ่าย) */
   const poles=[],trunks=[],leaves=[];
-  for(let x=-120;x<=120;x+=34) poles.push([x,4.5,72]);
+  for(let x=-120;x<=120;x+=34) poles.push([x,4.5,72]);   // เสาไฟระหว่างถนนกับคลอง
   inst(g,GE.pole,MT.dark,poles,true);
-  for(let x=-130;x<=130;x+=17){trunks.push([x,1.1,82]);leaves.push([x,2.9,82]);}
+  for(let x=-130;x<=130;x+=17){trunks.push([x,1.1,88]);leaves.push([x,2.9,88]);}  // ต้นไม้เลยคลองไป
   /* ต้นไม้ในแปลง */
   [[-52,-40],[-52,-8],[-52,26],[62,-40],[64,0],[66,34],[-30,58],[24,58],[48,56]]
     .forEach(([x,z])=>{trunks.push([x,1.1,z]);leaves.push([x,2.9,z]);});
@@ -1516,8 +1506,6 @@ function buildHall(){
   shedLowSkin=new THREE.Group();scene.add(shedLowSkin);
   shedLowSkin.add(quad([-hw,SHED_HI,-hl],[-hw-SHED_W,SHED_LO,-hl],[-hw-SHED_W,SHED_LO,hl],[-hw,SHED_HI,hl],
     mat(0xc9ccc7,{side:THREE.DoubleSide})));
-  const sc=[];for(let z=-hl;z<=hl+.1;z+=5) sc.push([-hw-SHED_W,SHED_LO/2,z]);
-  inst(scene,GE.shedCol,MT.steel,sc,true);
   const sf=new THREE.Mesh(new THREE.PlaneGeometry(SHED_W,HALL_L),mat(0x8f938d));
   sf.rotation.x=-Math.PI/2;sf.position.set(-hw-SHED_W/2,.01,0);sf.receiveShadow=true;scene.add(sf);
 }
@@ -1568,22 +1556,31 @@ window.rebuild3D=function(n){curCourts=n;if(started){buildCourts(n);applyNight()
 function buildBask(n){
   if(baskGroup){scene.remove(baskGroup);}
   if(bayGroup){scene.remove(bayGroup);}
+  if(shedColGroup){scene.remove(shedColGroup);}
   baskGroup=new THREE.Group();scene.add(baskGroup);
   bayGroup=new THREE.Group();scene.add(bayGroup);
-  if(!n) return;
-  const hw=HALL_W/2;
-  const xOut=-hw-BAY_D;                    // โซนยกหลังคาลึก 17 ม. (ล้ำเพิงเดิม ~3 ม.)
+  shedColGroup=new THREE.Group();scene.add(shedColGroup);
+  const hw=HALL_W/2, hl=HALL_L/2;
+  const xOut=-hw-BAY_D;                    // โซนยกหลังคาลึก 19 ม. (ล้ำเพิงเดิม ~4.8 ม.)
   const cx=-hw-BAY_D/2;
   const pitch=13, span=n*pitch, z0=-span/2;
-  /* หลังคายกเฉพาะโซนบาส */
-  const zA=z0-2, zB=z0+span+2;
+  const zA=z0-2, zB=z0+span+2;             // ช่วง Z ของโซนยกหลังคา
+  /* เสาเพิงเดิม — เว้นช่วงโซนบาส (เสาเดิมถูกรื้อตอนยกหลังคา จึงไม่มีเสากลางสนาม) */
+  const sc=[];
+  for(let z=-hl;z<=hl+.1;z+=5){
+    if(n && z>=zA-.5 && z<=zB+.5) continue;
+    sc.push([-hw-SHED_W,SHED_LO/2,z]);
+  }
+  inst(shedColGroup,GE.shedCol,MT.steel,sc,true);
+  if(!n) return;
+  /* หลังคายกเฉพาะโซนบาส — เสาใหม่อยู่ริมนอกสุดเท่านั้น ไม่มีเสาในสนาม */
   bayGroup.add(quad([-hw,BAY_H+.4,zA],[xOut,BAY_H-.3,zA],[xOut,BAY_H-.3,zB],[-hw,BAY_H+.4,zB],MT.roofSheet));
   const bc=[];for(let z=zA;z<=zB+.1;z+=6.5) bc.push([xOut,BAY_H/2,z]);
   inst(bayGroup,GE.bayCol,MT.steel,bc,true);
   plane(bayGroup,zB-zA,BAY_H,MT.wallHi,xOut,BAY_H/2,(zA+zB)/2,0,-Math.PI/2);
   [[zA,0],[zB,Math.PI]].forEach(([z,ry])=>plane(bayGroup,BAY_D,BAY_H,MT.wallHi,cx,BAY_H/2,z,0,ry));
   const sg=new THREE.Mesh(new THREE.PlaneGeometry(11,1.9),basic(signTex('BASKETBALL 3x3 · '+n+' สนาม')));
-  sg.rotation.y=-Math.PI/2;sg.position.set(xOut+.12,5.4,(zA+zB)/2);bayGroup.add(sg);
+  sg.rotation.y=Math.PI/2;sg.position.set(xOut+.12,5.4,(zA+zB)/2);bayGroup.add(sg);
 
   /* สนาม: ยาว 15 ม. วางตามแกน X (แนวเดียวกับคอร์ทแบด) · เรียงไปตามแกน Z
      พื้นผิวกว้างกว่าเส้นเขต 0.25 ม.ทุกด้าน (ตรงกับ PAD ใน texture) */
@@ -1788,7 +1785,7 @@ const VIEWS={
   cafe:  {c:[13,1.7,31.8], t:[14,1.4,38]},
   wc:    {c:[5,1.7,31.2],  t:[5.8,1.4,37.8]},
   f2:    {c:[-2.5,4.9,38], t:[-8.5,4.5,32]},
-  bask:  {c:[-24,2.4,16],  t:[-30,2.6,0]},
+  bask:  {c:[-29.5,2.2,12],t:[-30,2.3,-6]},
   front: {c:[20,9,86],     t:[0,4,40]},
   out:   {c:[0,34,132],    t:[0,2,20]}
 };
