@@ -142,9 +142,17 @@
   </div>
 
   <div class="card">
+    <h3 style="margin-top:0">🏗️ เพิงต่อเติมข้างโรงงาน (พื้นที่ในรูปที่ถ่ายมา) — จะใช้ทำอะไร</h3>
+    <div class="btnrow">
+      <span class="lbl">เลือกการใช้งาน — เพิงเดิมสูง 4.48–5.62 ม. (เตี้ยเกินเล่นแบด) ถ้าจะทำแบดต้องยกหลังคาเป็น ~9 ม.</span>
+      <button class="btn sb active" data-sb="bask" onclick="setSide('bask')">🏀 บาส 3x3 (ไม่ยกหลังคา) +0.42 ลบ.</button>
+      <button class="btn sb" data-sb="bad5" onclick="setSide('bad5')">🏸 ยกหลังคา → แบด +5 คอร์ท (เพิงกว้าง 12 ม.)</button>
+      <button class="btn sb" data-sb="bad10" onclick="setSide('bad10')">🏸 ยกหลังคา → แบด +10 คอร์ท (เพิงกว้าง 14.18 ม.)</button>
+    </div>
+    <div class="note" id="sideNote"></div>
     <div class="controls">
       <div class="ctrl">
-        <label>จำนวนคอร์ทที่จะเปิดใช้: <span class="val" id="courtsVal">18</span> คอร์ท <span class="sub" id="maxHint"></span></label>
+        <label>คอร์ทในโถงหลัก: <span class="val" id="courtsVal">18</span> คอร์ท <span class="sub" id="maxHint"></span></label>
         <input type="range" id="courts" min="8" max="20" step="2" value="18" oninput="recalc()">
       </div>
       <div class="ctrl" id="ctrlBuy" style="display:none">
@@ -161,6 +169,7 @@
       </div>
     </div>
     <div class="kpis">
+      <div class="kpi"><div class="t">คอร์ทแบดรวมทั้งโครงการ</div><div class="v" id="kTotalCourts"></div><div class="s" id="kTotalSub"></div></div>
       <div class="kpi"><div class="t">ผังที่เลือก</div><div class="v" id="kMode" style="font-size:1.05rem"></div><div class="s" id="kModeSub"></div></div>
       <div class="kpi"><div class="t">คอร์ทต่อฝั่ง (ซ้าย/ขวาของม่าน)</div><div class="v" id="kPerSide"></div><div class="s">แบ่ง 2 ฝั่งเท่ากัน</div></div>
       <div class="kpi"><div class="t">พื้นที่ว่างเหลือในโถง</div><div class="v" id="kSpare"></div><div class="s">ขยายคอร์ทเพิ่มภายหลังได้</div></div>
@@ -233,7 +242,8 @@
       <tr><td>ความยาวโถง</td><td class="r">~80 ม. (16 ช่วง × 5.00)</td><td>หักอาคาร 2 ชั้น 10 ม. เหลือวางคอร์ทได้ ~67 ม.</td></tr>
       <tr><td>ความสูงท้อง truss ริมอาคาร</td><td class="r">6.33 ม.</td><td>ตรงหัวคอร์ท — ลูกช่วงนั้นอยู่ต่ำ กระทบน้อย</td></tr>
       <tr><td>ความสูงท้อง truss กลางอาคาร</td><td class="r">9.42 ม.</td><td>ตรงท้ายคอร์ท/กลางคอร์ท — โซนที่ลูกโด่งสูงสุด ✅</td></tr>
-      <tr><td>เพิงข้าง</td><td class="r">14.18 ม. สูง 4.5–5.6</td><td>เล่นแบดไม่ได้ → จอดรถในร่ม + คลัง</td></tr>
+      <tr><td>เพิงต่อเติมข้าง</td><td class="r">12 ม. หรือ 14.18 ม. สูง 4.5–5.6</td><td>สูงเดิมเล่นแบดไม่ได้ → ทำบาส 3x3 หรือ<b>ยกหลังคาเป็น 9 ม. เพิ่มแบดได้ 5–10 คอร์ท</b></td></tr>
+      <tr><td>ที่ดินตามโฉนด</td><td class="r">~9,165 ตร.ม. ≈ 5.7 ไร่</td><td>หักอาคาร ~4,160 เหลือรอบนอก ~5,005 ตร.ม. → จอดได้ ~200 คัน</td></tr>
       <tr><td>อาคารเดิม 2 ชั้น</td><td class="r">พื้นถึงท้องคาน 2.65 ม.</td><td>ใช้เป็นแอดมิน/คาเฟ่/ห้องพัก (ไม่ต้องทุบ)</td></tr>
     </table>
     <div class="note">⚠️ <b>ยังต้องยืนยันจากหน้างาน:</b> จุดต่ำสุดจริงของสิ่งที่ห้อยใต้ truss (แป ท่อ ไฟเดิม พัดลม) · บ่อซ่อมรถ/แท่นเครื่องในพื้น · ช่องแสง skylight บนหลังคา · ขนาดหม้อแปลงไฟ — ตัวเลขพวกนี้กระทบงบปรับปรุงโดยตรง</div>
@@ -481,7 +491,7 @@
       <tr><td>ภูมิทัศน์ สวนหย่อม ทางเดิน</td><td class="r">400,000</td></tr>
       <tr><td>รั้ว ป้อม รปภ. CCTV</td><td class="r">500,000</td></tr>
       <tr class="sec"><td colspan="2">6) ระบบและอื่นๆ</td></tr>
-      <tr><td>สนามบาส 3x3 ในเพิงต่อเติม <span class="sub">พื้น PU 15×11 ม. + แป้น + ตีเส้น + ไฟ</span></td><td class="r">420,000</td></tr>
+      <tr><td id="bSideLabel"></td><td class="r" id="bSide"></td></tr>
       <tr><td>ระบบจองออนไลน์ + POS + คอมพิวเตอร์</td><td class="r">300,000</td></tr>
       <tr><td>ออกแบบ ขออนุญาตเปลี่ยนการใช้อาคาร + เผื่อ 10%</td><td class="r" id="bDesign"></td></tr>
       <tr class="total"><td>รวมเงินลงทุนทั้งโครงการ</td><td class="r" id="bTotal"></td></tr>
@@ -701,7 +711,23 @@ const MODES={
   dense:{pitch:6.6, maxPerSide:10, label:'อัดเต็มพื้นที่', gap:'0.5 ม.'},
   bwf:  {pitch:8.1, maxPerSide:8,  label:'มาตรฐาน BWF',  gap:'2.0 ม.'}
 };
-let mode='dense', grade='pro', mix='single', deal='rent';
+let mode='dense', grade='pro', mix='single', deal='rent', side='bask';
+/* เพิงต่อเติม: บาส 3x3 (ไม่ยกหลังคา) หรือยกหลังคา 9 ม. ทำแบดเพิ่ม */
+const SIDE={
+  bask: {courts:0,  cost:420000,   w:0,     n:'บาส 3x3 (ไม่ยกหลังคา)',
+         note:'🏀 <b>ใช้เพิงเดิมสูง 4.48–5.62 ม. ตามสภาพ</b> — ลงทุนต่ำสุด 420,000 บาท เล่นบาส 3x3/ชู้ตสนุกได้ แต่เพดานเหนือแป้นเหลือแค่ ~1.1 ม. ลูกโด่งสูงจะติดหลังคา · ที่เหลือใช้จอดรถในร่ม ~25 คัน + คลังของ'},
+  bad5: {courts:5,  cost:8100000,  w:12,    n:'ยกหลังคา → แบด 5 คอร์ท',
+         note:'🏸 <b>ยกหลังคาเป็น 9 ม. บนเพิงกว้าง 12 ม.</b> — วางคอร์ทตามแนวยาว 1 คอร์ทขวาง × 5 คอร์ทตามยาว = <b>5 คอร์ท</b> เหลือช่องข้าง 5.9 ม. (โปร่งสบาย ใช้เป็นทางเดิน+ที่นั่ง) · ค่ายกหลังคา+รื้อของเดิม ~8.1 ลบ. = <b>~1.6 ลบ./คอร์ท</b>'},
+  bad10:{courts:10, cost:9500000,  w:14.18, n:'ยกหลังคา → แบด 10 คอร์ท',
+         note:'🏸 <b>ยกหลังคาเป็น 9 ม. บนเพิงกว้าง 14.18 ม.</b> — 2 คอร์ทขวาง × 5 คอร์ทตามยาว = <b>10 คอร์ท</b> แต่ช่องข้างรวมเหลือแค่ 1.98 ม. (≈0.65 ม./ข้าง — แคบแบบสนามให้เช่าประหยัด) · ค่ายกหลังคา ~9.5 ลบ. = <b>~0.95 ลบ./คอร์ท คุ้มที่สุด</b> ⚠️ ต้องยืนยันความกว้างเพิงจริงก่อน (แบบเขียน 12 ม. กับ 14.18 ม. ไว้คนละที่)'}
+};
+function setSide(s){
+  side=s; window.__side=s;
+  document.querySelectorAll('.btn.sb').forEach(b=>b.classList.toggle('active',b.dataset.sb===s));
+  el('sideNote').innerHTML=SIDE[s].note;
+  if(window.rebuildSide) window.rebuildSide(s);
+  recalc();
+}
 function setDeal(d){
   deal=d;
   document.querySelectorAll('.modebar .mb[data-deal]').forEach(b=>b.classList.toggle('active',b.dataset.deal===d));
@@ -812,14 +838,19 @@ function recalc(){
   el('maxHint').textContent=`(สูงสุด ${mx} ในผังนี้)`;
 
   const M=MODES[mode], perSide=courts/2, maxPer=mx/2;
+  const SD=SIDE[side], sideCourts=SD.courts, totalCourts=courts+sideCourts;
+  el('kTotalCourts').textContent=totalCourts+' คอร์ท';
+  el('kTotalSub').textContent=sideCourts?`โถงหลัก ${courts} + เพิงยกหลังคา ${sideCourts}`:`โถงหลัก ${courts} (เพิงทำบาส)`;
   el('kMode').textContent=M.label;
-  el('kModeSub').textContent=`เว้นข้างคอร์ท ${M.gap} · สูงสุด ${mx} คอร์ท`;
+  el('kModeSub').textContent=`เว้นข้างคอร์ท ${M.gap} · โถงหลักสูงสุด ${mx} คอร์ท`;
   el('kPerSide').textContent=perSide+' / '+perSide;
   el('kSpare').textContent=(mx-courts)+' ตำแหน่ง';
-  const park=Math.round(courts*5);
+  /* ที่จอด: โฉนด 9,165 ตร.ม. − โถง 3,200 − เพิง ~960 = ~5,005 ตร.ม. ≈ 200 คัน */
+  const PARK_CAP=200;
+  const park=Math.round(totalCourts*5);
   el('kPark').textContent='~'+park+' คัน';
-  el('kParkSub').textContent=park<=93?'ที่ดินรองรับได้ (~93 คัน) ✅':'เกินที่จอด ~93 คัน ⚠️';
-  drawPlan(courts); drawGrades(courts);
+  el('kParkSub').textContent=park<=PARK_CAP?`ที่ดิน 5.7 ไร่ รองรับ ~${PARK_CAP} คัน ✅`:`เกินที่จอด ~${PARK_CAP} คัน ⚠️`;
+  drawPlan(courts); drawGrades(totalCourts);
   if(window.rebuild3D) window.rebuild3D(courts);
 
   /* budget */
@@ -835,14 +866,14 @@ function recalc(){
   const g=GRADES[grade];
   let matCost,lightCost,netCost,matLabel;
   if(mix==='mixed'){
-    const nb=Math.min(2,courts), np=courts-nb;
+    const nb=Math.min(2,totalCourts), np=totalCourts-nb;
     matCost=nb*GRADES.bwf.mat+np*GRADES.pro.mat;
     lightCost=nb*GRADES.bwf.light+np*GRADES.pro.light;
     netCost=nb*GRADES.bwf.net+np*GRADES.pro.net;
     matLabel=`ผสม: BWF ${nb} คอร์ท + พรีเมียม ${np} คอร์ท`;
   }else{
-    matCost=g.mat*courts; lightCost=g.light*courts; netCost=g.net*courts;
-    matLabel=`เกรด${g.n} × ${courts} คอร์ท (${fmt(g.mat)}/คอร์ท)`;
+    matCost=g.mat*totalCourts; lightCost=g.light*totalCourts; netCost=g.net*totalCourts;
+    matLabel=`เกรด${g.n} × ${totalCourts} คอร์ท (${fmt(g.mat)}/คอร์ท)`;
   }
   el('bMat').textContent=fmt(matCost);
   el('bMatSub').textContent=matLabel;
@@ -854,15 +885,18 @@ function recalc(){
   const renoFixed=1200000+2000000+2500000+900000+1500000+800000;
   const interior=350000+1200000+1800000+900000+600000+1500000;
   const outdoor=1500000+600000+400000+500000;
-  const systems=300000+420000;   /* ระบบ + สนามบาส 3x3 */
-  const preDesign=renoFixed+matCost+lightCost+netCost+interior+outdoor+systems;
+  const systems=300000;
+  const sideCost=SD.cost;                       /* บาส 3x3 หรือค่ายกหลังคาเพิง */
+  el('bSide').textContent=fmt(sideCost);
+  el('bSideLabel').innerHTML=`เพิงต่อเติม: ${SD.n} <span class="sub">${sideCourts?`ยกหลังคา 9 ม. + รื้อของเดิม (คอร์ทอีก ${sideCourts} รวมในค่าเสื่อ/ไฟ/เน็ตข้างบนแล้ว)`:'พื้น PU + แป้น + ไฟ'}</span>`;
+  const preDesign=renoFixed+matCost+lightCost+netCost+interior+outdoor+systems+sideCost;
   const design=Math.round(preDesign*0.10);
   el('bDesign').textContent=fmt(design);
   const reno=preDesign+design;
   const total=landCost+reno;
   el('bTotal').textContent=fmt(total)+'  ('+fmtM(total)+')';
-  el('bPerCourt').textContent=fmtM(total/courts);
-  el('bPerCourtSub').textContent=`= ${fmt(total/courts)} ฿/คอร์ท (รวมที่ดิน อาคาร ทุกอย่าง ÷ ${courts})`;
+  el('bPerCourt').textContent=fmtM(total/totalCourts);
+  el('bPerCourtSub').textContent=`= ${fmt(total/totalCourts)} ฿/คอร์ท (รวมทุกอย่าง ÷ ${totalCourts} คอร์ท)`;
   el('bReno').textContent=fmtM(reno);
   const newShell=HALL_W*HALL_L*11000;   // สร้างโครงอาคารใหม่ 3,200 ตร.ม.
   el('bVsNew').textContent='ประหยัด ~'+fmtM(newShell-8900000);
@@ -887,9 +921,9 @@ function recalc(){
   el('dayRateVal').textContent=fmt(dayRate);
   el('nightRateVal').textContent=fmt(nightRate);
   const perCourtDay=dayHrs*dayRate+nightHrs*nightRate;
-  const maxMonth=courts*perCourtDay*30;
+  const maxMonth=totalCourts*perCourtDay*30;
   const courtRev=maxMonth*occ;
-  el('ceilNote').innerHTML=`เพดานรายได้คอร์ท = ${courts} คอร์ท × (กลางวัน ${dayHrs} ชม.×${dayRate} + กลางคืน ${nightHrs} ชม.×${nightRate}) × 30 วัน = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100%`;
+  el('ceilNote').innerHTML=`เพดานรายได้คอร์ท = ${totalCourts} คอร์ท × (กลางวัน ${dayHrs} ชม.×${dayRate} + กลางคืน ${nightHrs} ชม.×${nightRate}) × 30 วัน = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100%`;
   const shop=val('shop'), rent=val('rent');
   /* รายได้เสริม: คลาสสอน · เหมาสนามทั้งวัน · อีเวนต์ · บาส 3x3 */
   const COACH_FEE=1200, COACH_SHARE=.6;               // สนามได้ 60% โค้ชได้ 40%
@@ -916,16 +950,16 @@ function recalc(){
   const rev=courtRev+extraRev;
   el('rTotal').textContent=fmt(rev);
 
-  const staffN=courts<=12?5:(courts<=16?6:7);
+  const staffN=totalCourts<=12?5:(totalCourts<=16?6:(totalCourts<=22?7:9));
   const staff=staffN*19000;
-  const util=Math.round(courts*4200+45000);
-  const supply=Math.round(courts*900+8000);
+  const util=Math.round(totalCourts*4200+45000);
+  const supply=Math.round(totalCourts*900+8000);
   /* Maintenance แยกรายการ: กันเงินเปลี่ยนเสื่อ + เน็ต/เสา + หลอดไฟ + ล้างพื้น + ซ่อมทั่วไป */
   const matLife=({eco:4,std:6,pro:9,bwf:10})[grade]||9;
   const matReplace=Math.round(matCost/(matLife*12));       // กันเงินเปลี่ยนเสื่อรายเดือน
   const netReplace=Math.round(netCost/(4*12));             // เน็ต/เสาทุก ~4 ปี
   const lampReplace=Math.round(lightCost/(8*12));          // หลอด LED ~8 ปี
-  const cleanFix=Math.round(courts*950+12000);             // ล้างพื้น/ขัดเสื่อ + ซ่อมทั่วไป
+  const cleanFix=Math.round(totalCourts*950+12000);        // ล้างพื้น/ขัดเสื่อ + ซ่อมทั่วไป
   const maint=matReplace+netReplace+lampReplace+cleanFix;
   el('staffSub').textContent=`${staffN} คน (แอดมิน 2 · ดูแลสนาม ${staffN-4} · แม่บ้าน 2)`;
   el('eStaff').textContent=fmt(staff);
@@ -956,7 +990,7 @@ function recalc(){
   const v=el('verdict');
   if(cash<0) v.innerHTML=`⚠️ <b>เงินสดติดลบ ${fmt(-cash)} ฿/เดือน</b> ที่จอง ${Math.round(occ*100)}% — ลองลดราคาที่ดิน/เจรจาค่าเซ้ง, ยืดเวลาผ่อน, เพิ่มอัตราจอง หรือลดเกรดพื้น`;
   else if(dscr<1.2) v.innerHTML=`🟡 เงินสดเหลือ <b>${fmt(cash)} ฿/เดือน</b> แต่ DSCR ${dscr.toFixed(2)} ต่ำกว่าเกณฑ์ธนาคาร (1.2) — ปรับโครงสร้างเงินกู้หรือเพิ่มรายได้เสริม`;
-  else v.innerHTML=`✅ ที่จอง <b>${Math.round(occ*100)}%</b> เหลือเงินสด <b>${fmt(cash)} ฿/เดือน</b>, DSCR ${dscr.toFixed(2)} ผ่านเกณฑ์, คืนทุน <b>~${pbi.toFixed(1)} ปี</b> · ${courts} คอร์ท เกรด${mix==='mixed'?'ผสม':GRADES[grade].n}`;
+  else v.innerHTML=`✅ ที่จอง <b>${Math.round(occ*100)}%</b> เหลือเงินสด <b>${fmt(cash)} ฿/เดือน</b>, DSCR ${dscr.toFixed(2)} ผ่านเกณฑ์, คืนทุน <b>~${pbi.toFixed(1)} ปี</b> · ${totalCourts} คอร์ท (${SD.n}) เกรด${mix==='mixed'?'ผสม':GRADES[grade].n}`;
 
   /* rent schedule */
   if(isRent){
@@ -984,6 +1018,7 @@ function recalc(){
   }
 }
 setDeal('rent');
+setSide('bask');
 setMode('dense');
 </script>
 
@@ -996,7 +1031,16 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 let started=false,scene,camera,renderer,controls,courtGroup,roofGroup,hemi,sun,night=false;
 let camDest=null,lookDest=null,lampMat,courtLights=[],curCourts=18,ambient,indoorLights=[];
-let officeGroup,officeShell;
+let officeGroup,officeShell,shedLow,shedHigh,shedLowSkin,shedHighSkin,baskGroup,sideCourtGroup;
+let roofOn=true, side3d='bask';
+function applyVis(){
+  const isBad=side3d!=='bask';
+  roofGroup.visible=roofOn;
+  shedLow.visible=!isBad;   if(shedLowSkin) shedLowSkin.visible=roofOn;
+  shedHigh.visible=isBad;   if(shedHighSkin) shedHighSkin.visible=roofOn;
+  baskGroup.visible=!isBad;
+  sideCourtGroup.visible=isBad;
+}
 const INDOOR_VIEWS=['shop','lounge','f2'];      /* ซ่อนผนังอาคาร + กระโดดเข้า */
 const JUMP_VIEWS=['cafe','wc','bask'];          /* กระโดดเข้าเฉยๆ (มีไฟในตัว) */
 const SKY_D=0xbfe0f5,SKY_N=0x0b1524;
@@ -1100,6 +1144,7 @@ window.init3D=function(){
   sun.shadow.camera.updateProjectionMatrix();scene.add(sun);
   buildStatic();
   buildCourts(curCourts);
+  if(window.rebuildSide) window.rebuildSide(window.__side||'bask');
   /* หลังคา+ผนังต้องบังแดด ไม่งั้นแดดทะลุลงมาเผาสีสนาม */
   roofGroup.traverse(o=>{if(o.isMesh)o.castShadow=true;});
   sun.intensity=1.3;
@@ -1189,16 +1234,50 @@ function buildStatic(){
     const t=new THREE.Mesh(new THREE.BoxGeometry(HALL_W,.35,.3),steel);
     t.position.set(0,EAVE+.2,z);roofGroup.add(t);
   }
-  /* side shed */
+  /* ---- เพิงต่อเติมข้าง: หลังคาเดิม (เตี้ย 4.48–5.62) / หลังคายกใหม่ 9 ม. สลับได้ ---- */
   const shedMat=mat(0xc9ccc7,{side:THREE.DoubleSide});
-  roofGroup.add(quad([-hw,5.62,-hl],[-hw-14.18,4.48,-hl],[-hw-14.18,4.48,hl],[-hw,5.62,hl],shedMat));
+  shedLow=new THREE.Group();scene.add(shedLow);
+  shedLowSkin=new THREE.Group();shedLow.add(shedLowSkin);   /* หลังคา — ซ่อนพร้อมหลังคาหลัก */
+  shedLowSkin.add(quad([-hw,5.62,-hl],[-hw-14.18,4.48,-hl],[-hw-14.18,4.48,hl],[-hw,5.62,hl],shedMat));
   for(let z=-hl;z<=hl+.1;z+=5){
     const c=new THREE.Mesh(new THREE.BoxGeometry(.35,4.48,.35),steel);
-    c.position.set(-hw-14.18,2.24,z);c.castShadow=true;scene.add(c);
+    c.position.set(-hw-14.18,2.24,z);c.castShadow=true;shedLow.add(c);
   }
   const shedFloor=new THREE.Mesh(new THREE.PlaneGeometry(14.18,HALL_L),mat(0x8f938d));
   shedFloor.rotation.x=-Math.PI/2;shedFloor.position.set(-hw-7.09,.01,0);shedFloor.receiveShadow=true;scene.add(shedFloor);
-  buildBasket(-hw-7.09);   /* สนามบาส 3x3 half court ในพื้นที่ต่อเติม */
+
+  /* หลังคายกใหม่ 9.3 ม. (แสดงเมื่อเลือกทำแบดในเพิง) */
+  shedHigh=new THREE.Group();shedHigh.visible=false;scene.add(shedHigh);
+  shedHighSkin=new THREE.Group();shedHigh.add(shedHighSkin);  /* หลังคา+ผนัง — ซ่อนได้ */
+  const HR=9.3, shW=14.18;
+  shedHighSkin.add(quad([-hw,HR+.3,-hl],[-hw-shW,HR-.5,-hl],[-hw-shW,HR-.5,hl],[-hw,HR+.3,hl],
+    mat(0x4a5158,{side:THREE.DoubleSide,metalness:.35,roughness:.6})));
+  const shWall=mat(0xe4e8e6,{side:THREE.DoubleSide}), shLowW=mat(0x2a3640,{side:THREE.DoubleSide});
+  for(let z=-hl;z<=hl+.1;z+=5){
+    const c=new THREE.Mesh(new THREE.BoxGeometry(.42,HR-.5,.42),steel);
+    c.position.set(-hw-shW,(HR-.5)/2,z);c.castShadow=true;shedHigh.add(c);
+    const t=new THREE.Mesh(new THREE.BoxGeometry(shW,.3,.26),steel);
+    t.position.set(-hw-shW/2,HR-.55,z);shedHigh.add(t);
+  }
+  const swLo=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L,3.6),shLowW);
+  swLo.rotation.y=-Math.PI/2;swLo.position.set(-hw-shW,1.8,0);shedHighSkin.add(swLo);
+  const swHi=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L,HR-4.1),shWall);
+  swHi.rotation.y=-Math.PI/2;swHi.position.set(-hw-shW,3.6+(HR-4.1)/2,0);shedHighSkin.add(swHi);
+  [[-hl,0],[hl,Math.PI]].forEach(([z,ry])=>{
+    const e=new THREE.Mesh(new THREE.PlaneGeometry(shW,HR),shWall);
+    e.position.set(-hw-shW/2,HR/2,z);e.rotation.y=ry;shedHighSkin.add(e);
+  });
+  const shBanner=new THREE.Mesh(new THREE.PlaneGeometry(12,2.1),
+    new THREE.MeshBasicMaterial({map:bannerTex('COURT 19-28','#125935','#e9f7ee'),side:THREE.DoubleSide}));
+  shBanner.rotation.y=-Math.PI/2;shBanner.position.set(-hw-shW+.1,5.4,0);shedHighSkin.add(shBanner);
+
+  baskGroup=new THREE.Group();scene.add(baskGroup);
+  buildBasket(-hw-7.09);                       /* บาส 3x3 (โหมดเริ่มต้น) */
+  sideCourtGroup=new THREE.Group();sideCourtGroup.visible=false;scene.add(sideCourtGroup);
+  buildSideCourts(-hw-7.09);                   /* คอร์ทแบดในเพิง (โหมดยกหลังคา) */
+
+  /* ---- อาคารหอพัก 2 ชั้นด้านหลัง (ตามรูปถ่าย) ---- */
+  buildDorm(-hw-7.09,-hl-16);
 
   /* ================= อาคาร 2 ชั้น (ภายในละเอียด) ================= */
   buildOffice(hw,hl);
@@ -1475,8 +1554,73 @@ function basketTex(){
   g.beginPath();g.arc(CX,H-6,1.8*M,Math.PI,Math.PI*2);g.stroke();
   const t=new THREE.CanvasTexture(c);t.anisotropy=16;t.colorSpace=THREE.SRGBColorSpace;return t;
 }
+/* ---------- คอร์ทแบดในเพิงยกหลังคา: 2 ขวาง × 5 ตามยาว (ยาววางตามแนว 80 ม.) ---------- */
+function buildSideCourts(cx){
+  const g=sideCourtGroup;
+  const tex=courtTex();
+  const cm=new THREE.MeshStandardMaterial({map:tex,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
+  const netM=mat(0x22262a,{transparent:true,opacity:.82,side:THREE.DoubleSide});
+  const frame=mat(0x2e3338,{metalness:.5,roughness:.45});
+  const lamp=new THREE.MeshStandardMaterial({color:0xf4f9ff,emissive:0xf4f9ff,emissiveIntensity:1.6});
+  const pad=new THREE.Mesh(new THREE.PlaneGeometry(14.18,80),mat(0x2e3236));
+  pad.rotation.x=-Math.PI/2;pad.position.set(cx,.03,0);pad.receiveShadow=true;g.add(pad);
+  /* 2 คอร์ทขวาง (แกน X) × 5 คอร์ทตามยาว (แกน Z) — ยาว 13.4 ไปตาม Z */
+  for(let ax=0;ax<2;ax++)for(let az=0;az<5;az++){
+    const px=cx+(ax===0?-3.35:3.35);
+    const pz=-40+2+az*15.4+6.7;
+    const p=new THREE.Mesh(new THREE.PlaneGeometry(6.5,14.0),cm);
+    p.rotation.x=-Math.PI/2;p.rotation.z=Math.PI/2;   /* หมุนให้ยาวไปตาม Z */
+    p.position.set(px,.07,pz);p.receiveShadow=true;g.add(p);
+    const net=new THREE.Mesh(new THREE.PlaneGeometry(6.7,.78),netM);
+    net.position.set(px,.79,pz);g.add(net);
+    const tape=new THREE.Mesh(new THREE.BoxGeometry(6.7,.07,.05),mat(0xffffff));
+    tape.position.set(px,1.2,pz);g.add(tape);
+    [-1,1].forEach(d=>{
+      const po=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,1.55),frame);
+      po.position.set(px+d*3.35,.78,pz);g.add(po);});
+    [-4.4,4.4].forEach(o=>{
+      const bar=new THREE.Mesh(new THREE.BoxGeometry(5.2,.12,.3),lamp);
+      bar.position.set(px,8.0,pz+o);g.add(bar);});
+    const sp=new THREE.SpotLight(0xeef4ff,55,24,Math.PI/2.8,.55,1);
+    sp.position.set(px,7.9,pz);sp.target.position.set(px,0,pz);
+    g.add(sp);g.add(sp.target);courtLights.push(sp);
+    if(az<4){
+      const div=new THREE.Mesh(new THREE.PlaneGeometry(6.5,2.2),
+        mat(0x0f1a14,{transparent:true,opacity:.16,side:THREE.DoubleSide,depthWrite:false}));
+      div.position.set(px,1.1,pz+7.7);g.add(div);
+    }
+  }
+  const gl=new THREE.PointLight(0xfff6e6,1.0,50,1.3);gl.position.set(cx,7,0);g.add(gl);indoorLights.push(gl);
+}
+
+/* ---------- อาคารหอพัก 2 ชั้นด้านหลัง (ตามรูปถ่าย — ต้องเคลียร์ผู้อยู่อาศัยก่อน) ---------- */
+function buildDorm(cx,cz){
+  const g=new THREE.Group();g.position.set(cx,0,cz);scene.add(g);
+  const W=26,D=8,H1=2.9,H2=2.7;
+  const body=new THREE.Mesh(new THREE.BoxGeometry(W,H1+H2,D),mat(0xd8d2c2));
+  body.position.y=(H1+H2)/2;body.castShadow=true;g.add(body);
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(W+1.4,.16,D+2.2),mat(0x9a9186));
+  roof.position.set(0,H1+H2+.3,.6);roof.castShadow=true;g.add(roof);
+  /* ระเบียงชั้น 2 + ราวกันตก */
+  const bal=new THREE.Mesh(new THREE.BoxGeometry(W,.16,1.5),mat(0xc4bdae));
+  bal.position.set(0,H1,D/2+.75);g.add(bal);
+  const rail=new THREE.Mesh(new THREE.BoxGeometry(W,.9,.06),mat(0x7f95a3,{transparent:true,opacity:.85}));
+  rail.position.set(0,H1+.55,D/2+1.45);g.add(rail);
+  /* ประตู-หน้าต่างห้องเช่า 8 ห้อง (ล่าง 4 บน 4) */
+  for(let f=0;f<2;f++)for(let i=0;i<4;i++){
+    const x=-9.5+i*6.3, y=f*H1;
+    const dr=new THREE.Mesh(new THREE.BoxGeometry(.95,2.0,.1),mat(0xe8e2d4));
+    dr.position.set(x,y+1.0,D/2+.06);g.add(dr);
+    const wn=new THREE.Mesh(new THREE.BoxGeometry(1.5,.85,.1),mat(0x8fa5b0));
+    wn.position.set(x+2.6,y+1.55,D/2+.06);g.add(wn);
+  }
+  const sign=new THREE.Mesh(new THREE.PlaneGeometry(11,1.3),
+    new THREE.MeshBasicMaterial({map:bannerTex('หอพักเดิม — ต้องเคลียร์','#8a2a44','#ffe9f0'),side:THREE.DoubleSide}));
+  sign.position.set(0,H1+H2+1.3,D/2+.1);g.add(sign);
+}
+
 function buildBasket(cx){
-  const g=new THREE.Group();scene.add(g);
+  const g=baskGroup;
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(11,15),new THREE.MeshStandardMaterial({
     map:basketTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));
   floor.rotation.x=-Math.PI/2;   /* local X → กว้าง(world X) · local Y → ยาว(world Z) ตรงกับ texture */
@@ -1759,6 +1903,11 @@ function buildCourts(n){
   applyNight();
 }
 window.rebuild3D=function(n){curCourts=n;if(started)buildCourts(n);};
+window.rebuildSide=function(s){
+  side3d=s;
+  if(!started)return;
+  applyVis();applyNight();
+};
 
 const VIEWS={
   persp: {c:[-78,46,86],   t:[0,3,0]},
@@ -1778,7 +1927,7 @@ window.setView=(k,btn)=>{
   if(!started)return;
   const v=VIEWS[k];
   if(INDOOR_VIEWS.includes(k)){                 /* มุมภายในอาคาร: กระโดดเข้าเลย + ซ่อนผนัง */
-    if(roofGroup.visible) window.toggleRoof();
+    if(roofOn) window.toggleRoof();
     camDest=null;
     camera.position.set(...v.c);controls.target.set(...v.t);controls.update();
   }else if(JUMP_VIEWS.includes(k)){
@@ -1791,10 +1940,10 @@ window.setView=(k,btn)=>{
 };
 window.toggleRoof=()=>{
   if(!started)return;
-  roofGroup.visible=!roofGroup.visible;
+  roofOn=!roofOn; applyVis();
   const b=document.getElementById('btnRoof');
-  b.textContent=roofGroup.visible?'🏚️ ซ่อนหลังคา (ดูข้างใน)':'🏠 แสดงหลังคา';
-  b.classList.toggle('active',!roofGroup.visible);
+  b.textContent=roofOn?'🏚️ ซ่อนหลังคา (ดูข้างใน)':'🏠 แสดงหลังคา';
+  b.classList.toggle('active',!roofOn);
 };
 function applyNight(){
   courtLights.forEach(s=>s.intensity=night?170:38);
