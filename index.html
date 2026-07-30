@@ -423,6 +423,22 @@
       <div class="step"><span class="n"></span><div><b>EV charger + จุดล้างรถ</b> · เฟส 2 · คนตีแบด 1.5–2 ชม. = เวลาชาร์จพอดี เก็บค่าไฟ+ค่าบริการได้ และดึงกลุ่มรถ EV ซึ่งกำลังโตเร็วในกรุงเทพฯ</div></div>
     </div>
   </div>
+  <div class="card">
+    <h3 style="margin-top:0">🏠 ตึก 2 ชั้นหลังโรงงาน (8 ห้อง) — ควรทำเป็นอะไร</h3>
+    <p class="sub" style="margin-bottom:10px">อาคารเดิมสภาพทรุดโทรม มีผู้เช่าอยู่ ต้องเคลียร์ก่อน · ปรับปรุงทั้งหลัง ~0.9–1.4 ลบ. (ห้องน้ำ+ทาสี+ไฟ+แอร์ ห้องละ 110,000–175,000)</p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>ทางเลือก</th><th class="r">มูลค่า/เดือน</th><th>ข้อดี</th><th>ข้อเสีย</th></tr>
+      <tr style="background:#eef7f1"><td><b>⭐ แนะนำ: ผสม — พนักงาน 3 + โค้ช 1 + คลัง 1 + ปล่อยเช่า 3</b></td><td class="r"><b>~19,000</b></td><td>พนักงานอยู่ประจำ = มีคนเฝ้าสนามกลางคืน ไม่ต้องจ้าง รปภ. (ประหยัด ~15,000) + ค่าเช่า 3 ห้อง ~10,500 + โค้ชอยู่ใกล้สอนคลาสเช้าได้</td><td>ต้องมีกฎอยู่ร่วมชัดเจน</td></tr>
+      <tr><td>ที่พักนักกีฬา/แคมป์ (เฟส 2)</td><td class="r">15,000–30,000</td><td>ต่อยอดธุรกิจทัวร์นาเมนต์+อคาเดมีได้ตรงตัว ทีมต่างจังหวัดมาแข่งพักได้ (บ้านทองหยอดก็ใช้โมเดลนี้)</td><td>รายได้ไม่สม่ำเสมอ ขึ้นกับตารางแข่ง ต้องปรับปรุงสวยกว่า</td></tr>
+      <tr><td>ปล่อยเช่าทั้งหลัง 8 ห้อง</td><td class="r">~26,000</td><td>รายได้สูงสุดและสม่ำเสมอ (3,200/ห้อง)</td><td>คนนอกเข้า-ออกในพื้นที่สนาม กระทบความปลอดภัย+ภาพลักษณ์ และต้องบริหารผู้เช่า</td></tr>
+      <tr><td>รื้อทำที่จอดรถ</td><td class="r">—</td><td>ได้ที่จอดเพิ่ม ~30 คัน · ภาพรวมสนามโปร่งสะอาด</td><td><b>ไม่คุ้ม</b> — ที่จอดเรามี ~200 คันเกินพออยู่แล้ว เท่ากับทิ้งอาคารที่ทำเงินได้</td></tr>
+      <tr><td>คลังของ + ห้องซ่อมบำรุงล้วน</td><td class="r">~4,000</td><td>ลงทุนน้อยสุด ใช้พื้นที่เก็บเสื่อสำรอง/อุปกรณ์</td><td>ใช้ประโยชน์ต่ำมากสำหรับอาคาร 8 ห้อง</td></tr>
+    </table>
+    </div>
+    <div class="note blue">💡 <b>เหตุผลที่แนะนำแบบผสม:</b> ค่าที่แท้จริงไม่ใช่ค่าเช่า แต่คือ<b>การมีคนอยู่ในพื้นที่ 24 ชม.</b> — สนามแบดปิดเที่ยงคืน มีของมีค่า (เสื่อ ไฟ อุปกรณ์ร้าน) พนักงานพักที่นี่ = เปิด-ปิดสนามเองได้ ไม่ต้องจ้าง รปภ. กะดึก (ประหยัด 15,000–18,000/เดือน) และเรียกคนมาซ่อมด่วนได้ทันที · เก็บ 3 ห้องปล่อยเช่าไว้เป็นรายได้เสริม แล้วค่อยแปลงเป็นที่พักนักกีฬาตอนธุรกิจทัวร์นาเมนต์โตขึ้น</div>
+  </div>
+
   <div class="pagenav"><button class="btn ghost" onclick="go('p3')">← ภายในอาคาร</button><button class="btn" onclick="go('p5')">ถัดไป: ราคายาง →</button></div>
 </section>
 
@@ -549,7 +565,8 @@
     <div class="controls" style="margin-top:6px">
       <div class="ctrl"><label>กำไรร้าน+ขึ้นเอ็น+คาเฟ่: <span class="val" id="shopVal">70,000</span> ฿/ด.</label><input type="range" id="shop" min="0" max="200000" step="10000" value="70000" oninput="recalc()"></div>
       <div class="ctrl"><label>ค่าเช่าแผง+ป้าย: <span class="val" id="rentVal">45,000</span> ฿/ด.</label><input type="range" id="rent" min="0" max="120000" step="5000" value="45000" oninput="recalc()"></div>
-      <div class="ctrl"><label>คลาสสอน: <span class="val" id="coachN">6</span> คลาส/สัปดาห์ × <span class="val" id="coachFee">1,200</span> ฿ (หัก 40% ให้โค้ช)</label><input type="range" id="coach" min="0" max="24" step="1" value="6" oninput="recalc()"></div>
+      <div class="ctrl"><label>คลาสสอน: <span class="val" id="coachN">6</span> คลาส/สัปดาห์</label><input type="range" id="coach" min="0" max="24" step="1" value="6" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าเรียน/คลาส: <span class="val" id="coachFee">1,200</span> ฿ <span class="sub">(คลาสกลุ่ม 4–6 คน เก็บคนละ 250–300)</span></label><input type="range" id="cfee" min="600" max="3000" step="100" value="1200" oninput="recalc()"></div>
       <div class="ctrl"><label>เหมาสนามทั้งวัน: <span class="val" id="wholeN">2</span> ครั้ง/เดือน × <span class="val" id="wholeFee">28,000</span> ฿</label><input type="range" id="whole" min="0" max="8" step="1" value="2" oninput="recalc()"></div>
       <div class="ctrl"><label>อีเวนต์เราจัดเอง: <span class="val" id="evtN">1</span> ครั้ง/เดือน (กำไรสุทธิ <span class="val" id="evtFee">18,000</span> ฿)</label><input type="range" id="evt" min="0" max="4" step="1" value="1" oninput="recalc()"></div>
       <div class="ctrl"><label>รายได้บาส 3x3: <span class="val" id="baskVal">35,000</span> ฿/ด. <span class="sub" id="baskPerSub"></span></label><input type="range" id="bask" min="0" max="200000" step="5000" value="35000" oninput="recalc()"></div>
@@ -579,6 +596,20 @@
       <div class="kpi"><div class="t">กำไรต่อปี</div><div class="v" id="kNetY"></div></div>
     </div>
     <div class="note" id="verdict" style="font-size:.98rem"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🎓 คลาสสอน / โค้ช — คิดเงินยังไง (กดเลือกโมเดลได้)</h3>
+    <div class="btnrow">
+      <span class="lbl">ข้อตกลงกับโค้ช — สัดส่วนขึ้นอยู่กับว่า "ใครหานักเรียนมา"</span>
+      <button class="btn cm" data-cm="A" onclick="setCoach('A')">A. โค้ชเช่าคอร์ทเอง</button>
+      <button class="btn cm" data-cm="B" onclick="setCoach('B')">B. แบ่ง สนาม 40%</button>
+      <button class="btn cm active" data-cm="C" onclick="setCoach('C')">C. แบ่ง สนาม 60%</button>
+      <button class="btn cm" data-cm="D" onclick="setCoach('D')">D. จ้างโค้ชรายชั่วโมง</button>
+    </div>
+    <div style="overflow-x:auto"><table id="coachTable"></table></div>
+    <div class="note blue" id="coachNote"></div>
+    <div class="note" id="coachWarn"></div>
   </div>
 
   <div class="card" id="rentCard">
@@ -659,6 +690,7 @@
         <li>โค้ชพาลูกศิษย์เข้ามาเอง</li>
       </ul></div>
       <div class="b co"><h4>💸 Cost Structure</h4><ul>
+        <li>ปรับปรุงตึก 2 ชั้นหลังโรงงาน (8 ห้อง) เป็นหอพักพนักงาน + ที่พักนักกีฬา ~0.9–1.4 ลบ.</li>
         <li><b>คงที่:</b> ค่าเช่าโรงงาน 120,000 (ขึ้น 10%/4ปี) · เงินเดือน 7 คน ~133,000 · ค่างวดธนาคาร ~183,000</li>
         <li><b>ผันแปร:</b> ค่าไฟ-น้ำ (ตามชั่วโมงเปิดไฟคอร์ท) · ลูกขนไก่/ของใช้ · การตลาด</li>
         <li><b>Maintenance:</b> กันเงินเปลี่ยนเสื่อทุก 9 ปี · เน็ต/เสาทุก 4 ปี · หลอด LED ทุก 8 ปี · ล้างพื้น/ซ่อมทั่วไป</li>
@@ -709,7 +741,31 @@ const MODES={
   dense:{pitch:6.6, maxPerSide:10, label:'อัดเต็มพื้นที่', gap:'0.5 ม.'},
   bwf:  {pitch:8.1, maxPerSide:8,  label:'มาตรฐาน BWF',  gap:'2.0 ม.'}
 };
-let mode='dense', grade='pro', mix='single', deal='rent', side='b2';
+let mode='dense', grade='pro', mix='single', deal='rent', side='b2', coachM='C';
+/* โมเดลข้อตกลงกับโค้ช — สนามได้เท่าไหร่ต่างกันตามว่าใครหานักเรียนมา */
+const CM={
+  A:{n:'โค้ชเช่าคอร์ทเอง', d:'โค้ชจ่ายค่าคอร์ทตามปกติ แล้วเก็บค่าเรียนทั้งหมดเอง — สนามได้แค่ค่าเช่าคอร์ท',
+     when:'ง่ายสุด ความเสี่ยงเป็นศูนย์ ไม่ต้องบริหารอะไร เหมาะช่วงเปิดใหม่ที่ยังไม่มีฐานนักเรียน'},
+  B:{n:'แบ่งรายได้ สนาม 40% / โค้ช 60%', d:'สนามเก็บค่าเรียน แบ่งให้โค้ช 60% (คอร์ทฟรีให้โค้ช)',
+     when:'พบมากที่สุดในตลาด — ใช้เมื่อโค้ชพานักเรียนของตัวเองมา เขาจึงขอส่วนแบ่งมากกว่า'},
+  C:{n:'แบ่งรายได้ สนาม 60% / โค้ช 40%', d:'สนามเก็บค่าเรียน แบ่งให้โค้ช 40%',
+     when:'ได้เมื่อ "สนามเป็นคนหานักเรียน" — ทำการตลาดเอง คุมตารางเอง โค้ชแค่มาสอน'},
+  D:{n:'จ้างโค้ชรายชั่วโมง 400 ฿/ชม.', d:'สนามเก็บค่าเรียนทั้งหมด จ่ายค่าจ้างโค้ชเป็นชั่วโมง',
+     when:'กำไรสูงถ้าคลาสเต็ม แต่สนามรับความเสี่ยงเอง — คลาสว่างก็ยังต้องจ่ายค่าโค้ช'}
+};
+const COACH_HRS=1.5, COACH_RATE=400;
+function coachCalc(m,sessions,fee,dayRate){
+  const gross=sessions*fee, hrs=sessions*COACH_HRS;
+  if(m==='A') return {court:Math.round(hrs*dayRate), gross, hrs};
+  if(m==='B') return {court:Math.round(gross*0.4), gross, hrs};
+  if(m==='C') return {court:Math.round(gross*0.6), gross, hrs};
+  return {court:Math.round(gross-hrs*COACH_RATE), gross, hrs};
+}
+function setCoach(m){
+  coachM=m;
+  document.querySelectorAll('.btn.cm').forEach(b=>b.classList.toggle('active',b.dataset.cm===m));
+  recalc();
+}
 /* บาส 3x3 แนวตั้ง — ยกหลังคาเฉพาะโซนบาส (โซนลึก 17 ม. ล้ำเพิงเดิม ~3 ม.) */
 const SIDE={
   b1:{bask:1, cost:2700000, area:'17 × 17 ม. (289 ตร.ม.)'},
@@ -947,18 +1003,39 @@ function recalc(){
   el('ceilNote').innerHTML=`เพดานรายได้คอร์ท = ${totalCourts} คอร์ท × (กลางวัน ${dayHrs} ชม.×${dayRate} + กลางคืน ${nightHrs} ชม.×${nightRate}) × 30 วัน = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100%`;
   const shop=val('shop'), rent=val('rent');
   /* รายได้เสริม: คลาสสอน · เหมาสนามทั้งวัน · อีเวนต์ · บาส 3x3 */
-  const COACH_FEE=1200, COACH_SHARE=.6;               // สนามได้ 60% โค้ชได้ 40%
   const WHOLE_FEE=28000, EVT_PROFIT=18000;
   const coachN=val('coach'), wholeN=val('whole'), evtN=val('evt'), bask=val('bask');
-  const cls=Math.round(coachN*4.3*COACH_FEE*COACH_SHARE);
+  const cFee=val('cfee'), WK=52/12;
+  const sessions=coachN*WK;                            // คลาสต่อเดือน
+  const cc=coachCalc(coachM,sessions,cFee,dayRate);
+  const cls=cc.court;
   const whole=wholeN*WHOLE_FEE, evt=evtN*EVT_PROFIT;
   el('shopVal').textContent=fmt(shop); el('rentVal').textContent=fmt(rent);
-  el('coachN').textContent=coachN; el('coachFee').textContent=fmt(COACH_FEE);
+  el('coachN').textContent=coachN; el('coachFee').textContent=fmt(cFee);
   el('wholeN').textContent=wholeN; el('wholeFee').textContent=fmt(WHOLE_FEE);
   el('evtN').textContent=evtN; el('evtFee').textContent=fmt(EVT_PROFIT);
   el('baskVal').textContent=fmt(bask);
   el('baskPerSub').textContent=`(${SD.bask} สนาม ≈ ${fmt(bask/SD.bask)}/สนาม)`;
-  el('coachSub').textContent=`${coachN} คลาส/สัปดาห์ · ส่วนแบ่งสนาม 60%`;
+  el('coachSub').textContent=`${coachN} คลาส/สัปดาห์ · โมเดล ${coachM}: ${CM[coachM].n}`;
+  /* ตารางเทียบ 4 โมเดล + คำอธิบายสูตร */
+  let ct=`<tr><th>โมเดล</th><th>วิธีคิด</th><th class="r">สนามได้/เดือน</th><th>เหมาะเมื่อ</th></tr>`;
+  ['A','B','C','D'].forEach(k=>{
+    const r=coachCalc(k,sessions,cFee,dayRate);
+    const hl=k===coachM?' style="background:#eaf1fa;font-weight:600"':'';
+    ct+=`<tr${hl}><td>${k}. ${CM[k].n}</td><td class="sub">${CM[k].d}</td><td class="r">${fmt(r.court)}</td><td class="sub">${CM[k].when}</td></tr>`;
+  });
+  el('coachTable').innerHTML=ct;
+  el('coachNote').innerHTML=
+    `📐 <b>สูตรคำนวณ (โมเดลที่เลือก = ${coachM})</b><br>`+
+    `${coachN} คลาส/สัปดาห์ × 4.33 สัปดาห์/เดือน = <b>${sessions.toFixed(1)} คลาส/เดือน</b><br>`+
+    `${sessions.toFixed(1)} คลาส × ${fmt(cFee)} ฿/คลาส = <b>ค่าเรียนรวม ${fmt(cc.gross)} ฿/เดือน</b><br>`+
+    (coachM==='A'?`คอร์ทที่โค้ชเช่า ${cc.hrs.toFixed(1)} ชม. × ${fmt(dayRate)} ฿/ชม. = <b>สนามได้ ${fmt(cls)} ฿</b> (ค่าเรียนเป็นของโค้ชทั้งหมด)`
+     :coachM==='D'?`ค่าเรียน ${fmt(cc.gross)} − ค่าจ้างโค้ช (${cc.hrs.toFixed(1)} ชม. × ${fmt(COACH_RATE)} ฿) = <b>สนามได้ ${fmt(cls)} ฿</b>`
+     :`${fmt(cc.gross)} × ${coachM==='B'?'40':'60'}% = <b>สนามได้ ${fmt(cls)} ฿</b> · โค้ชได้ ${fmt(cc.gross-cls)} ฿`);
+  el('coachWarn').innerHTML=
+    `⏰ <b>ต้องจัดคลาสช่วงกลางวันวันธรรมดาเท่านั้น</b> — คลาสใช้คอร์ทไป <b>${cc.hrs.toFixed(0)} ชม./เดือน</b> `+
+    `ถ้าเอาไปสอนช่วงพีค (18:00–22:00) เท่ากับแย่งคอร์ทจากลูกค้าที่จ่ายเต็ม เสียโอกาสอีก ~${fmt(cc.hrs*nightRate)} ฿ `+
+    `· โซนนี้กลางวันคู่แข่งปิดกันหมด (เปิดบ่าย 3) คอร์ทเราว่างอยู่แล้ว → <b>จัดคลาสกลางวันคือรายได้เพิ่มแท้ๆ ไม่เบียดใคร</b>`;
   el('rentAllSub').textContent=`${wholeN} ครั้ง/เดือน @ ${fmt(WHOLE_FEE)} ฿`;
   el('eventSub').textContent=`${evtN} ครั้ง/เดือน · กำไรสุทธิหลังหักของรางวัล`;
   el('rCourt').textContent=fmt(courtRev);
@@ -1169,26 +1246,54 @@ function courtTex(){
   courtTexCache=t; return t;
 }
 function basketTex(){
-  /* 3x3 แนวนอนใน canvas: X = ยาว 15 ม. (ห่วงซ้าย) · Y = กว้าง 11 ม. */
-  const W=1024,H=752;
+  /* สนาม FIBA 3x3 : 15 (ยาว) × 11 (กว้าง) ม. · ห่วง 1 ฝั่ง
+     canvas: X = ความยาว (ห่วงอยู่ซ้าย) · Y = ความกว้าง · 1 ม. = 80 px
+     ระยะมาตรฐาน: ห่วงห่างเส้นหลัง 1.575 · เขตโทษ 4.90 × 5.80 · วงโทษ r1.80
+                  เส้น 2 คะแนน r6.75 จากห่วง · no-charge r1.25 */
+  const M=80, PAD=20;
+  const W=15*M+PAD*2, H=11*M+PAD*2;
   const c=document.createElement('canvas');c.width=W;c.height=H;
   const g=c.getContext('2d');
-  const M=W/B_L;
-  g.fillStyle='#b4622e';g.fillRect(0,0,W,H);
-  g.strokeStyle='#fff';g.lineWidth=7;
-  g.strokeRect(6,6,W-12,H-12);
-  const HX=6+1.575*M, CY=H/2;
-  g.lineWidth=6;
-  g.strokeRect(6,CY-2.45*M,5.8*M,4.9*M);                 // เขตโทษ
-  g.beginPath();g.arc(6+5.8*M,CY,1.8*M,-Math.PI/2,Math.PI/2);g.stroke();
-  const R=6.75*M, sy=.9*M+6, dy=CY-sy, dx=Math.sqrt(R*R-dy*dy);
-  g.lineWidth=7;
+  const X0=PAD, X1=W-PAD, Y0=PAD, Y1=H-PAD, CY=(Y0+Y1)/2;
+  const HX=X0+1.575*M;                    // จุดกลางห่วง (ฉายลงพื้น)
+  const KH=2.45*M, KD=5.8*M;              // เขตโทษ: ครึ่งกว้าง 2.45 · ลึก 5.80
+  const FTX=X0+KD, FTR=1.8*M, R2=6.75*M, NCR=1.25*M;
+
+  g.fillStyle='#1f6fb5';g.fillRect(0,0,W,H);              // พื้นสนามน้ำเงิน
+  g.fillStyle='#c8a678';g.fillRect(X0,CY-KH,KD,KH*2);     // เขตโทษสีตัด
+  g.strokeStyle='#fff';g.lineJoin='round';g.lineCap='butt';
+
+  g.lineWidth=9;g.strokeRect(X0,Y0,X1-X0,Y1-Y0);          // เส้นเขตสนาม
+
+  g.lineWidth=7;                                          // กรอบเขตโทษ + เส้นโทษ
   g.beginPath();
-  g.moveTo(6,sy);g.lineTo(HX+dx,sy);
-  g.moveTo(6,H-sy);g.lineTo(HX+dx,H-sy);
+  g.moveTo(X0,CY-KH);g.lineTo(FTX,CY-KH);
+  g.lineTo(FTX,CY+KH);g.lineTo(X0,CY+KH);
   g.stroke();
-  g.beginPath();g.arc(HX,CY,R,-Math.atan2(dy,dx),Math.atan2(dy,dx));g.stroke();
-  g.beginPath();g.arc(W-6,CY,1.8*M,Math.PI/2,Math.PI*1.5);g.stroke();
+
+  g.beginPath();g.arc(FTX,CY,FTR,-Math.PI/2,Math.PI/2);g.stroke();   // วงโทษครึ่งนอก (ทึบ)
+  g.save();g.setLineDash([24,18]);                                    // ครึ่งในเขตโทษ (ประ)
+  g.beginPath();g.arc(FTX,CY,FTR,Math.PI/2,Math.PI*1.5);g.stroke();
+  g.restore();
+
+  /* เส้น 2 คะแนน r6.75 — สนาม 3x3 กว้าง 11 ม. อาร์คจะตัดเส้นข้างพอดี
+     (ไม่มีช่วงเส้นตรงมุมเหมือนสนามเต็ม 15 ม. เพราะ 6.75 > ครึ่งความกว้าง 5.5) */
+  const dy=CY-Y0, dx=Math.sqrt(R2*R2-dy*dy), a=Math.atan2(dy,dx);
+  g.lineWidth=9;
+  g.beginPath();g.arc(HX,CY,R2,-a,a);g.stroke();
+
+  g.lineWidth=6;                                          // no-charge semi-circle r1.25
+  g.beginPath();g.arc(HX,CY,NCR,-Math.PI/2,Math.PI/2);g.stroke();
+
+  g.lineWidth=5;                                          // ขีดตำแหน่งรีบาวด์ข้างเขตโทษ
+  g.beginPath();
+  [1.75,2.65,3.50].forEach(d=>{
+    const x=X0+d*M;
+    g.moveTo(x,CY-KH);g.lineTo(x,CY-KH-.35*M);
+    g.moveTo(x,CY+KH);g.lineTo(x,CY+KH+.35*M);
+  });
+  g.stroke();
+
   const t=new THREE.CanvasTexture(c);t.anisotropy=8;t.colorSpace=THREE.SRGBColorSpace;return t;
 }
 function signTex(txt,bg,fg){
@@ -1278,6 +1383,30 @@ function buildSite(){
   road.rotation.x=-Math.PI/2;road.position.set(0,-.02,64);g.add(road);
   const cl=[]; for(let x=-140;x<140;x+=9) cl.push([x,.01,64]);
   inst(g,new THREE.BoxGeometry(4.5,.02,.24),MT.line,cl);
+
+  /* ---- ลำคลองเลียบถนน (คั่นระหว่างที่ดินกับถนน) ---- */
+  const CW_=6, CZ=56.5;                        // กว้าง 6 ม. อยู่ระหว่างแปลง (z 52) กับถนน (z 64)
+  const bank=new THREE.Mesh(new THREE.PlaneGeometry(300,CW_+2.6),mat(0x8d8574));
+  bank.rotation.x=-Math.PI/2;bank.position.set(0,-.03,CZ);g.add(bank);
+  const water=new THREE.Mesh(new THREE.PlaneGeometry(300,CW_),
+    mat(0x3f6f78,{metalness:.45,roughness:.22,transparent:true,opacity:.92}));
+  water.rotation.x=-Math.PI/2;water.position.set(0,-.62,CZ);g.add(water);
+  /* ขอบคลอง 2 ฝั่ง */
+  [CZ-CW_/2-.5,CZ+CW_/2+.5].forEach(z=>
+    box(g,new THREE.BoxGeometry(300,.9,1.0),mat(0x9a9284),0,-.35,z));
+  /* กอหญ้าริมคลอง */
+  const reed=[];for(let x=-140;x<140;x+=11) reed.push([x,.15,CZ-CW_/2-.9]);
+  inst(g,new THREE.IcosahedronGeometry(.7,0),mat(0x5f8a4a),reed);
+
+  /* ---- สะพาน/ท่อลอดข้ามคลองตรงประตูทางเข้า ---- */
+  const BX=26, BW=8.2;                         // กว้างสะพาน ~8 ม. (ตัวจำกัดรถเข้า-ออก)
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(BW,.5,CW_+3.4),MT.asphalt);
+  deck.position.set(BX,-.02,CZ);deck.castShadow=true;g.add(deck);
+  const rail=[];[-1,1].forEach(s=>rail.push([BX+s*(BW/2-.15),.55,CZ]));
+  inst(g,new THREE.BoxGeometry(.16,1.0,CW_+3.4),mat(0xc9ccc7),rail);
+  const bsign=new THREE.Mesh(new THREE.PlaneGeometry(7,1.2),
+    basic(signTex('สะพานทางเข้า ~8 ม. (ต้องวัดยืนยัน)','#8a5a12')));
+  bsign.position.set(BX,2.6,CZ-CW_/2-1.9);g.add(bsign);
   /* เสาไฟฟ้าริมถนน + ต้นไม้ฝั่งตรงข้าม (ตามรูปถ่าย) */
   const poles=[],trunks=[],leaves=[];
   for(let x=-120;x<=120;x+=34) poles.push([x,4.5,72]);
@@ -1456,23 +1585,32 @@ function buildBask(n){
   const sg=new THREE.Mesh(new THREE.PlaneGeometry(11,1.9),basic(signTex('BASKETBALL 3x3 · '+n+' สนาม')));
   sg.rotation.y=-Math.PI/2;sg.position.set(xOut+.12,5.4,(zA+zB)/2);bayGroup.add(sg);
 
-  /* สนาม: ยาว 15 ม. วางตามแกน X (แนวเดียวกับคอร์ทแบด) · เรียงไปตามแกน Z */
+  /* สนาม: ยาว 15 ม. วางตามแกน X (แนวเดียวกับคอร์ทแบด) · เรียงไปตามแกน Z
+     พื้นผิวกว้างกว่าเส้นเขต 0.25 ม.ทุกด้าน (ตรงกับ PAD ใน texture) */
+  const SX=B_L+.5, SZ=B_W+.5;
   const bm=new THREE.MeshStandardMaterial({map:basketTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
-  const fg=new THREE.PlaneGeometry(B_L,B_W);
-  const F=[],PO=[],BD=[],RM=[],BN=[];
+  const fg=new THREE.PlaneGeometry(SX,SZ);
+  /* ห่วงอยู่ปลายด้าน −X (ชิดผนังนอก) ตาม texture · เส้นหลังอยู่ที่ cx−7.5 */
+  const endX=cx-SX/2+.25;                   // เส้นหลัง
+  const hoopX=endX+1.575;                   // จุดกลางห่วง (มาตรฐาน 1.575 ม.)
+  const boardX=endX+1.20;                   // หน้ากระดานหลัง (มาตรฐาน 1.20 ม.)
+  const F=[],PO=[],AR=[],BD=[],EDG=[],RM=[],BN=[];
   for(let i=0;i<n;i++){
     const z=z0+i*pitch+pitch/2;
     F.push([cx,.06,z,-Math.PI/2]);
-    const hx=-hw-1.6;                       // ห่วงอยู่ฝั่งติดโถง
-    PO.push([hx+.8,1.8,z]);
-    BD.push([hx,3.5,z,0,Math.PI/2]);
-    RM.push([hx-.28,3.05,z,Math.PI/2]);
-    BN.push([cx,.45,z-B_W/2+.8]);
+    PO.push([endX-1.1,1.8,z]);                       // เสาอยู่หลังเส้นหลัง
+    AR.push([endX-.55,3.55,z,0,Math.PI/2]);          // แขนยื่นเข้าหาสนาม
+    BD.push([boardX,3.05+.525,z,0,Math.PI/2]);       // กระดานหลัง (ขอบล่างสูง 3.05)
+    EDG.push([boardX,3.05,z,0,Math.PI/2]);
+    RM.push([hoopX,3.05,z,Math.PI/2]);               // ห่วงสูง 3.05 ม.
+    BN.push([cx+2,.45,z-SZ/2-.9]);                   // ม้านั่งข้างสนาม
   }
   inst(baskGroup,fg,bm,F);
   inst(baskGroup,new THREE.CylinderGeometry(.11,.13,3.6,8),MT.steel,PO,true);
-  inst(baskGroup,new THREE.BoxGeometry(1.8,1.05,.06),mat(0xeef2f4),BD,true);
-  inst(baskGroup,new THREE.TorusGeometry(.23,.022,6,14),mat(0xe8600f),RM);
+  inst(baskGroup,new THREE.BoxGeometry(1.3,.14,.14),MT.steel,AR);
+  inst(baskGroup,new THREE.BoxGeometry(1.8,1.05,.05),mat(0xeef2f4,{transparent:true,opacity:.92}),BD,true);
+  inst(baskGroup,new THREE.BoxGeometry(1.84,.07,.07),mat(0xd94f4f),EDG);
+  inst(baskGroup,new THREE.TorusGeometry(.2286,.02,6,14),mat(0xe8600f),RM);
   inst(baskGroup,new THREE.BoxGeometry(2.2,.08,.45),MT.wood,BN,true);
 }
 window.rebuildBask=function(n){curBask=n;if(started){buildBask(n);applyVis();applyNight();}};
@@ -1622,7 +1760,7 @@ function buildDorm(){
   }
   inst(g,new THREE.BoxGeometry(.95,2.0,.1),mat(0xe8e2d4),dr);
   inst(g,new THREE.BoxGeometry(1.5,.85,.1),mat(0x8fa5b0),wn);
-  const s=new THREE.Mesh(new THREE.PlaneGeometry(12,1.4),basic(signTex('หอพักเดิม — ต้องเคลียร์','#8a2a44')));
+  const s=new THREE.Mesh(new THREE.PlaneGeometry(13,1.4),basic(signTex('หอพักพนักงาน + ที่พักนักกีฬา','#125935')));
   s.position.set(0,H1+H2+1.3,D/2+.1);g.add(s);
 }
 
