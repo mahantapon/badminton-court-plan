@@ -16,10 +16,17 @@
   header{background:linear-gradient(135deg,var(--bad-dark),var(--bad));color:#fff;padding:32px 20px 16px;text-align:center}
   header h1{font-size:1.55rem;font-weight:700}
   header p{opacity:.9;margin-top:6px;font-weight:300;font-size:.92rem}
-  nav{position:sticky;top:0;z-index:50;background:var(--bad-dark);display:flex;justify-content:center;flex-wrap:wrap;gap:4px;padding:9px 8px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-  nav button{font-family:inherit;font-size:.88rem;border:none;background:transparent;color:#cfe0f0;padding:8px 14px;border-radius:999px;cursor:pointer;transition:.15s}
-  nav button:hover{background:rgba(255,255,255,.12);color:#fff}
-  nav button.active{background:#fff;color:var(--bad-dark);font-weight:600}
+  nav{position:sticky;top:0;z-index:50;background:var(--bad-dark);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+  .navtop{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;padding:8px 8px 0}
+  .navtop button{font-family:inherit;font-size:.94rem;font-weight:500;border:none;background:transparent;color:#b9d3ea;padding:9px 20px;border-radius:10px 10px 0 0;cursor:pointer;transition:.15s}
+  .navtop button:hover{background:rgba(255,255,255,.1);color:#fff}
+  .navtop button.active{background:#14528c;color:#fff;font-weight:600}
+  .navsub{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;padding:7px 8px;background:#14528c}
+  .navsub button{font-family:inherit;font-size:.85rem;border:none;background:transparent;color:#cfe0f0;padding:6px 14px;border-radius:999px;cursor:pointer;transition:.15s}
+  .navsub button:hover{background:rgba(255,255,255,.14);color:#fff}
+  .navsub button.active{background:#fff;color:var(--bad-dark);font-weight:600}
+  .crumb{font-size:.82rem;color:var(--muted);margin:2px 0 10px}
+  .crumb b{color:var(--bad-dark)}
   .page{display:none}
   .page.active{display:block;animation:fade .25s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -102,15 +109,9 @@
   <p>โถง 40 × 80 ม. · เพดาน 6.33–9.42 ม. · คอร์ทแนวตั้ง indoor ทั้งหมด · เลือกได้ 2 ผัง: มาตรฐาน BWF หรือ อัดเต็มพื้นที่</p>
 </header>
 
-<nav id="nav">
-  <button class="active" data-page="p1" onclick="go('p1',this)">🏟️ ผัง &amp; จำนวนคอร์ท</button>
-  <button data-page="p2" onclick="go('p2',this)">🧊 ภาพ 3D</button>
-  <button data-page="p3" onclick="go('p3',this)">🏢 ภายในอาคาร</button>
-  <button data-page="p4" onclick="go('p4',this)">🌳 พื้นที่รอบนอก</button>
-  <button data-page="p5" onclick="go('p5',this)">💵 ราคายาง/เกรด</button>
-  <button data-page="p6" onclick="go('p6',this)">💰 งบลงทุนรวม</button>
-  <button data-page="p7" onclick="go('p7',this)">📈 รายได้ &amp; คืนทุน</button>
-  <button data-page="p8" onclick="go('p8',this)">🧩 Business Canvas</button>
+<nav>
+  <div class="navtop" id="navtop"></div>
+  <div class="navsub" id="navsub"></div>
 </nav>
 
 <div class="wrap">
@@ -507,6 +508,7 @@
       <tr class="sec"><td colspan="2">6) ระบบและอื่นๆ</td></tr>
       <tr><td id="bSideLabel"></td><td class="r" id="bSide"></td></tr>
       <tr><td>ระบบจองออนไลน์ + POS + คอมพิวเตอร์</td><td class="r">300,000</td></tr>
+      <tr id="rowLegal"><td>จดทะเบียนการเช่า + อากรแสตมป์ + ใบอนุญาต <span class="sub">1.1% ของค่าเช่าตลอดสัญญา + อ.1 + จดบริษัท</span></td><td class="r" id="bLegal"></td></tr>
       <tr><td>ออกแบบ ขออนุญาตเปลี่ยนการใช้อาคาร + เผื่อ 10%</td><td class="r" id="bDesign"></td></tr>
       <tr class="total"><td>รวมเงินลงทุนทั้งโครงการ</td><td class="r" id="bTotal"></td></tr>
     </table>
@@ -580,6 +582,7 @@
       <tr><td>ลูกขนไก่/อุปกรณ์สิ้นเปลือง + ของใช้ห้องน้ำ</td><td class="r" id="eSupply"></td></tr>
       <tr><td><b>Maintenance สนาม</b> <span class="sub" id="maintSub"></span></td><td class="r" id="eMaint"></td></tr>
       <tr><td>การตลาด + ระบบจอง + เบ็ดเตล็ด</td><td class="r">45,000</td></tr>
+      <tr><td>ประกันภัย <span class="sub">อัคคีภัย + ความรับผิดต่อบุคคลภายนอก + ธุรกิจหยุดชะงัก</span></td><td class="r">9,000</td></tr>
       <tr id="rowRent"><td><b>ค่าเช่าโรงงาน</b> <span class="sub" id="rentNote"></span></td><td class="r" id="eRent"></td></tr>
       <tr class="total"><td>รวมรายจ่าย (ไม่รวมค่างวด)</td><td class="r" id="eTotal"></td></tr>
     </table>
@@ -772,6 +775,339 @@
   <div class="pagenav"><button class="btn ghost" onclick="go('p7')">← รายได้ &amp; คืนทุน</button><span></span></div>
 </section>
 
+<!-- ================= P9 ตลาด & คู่แข่ง ================= -->
+<section class="page" id="p9">
+  <h2>ตลาด &amp; คู่แข่ง — สนามแบดในรัศมี 5–8 กม.</h2>
+  <div class="card">
+    <h3 style="margin-top:0">🆚 คู่แข่งที่ต้องรู้ (ข้อมูลสาธารณะ)</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>สนาม</th><th>ทำเล</th><th class="r">ระยะ~</th><th class="r">คอร์ท</th><th class="r">ราคา/ชม.</th><th>เวลาเปิด</th><th>ช่องว่างที่เราชนะได้</th></tr>
+      <tr style="background:#fff8ec"><td><b>CC Badminton</b></td><td>พระราม 2 ซ.60</td><td class="r">2–3 กม.</td><td class="r"><b>18</b></td><td class="r">สอบถาม</td><td>15:00–23:30</td><td><b>คู่แข่งหลักตัวจริง</b> — ขนาดเท่าเรา แต่<b>ไม่เปิดกลางวัน</b> และที่จอดจำกัด</td></tr>
+      <tr><td>ชนะชน</td><td>บางบอน 5</td><td class="r">6–8 กม.</td><td class="r">15</td><td class="r">สอบถาม</td><td>สอบถาม</td><td>ไกลกว่า · ไม่มีคาเฟ่/ห้องอาบน้ำระดับเรา</td></tr>
+      <tr><td>A-Team</td><td>ซ.บางกระดี่ 19</td><td class="r">3–4 กม.</td><td class="r">7</td><td class="r">สอบถาม</td><td>สอบถาม</td><td>เล็กกว่ามาก จองยากช่วงเย็น</td></tr>
+      <tr><td>Conbrio</td><td>พระราม 2 ซ.82</td><td class="r">3–5 กม.</td><td class="r">~6</td><td class="r">บุฟเฟต์</td><td>15:00–23:00 · ศ.ถึง 20:00 · <b>อา.ปิด</b></td><td><b>อาทิตย์ปิด</b> — เราเปิดทุกวันรับลูกค้าตรงนี้ได้เต็มๆ</td></tr>
+      <tr><td>OMG Badminton</td><td>พระราม 2</td><td class="r">4–6 กม.</td><td class="r">4</td><td class="r">สอบถาม</td><td>สอบถาม</td><td>พื้นดีแต่แค่ 4 คอร์ท จัดก๊วนใหญ่/แข่งไม่ได้</td></tr>
+      <tr><td>ศูนย์กีฬาบางขุนเทียน (กทม.)</td><td>แสมดำ</td><td class="r">3–5 กม.</td><td class="r">~4</td><td class="r">100–140</td><td>ราชการ</td><td>ถูกแต่คิวแน่น จองล่วงหน้ายาก ไม่มีบริการเสริม</td></tr>
+      <tr><td>จอมทอง ซ.รวมสุข</td><td>ถ.เอกชัย</td><td class="r">8–10 กม.</td><td class="r">6</td><td class="r">100–110</td><td>สอบถาม</td><td>ราคาถูกสุดในโซน — เป็นเพดานราคาล่าง</td></tr>
+      <tr style="background:#eef7f1"><td><b>🏸 โครงการเรา</b></td><td>บางขุนเทียน-ชายทะเล</td><td class="r">—</td><td class="r"><b>18</b></td><td class="r"><b>200</b></td><td><b>10:00–24:00 ทุกวัน</b></td><td>ที่จอด 200 คัน · ห้องอาบน้ำ 8 ห้อง · คาเฟ่ · เปิดกลางวัน · บาส 3x3</td></tr>
+    </table>
+    </div>
+    <div class="note">⚠️ ช่อง "สอบถาม" คือข้อมูลที่ไม่เปิดเผยออนไลน์ — <b>ต้องโทร/ทักไลน์ถามเอง</b> ก่อนสรุปแผนราคา · ระยะทางเป็นค่าประมาณ ควรวัดจริงจาก Google Maps</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">💡 ช่องว่างตลาด 3 ข้อที่เราเข้าไปได้</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>ไม่มีใครเปิดกลางวัน</b> — คู่แข่งเกือบทั้งหมดเปิดบ่าย 3 เป็นต้นไป เราเปิด 10:00 พร้อมราคาสมาชิกนอกพีค 160 ฿ + บุฟเฟต์ + คลาสสอน → <b>ได้ตลาดที่ไม่มีคู่แข่งเลย</b></div></div>
+      <div class="step"><span class="n"></span><div><b>Conbrio ปิดวันอาทิตย์</b> — วันอาทิตย์เป็นวันที่ก๊วนครอบครัวเล่นเยอะที่สุด เราเปิดเต็มวันรับลูกค้ากลุ่มนี้ได้ทันที</div></div>
+      <div class="step"><span class="n"></span><div><b>ไม่มีสนามไหนจัดแข่งครบวงจรได้</b> — 18 คอร์ทในที่เดียว + ที่จอด 200 คัน + ห้องอาบน้ำ + คาเฟ่ = รับงานเหมาสนามทั้งวัน 85,000 ฿ ได้จริง ซึ่งคู่แข่งขนาด 4–7 คอร์ททำไม่ได้</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📊 ประมาณอัตราการจองรายชั่วโมง (กดที่ช่องเพื่อแก้เป็นเลขที่ไปนับจริง)</h3>
+    <p class="sub" style="margin-bottom:10px">ไม่มีสนามไหนเปิดเผยตัวเลขจริง ตารางนี้เป็น<b>ประมาณการ</b>จากเวลาเปิดของคู่แข่งและพฤติกรรมตลาด — กด 1 ครั้งเพื่อวนค่า 0→25→50→75→100% ระบบจำค่าไว้ในเครื่อง</p>
+    <div style="overflow-x:auto"><table id="bHeat"></table></div>
+    <div class="btnrow" style="margin-top:10px">
+      <button class="btn ghost" onclick="bHeatReset()">↺ รีเซ็ตกลับเป็นประมาณการ</button>
+      <span class="sub" style="align-self:center">ช่องที่มีกรอบส้ม = ข้อมูลที่คุณแก้เอง</span>
+    </div>
+    <div class="note blue" id="bHeatNote"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🔬 วิธีเก็บข้อมูลจริงก่อนลงเงิน (2 สัปดาห์)</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>ทักไลน์ถามคอร์ทว่าง</b> — ถาม CC / Conbrio / ชนะชน ว่า "พรุ่งนี้ 19:00 ว่างกี่คอร์ท" จดทุกครั้ง 2 สัปดาห์ = ได้ occupancy ช่วงพีคที่แม่นมาก</div></div>
+      <div class="step"><span class="n"></span><div><b>ไปนั่งนับหน้างาน</b> อย่างน้อย 5 ช่วง: อังคาร 19:00 · ศุกร์ 19:00 · เสาร์ 10:00 · เสาร์ 19:00 · อาทิตย์ 10:00 → นับคอร์ทที่มีคนเล่น ÷ คอร์ททั้งหมด</div></div>
+      <div class="step"><span class="n"></span><div><b>ดู "ช่วงเวลายอดนิยม" ใน Google Maps</b> ของแต่ละสนาม — เป็นข้อมูลความหนาแน่นจริงจากมือถือคนที่ไปอยู่ที่นั่น ฟรีและไม่ต้องไปเอง</div></div>
+      <div class="step"><span class="n"></span><div><b>ถามแม่ค้าน้ำ/ร้านข้าวหน้าสนาม</b> — รู้ดีที่สุดว่าวันไหนคนเยอะ ก๊วนไหนมาประจำ และลูกค้าบ่นอะไร</div></div>
+    </div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง &amp; คอร์ท</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้น →</button></div>
+</section>
+
+<!-- ================= P10 กระแสเงินสด & ภาษี ================= -->
+<section class="page" id="p10">
+  <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
+  <div class="note" style="margin-top:0">🔴 <b>หน้านี้คือสิ่งที่ทำให้ธุรกิจใหม่ตายบ่อยที่สุด</b> — ตัวเลขในหน้า "รายได้ &amp; คืนทุน" คิดที่อัตราการจองเป้าหมายตั้งแต่เดือนแรก ซึ่งเป็นไปไม่ได้ หน้านี้จำลองการไต่ระดับจริงและบอกว่า<b>ต้องเตรียมเงินสดสำรองเท่าไหร่</b></div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📉 กระแสเงินสด 12 เดือนแรก (ไต่ระดับจากศูนย์)</h3>
+    <div class="controls">
+      <div class="ctrl"><label>เดือนที่เริ่มมีลูกค้าเต็มเป้า: <span class="val" id="rampMV">10</span> <span class="sub">(ยิ่งเร็วยิ่งต้องการเงินสำรองน้อย)</span></label><input type="range" id="rampM" min="4" max="18" step="1" value="10" oninput="recalc()"></div>
+      <div class="ctrl"><label>เดือนปลอดค่าเช่าที่เจรจาได้: <span class="val" id="rentFreeV">0</span> เดือน <span class="sub">(ควรขอ 3–6 เดือนช่วงปรับปรุง)</span></label><input type="range" id="rentFree" min="0" max="12" step="1" value="0" oninput="recalc()"></div>
+    </div>
+    <div style="overflow-x:auto"><table id="cfTable"></table></div>
+    <div class="kpis">
+      <div class="kpi big"><div class="t">💰 เงินทุนหมุนเวียนที่ต้องเตรียมเพิ่ม</div><div class="v" id="kWC"></div><div class="s" id="kWCSub"></div></div>
+      <div class="kpi"><div class="t">เดือนที่เงินสดเริ่มเป็นบวก</div><div class="v" id="kTurn"></div></div>
+      <div class="kpi"><div class="t">เงินสดสะสมสิ้นปีที่ 1</div><div class="v" id="kY1"></div></div>
+      <div class="kpi"><div class="t">เงินลงทุนรวม + เงินหมุนเวียน</div><div class="v" id="kAllIn"></div><div class="s">ตัวเลขจริงที่ต้องหาให้ได้</div></div>
+    </div>
+    <div class="note" id="cfNote"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🧾 ภาษีทั้งชุดที่ต้องเสีย</h3>
+    <div style="overflow-x:auto">
+    <table id="taxTable"></table>
+    </div>
+    <div class="note blue" id="taxNote"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📕 ค่าเสื่อมราคา / ตัดจำหน่ายสิทธิการเช่า</h3>
+    <table>
+      <tr><th>รายการ</th><th class="r">มูลค่า</th><th class="r">อายุตัดจำหน่าย</th><th class="r">ต่อปี</th></tr>
+      <tr><td>ค่าปรับปรุงอาคาร + งานระบบ (บนที่เช่า)</td><td class="r" id="dpReno"></td><td class="r">20 ปี (ตามอายุสัญญาเช่า)</td><td class="r" id="dpRenoY"></td></tr>
+      <tr><td>พื้นยาง + เน็ต + ไฟคอร์ท</td><td class="r" id="dpCourt"></td><td class="r">10 ปี</td><td class="r" id="dpCourtY"></td></tr>
+      <tr><td>เฟอร์นิเจอร์ + อุปกรณ์ + ระบบ IT</td><td class="r">1,200,000</td><td class="r">5 ปี</td><td class="r">240,000</td></tr>
+      <tr class="total"><td>รวมค่าเสื่อม/ตัดจำหน่ายต่อปี</td><td class="r">—</td><td class="r">—</td><td class="r" id="dpTotal"></td></tr>
+    </table>
+    <div class="note blue">💡 <b>ค่าเสื่อมไม่ใช่เงินที่จ่ายออกจริง</b> แต่<b>หักลดหย่อนภาษีได้</b> — ยิ่งค่าเสื่อมสูง ภาษีเงินได้ยิ่งต่ำในช่วงปีแรกๆ นี่คือเหตุผลที่กำไรทางบัญชีกับเงินสดในมือไม่เท่ากัน · ต้องจดทะเบียนบริษัทและวางระบบบัญชีกับนักบัญชีตั้งแต่ก่อนเริ่มปรับปรุง เพื่อให้ใบเสร็จทุกใบใช้ลดหย่อนได้</div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p7')">← รายได้ &amp; คืนทุน</button><button class="btn" onclick="go('p11')">ถัดไป: งบ 10 ปี →</button></div>
+</section>
+
+<!-- ================= P11 งบ 10 ปี · IRR · Sensitivity ================= -->
+<section class="page" id="p11">
+  <h2>งบการเงิน 10 ปี · IRR/NPV · Sensitivity</h2>
+  <div class="card">
+    <h3 style="margin-top:0">📊 ประมาณการ 10 ปี (ค่าเช่าขึ้น 10% ทุก 4 ปี)</h3>
+    <div style="overflow-x:auto"><table id="pnlTable"></table></div>
+    <div class="note" id="pnlNote"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">💹 IRR / NPV — ตัวเลขที่ผู้ร่วมทุนและธนาคารถาม</h3>
+    <div class="controls">
+      <div class="ctrl"><label>อัตราคิดลด (ผลตอบแทนที่ต้องการ): <span class="val" id="discV">10</span>% ต่อปี</label><input type="range" id="disc" min="5" max="20" step="1" value="10" oninput="recalc()"></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><div class="t">IRR ของเงินทุนตัวเอง (10 ปี)</div><div class="v" id="kIRRe"></div><div class="s">ผลตอบแทนที่ผู้ลงทุนได้จริง</div></div>
+      <div class="kpi"><div class="t">IRR ของโครงการ (ไม่คิดเงินกู้)</div><div class="v" id="kIRRp"></div><div class="s">ความสามารถของธุรกิจล้วนๆ</div></div>
+      <div class="kpi"><div class="t">NPV ที่อัตราคิดลดที่เลือก</div><div class="v" id="kNPV"></div><div class="s">บวก = คุ้มกว่าเอาเงินไปลงทุนอย่างอื่น</div></div>
+      <div class="kpi"><div class="t">เงินสดสะสม 10 ปี</div><div class="v" id="kCum10"></div></div>
+    </div>
+    <div class="note blue" id="irrNote"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🎛️ Sensitivity — เงินสดต่อเดือนในแต่ละสถานการณ์</h3>
+    <p class="sub">แถว = อัตราการจอง · คอลัมน์ = ค่าคอร์ท/ชม. · คำนวณจากค่าเช่า ค่างวด และรายได้เสริมที่ตั้งไว้ตอนนี้</p>
+    <div style="overflow-x:auto"><table id="sensTable"></table></div>
+    <p class="sub" style="margin-top:8px">🟥 ติดลบ · 🟨 บวกแต่เฉียด (&lt;100,000) · 🟩 ปลอดภัย</p>
+    <div class="note" id="worstNote"></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p10')">← กระแสเงินสด</button><button class="btn" onclick="go('p13')">ถัดไป: ไทม์ไลน์ →</button></div>
+</section>
+
+<!-- ================= P12 สัญญา · กฎหมาย · ใบอนุญาต · ประกัน ================= -->
+<section class="page" id="p12">
+  <h2>สัญญาเช่า · กฎหมาย · ใบอนุญาต · ประกันภัย</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">📜 จดทะเบียนการเช่า — ห้ามข้าม</h3>
+    <div class="note" style="margin-top:0">🔴 <b>กฎหมายไทย: สัญญาเช่าเกิน 3 ปี ต้องจดทะเบียนที่สำนักงานที่ดิน</b> ถ้าไม่จด บังคับใช้ได้แค่ <b>3 ปี</b> เท่านั้น — แปลว่าเราลงทุนปรับปรุง <b id="lgReno"></b> แล้วอาจถูกไล่ออกตั้งแต่ปีที่ 4 โดยชอบด้วยกฎหมาย</div>
+    <table>
+      <tr><th>รายการ</th><th class="r">จำนวนเงิน</th><th>หมายเหตุ</th></tr>
+      <tr><td>ค่าเช่ารวมตลอดสัญญา 20 ปี</td><td class="r" id="lgRentTotal"></td><td>ฐานคำนวณค่าธรรมเนียม</td></tr>
+      <tr><td>ค่าธรรมเนียมจดทะเบียนการเช่า 1%</td><td class="r" id="lgFee"></td><td>จ่ายที่สำนักงานที่ดินตอนจดทะเบียน</td></tr>
+      <tr><td>อากรแสตมป์ 0.1%</td><td class="r" id="lgStamp"></td><td>ติดในสัญญา</td></tr>
+      <tr class="total"><td>รวมค่าใช้จ่ายจดทะเบียน</td><td class="r" id="lgTotal"></td><td><b>ยังไม่อยู่ในงบลงทุน — ต้องเพิ่ม</b></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">✍️ 6 ข้อสัญญาที่ต้องต่อรองให้ได้ (เรียงตามความสำคัญ)</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>สิ่งปรับปรุงตกเป็นของใครเมื่อครบสัญญา</b> — เราลงทุน ~29 ล้าน ถ้าไม่เขียนไว้ ตามกฎหมายมักตกเป็นของเจ้าของที่ · <b>ขอสิทธิ์รื้อถอนนำกลับ หรือขอค่าชดเชยตามมูลค่าคงเหลือ</b></div></div>
+      <div class="step"><span class="n"></span><div><b>สิทธิ์ต่อสัญญา (Renewal Option)</b> — ขอสิทธิ์ต่ออีก 10–20 ปี ในราคาที่ตกลงสูตรไว้ล่วงหน้า ไม่ใช่ "แล้วแต่เจรจา" · ถ้าไม่มีข้อนี้ ปีที่ 21 เราไม่มีอำนาจต่อรองเลย</div></div>
+      <div class="step"><span class="n"></span><div><b>สิทธิ์โอน/ขายสิทธิ์การเช่า (Assignment)</b> — ถ้าอยากเลิกกลางคัน หรือขายกิจการ ต้องโอนสิทธิ์เช่าให้ผู้ซื้อได้ · <b>นี่คือทางออก (exit) เดียวของเรา</b></div></div>
+      <div class="step"><span class="n"></span><div><b>ใครเคลียร์ผู้อยู่อาศัยเดิม + กำหนดเวลา</b> — หอพักและชุมชนหลังโรงงาน ต้องระบุวันส่งมอบพื้นที่ว่างเปล่า และ<b>ค่าปรับถ้าส่งช้า</b></div></div>
+      <div class="step"><span class="n"></span><div><b>สิทธิ์ดัดแปลงอาคาร</b> — เขียนให้ชัดว่าเราปิด skylight / ยกหลังคาโซนบาส / เจาะผนัง / ติดแอร์ ได้โดยไม่ต้องขออนุญาตเป็นครั้งๆ</div></div>
+      <div class="step"><span class="n"></span><div><b>เพดานการขึ้นค่าเช่า</b> — ล็อกไว้ที่ 10%/4 ปีตามที่ตกลง ห้ามมีข้อยกเว้นให้ขึ้นได้เอง · และขอ <b>rent-free 3–6 เดือนช่วงปรับปรุง</b> (ประหยัดได้ทันที <span id="lgFreeSave"></span>)</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📋 ใบอนุญาตที่ต้องขอ</h3>
+    <table>
+      <tr><th>ใบอนุญาต</th><th>หน่วยงาน</th><th class="r">ค่าใช้จ่าย</th><th class="r">เวลา</th></tr>
+      <tr><td>จดทะเบียนบริษัทจำกัด</td><td>กรมพัฒนาธุรกิจการค้า</td><td class="r">~15,000</td><td class="r">1–2 สัปดาห์</td></tr>
+      <tr><td><b>ดัดแปลง/เปลี่ยนการใช้อาคาร (อ.1)</b> โรงงาน → สถานกีฬา</td><td>สำนักงานเขตบางขุนเทียน</td><td class="r">~50,000–150,000<br><span class="sub">(รวมค่าเขียนแบบ+วิศวกรเซ็น)</span></td><td class="r"><b>2–4 เดือน</b></td></tr>
+      <tr><td>ใบอนุญาตประกอบกิจการที่เป็นอันตรายต่อสุขภาพ <span class="sub">(สนามกีฬาอยู่ในบัญชี)</span></td><td>สำนักงานเขต</td><td class="r">~3,000–10,000/ปี</td><td class="r">2–4 สัปดาห์</td></tr>
+      <tr><td>ใบอนุญาตสถานที่จำหน่ายอาหาร (คาเฟ่)</td><td>สำนักงานเขต</td><td class="r">~1,000–3,000/ปี</td><td class="r">2–4 สัปดาห์</td></tr>
+      <tr><td>ภาษีป้าย (ป้าย LED ริมถนน)</td><td>สำนักงานเขต</td><td class="r">~5,000–20,000/ปี</td><td class="r">—</td></tr>
+      <tr><td>จดทะเบียน VAT</td><td>กรมสรรพากร</td><td class="r">ฟรี</td><td class="r">1 สัปดาห์</td></tr>
+      <tr class="total"><td>รวมค่าใช้จ่ายแรกเข้า</td><td>—</td><td class="r">~70,000–180,000</td><td class="r">ทำคู่ขนานได้</td></tr>
+    </table>
+    <div class="note">⏰ <b>ตัวที่กินเวลาที่สุดคือ อ.1 (2–4 เดือน)</b> — ต้องเริ่มยื่นทันทีที่เซ็นสัญญาเช่า ไม่ใช่รอปรับปรุงเสร็จ ไม่งั้นเปิดไม่ได้ทั้งที่สนามพร้อม (และยังต้องจ่ายค่าเช่าไปเรื่อยๆ)</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🛡️ ประกันภัยที่ต้องมี</h3>
+    <table>
+      <tr><th>ประเภท</th><th class="r">ทุนประกัน</th><th class="r">เบี้ย/ปี</th><th>ทำไมต้องมี</th></tr>
+      <tr><td>อัคคีภัย + ภัยธรรมชาติ (ทรัพย์สินที่เราปรับปรุง)</td><td class="r">~29 ล้าน</td><td class="r">~45,000</td><td>ไฟไหม้แล้วเราเสียเงินลงทุนทั้งหมด (อาคารเป็นของเจ้าของที่ แต่ของปรับปรุงเป็นของเรา)</td></tr>
+      <tr style="background:#fff8ec"><td><b>ความรับผิดต่อบุคคลภายนอก (Public Liability)</b></td><td class="r">5–10 ล้าน</td><td class="r">~30,000</td><td><b>สำคัญที่สุด</b> — ลูกค้าลื่นล้ม/บาดเจ็บในสนามแล้วฟ้อง เคสเดียวอาจเป็นล้าน · สนามกีฬาเสี่ยงสูงมาก</td></tr>
+      <tr><td>ธุรกิจหยุดชะงัก (Business Interruption)</td><td class="r">6 เดือนของรายได้</td><td class="r">~35,000</td><td>ถ้าปิดซ่อมจากไฟไหม้/น้ำท่วม ยังมีค่าเช่า+เงินเดือน+ค่างวดต้องจ่าย</td></tr>
+      <tr><td>ประกันสังคมพนักงาน</td><td class="r">ตามกฎหมาย</td><td class="r">~5% ของเงินเดือน</td><td>บังคับตามกฎหมาย (นายจ้าง 5% + ลูกจ้าง 5%)</td></tr>
+      <tr class="total"><td>รวมเบี้ยประกัน (ไม่รวมประกันสังคม)</td><td class="r">—</td><td class="r">~110,000/ปี</td><td>≈ 9,000 ฿/เดือน — <b>รวมในรายจ่ายแล้ว</b></td></tr>
+    </table>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p13')">← ไทม์ไลน์ &amp; ทีมงาน</button><button class="btn" onclick="go('p14')">ถัดไป: ความเสี่ยง →</button></div>
+</section>
+
+<!-- ================= P13 ไทม์ไลน์ · ทีมงาน · KPI · การตลาด ================= -->
+<section class="page" id="p13">
+  <h2>ไทม์ไลน์ · ทีมงาน · การตลาด · KPI</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">🗓️ ไทม์ไลน์ตั้งแต่เซ็นสัญญาถึงเปิดบริการ (~7 เดือน)</h3>
+    <div class="blueprint">
+    <svg viewBox="0 0 900 330" xmlns="http://www.w3.org/2000/svg" font-family="Prompt,sans-serif">
+      <g font-size="11" fill="#8a978f" text-anchor="middle">
+        <text x="250" y="26">1</text><text x="330" y="26">2</text><text x="410" y="26">3</text><text x="490" y="26">4</text>
+        <text x="570" y="26">5</text><text x="650" y="26">6</text><text x="730" y="26">7</text><text x="810" y="26">8</text>
+      </g>
+      <text x="530" y="12" font-size="11.5" fill="#6b7a72" text-anchor="middle">เดือนที่</text>
+      <g stroke="#eef1ee">
+        <line x1="210" y1="32" x2="210" y2="300"/><line x1="290" y1="32" x2="290" y2="300"/><line x1="370" y1="32" x2="370" y2="300"/>
+        <line x1="450" y1="32" x2="450" y2="300"/><line x1="530" y1="32" x2="530" y2="300"/><line x1="610" y1="32" x2="610" y2="300"/>
+        <line x1="690" y1="32" x2="690" y2="300"/><line x1="770" y1="32" x2="770" y2="300"/><line x1="850" y1="32" x2="850" y2="300"/>
+      </g>
+      <g font-size="11.5" fill="#3c4a43" text-anchor="end">
+        <text x="202" y="52">เซ็นสัญญา + จดทะเบียนเช่า</text>
+        <text x="202" y="80">จดบริษัท + ยื่น อ.1 ⚠️</text>
+        <text x="202" y="108">เจ้าของเคลียร์ผู้อยู่อาศัย</text>
+        <text x="202" y="136">ยื่นกู้ธนาคาร</text>
+        <text x="202" y="164">รื้อ+ปรับพื้น+ปิด skylight</text>
+        <text x="202" y="192">ระบบไฟ+ระบายอากาศ</text>
+        <text x="202" y="220">ปูพื้นยาง+ไฟคอร์ท+ตีเส้น</text>
+        <text x="202" y="248">ห้องน้ำ+คาเฟ่+ร้าน+ที่จอด</text>
+        <text x="202" y="276">การตลาด + Pre-sale สมาชิก</text>
+      </g>
+      <g>
+        <rect x="210" y="42" width="80" height="15" rx="4" fill="#7fae8f"/>
+        <rect x="210" y="70" width="240" height="15" rx="4" fill="#c0504d"/>
+        <rect x="210" y="98" width="160" height="15" rx="4" fill="#e8a03c"/>
+        <rect x="250" y="126" width="160" height="15" rx="4" fill="#7fae8f"/>
+        <rect x="370" y="154" width="160" height="15" rx="4" fill="#1e5aa8"/>
+        <rect x="450" y="182" width="160" height="15" rx="4" fill="#1e5aa8"/>
+        <rect x="530" y="210" width="160" height="15" rx="4" fill="#1e5aa8"/>
+        <rect x="610" y="238" width="160" height="15" rx="4" fill="#5e9b74"/>
+        <rect x="610" y="266" width="200" height="15" rx="4" fill="#e8a03c"/>
+      </g>
+      <path d="M802 292 L810 304 L802 316 L794 304 Z" fill="#c0504d"/>
+      <text x="786" y="309" font-size="12" fill="#c0504d" text-anchor="end" font-weight="600">🏸 เปิดบริการ</text>
+      <text x="530" y="326" font-size="10.5" fill="#8a978f" text-anchor="middle">แถบแดง = ใบอนุญาต อ.1 (2–4 เดือน) คือเส้นทางวิกฤต ต้องยื่นทันทีที่เซ็นสัญญา</text>
+    </svg>
+    </div>
+    <div class="note">💸 <b>ระหว่าง 7 เดือนนี้ต้องจ่ายค่าเช่าไปด้วย</b> = <span id="tlRentCost"></span> ถ้าไม่ได้ rent-free — นี่คือเหตุผลที่ต้องเจรจาขอเดือนปลอดค่าเช่าให้ได้ (ปรับดูผลได้ที่หน้า "กระแสเงินสด")</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">👥 ทีมงาน &amp; ตารางกะ (เปิด 10:00–24:00 ทุกวัน = 98 ชม./สัปดาห์)</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>ตำแหน่ง</th><th class="r">จำนวน</th><th>กะ</th><th class="r">เงินเดือน/คน</th><th>หน้าที่</th></tr>
+      <tr><td>ผู้จัดการสนาม</td><td class="r">1</td><td>ยืดหยุ่น (เน้นช่วงพีค)</td><td class="r">25,000</td><td>คุมภาพรวม · จัดตาราง · ดีลลูกค้าเหมาสนาม · การตลาด</td></tr>
+      <tr><td>แอดมิน/เคาน์เตอร์</td><td class="r">2</td><td>กะเช้า 10:00–17:00 · กะดึก 17:00–24:00</td><td class="r">16,000</td><td>รับจอง · เก็บเงิน · ขายน้ำ/โปรช็อป · ดูกล้อง</td></tr>
+      <tr><td>ดูแลสนาม</td><td class="r">3</td><td>หมุน 2 กะ + วันหยุดสลับ</td><td class="r">15,000</td><td>เปิด-ปิดไฟคอร์ท · ขึงเน็ต · ขึ้นเอ็น · ดูแลความปลอดภัย</td></tr>
+      <tr><td>แม่บ้าน</td><td class="r">2</td><td>เช้า + เย็น (เน้นห้องน้ำ)</td><td class="r">13,000</td><td>ห้องน้ำ/อาบน้ำทุก 2 ชม. · ถูพื้น · เก็บขยะ</td></tr>
+      <tr class="total"><td>รวม</td><td class="r">8</td><td>ครอบคลุม 14 ชม. × 7 วัน</td><td class="r" id="staffTotal"></td><td>+ ประกันสังคม 5%</td></tr>
+    </table>
+    </div>
+    <div class="note">⚠️ <b>ตอนนี้โมเดลตั้งไว้ 7 คน แต่ตารางกะจริงต้องใช้ 8 คน</b> — เพราะเปิด 7 วัน/สัปดาห์ ต้องมีคนสลับวันหยุด · ปีแรกที่คนยังน้อยอาจเริ่ม 6 คนแล้วค่อยเพิ่ม แต่ควรเผื่องบไว้</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📣 แผนการตลาดก่อนเปิด (3 เดือนสุดท้าย)</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>เดือน −3: สร้างตัวตนออนไลน์</b> — เปิด LINE OA + Facebook + TikTok ลงคลิปความคืบหน้าการก่อสร้างทุกสัปดาห์ (คนชอบดู "สนามกำลังจะเสร็จ") · ตั้งเป้าผู้ติดตาม 1,000 คนก่อนเปิด</div></div>
+      <div class="step"><span class="n"></span><div><b>เดือน −2: Pre-sale สมาชิก</b> — ขายบัตรสมาชิกล่วงหน้าราคาพิเศษ (เช่น รายปี 690 จากปกติ 900) ตั้งเป้า <b>150 ใบ = ~104,000 บาทเงินสดเข้าก่อนเปิด</b> ช่วยลดเงินหมุนเวียนที่ต้องเตรียม</div></div>
+      <div class="step"><span class="n"></span><div><b>เดือน −2: ล็อกก๊วนประจำ</b> — ไปคุยกับหัวหน้าก๊วนในโซน (หาจากเฟซกลุ่มแบดพระราม 2/บางขุนเทียน) เสนอราคาก๊วนประจำจองล่วงหน้า 3 เดือน · <b>ได้ 10 ก๊วนก็เต็มพีคไปครึ่งหนึ่งแล้ว</b></div></div>
+      <div class="step"><span class="n"></span><div><b>เดือน −1: ดึงโค้ช</b> — ชวนโค้ชที่มีลูกศิษย์อยู่แล้วมาประจำ (โค้ชพานักเรียนมาเอง = ลูกค้าฟรี) · เสนอโมเดล B แบ่ง 40/60 ให้เขาได้เยอะเพื่อจูงใจช่วงแรก</div></div>
+      <div class="step"><span class="n"></span><div><b>วันเปิด: Soft opening 2 สัปดาห์</b> — ลดราคา 30% + จัดทัวร์นาเมนต์เปิดสนามฟรี ให้คนได้ลอง · เก็บรีวิว Google Maps ให้ได้ 30+ รีวิวใน 2 เดือนแรก (คนหาสนามจาก Google Maps เป็นหลัก)</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📈 KPI ที่ต้องดูทุกวัน/ทุกเดือน</h3>
+    <table>
+      <tr><th>ตัวชี้วัด</th><th>ความถี่</th><th class="r">เป้าหมาย</th><th>ทำอะไรถ้าไม่ถึง</th></tr>
+      <tr style="background:#eef7f1"><td><b>อัตราการจองช่วงพีค (18:00–22:00)</b></td><td>ทุกวัน</td><td class="r"><b>&gt;85%</b></td><td>ตัวชี้วัดที่สำคัญที่สุด — ถ้าพีคไม่เต็ม แปลว่าสินค้ามีปัญหา ไม่ใช่ราคา</td></tr>
+      <tr><td>อัตราการจองรวมทั้งวัน</td><td>ทุกวัน</td><td class="r" id="kpiOcc"></td><td>ต่ำกว่าจุดคุ้มทุน = เร่งโปรกลางวัน/บุฟเฟต์</td></tr>
+      <tr><td>รายได้ต่อคอร์ท-ชั่วโมง</td><td>รายสัปดาห์</td><td class="r">&gt;120 ฿</td><td>ถ้าต่ำ แปลว่าลดราคามากไป หรือส่วนลดสมาชิกเยอะเกิน</td></tr>
+      <tr><td>จำนวนสมาชิกใหม่ / ยกเลิก</td><td>รายเดือน</td><td class="r">+25 / −&lt;5%</td><td>ยกเลิกเยอะ = คุณภาพบริการมีปัญหา ต้องถามเหตุผลทุกราย</td></tr>
+      <tr><td>รายได้ร้าน+คาเฟ่ ต่อผู้เข้าใช้ 1 คน</td><td>รายเดือน</td><td class="r">&gt;35 ฿</td><td>ต่ำ = ของไม่น่าซื้อ/ราคาแพง/ตำแหน่งร้านไม่ดี</td></tr>
+      <tr><td>คะแนน Google Maps</td><td>รายเดือน</td><td class="r">&gt;4.5 ★</td><td>อ่านรีวิวลบทุกอัน แก้ทันที — รีวิวคือช่องทางหาลูกค้าอันดับ 1</td></tr>
+      <tr><td>DSCR (กำไร ÷ ค่างวด)</td><td>รายเดือน</td><td class="r">&gt;1.2</td><td>ต่ำกว่านี้ธนาคารจะเริ่มจับตา ต้องคุยขอปรับโครงสร้างก่อนผิดนัด</td></tr>
+      <tr><td>เงินสดคงเหลือในบัญชี</td><td>ทุกสัปดาห์</td><td class="r">&gt;3 เดือนของรายจ่าย</td><td>ต่ำกว่านี้คือสัญญาณอันตราย ต้องหยุดลงทุนเพิ่มทันที</td></tr>
+    </table>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p11')">← งบ 10 ปี</button><button class="btn" onclick="go('p12')">ถัดไป: สัญญา &amp; กฎหมาย →</button></div>
+</section>
+
+<!-- ================= P14 ความเสี่ยง · ขยาย · Exit ================= -->
+<section class="page" id="p14">
+  <h2>ความเสี่ยง · แผนขยาย · ทางออก</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">⚠️ ตารางความเสี่ยง + แผนรับมือ</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>ความเสี่ยง</th><th class="r">โอกาส</th><th class="r">ผลกระทบ</th><th>แผนรับมือ</th></tr>
+      <tr style="background:#fbe9e7"><td><b>สัญญาเช่าไม่จดทะเบียน / ไม่มีสิทธิ์ต่อ</b></td><td class="r">ต่ำ</td><td class="r"><b>รุนแรงมาก</b></td><td><b>จดทะเบียนที่สำนักงานที่ดินก่อนลงเงินบาทแรก</b> + ใส่สิทธิ์ต่อสัญญาและสิทธิ์โอนในสัญญา — ถ้าเจ้าของไม่ยอม <b>อย่าเซ็น</b></td></tr>
+      <tr style="background:#fbe9e7"><td><b>เจ้าของเคลียร์ผู้อยู่อาศัยไม่ได้ตามกำหนด</b></td><td class="r">ปานกลาง</td><td class="r">สูง</td><td>ระบุวันส่งมอบพื้นที่ว่างเปล่าในสัญญา + ค่าปรับรายวัน + สิทธิ์บอกเลิกสัญญาและได้แปะเจี๊ยะคืนถ้าเกิน 90 วัน</td></tr>
+      <tr><td>ใบอนุญาต อ.1 ไม่ผ่าน/ล่าช้า</td><td class="r">ปานกลาง</td><td class="r">สูง</td><td>จ้างที่ปรึกษาที่เคยทำเขตบางขุนเทียน · ยื่นทันทีที่เซ็นสัญญา · <b>ทำสัญญาแบบมีเงื่อนไข</b> ว่าถ้า อ.1 ไม่ผ่านใน 6 เดือนขอยกเลิกได้</td></tr>
+      <tr><td>อัตราการจองไม่ถึงเป้าใน 12 เดือน</td><td class="r">ปานกลาง</td><td class="r">สูง</td><td>เตรียมเงินหมุนเวียน <span id="rkWC"></span> · เร่ง pre-sale + ก๊วนประจำก่อนเปิด · โปรกลางวัน/บุฟเฟต์เติมชั่วโมงว่าง · จุดคุ้มทุนต่ำแค่ <span id="rkBE"></span> ช่วยรองรับ</td></tr>
+      <tr><td>CC Badminton ลดราคาสู้ / ขยายคอร์ท</td><td class="r">สูง</td><td class="r">ปานกลาง</td><td><b>อย่าสู้ด้วยราคา</b> — สู้ด้วยที่จอด 200 คัน, ห้องอาบน้ำ, เปิดกลางวัน, เปิดวันอาทิตย์ · ล็อกก๊วนด้วยสัญญาประจำ 3 เดือน + สมาชิกรายปี</td></tr>
+      <tr><td>ค่าไฟขึ้น / ต้นทุนพลังงานสูง</td><td class="r">สูง</td><td class="r">ต่ำ–ปานกลาง</td><td>ใช้ LED ทั้งหมด · แยกสวิตช์รายคอร์ท เปิดเฉพาะคอร์ทที่มีคนเล่น · <b>เฟส 2 ติดโซลาร์บนหลังคา 3,200 ตร.ม.</b></td></tr>
+      <tr><td>ดอกเบี้ยขาขึ้น (MLR ลอยตัว)</td><td class="r">ปานกลาง</td><td class="r">ปานกลาง</td><td>ทดสอบแล้วในหน้า Sensitivity · โปะหนี้จากกำไรปีแรกๆ · refinance หลังผ่อนครบ 3 ปี</td></tr>
+      <tr><td>น้ำท่วม (พื้นที่บางขุนเทียนใกล้ชายทะเล)</td><td class="r">ปานกลาง</td><td class="r">สูง</td><td><b>ตรวจประวัติน้ำท่วมย้อนหลัง 10 ปีก่อนเซ็น</b> · ยกระดับพื้นโซนคอร์ท · เสื่อยางถอดม้วนเก็บได้ · ทำประกันน้ำท่วม</td></tr>
+      <tr><td>ลูกค้าบาดเจ็บในสนามแล้วฟ้อง</td><td class="r">ต่ำ</td><td class="r">สูง</td><td>ประกันความรับผิดต่อบุคคลภายนอก 5–10 ล้าน · ป้ายเตือน · ปฐมพยาบาลประจำสนาม · พื้นกันลื่นมาตรฐาน</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🚀 แผนขยาย (เฟส 2–3)</h3>
+    <table>
+      <tr><th>โครงการ</th><th class="r">ลงทุน</th><th class="r">ผลตอบแทน</th><th>เมื่อไหร่</th></tr>
+      <tr style="background:#eef7f1"><td><b>โซลาร์เซลล์บนหลังคา 3,200 ตร.ม.</b></td><td class="r">~3.5 ลบ.</td><td class="r">ลดค่าไฟ ~50,000/ด. <br>คืนทุน 5–6 ปี</td><td>ปีที่ 2–3 เมื่อเงินสดนิ่งแล้ว · หลังคาโรงงานใหญ่มากเป็นข้อได้เปรียบ</td></tr>
+      <tr><td>เปิดคอร์ทเพิ่มเป็น 20 (ใช้ตำแหน่งสำรอง)</td><td class="r">~0.4 ลบ.</td><td class="r">+2 คอร์ท</td><td>เมื่ออัตราการจองพีคเกิน 90% ต่อเนื่อง 3 เดือน</td></tr>
+      <tr><td>อคาเดมีของตัวเอง + ที่พักนักกีฬา</td><td class="r">~1.5 ลบ.</td><td class="r">มาร์จิ้นสูงสุดในธุรกิจ</td><td>ปีที่ 3+ เมื่อมีฐานเด็กเรียนแล้ว · ใช้ตึก 2 ชั้นหลังโรงงาน</td></tr>
+      <tr><td>สาขา 2 (โมเดลเดิม)</td><td class="r">~30 ลบ.</td><td class="r">—</td><td>ปีที่ 5+ เมื่อสาขาแรกพิสูจน์แล้วและมีทีมบริหารที่ทำแทนได้</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🚪 ทางออก (Exit) — ต้องคิดตั้งแต่วันแรก</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>ขายกิจการพร้อมโอนสิทธิ์การเช่า</b> — ทางออกหลัก · ธุรกิจที่มีกำไรสม่ำเสมอมักขายได้ที่ <b>3–5 เท่าของกำไรต่อปี</b> · ที่กำไร <span id="exProfit"></span>/ปี มูลค่าขายอาจอยู่ที่ <b><span id="exValue"></span></b> · <b>ต้องมีข้อสัญญาให้โอนสิทธิ์เช่าได้</b> ไม่งั้นขายไม่ได้เลย</div></div>
+      <div class="step"><span class="n"></span><div><b>ให้เช่าช่วงทั้งสนาม</b> — ถ้าไม่อยากบริหารเอง ปล่อยให้ผู้ประกอบการรายอื่นเช่าช่วงในราคาที่สูงกว่าค่าเช่าเรา (ต้องมีสิทธิ์ให้เช่าช่วงในสัญญา)</div></div>
+      <div class="step"><span class="n"></span><div><b>เปลี่ยนประเภทกีฬา</b> — สนามในร่มเพดานสูงพร้อมที่จอด ปรับเป็นฟุตซอล/พิคเคิลบอล/ตลาดในร่ม/คลังสินค้าได้ · <b>ความเสี่ยงต่ำกว่าลงทุนที่ดินเพราะสินทรัพย์ยืดหยุ่น</b></div></div>
+      <div class="step"><span class="n"></span><div><b>กรณีแย่สุด: เลิกกลางคัน</b> — เสียแปะเจี๊ยะ 2 ล้าน + ค่าปรับปรุงที่รื้อกลับไม่ได้ · ของที่ถอดขายต่อได้ (เสื่อยาง ไฟ LED เฟอร์นิเจอร์ เครื่องขึ้นเอ็น) ~15–20% ของค่าปรับปรุง = <span id="exSalvage"></span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🏦 โครงสร้างผู้ถือหุ้น (ให้กรอกตอนคุยกับผู้ร่วมทุน)</h3>
+    <table>
+      <tr><th>ผู้ลงทุน</th><th class="r">เงินลงทุน</th><th class="r">สัดส่วน</th><th>บทบาท</th></tr>
+      <tr><td>เรา (ผู้ก่อตั้ง)</td><td class="r">— กรอก —</td><td class="r">—</td><td>บริหารเต็มเวลา · รับผิดชอบผลประกอบการ</td></tr>
+      <tr><td>ผู้ร่วมทุน (ครอบครัว/เพื่อน)</td><td class="r">— กรอก —</td><td class="r">—</td><td>ลงเงินอย่างเดียว รับปันผล</td></tr>
+      <tr class="total"><td>รวมเงินทุนตัวเองที่ต้องมี</td><td class="r" id="shEquity"></td><td class="r">100%</td><td>ที่เหลือเป็นเงินกู้ธนาคาร</td></tr>
+    </table>
+    <div class="note blue">💡 <b>ข้อควรตกลงล่วงหน้ากับผู้ร่วมทุน:</b> (1) ปันผลเมื่อไหร่ อย่างไร (2) ใครตัดสินใจเรื่องอะไร (3) ถ้าต้องเพิ่มทุนใครใส่ (4) ถ้าใครอยากออกก่อน ขายหุ้นให้ใครในราคาเท่าไหร่ · <b>เขียนเป็นสัญญาผู้ถือหุ้นตั้งแต่วันแรก</b> ตอนธุรกิจดีไม่มีใครทะเลาะ ตอนมีปัญหาถึงจะรู้ว่าจำเป็น</div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p12')">← สัญญา &amp; กฎหมาย</button><button class="btn" onclick="go('p8')">ถัดไป: Business Canvas →</button></div>
+</section>
+
 <footer>ตัวเลขทั้งหมดเป็นประมาณการเบื้องต้นเพื่อการตัดสินใจ ยังไม่ใช่ราคาก่อสร้างจริง · อ้างอิงแบบวัดหน้างานของสถาปนิก ก.ค. 2569</footer>
 </div>
 
@@ -814,6 +1150,167 @@ function setCoach(m){
   document.querySelectorAll('.btn.cm').forEach(b=>b.classList.toggle('active',b.dataset.cm===m));
   recalc();
 }
+/* ================= เครื่องมือการเงินสำหรับหน้าใหม่ ================= */
+function smeTax(p){                       // ภาษีนิติบุคคล SME
+  if(p<=0) return 0;
+  return Math.min(Math.max(p-300000,0),2700000)*0.15 + Math.max(p-3000000,0)*0.20;
+}
+function irr(cf){                         // หา IRR ด้วยวิธีแบ่งครึ่ง
+  const npv=r=>cf.reduce((s,c,i)=>s+c/Math.pow(1+r,i),0);
+  if(npv(0)<=0) return null;
+  let lo=-0.95, hi=5;
+  for(let i=0;i<200;i++){const m=(lo+hi)/2; if(npv(m)>0) lo=m; else hi=m;}
+  return (lo+hi)/2;
+}
+function rentSched20(base){               // ค่าเช่า 20 ปี ขึ้น 10% ทุก 4 ปี
+  let r=base,t=0,rows=[];
+  for(let p=0;p<5;p++){rows.push({y1:p*4+1,y2:p*4+4,m:r,sum:r*48});t+=r*48;r=Math.round(r*1.1);}
+  return {rows,total:t};
+}
+
+function buildFinance(D){
+  const {totalCourts,maxMonth,occ,extraRev,opexNoRentAll,rentBase,pmt,loan,equity,
+         total,reno,RATE,totalHrs,matCost,lightCost,netCost,rate,yrs,isRent,keyMoney,net,occBE}=D;
+
+  /* ===== ค่าเสื่อม / ตัดจำหน่าย ===== */
+  const courtKit=matCost+lightCost+netCost;
+  const renoOnly=Math.max(reno-courtKit-1200000,0);
+  const dpReno=renoOnly/20, dpCourt=courtKit/10, dpEquip=240000;
+  const depYear=dpReno+dpCourt+dpEquip;
+  el('dpReno').textContent=fmt(renoOnly);   el('dpRenoY').textContent=fmt(dpReno);
+  el('dpCourt').textContent=fmt(courtKit);  el('dpCourtY').textContent=fmt(dpCourt);
+  el('dpTotal').textContent=fmt(depYear);
+
+  /* ===== กระแสเงินสด 12 เดือนแรก ===== */
+  const rampM=val('rampM'), freeM=val('rentFree');
+  el('rampMV').textContent=rampM; el('rentFreeV').textContent=freeM;
+  let cum=0, minCum=0, turn='—', rows='';
+  rows+=`<tr><th>เดือน</th><th class="r">อัตราจอง</th><th class="r">รายได้</th><th class="r">รายจ่าย</th><th class="r">ค่างวด</th><th class="r">เงินสด/เดือน</th><th class="r">สะสม</th></tr>`;
+  for(let m=1;m<=12;m++){
+    /* เปิดตัวด้วย soft opening + pre-sale → เดือนแรกได้ ~30% ของเป้า แล้วไต่ถึง 100% ที่เดือน rampM */
+    const f=Math.min(0.30+0.70*(m-1)/Math.max(rampM-1,1),1);
+    const rev=maxMonth*occ*f+extraRev*f;
+    const rentM=m<=freeM?0:rentBase;
+    const ex=opexNoRentAll+rentM;
+    const c=rev-ex-pmt;
+    cum+=c; if(cum<minCum) minCum=cum;
+    if(c>=0&&turn==='—') turn='เดือนที่ '+m;
+    rows+=`<tr><td>${m}${m<=freeM?' <span class="sub">(ปลอดค่าเช่า)</span>':''}</td><td class="r">${(occ*f*100).toFixed(0)}%</td>`+
+      `<td class="r">${fmt(rev)}</td><td class="r">${fmt(ex)}</td><td class="r">${fmt(pmt)}</td>`+
+      `<td class="r" style="color:${c<0?'#c0504d':'#125935'}">${c>=0?'+':''}${fmt(c)}</td>`+
+      `<td class="r" style="color:${cum<0?'#c0504d':'#125935'};font-weight:600">${cum>=0?'+':''}${fmt(cum)}</td></tr>`;
+  }
+  el('cfTable').innerHTML=rows;
+  const WC=Math.ceil(Math.abs(minCum)*1.2/100000)*100000;
+  el('kWC').textContent=WC?fmtM(WC):'ไม่ต้องเตรียมเพิ่ม';
+  el('kWCSub').textContent=WC?`จุดต่ำสุด ${fmt(minCum)} ฿ + เผื่อ 20%`:'กระแสเงินสดเป็นบวกตลอด 12 เดือน';
+  el('kTurn').textContent=turn;
+  el('kY1').textContent=(cum>=0?'+':'')+fmt(cum)+' ฿';
+  el('kAllIn').textContent=fmtM(total+WC);
+  el('cfNote').innerHTML=`💡 <b>ลดเงินหมุนเวียนได้ 2 ทาง:</b> (1) <b>เจรจาขอเดือนปลอดค่าเช่า</b> — ทุก 1 เดือนที่ได้ ประหยัด ${fmt(rentBase)} ฿ `+
+    `(2) <b>Pre-sale สมาชิกก่อนเปิด</b> — ขายล่วงหน้า 150 ใบ ได้เงินสดเข้าก่อน ~100,000 ฿ · `+
+    `ลองเลื่อนสไลเดอร์ทั้งสองด้านบนดูผล`;
+
+  /* ===== ภาษี ===== */
+  const revYear=(maxMonth*occ+extraRev)*12;
+  const ebitdaYear=(maxMonth*occ+extraRev-opexNoRentAll-rentBase)*12;
+  const int1=loan*rate;
+  const taxable=ebitdaYear-int1-depYear;
+  const cit=smeTax(taxable);
+  const vatOut=revYear*7/107;
+  let tt=`<tr><th>ภาษี</th><th>ฐานคำนวณ</th><th class="r">ประมาณการ/ปี</th><th>หมายเหตุ</th></tr>`;
+  tt+=`<tr style="background:#fff8ec"><td><b>VAT 7%</b></td><td>รายได้ ${fmt(revYear)} ฿/ปี (เกิน 1.8 ล้าน → <b>ต้องจดทะเบียน</b>)</td><td class="r">${fmt(vatOut)}</td><td>ถ้าตั้งราคา 200 ฿ <b>รวม VAT แล้ว</b> รายได้จริงเหลือ ${fmt(revYear/1.07)} ฿ · หักภาษีซื้อได้บางส่วน</td></tr>`;
+  tt+=`<tr><td>ภาษีเงินได้นิติบุคคล (SME)</td><td>กำไร ${fmt(Math.max(taxable,0))} ฿ (หลังหักดอกเบี้ย ${fmt(int1)} + ค่าเสื่อม ${fmt(depYear)})</td><td class="r">${fmt(cit)}</td><td>ยกเว้น 3 แสนแรก · 15% ถึง 3 ล้าน · 20% ส่วนเกิน</td></tr>`;
+  tt+=`<tr><td>หัก ณ ที่จ่ายค่าเช่า 5%</td><td>ค่าเช่า ${fmt(rentBase)} ฿/เดือน</td><td class="r">${fmt(rentBase*0.05*12)}</td><td><b>เราต้องหักแล้วนำส่งสรรพากรทุกเดือน</b> (ไม่ใช่ต้นทุนเพิ่ม แต่ลืมแล้วโดนปรับ)</td></tr>`;
+  tt+=`<tr><td>ภาษีป้าย</td><td>ป้าย LED ริมถนน</td><td class="r">~12,000</td><td>ยื่นที่สำนักงานเขตทุกปี</td></tr>`;
+  tt+=`<tr class="total"><td>ภาษีที่เป็นต้นทุนจริง (ไม่รวม VAT ที่ผลักให้ลูกค้า)</td><td>—</td><td class="r">${fmt(cit+12000)}</td><td>≈ ${fmt((cit+12000)/12)} ฿/เดือน</td></tr>`;
+  el('taxTable').innerHTML=tt;
+  el('taxNote').innerHTML=`⚠️ <b>เรื่องที่ต้องตัดสินใจก่อนเปิด: ราคา ${fmt(RATE)} ฿ รวม VAT หรือยัง?</b> `+
+    `ถ้ารวมแล้ว รายได้จริงของเราคือ ${fmt(RATE/1.07)} ฿/ชม. (หายไป ${fmt(RATE-RATE/1.07)} ฿) · `+
+    `ถ้ายังไม่รวม ต้องเก็บลูกค้า ${fmt(RATE*1.07)} ฿ ซึ่งดูแพงกว่าคู่แข่ง — <b>ตลาดสนามแบดส่วนใหญ่ตั้งราคารวม VAT แล้ว</b> จึงควรคิดว่ารายได้จริงคือ ${fmt(RATE/1.07)} ฿/ชม.`;
+
+  /* ===== งบ 10 ปี ===== */
+  const sched=rentSched20(rentBase||120000);
+  let bal=loan, pt=`<tr><th>ปีที่</th><th class="r">ค่าเช่า/ด.</th><th class="r">รายได้</th><th class="r">รายจ่าย</th><th class="r">EBITDA</th><th class="r">ดอกเบี้ย</th><th class="r">ภาษี</th><th class="r">เงินสดสุทธิ</th></tr>`;
+  const eqCF=[-(equity+WC)], prCF=[-(total+WC)];
+  let cum10=0;
+  for(let y=1;y<=10;y++){
+    const rMo=isRent?(sched.rows[Math.min(Math.floor((y-1)/4),4)].m):0;
+    const oy=y===1?occ*0.75:occ;
+    const rev=(maxMonth*oy+extraRev)*12;
+    const ex=(opexNoRentAll+rMo)*12;
+    const eb=rev-ex;
+    let iy=0,py=0;
+    for(let m=0;m<12;m++){ if(y<=yrs){const it=bal*rate/12;const pr=Math.min(pmt-it,bal);iy+=it;py+=pr;bal-=pr;} }
+    const dep=y<=5?depYear:(y<=10?dpReno+dpCourt:dpReno);
+    const tax=smeTax(eb-iy-dep);
+    const cash=eb-iy-py-tax;
+    cum10+=cash; eqCF.push(cash); prCF.push(eb-tax);
+    pt+=`<tr${y===1?' style="background:#fff8ec"':''}><td>${y}</td><td class="r">${fmt(rMo)}</td><td class="r">${fmt(rev)}</td><td class="r">${fmt(ex)}</td>`+
+      `<td class="r">${fmt(eb)}</td><td class="r">${fmt(iy)}</td><td class="r">${fmt(tax)}</td>`+
+      `<td class="r" style="font-weight:600;color:${cash<0?'#c0504d':'#125935'}">${fmt(cash)}</td></tr>`;
+  }
+  el('pnlTable').innerHTML=pt;
+  el('pnlNote').innerHTML=`📌 ปีที่ 1 คิดที่อัตราการจอง ${(occ*75).toFixed(0)}% (75% ของเป้า) เพราะยังไต่ระดับ · ค่าเช่าขึ้น 10% ทุก 4 ปีตามสัญญา · `+
+    `ค่างวดธนาคารหมดหลังปีที่ ${yrs} จากนั้นเงินสดจะกระโดดขึ้น ${fmt(pmt*12)} ฿/ปี`;
+
+  const dr=val('disc')/100;
+  el('discV').textContent=Math.round(dr*100);
+  const irrE=irr(eqCF), irrP=irr(prCF);
+  const npv=eqCF.reduce((s,c,i)=>s+c/Math.pow(1+dr,i),0);
+  el('kIRRe').textContent=irrE!=null?(irrE*100).toFixed(1)+'%':'—';
+  el('kIRRp').textContent=irrP!=null?(irrP*100).toFixed(1)+'%':'—';
+  el('kNPV').textContent=fmtM(npv);
+  el('kCum10').textContent=fmtM(cum10);
+  el('irrNote').innerHTML=(irrE!=null&&irrE>dr)
+    ? `✅ <b>IRR เงินทุนตัวเอง ${(irrE*100).toFixed(1)}% สูงกว่าอัตราคิดลด ${Math.round(dr*100)}%</b> และ NPV เป็นบวก ${fmtM(npv)} — แปลว่าโครงการให้ผลตอบแทนดีกว่าเอาเงินไปลงทุนทางเลือกอื่นที่ให้ ${Math.round(dr*100)}%/ปี · <b>ตัวเลขนี้ยังไม่รวมมูลค่ากิจการตอนขายต่อ</b> (ถ้ารวมจะสูงกว่านี้อีก)`
+    : `⚠️ IRR ยังต่ำกว่าอัตราคิดลดที่ตั้งไว้ — ลองปรับอัตราการจอง/ราคา/ค่าเช่า หรือลดเงินลงทุนลง`;
+
+  /* ===== Sensitivity ===== */
+  let st=`<tr><th>จอง \\ ค่าคอร์ท</th>`;
+  const rateCols=[RATE-40,RATE-20,RATE,RATE+20,RATE+40];
+  rateCols.forEach(r=>st+=`<th class="r">${fmt(r)} ฿</th>`);
+  st+=`</tr>`;
+  let worst=null;
+  [0.25,0.35,0.45,0.55,0.65].forEach(o=>{
+    st+=`<tr><td>${(o*100).toFixed(0)}%</td>`;
+    rateCols.forEach(r=>{
+      const mm=maxMonth/RATE*r;
+      const c=mm*o+extraRev-opexNoRentAll-rentBase-pmt;
+      if(worst===null) worst=c;
+      const bg=c<0?'#fbe9e7':(c<100000?'#fff8e1':'#e8f5e9');
+      const tc=c<0?'#c0504d':(c<100000?'#9a6a1c':'#125935');
+      st+=`<td class="r" style="background:${bg};color:${tc}">${c>=0?'+':''}${fmt(c)}</td>`;
+    });
+    st+=`</tr>`;
+  });
+  el('sensTable').innerHTML=st;
+  el('worstNote').innerHTML=`🔎 <b>กรณีแย่ที่สุดในตาราง (จอง 25% + ลดราคาเหลือ ${fmt(RATE-40)} ฿):</b> เงินสด ${fmt(worst)} ฿/เดือน · `+
+    `จุดคุ้มทุนปัจจุบันอยู่ที่ <b>${(occBE*100).toFixed(1)}%</b> ซึ่งต่ำกว่าที่สนามคู่แข่งในโซนทำได้ — <b>นี่คือเกราะป้องกันหลักของโครงการนี้</b>`;
+
+  /* ===== สัญญา/กฎหมาย ===== */
+  el('lgReno').textContent=fmtM(reno);
+  el('lgRentTotal').textContent=fmt(sched.total);
+  el('lgFee').textContent=fmt(sched.total*0.01);
+  el('lgStamp').textContent=fmt(sched.total*0.001);
+  el('lgTotal').textContent=fmt(sched.total*0.011);
+  el('lgFreeSave').textContent=fmt((rentBase||120000)*6)+' ฿ (ถ้าได้ 6 เดือน)';
+
+  /* ===== ไทม์ไลน์ / ทีมงาน / KPI ===== */
+  el('tlRentCost').textContent=fmt((rentBase||120000)*7)+' ฿';
+  el('staffTotal').textContent=fmt(25000+2*16000+3*15000+2*13000);
+  el('kpiOcc').textContent='>'+(occ*100).toFixed(0)+'%';
+
+  /* ===== ความเสี่ยง / Exit / ผู้ถือหุ้น ===== */
+  el('rkWC').textContent=fmtM(WC);
+  el('rkBE').textContent=(occBE*100).toFixed(1)+'%';
+  const profitY=net*12;
+  el('exProfit').textContent=fmtM(profitY);
+  el('exValue').textContent=fmtM(profitY*3)+' – '+fmtM(profitY*5);
+  el('exSalvage').textContent=fmtM(reno*0.15)+' – '+fmtM(reno*0.20);
+  el('shEquity').textContent=fmt(equity+WC);
+}
+
 /* ---------- แพ็กเกจสมาชิกสำเร็จรูป ---------- */
 const MEM_MC=22;                       // ต้นทุนส่วนเพิ่มต่อคอร์ท-ชั่วโมง (ไฟคอร์ท+สึกหรอ)
 const MEM_PRESET={
@@ -875,10 +1372,26 @@ const GRADES={
 const gSum=g=>g.mat+g.light+g.net;
 const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mode].pitch))*2;
 
-function go(id,btn){
+/* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
+const GROUPS=[
+  {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ดีมานด์'],['p8','Business Canvas']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p7','รายได้ & คืนทุน'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
+  {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
+];
+const PAGE_G={};
+GROUPS.forEach(g=>g.pages.forEach(([p])=>{PAGE_G[p]=g;}));
+function buildNav(){
+  el('navtop').innerHTML=GROUPS.map(g=>`<button data-g="${g.id}" onclick="goGroup('${g.id}')">${g.n}</button>`).join('');
+}
+function goGroup(gid){const g=GROUPS.find(x=>x.id===gid);go(g.pages[0][0]);}
+function go(id){
+  const g=PAGE_G[id]; if(!g) return;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   el(id).classList.add('active');
-  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  document.querySelectorAll('#navtop button').forEach(b=>b.classList.toggle('active',b.dataset.g===g.id));
+  el('navsub').innerHTML=g.pages.map(([p,n])=>
+    `<button onclick="go('${p}')"${p===id?' class="active"':''}>${n}</button>`).join('');
   window.scrollTo({top:0,behavior:'smooth'});
   if(id==='p2'&&window.init3D) window.init3D();
 }
@@ -1029,7 +1542,11 @@ function recalc(){
   const sideCost=SD.cost;
   el('bSide').textContent=fmt(sideCost);
   el('bSideLabel').innerHTML=`สนามบาส 3x3 แนวตั้ง ${SD.bask} สนาม <span class="sub">ยกหลังคาเฉพาะโซน ${SD.area} เป็น 9 ม. + พื้น PU + แป้น + ไฟ</span>`;
-  const preDesign=renoFixed+matCost+lightCost+netCost+interior+outdoor+systems+sideCost;
+  /* ค่าจดทะเบียนการเช่า 1% + อากรแสตมป์ 0.1% + ใบอนุญาต/จดบริษัท */
+  const legalCost=isRent?Math.round(rentSched20(rentBase).total*0.011)+150000:150000;
+  el('bLegal').textContent=fmt(legalCost);
+  el('rowLegal').style.display='';
+  const preDesign=renoFixed+matCost+lightCost+netCost+interior+outdoor+systems+sideCost+legalCost;
   const design=Math.round(preDesign*0.10);
   el('bDesign').textContent=fmt(design);
   const reno=preDesign+design;
@@ -1202,7 +1719,9 @@ function recalc(){
   const rentMo=isRent?rentBase:0;
   el('eRent').textContent=fmt(rentMo);
   el('rentNote').textContent=isRent?`ปี 1–4 · ขึ้น 10% ทุก 4 ปี`:'';
-  const exp=staff+util+supply+maint+45000+rentMo;
+  const INSUR=9000;
+  const opexNoRentAll=staff+util+supply+maint+45000+INSUR;   // รายจ่ายดำเนินงาน ไม่รวมค่าเช่า
+  const exp=opexNoRentAll+rentMo;
   el('eTotal').textContent=fmt(exp);
 
   const net=rev-exp, cash=net-pmt, dscr=net*12/(pmt*12);
@@ -1224,10 +1743,15 @@ function recalc(){
   else if(dscr<1.2) v.innerHTML=`🟡 เงินสดเหลือ <b>${fmt(cash)} ฿/เดือน</b> แต่ DSCR ${dscr.toFixed(2)} ต่ำกว่าเกณฑ์ธนาคาร (1.2) — ปรับโครงสร้างเงินกู้หรือเพิ่มรายได้เสริม`;
   else v.innerHTML=`✅ ที่จอง <b>${Math.round(occ*100)}%</b> เหลือเงินสด <b>${fmt(cash)} ฿/เดือน</b>, DSCR ${dscr.toFixed(2)} ผ่านเกณฑ์, คืนทุน <b>~${pbi.toFixed(1)} ปี</b> · แบด ${totalCourts} คอร์ท + บาส ${SD.bask} สนาม เกรด${mix==='mixed'?'ผสม':GRADES[grade].n}`;
 
+  /* ---------- ส่งค่าให้หน้าใหม่: กระแสเงินสด · ภาษี · งบ 10 ปี · กฎหมาย · ความเสี่ยง ---------- */
+  buildFinance({totalCourts,maxMonth,occ,extraRev,opexNoRentAll,rentBase:isRent?rentBase:0,
+    pmt,loan,equity,total,reno,RATE,totalHrs,matCost,lightCost,netCost,rate,yrs,
+    isRent,keyMoney,net,occBE});
+
   /* rent schedule */
   if(isRent){
     const sch=rentSchedule(rentBase);
-    const opexNoRent=staff+util+supply+maint+45000;
+    const opexNoRent=opexNoRentAll;
     let t=`<tr><th>ช่วงสัญญา</th><th class="r">ค่าเช่า/เดือน</th><th class="r">รวมช่วงนั้น (48 ด.)</th><th class="r">จุดคุ้มทุน (อัตราจอง)</th></tr>`;
     sch.rows.forEach(r=>{
       const nd=opexNoRent+r.m+pmt-extraRev;
@@ -1249,9 +1773,51 @@ function recalc(){
     else rv.innerHTML=`⚠️ ปีท้ายสัญญาค่าเช่าขึ้นเป็น ${fmt(sch.rows[4].m)} ฿/ด. ทำให้จุดคุ้มทุนขยับไป <b>${be20.toFixed(0)}%</b> — ควรเจรจาเพดานการขึ้นค่าเช่า (เช่น ขึ้นไม่เกิน 7%/4ปี) หรือขอสิทธิ์ต่อสัญญาในราคาที่ตกลงไว้ล่วงหน้า`;
   }
 }
+/* ---------- ตารางอัตราการจองรายชั่วโมง (หน้าคู่แข่ง) ---------- */
+const BH_DAYS=['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'];
+const BH_SLOTS=['10–12','12–14','14–16','16–18','18–20','20–22','22–24'];
+const BH_WD=[8,6,12,30,88,92,55];
+const BH_EST=[[30,35,45,55,70,60,25],BH_WD,BH_WD,BH_WD,BH_WD,BH_WD,[35,42,52,62,80,72,35]];
+const BH_KEY='bkt_bheat_v1';
+const bhStore=()=>{try{return JSON.parse(localStorage.getItem(BH_KEY)||'{}');}catch(e){return {};}};
+function bhVal(d,s){const o=bhStore();return (d+'-'+s) in o?o[d+'-'+s]:BH_EST[d][s];}
+function bhColor(v){
+  const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
+  return `rgb(${r},${g},${b})`;
+}
+function bHeatRender(){
+  const o=bhStore();
+  let t='<tr><th>เวลา \\ วัน</th>'+BH_DAYS.map(d=>'<th class="r">'+d+'</th>').join('')+'</tr>';
+  BH_SLOTS.forEach((sl,s)=>{
+    t+='<tr><td style="white-space:nowrap">'+sl+' น.</td>';
+    BH_DAYS.forEach((d,di)=>{
+      const v=bhVal(di,s), ed=(di+'-'+s) in o;
+      t+=`<td class="r" onclick="bHeatClick(${di},${s})" style="cursor:pointer;background:${bhColor(v)};color:${v>=55?'#fff':'#22302a'}${ed?';outline:2px solid #d3672a;outline-offset:-2px':''}" title="กดเพื่อแก้">${v}%</td>`;
+    });
+    t+='</tr>';
+  });
+  el('bHeat').innerHTML=t;
+  let peak=0,off=0,pc=0,oc=0;
+  BH_DAYS.forEach((d,di)=>BH_SLOTS.forEach((sl,s)=>{
+    const v=bhVal(di,s); if(s>=4){peak+=v;pc++;}else{off+=v;oc++;}
+  }));
+  el('bHeatNote').innerHTML=`📊 ค่าเฉลี่ยจากตาราง: <b>ช่วงพีค (18:00–24:00) ${(peak/pc).toFixed(0)}%</b> · `+
+    `<b>นอกพีค (10:00–18:00) ${(off/oc).toFixed(0)}%</b> — นี่คือเหตุผลที่ทุกแพ็กเกจส่วนลดของเราเจาะเฉพาะนอกพีค `+
+    `และทำไมคลาสสอน/บุฟเฟต์ต้องจัดกลางวัน`;
+}
+function bHeatClick(d,s){
+  const lv=[0,25,50,75,100],cur=bhVal(d,s),nx=lv.find(x=>x>cur);
+  const o=bhStore();o[d+'-'+s]=(nx===undefined?0:nx);
+  localStorage.setItem(BH_KEY,JSON.stringify(o));bHeatRender();
+}
+function bHeatReset(){localStorage.removeItem(BH_KEY);bHeatRender();}
+
+buildNav();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
+bHeatRender();
+go('p1');
 </script>
 
 <script type="importmap">
