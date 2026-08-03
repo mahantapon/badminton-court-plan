@@ -559,9 +559,10 @@
       <tr><td>ค่าคอร์ทแบด</td><td class="r" id="rCourt"></td></tr>
       <tr><td>โปรช็อป + ขึ้นเอ็น + ขายน้ำ/คาเฟ่</td><td class="r" id="rShop"></td></tr>
       <tr><td>ค่าเช่าแผงตลาดนัด + ป้ายโฆษณา</td><td class="r" id="rRent"></td></tr>
-      <tr><td>คลาสสอน/จ้างโค้ช <span class="sub" id="coachSub"></span></td><td class="r" id="rClass"></td></tr>
-      <tr><td>เหมาสนามทั้งวัน (จัดแข่ง/บริษัท) <span class="sub" id="rentAllSub"></span></td><td class="r" id="rWhole"></td></tr>
-      <tr><td>อีเวนต์/ทัวร์นาเมนต์ของเราเอง <span class="sub" id="eventSub"></span></td><td class="r" id="rEvent"></td></tr>
+      <tr><td>คลาสสอน/จ้างโค้ชรายครั้ง <span class="sub" id="coachSub"></span></td><td class="r" id="rClass"></td></tr>
+      <tr style="background:#f4f8fd"><td>🎓 <b>อคาเดมีรายเดือน</b> <span class="sub" id="acadSub"></span></td><td class="r" id="rAcad"></td></tr>
+      <tr style="background:#f4f8fd"><td>🏆 <b>ให้เช่าเหมาสนามจัดแข่ง</b> <span class="sub" id="rentAllSub"></span></td><td class="r" id="rWhole"></td></tr>
+      <tr style="background:#f4f8fd"><td>🏆 <b>รายการแข่งที่เราจัดเอง</b> <span class="sub" id="eventSub"></span></td><td class="r" id="rEvent"></td></tr>
       <tr><td>สนามบาส 3x3 <span class="sub" id="baskPerSub"></span></td><td class="r" id="rBask"></td></tr>
       <tr><td>หัก: วันที่เหมาสนาม ขายรายชั่วโมงไม่ได้ <span class="sub" id="oppSub"></span></td><td class="r" id="rOpp"></td></tr>
       <tr class="total"><td>รวมรายได้</td><td class="r" id="rTotal"></td></tr>
@@ -571,10 +572,11 @@
       <div class="ctrl"><label>ค่าเช่าแผง+ป้าย: <span class="val" id="rentVal">45,000</span> ฿/ด.</label><input type="range" id="rent" min="0" max="120000" step="5000" value="45000" oninput="recalc()"></div>
       <div class="ctrl"><label>คลาสสอน: <span class="val" id="coachN">6</span> คลาส/สัปดาห์</label><input type="range" id="coach" min="0" max="24" step="1" value="6" oninput="recalc()"></div>
       <div class="ctrl"><label>ค่าเรียน/คลาส: <span class="val" id="coachFee">1,200</span> ฿ <span class="sub">(คลาสกลุ่ม 4–6 คน เก็บคนละ 250–300)</span></label><input type="range" id="cfee" min="600" max="3000" step="100" value="1200" oninput="recalc()"></div>
-      <div class="ctrl"><label>เหมาสนามทั้งวัน: <span class="val" id="wholeN">2</span> ครั้ง/เดือน</label><input type="range" id="whole" min="0" max="8" step="1" value="2" oninput="recalc()"></div>
-      <div class="ctrl"><label>ค่าเหมา/ครั้ง: <span class="val" id="wholeFee">85,000</span> ฿ <span class="sub">(รวมค่าน้ำ-ไฟทั้งวันแล้ว · ตลาดจริง 70,000–100,000)</span></label><input type="range" id="wfee" min="40000" max="150000" step="5000" value="85000" oninput="recalc()"></div>
-      <div class="ctrl"><label>อีเวนต์เราจัดเอง: <span class="val" id="evtN">0</span> ครั้ง/เดือน × กำไรสุทธิ <span class="val" id="evtFee">18,000</span> ฿ <span class="sub">(ยังไม่มีข้อมูลจริง — ตั้ง 0 ไว้ก่อน แผนจะ conservative)</span></label><input type="range" id="evt" min="0" max="4" step="1" value="0" oninput="recalc()"></div>
     </div>
+    <div class="note blue">🏆🎓 <b>บรรทัดสีฟ้า 3 บรรทัด (อคาเดมี · เช่าเหมา · จัดแข่งเอง) ปรับที่หน้าอื่น</b> —
+      <button class="btn ghost" style="padding:3px 10px" onclick="go('p15')">แข่งขัน &amp; Event →</button>
+      <button class="btn ghost" style="padding:3px 10px" onclick="go('p16')">โค้ช &amp; อคาเดมี →</button>
+      เพราะสองเสานี้มีตัวแปรเยอะ (จำนวนคู่ · ค่าสมัคร · เงินรางวัล · นักเรียน · ค่าโค้ช) จึงแยกไปคำนวณเต็มรูปแบบในหน้าของตัวเอง</div>
     <table style="margin-top:14px">
       <tr><th>รายจ่ายต่อเดือน</th><th class="r">บาท</th></tr>
       <tr><td>พนักงาน <span class="sub" id="staffSub"></span></td><td class="r" id="eStaff"></td></tr>
@@ -592,6 +594,15 @@
       <div class="kpi"><div class="t">DSCR (เกณฑ์ ≥1.2)</div><div class="v" id="kDscr"></div></div>
       <div class="kpi"><div class="t">จุดคุ้มทุน (อัตราจอง)</div><div class="v" id="kBE"></div></div>
     </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">⚖️ สัดส่วน 3 เสารายได้ — เทียบกับเป้า 50 / 30 / 20</h3>
+    <p class="sub" style="margin-bottom:10px">โมเดลธุรกิจที่ตั้งใจไว้คือ <b>แข่งขัน 50% · โค้ช 30% · เล่นทั่วไป 20%</b> — ตารางนี้บอกว่าตัวเลขที่ตั้งอยู่ตอนนี้ให้สัดส่วนเท่าไรจริง</p>
+    <div style="overflow-x:auto"><table id="mixTable"></table></div>
+    <div class="note blue" id="mixNote"></div>
+    <div class="note" id="mixSanity"></div>
+    <div class="note">📅 <b>อย่าใช้สัดส่วนนี้กับปีแรก</b> — ปีที่ 1 ตามความเป็นจริงจะเป็นประมาณ <b>Event 20% · โค้ช 10% · ทั่วไป 70%</b> เพราะอคาเดมีเพิ่งเริ่ม (20–40 คน) และเรายังไม่มีชื่อพอให้ผู้จัดเลือก · 50/30/20 คือเป้า<b>ปีที่ 3</b> · หน้า "กระแสเงินสด &amp; ภาษี" คำนวณปีแรกแบบไต่ระดับให้แล้ว</div>
   </div>
   <div class="card">
     <div class="kpis">
@@ -782,18 +793,42 @@
     <h3 style="margin-top:0">🆚 คู่แข่งที่ต้องรู้ (ข้อมูลสาธารณะ)</h3>
     <div style="overflow-x:auto">
     <table>
-      <tr><th>สนาม</th><th>ทำเล</th><th class="r">ระยะ~</th><th class="r">คอร์ท</th><th class="r">ราคา/ชม.</th><th>เวลาเปิด</th><th>ช่องว่างที่เราชนะได้</th></tr>
-      <tr style="background:#fff8ec"><td><b>CC Badminton</b></td><td>พระราม 2 ซ.60</td><td class="r">2–3 กม.</td><td class="r"><b>18</b></td><td class="r">สอบถาม</td><td>15:00–23:30</td><td><b>คู่แข่งหลักตัวจริง</b> — ขนาดเท่าเรา แต่<b>ไม่เปิดกลางวัน</b> และที่จอดจำกัด</td></tr>
-      <tr><td>ชนะชน</td><td>บางบอน 5</td><td class="r">6–8 กม.</td><td class="r">15</td><td class="r">สอบถาม</td><td>สอบถาม</td><td>ไกลกว่า · ไม่มีคาเฟ่/ห้องอาบน้ำระดับเรา</td></tr>
-      <tr><td>A-Team</td><td>ซ.บางกระดี่ 19</td><td class="r">3–4 กม.</td><td class="r">7</td><td class="r">สอบถาม</td><td>สอบถาม</td><td>เล็กกว่ามาก จองยากช่วงเย็น</td></tr>
-      <tr><td>Conbrio</td><td>พระราม 2 ซ.82</td><td class="r">3–5 กม.</td><td class="r">~6</td><td class="r">บุฟเฟต์</td><td>15:00–23:00 · ศ.ถึง 20:00 · <b>อา.ปิด</b></td><td><b>อาทิตย์ปิด</b> — เราเปิดทุกวันรับลูกค้าตรงนี้ได้เต็มๆ</td></tr>
-      <tr><td>OMG Badminton</td><td>พระราม 2</td><td class="r">4–6 กม.</td><td class="r">4</td><td class="r">สอบถาม</td><td>สอบถาม</td><td>พื้นดีแต่แค่ 4 คอร์ท จัดก๊วนใหญ่/แข่งไม่ได้</td></tr>
-      <tr><td>ศูนย์กีฬาบางขุนเทียน (กทม.)</td><td>แสมดำ</td><td class="r">3–5 กม.</td><td class="r">~4</td><td class="r">100–140</td><td>ราชการ</td><td>ถูกแต่คิวแน่น จองล่วงหน้ายาก ไม่มีบริการเสริม</td></tr>
-      <tr><td>จอมทอง ซ.รวมสุข</td><td>ถ.เอกชัย</td><td class="r">8–10 กม.</td><td class="r">6</td><td class="r">100–110</td><td>สอบถาม</td><td>ราคาถูกสุดในโซน — เป็นเพดานราคาล่าง</td></tr>
-      <tr style="background:#eef7f1"><td><b>🏸 โครงการเรา</b></td><td>บางขุนเทียน-ชายทะเล</td><td class="r">—</td><td class="r"><b>18</b></td><td class="r"><b>200</b></td><td><b>10:00–24:00 ทุกวัน</b></td><td>ที่จอด 200 คัน · ห้องอาบน้ำ 8 ห้อง · คาเฟ่ · เปิดกลางวัน · บาส 3x3</td></tr>
+      <tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th class="r">ราคา/ชม.</th><th>เวลาเปิด</th><th class="r">จัดแข่ง</th><th>ช่องว่างที่เราชนะได้</th></tr>
+      <tr style="background:#fff8ec"><td><b>CC Badminton</b></td><td>ซ.บางขุนเทียน 16 แสมดำ<br><span class="sub">2–3 กม. — โซนเดียวกับเรา</span></td><td class="r"><b>18</b></td><td class="r"><b>190</b></td><td>15:00–23:30</td><td class="r"><b>9</b></td><td><b>คู่แข่งตัวจริงเจ้าเดียว</b> — ขนาดเท่าเรา จัดแข่งถี่ที่สุดในไทย แต่<b>ไม่เปิดกลางวัน</b> · ที่จอดใต้อาคารจำกัด</td></tr>
+      <tr><td>BEAT Discovery</td><td>สุขุมวิท 66 (บางนา)</td><td class="r">16</td><td class="r"><b>250</b> กลางวัน<br><b>350</b> เย็น</td><td>07:00–22:00</td><td class="r">1</td><td>คนละฝั่งเมือง ไม่ทับ catchment · เป็น<b>เพดานราคาบน</b>ที่พิสูจน์ว่าคนจ่าย 350 ได้ถ้าของดีจริง</td></tr>
+      <tr><td>15 คอร์ต ลาดปลาเค้า</td><td>ลาดปลาเค้า 71 บางเขน</td><td class="r">15</td><td class="r">190</td><td>10:00–<b>01:00</b></td><td class="r">2</td><td>คนละโซน · <b>เปิดถึงตี 1</b> — โมเดลเปิดยาวที่เราเรียนแบบได้</td></tr>
+      <tr><td>Guy Badminton</td><td>รามอินทรา ซ.5</td><td class="r">12</td><td class="r">180</td><td class="sub">ไม่เปิดเผย</td><td class="r">1</td><td>คนละโซน · พื้น PB เกรดแข่งขัน แต่ 12 คอร์ทจัดงานใหญ่ไม่ไหว</td></tr>
+      <tr><td>T.Thailand Arena</td><td>บางบัวทอง นนทบุรี</td><td class="r">16</td><td class="r">~160 <span class="sub">*</span></td><td>09:30–24:00</td><td class="r">6</td><td>คนละโซน · <b>อคาเดมี 200 นักกีฬา</b> = ต้นแบบเสาที่ 2 ของเรา</td></tr>
+      <tr><td>18 คอร์ท ราชพฤกษ์</td><td>บางพลับ ปากเกร็ด</td><td class="r"><b>18</b></td><td class="r"><b>120–130</b></td><td>จ-ศ 17:00–24:00<br>ส-อา 10:00–24:00</td><td class="r">4</td><td>คนละโซน · <b>ถูกที่สุดเพราะมีห้างทองอุ้ม</b> (ดูหน้า "งบจริงคู่แข่ง") — ไม่ใช่ราคาที่คนไม่มีธุรกิจอื่นจะสู้ได้</td></tr>
+      <tr><td colspan="7" class="sub" style="text-align:center">— สนามเล็กในโซนเรา —</td></tr>
+      <tr><td>ชนะชน / A-Team / Conbrio / OMG</td><td>บางบอน · บางกระดี่ · พระราม 2</td><td class="r">4–15</td><td class="r">100–180</td><td>ส่วนใหญ่เปิดบ่าย 3<br>Conbrio <b>อา.ปิด</b></td><td class="r">0</td><td>เล็กเกินกว่าจะจัดแข่งได้ · Conbrio ปิดอาทิตย์ = วันที่ก๊วนครอบครัวเล่นเยอะสุด</td></tr>
+      <tr><td>ศูนย์กีฬาบางขุนเทียน / จอมทอง</td><td>แสมดำ · ถ.เอกชัย</td><td class="r">~4–6</td><td class="r">100–140</td><td>ราชการ</td><td class="r">0</td><td>ถูกแต่คิวแน่น จองล่วงหน้ายาก ไม่มีบริการเสริม — เป็น<b>เพดานราคาล่าง</b></td></tr>
+      <tr style="background:#eef7f1"><td><b>🏸 โครงการเรา</b></td><td>บางขุนเทียน-ชายทะเล</td><td class="r"><b>18</b></td><td class="r"><b>200</b></td><td><b>10:00–24:00 ทุกวัน</b></td><td class="r"><b>เป้า 3/ด.</b></td><td>ที่จอด 200 คัน · อาบน้ำ 8 ห้อง · คาเฟ่ · <b>เปิดกลางวัน</b> · บาส 3x3 · อคาเดมีของตัวเอง</td></tr>
     </table>
     </div>
-    <div class="note">⚠️ ช่อง "สอบถาม" คือข้อมูลที่ไม่เปิดเผยออนไลน์ — <b>ต้องโทร/ทักไลน์ถามเอง</b> ก่อนสรุปแผนราคา · ระยะทางเป็นค่าประมาณ ควรวัดจริงจาก Google Maps</div>
+    <div class="note">📍 <b>ราคาทั้งหมดยืนยันแล้วจากแหล่งสาธารณะ (3 ส.ค. 2569)</b> — CC จากระบบจอง Matchday · BEAT จาก FAQ ทางการของสนาม · 15 คอร์ต/Guy จากรีวิวและสื่อรวมสนาม · 18 คอร์ท จากข้อมูลสนาม<br>
+      <span class="sub">* T.Thailand 160 ฿ มาจากรีวิวผู้ใช้ ไม่ใช่ประกาศทางการ — <b>เป็นตัวเลขที่อ่อนที่สุดในตาราง ควรโทรยืนยัน 02-011-0997</b></span><br>
+      ⚠️ <b>ไม่มีสนามไหนเลยประกาศราคาเสาร์-อาทิตย์แพงกว่าวันธรรมดา</b> — ถ้าแผนเราคิดจะเก็บแพงขึ้นวันหยุด ต้องรู้ว่าไม่มีใครในตลาดทำ</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🎯 ราคา 200 ฿ ของเราอยู่ตรงไหนในตลาด</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th class="r">อันดับ</th><th>สนาม</th><th class="r">ราคา/ชม.</th><th>อ่านว่าอะไร</th></tr>
+      <tr><td class="r">1</td><td>BEAT Discovery (เย็น)</td><td class="r">350</td><td>เพดานบนของตลาด — ทุนอสังหา ติด BTS</td></tr>
+      <tr><td class="r">2</td><td>BEAT Discovery (กลางวัน)</td><td class="r">250</td><td></td></tr>
+      <tr style="background:#eef7f1"><td class="r"><b>3</b></td><td><b>🏸 โครงการเรา</b></td><td class="r"><b>200</b></td><td><b>สูงกว่าค่ากลางโซน 5–25% — ต้องมีของจริงมารองรับ</b></td></tr>
+      <tr><td class="r">4</td><td>CC Badminton <span class="sub">(คู่แข่งตรง)</span></td><td class="r">190</td><td><b>ต่างกันแค่ 10 ฿</b> — ลูกค้าจะเทียบเรากับเจ้านี้ทุกครั้ง</td></tr>
+      <tr><td class="r">4</td><td>15 คอร์ต ลาดปลาเค้า</td><td class="r">190</td><td></td></tr>
+      <tr><td class="r">6</td><td>Guy Badminton</td><td class="r">180</td><td></td></tr>
+      <tr><td class="r">7</td><td>T.Thailand</td><td class="r">~160</td><td></td></tr>
+      <tr><td class="r">8</td><td>18 คอร์ท ราชพฤกษ์</td><td class="r">120–130</td><td>ธุรกิจเสริมของห้างทอง — ไม่ต้องกำไร</td></tr>
+    </table>
+    </div>
+    <div class="note blue">💡 <b>สรุปเรื่องราคา:</b> 200 ฿ คือ<b>อันดับ 3 จาก 8</b> — ไม่ถูกที่สุดและไม่แพงที่สุด · แต่คู่แข่งที่อยู่ใกล้บ้านลูกค้าที่สุด (CC) ขาย 190 ฿ ห่างกันแค่ 10 ฿<br>
+      → <b>เราชนะที่ 10 บาทนี้ไม่ได้ด้วยราคา ต้องชนะด้วย 3 อย่างที่ CC ไม่มี:</b> เปิดกลางวัน (เขาเปิดบ่าย 3) · ที่จอด 200 คัน · และรับจัดแข่งครบวงจร<br>
+      → ถ้าลดเหลือ 180 เพื่อสู้ CC ให้ดูหน้า <b>"รายได้ &amp; คืนทุน"</b> ว่าจุดคุ้มทุนขยับขึ้นเท่าไร ก่อนตัดสินใจ</div>
   </div>
 
   <div class="card">
@@ -1108,6 +1143,293 @@
   <div class="pagenav"><button class="btn ghost" onclick="go('p12')">← สัญญา &amp; กฎหมาย</button><button class="btn" onclick="go('p8')">ถัดไป: Business Canvas →</button></div>
 </section>
 
+<!-- ================= P15 แข่งขัน & EVENT (เสา 1) ================= -->
+<section class="page" id="p15">
+  <h2>🏆 เสาที่ 1 — แข่งขัน &amp; Event <span class="sub">(เป้า 50% ของรายได้)</span></h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">📈 ตลาดจัดแข่งใหญ่แค่ไหน — ข้อมูลจริงจาก Bad-Web Thailand</h3>
+    <p class="sub" style="margin-bottom:10px">ดึงข้อมูลทั้งเว็บ badwebthailand.com เมื่อ 3 ส.ค. 2569 — เว็บกลางที่ก๊วนและผู้จัดทั่วประเทศใช้ประกาศรายการแข่ง</p>
+    <div class="kpis">
+      <div class="kpi"><div class="t">รายการแข่งที่ประกาศ</div><div class="v">~16</div><div class="s">รายการ/เดือน ทั่วประเทศ (ก.ค. 69)</div></div>
+      <div class="kpi"><div class="t">4 สนามเจ้าภาพหลัก</div><div class="v">50%</div><div class="s">ของรายการทั้งหมดกระจุกที่ 4 สนาม</div></div>
+      <div class="kpi"><div class="t">ค่าสมัคร</div><div class="v">1,100–1,600</div><div class="s">฿/คู่ · ที่พบบ่อยสุด 1,300–1,500</div></div>
+      <div class="kpi"><div class="t">ขนาดงาน 1 วัน</div><div class="v">170–350</div><div class="s">คู่ = 340–700 คนในสนาม</div></div>
+    </div>
+    <div style="overflow-x:auto;margin-top:12px">
+    <table>
+      <tr><th>สนามเจ้าภาพ</th><th class="r">รายการที่จัด</th><th>สิ่งที่ทำให้เขาได้งาน</th></tr>
+      <tr style="background:#fff8ec"><td><b>CC Badminton</b> (บางขุนเทียน)</td><td class="r"><b>9</b></td><td>18 คอร์ทในที่เดียว · <b>อยู่โซนเดียวกับเรา — คือคู่แข่งตรงที่สุด</b></td></tr>
+      <tr><td>T.Thailand Arena (บางบัวทอง)</td><td class="r">6</td><td>16 คอร์ท + อคาเดมี 200 นักกีฬา = มีนักกีฬาป้อนงานตัวเอง</td></tr>
+      <tr><td>18 คอร์ท ราชพฤกษ์ (ปากเกร็ด)</td><td class="r">4</td><td>18 คอร์ท + ที่จอด 200 คัน + ร้านอาหารครบ</td></tr>
+      <tr><td>BEAT Discovery (สุขุมวิท 66)</td><td class="r">1</td><td>16 คอร์ท BWF + ติด BTS — งานใหญ่ระดับสปอนเซอร์แบรนด์</td></tr>
+      <tr><td class="sub" colspan="3">สนามที่เหลือได้งานละ 1–2 รายการ — เพราะคอร์ทน้อยเกินกว่าจะจบงานได้ในวันเดียว</td></tr>
+    </table>
+    </div>
+    <div class="note blue">🔑 <b>กติกาข้อเดียวของตลาดนี้: ต้องมีคอร์ทเยอะพอจบงานใน 1 วัน</b> — งาน 8 รุ่น 160 คู่ ต้องเล่นราว 300 แมตช์ สนาม 4–7 คอร์ททำไม่ได้ ต้องลากเป็น 2–3 วันซึ่งไม่มีใครเอา · <b>18 คอร์ทของเราคือตั๋วผ่านเข้าตลาดนี้โดยตรง</b></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🔥 หลักฐานว่า "ดีมานด์ล้น" ไม่ใช่การเดา</h3>
+    <p class="sub" style="margin-bottom:10px">ยอดรับสมัครจริงของรายการ <b>Supersports Web Badminton Championship 2026</b> (1 ส.ค. 69 · จัดที่ BEAT Discovery) — ระบบเปิดเผยทั้งยอดสมัครและจำนวนที่นั่ง</p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>รุ่นมือ</th><th class="r">คนสมัคร</th><th class="r">ที่นั่ง</th><th class="r">ล้นกี่เท่า</th><th>สถานะ</th></tr>
+      <tr><td>Rookie (มือใหม่)</td><td class="r">38</td><td class="r">16</td><td class="r"><b>2.4×</b></td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr><td>BG</td><td class="r">49</td><td class="r">32</td><td class="r">1.5×</td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr><td>NB</td><td class="r">54</td><td class="r">32</td><td class="r">1.7×</td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr style="background:#fff8ec"><td><b>N</b></td><td class="r"><b>62</b></td><td class="r">32</td><td class="r"><b>1.9×</b></td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr><td>S</td><td class="r">29</td><td class="r">16</td><td class="r">1.8×</td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr><td>S-N</td><td class="r">33</td><td class="r">16</td><td class="r">2.1×</td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr><td>P-/P</td><td class="r">16</td><td class="r">16</td><td class="r">1.0×</td><td style="color:#b3261e">เต็ม</td></tr>
+      <tr><td>OPEN (มือดีสุด)</td><td class="r">10</td><td class="r">12</td><td class="r">0.8×</td><td class="sub">เหลือ 2 ที่</td></tr>
+      <tr class="total"><td>รวม</td><td class="r"><b>291</b></td><td class="r">172</td><td class="r"><b>1.7×</b></td><td>รับได้จริง 175 คู่</td></tr>
+    </table>
+    </div>
+    <div class="note">📌 <b>อ่านตารางนี้ให้ออก:</b> คน <b>291 คู่อยากแข่ง แต่มีที่ให้แค่ 172</b> — <b>116 คู่ถูกปฏิเสธในงานเดียว</b> · ตลาดนี้ <b>ขาดสนาม ไม่ใช่ขาดคน</b> · รุ่นที่ล้นที่สุดคือ<b>มือใหม่–มือกลาง (Rookie 2.4× · S-N 2.1× · N 1.9×)</b> ซึ่งคือคนทำงานทั่วไปที่จ่ายเอง ไม่ใช่นักกีฬาอาชีพ → ตลาดกว้างและจ่ายได้จริง</div>
+    <div class="note blue">อีก 2 รายการที่ตรวจสอบ: <b>BWT Junior 2026</b> (BTU Sportscomplex) เปิด 23 รุ่นเยาวชน 347 คนสมัคร/344 ที่ · <b>รายการมือ OPEN อีกงานหนึ่ง</b> 33 สมัคร/16 ที่ = <b>ล้น 2.1 เท่า</b></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">💰 หาเงินจาก Event ได้ 2 ทาง — ปรับตัวเลขดูได้เลย</h3>
+    <div class="btnrow">
+      <span class="lbl">ดูโมเดล</span>
+      <button class="btn ev active" onclick="setEv('mix',this)">🅲 ทำทั้งสองอย่าง (แนะนำ)</button>
+      <button class="btn ev" onclick="setEv('rent',this)">🅰️ ให้เช่าเหมาอย่างเดียว</button>
+      <button class="btn ev" onclick="setEv('self',this)">🅱️ เราจัดแข่งเองอย่างเดียว</button>
+    </div>
+    <p class="sub" id="evModeNote" style="margin-top:4px"></p>
+    <div class="controls">
+      <div class="ctrl"><label>🅰️ วันให้เช่าเหมา: <span class="val" id="evRentNv">2</span> ครั้ง/เดือน</label><input type="range" id="evRentN" min="0" max="8" step="1" value="2" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅰️ ค่าเหมา/วัน: <span class="val" id="evRentFv">85,000</span> ฿ <span class="sub">(ตลาดจริง 70,000–100,000 รวมค่าน้ำ-ไฟ)</span></label><input type="range" id="evRentF" min="40000" max="150000" step="5000" value="85000" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ งานที่เราจัดเอง: <span class="val" id="evSelfNv">1</span> ครั้ง/เดือน</label><input type="range" id="evSelfN" min="0" max="4" step="1" value="1" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ รับได้: <span class="val" id="evPairsv">160</span> คู่/งาน <span class="sub">(18 คอร์ทจบใน 1 วันได้ ~150–200 คู่)</span></label><input type="range" id="evPairs" min="60" max="260" step="10" value="160" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ ค่าสมัคร: <span class="val" id="evFeev">1,300</span> ฿/คู่ <span class="sub">(ตลาด 1,100–1,600 · พบบ่อยสุด 1,300–1,500)</span></label><input type="range" id="evFee" min="800" max="1800" step="50" value="1300" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ จำนวนรุ่นมือ: <span class="val" id="evCatsv">8</span> รุ่น</label><input type="range" id="evCats" min="4" max="24" step="1" value="8" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ เงินรางวัล: <span class="val" id="evPrizev">10,000</span> ฿/รุ่น <span class="sub">(ตลาดจริง 8,000–13,800)</span></label><input type="range" id="evPrize" min="0" max="20000" step="500" value="10000" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ ค่าลูกขนไก่ที่เก็บ: <span class="val" id="evShutSellv">650</span> ฿/คู่ (คูปอง 10 ดวง) <span class="sub">(ตลาด 600–750)</span></label><input type="range" id="evShutSell" min="0" max="900" step="25" value="650" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ ต้นทุนลูกขนไก่: <span class="val" id="evShutCostv">52</span> ฿/ดวง <span class="sub">(Victor Master No.7 ยกโหล 620–640 = 51.7–53.3)</span></label><input type="range" id="evShutCost" min="30" max="90" step="1" value="52" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ ข้าวกล่อง+น้ำ: <span class="val" id="evFoodv">60</span> ฿/คน</label><input type="range" id="evFood" min="0" max="150" step="10" value="60" oninput="recalc()"></div>
+      <div class="ctrl"><label>🅱️ จ้างกรรมการทุกคอร์ท: <span class="val" id="evUmpv">ไม่จ้าง</span> <span class="sub">(มาตรฐานแบดเว็บ = ผู้เล่นขานเอง · จ้างได้เป็นจุดขายพรีเมียม)</span></label><input type="range" id="evUmp" min="0" max="1" step="1" value="0" oninput="recalc()"></div>
+    </div>
+
+    <div style="overflow-x:auto;margin-top:8px">
+    <table id="evPL"></table>
+    </div>
+    <div class="note blue" id="evCompare"></div>
+    <div class="note" id="evWarn"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🧾 ต้นทุนจัดงาน — ราคาจริงที่หาได้ พร้อมแหล่งอ้างอิง</h3>
+    <p class="sub" style="margin-bottom:10px">ทุกบรรทัดคือราคาที่ประกาศจริงบนเว็บผู้ให้บริการ ไม่ใช่การเดา · ปรับปรุง 3 ส.ค. 2569</p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>รายการ</th><th class="r">ราคาจริง</th><th>หมายเหตุ / แหล่งที่มา</th></tr>
+      <tr><td>ระบบจัดการแข่งขันออนไลน์</td><td class="r"><b>1,500 ฿/รายการ</b></td><td>ไม่จำกัดผู้เล่น · ไม่ต้องมัดจำ · ยกเลิกได้ฟรี (badmintonthaimatch.com)</td></tr>
+      <tr><td>ถ่ายทอดสด 2 กล้อง</td><td class="r"><b>15,000 ฿</b></td><td>3 กล้อง 20,000 · 4 กล้อง 25,000 (OB Easy)</td></tr>
+      <tr><td>ช่างภาพเต็มวัน</td><td class="r"><b>4,500 ฿</b></td><td>ครึ่งวัน 3,000 · กทม. ไม่เกิน 8 ชม.</td></tr>
+      <tr><td>พยาบาลวิชาชีพประจำงาน</td><td class="r"><b>2,590 ฿/12 ชม.</b></td><td>ยังไม่รวมอุปกรณ์ปฐมพยาบาล</td></tr>
+      <tr><td>ถ้วยรางวัล</td><td class="r"><b>80–300 ฿/ใบ</b></td><td>เหรียญ 30–100 ฿ (สั่งขั้นต่ำ 100 เหรียญ)</td></tr>
+      <tr><td>ประกันภัยการจัดงาน</td><td class="r"><b>2,000–5,000 ฿</b></td><td>0.2–0.5% ของทุนประกัน · ทุน 1 ล้าน · ขอใบเสนอราคา 3–7 วันทำการ</td></tr>
+      <tr><td>เจ้าหน้าที่ประจำสนาม</td><td class="r"><b>≤200 ฿/คน/วัน</b></td><td>รปภ. ≤400 ฿/คน/วัน (อัตราราชการ)</td></tr>
+      <tr><td>กรรมการตัดสิน (ถ้าจ้าง)</td><td class="r"><b>1,000 ฿/คน/วัน</b></td><td>อัตราโครงการภาครัฐ · อัตรา กกท. 250 ฿/ชม. + เบี้ยเลี้ยง 300 ฿/วัน</td></tr>
+      <tr style="background:#fff8ec"><td><b>ลูกขนไก่ (ต้นทุนจริง)</b></td><td class="r"><b>51.7–61.7 ฿/ดวง</b></td><td>Victor Master No.7 ยกโหล 620–640 ฿ · BULLETS Diamond 680 ฿/โหล</td></tr>
+    </table>
+    </div>
+    <div class="note">⚠️ <b>อย่าหวังกำไรจากค่าลูกขนไก่</b> — เก็บคูปอง 650 ฿/10 ดวง = 65 ฿/ดวง แต่ต้นทุน Victor 52 ฿/ดวง เหลือกำไรแค่ <b>~13 ฿/ดวง</b> · ถ้าเปลี่ยนไปใช้ <b>LING-MEI 70 (960 ฿/หลอด = 80 ฿/ดวง) จะขาดทุนทุกดวง</b> · <b>ยี่ห้อลูกที่เลือก ไม่ใช่ราคาคูปอง คือตัวตัดสินว่าบรรทัดนี้บวกหรือลบ</b></div>
+    <div class="note blue">✅ <b>ข่าวดีที่ประหยัดเงินได้มาก:</b> รายการแบดเว็บสมัครเล่นในไทย<b>ไม่จ้างกรรมการรายคอร์ท</b> — มาตรฐานคือ "ผู้เล่นขานเอง" ใช้ทีมงานกลางแทน (ผู้จัดการแข่ง · จัดสาย · ลงทะเบียน · บันทึกผล) · ถ้าใช้เกณฑ์ BWF ที่ต้องมีกรรมการ 10–13 คน/คอร์ท จะคิดต้นทุนเกินจริงหลายเท่า</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">✅ อะไรที่ต้องมี ถึงจะเป็น "สนามจัดแข่ง" ได้จริง</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>สิ่งที่ผู้จัดมองหา</th><th>เกณฑ์</th><th>โครงการเรา</th></tr>
+      <tr><td>จำนวนคอร์ท จบงานใน 1 วัน</td><td>≥ 12 คอร์ท</td><td style="color:#1e7a3c"><b>18 ✓</b></td></tr>
+      <tr><td>ที่จอดรถ (นักกีฬา+กองเชียร์ 400–700 คน)</td><td>≥ 100 คัน</td><td style="color:#1e7a3c"><b>200 ✓</b></td></tr>
+      <tr><td>ห้องอาบน้ำ (แข่งทั้งวัน)</td><td>มี</td><td style="color:#1e7a3c"><b>8 ห้อง ✓</b></td></tr>
+      <tr><td>ที่นั่งพัก / กองเชียร์</td><td>มี</td><td style="color:#1e7a3c"><b>โซนพักแอร์ ✓</b></td></tr>
+      <tr><td>อาหาร-เครื่องดื่มในสนาม</td><td>มี (ผู้จัดต้องแจกข้าวกล่อง)</td><td style="color:#1e7a3c"><b>คาเฟ่ + โซนกินข้าว ✓</b></td></tr>
+      <tr><td>เพดานสูงพอสำหรับลูกโด่ง</td><td>≥ 9 ม. เหนือคอร์ท</td><td style="color:#b8860b"><b>9.42 ม. กลางโถง — คอร์ทริมต้องเช็ค ⚠️</b></td></tr>
+      <tr><td>แสงสว่างระดับแข่งขัน</td><td>750–1,000 lux</td><td style="color:#b8860b"><b>ยังไม่ได้กำหนดสเปก ⚠️</b></td></tr>
+      <tr><td>ไฟฟ้าพอ / ไม่ดับกลางงาน</td><td>ไฟดับ = งานล่ม</td><td style="color:#b8860b"><b>ต้องเช็ค kVA หม้อแปลง ⚠️</b></td></tr>
+      <tr><td>พื้นยางมาตรฐาน</td><td>ผู้จัดใหญ่ระบุ BWF</td><td class="sub">เลือกเกรดได้ที่หน้า "เกรดพื้นยาง"</td></tr>
+    </table>
+    </div>
+    <div class="note">⚠️ <b>3 ข้อเหลืองคือเงื่อนไขเข้าตลาด Event ที่ยังไม่ปิด</b> — ถ้าเพดานคอร์ทริมต่ำกว่า 9 ม. หรือไฟไม่ถึง 750 lux ผู้จัดรายใหญ่จะไม่เลือกเรา แปลว่าเสาที่ 1 (50% ของรายได้) พังทันที · <b>ต้องเคลียร์ 3 ข้อนี้ก่อนเซ็นสัญญาเช่า</b></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📅 เพดานจริงของเสานี้ใน 1 เดือน</h3>
+    <p class="sub" style="margin-bottom:10px">งานแข่งเกือบทั้งหมดจัด<b>เสาร์หรืออาทิตย์ 08:00–18:00</b> — เดือนหนึ่งมีเสาร์-อาทิตย์ราว 8–9 วัน คือเพดานของเสานี้</p>
+    <div style="overflow-x:auto"><table id="evCal"></table></div>
+    <div class="note blue">💡 <b>วันจัดงานยังขายรายชั่วโมงได้อีก</b> — งานแข่งเลิก ~18:00 แต่เราเปิดถึงเที่ยงคืน ช่วง 18:00–24:00 ยังขายปกติได้อีก 6 ชม. · และงานใช้ราว 12–16 คอร์ท เหลืออีก 2–6 คอร์ทขายคนทั่วไปได้ทั้งวัน · ตัวเลขในหน้า "รายได้" หักวันเหมาออกแบบระมัดระวัง (ไม่นับรายได้ส่วนนี้) เพื่อให้แผน conservative</div>
+  </div>
+
+  <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p16')">ถัดไป: โค้ช &amp; อคาเดมี →</button></div>
+</section>
+
+<!-- ================= P16 โค้ช & อคาเดมี (เสา 2) ================= -->
+<section class="page" id="p16">
+  <h2>🎓 เสาที่ 2 — โค้ช &amp; อคาเดมี <span class="sub">(เป้า 30% ของรายได้)</span></h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">💵 ราคาตลาดจริง — ค่าเรียนแบดในกรุงเทพ</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>รูปแบบ</th><th class="r">ราคาตลาด</th><th>รวมค่าคอร์ทมั้ย</th><th>แหล่งอ้างอิง</th></tr>
+      <tr><td>คลาสกลุ่ม 2–5 คน</td><td class="r">300 ฿/ชม.</td><td>รวม</td><td class="sub">BestKru (ครูอิสระ กทม.)</td></tr>
+      <tr><td>ตัวต่อตัว ครูทั่วไป</td><td class="r">250–350 ฿/ชม.</td><td>รวม</td><td class="sub">BestKru</td></tr>
+      <tr><td>ตัวต่อตัว ครูมีประสบการณ์</td><td class="r">700–1,200 ฿/ชม.</td><td>แล้วแต่</td><td class="sub">ค่ากลางตลาดครูสอนกีฬา</td></tr>
+      <tr style="background:#fff8ec"><td><b>BEAT Discovery</b> (สนามพรีเมียม) — ตัวต่อตัว</td><td class="r"><b>800 ฿/ชม.</b></td><td><b>ไม่รวม</b> (บวกค่าคอร์ทอีก 250–350)</td><td class="sub">FAQ ทางการของสนาม</td></tr>
+      <tr style="background:#fff8ec"><td>BEAT Discovery — 2 คน / 3 คน</td><td class="r"><b>1,000 / 1,200 ฿/ชม.</b></td><td><b>ไม่รวม</b></td><td class="sub">FAQ ทางการของสนาม</td></tr>
+      <tr style="background:#eef7f1"><td><b>คอร์สรายเดือน (โมเดลอคาเดมี)</b></td><td class="r"><b>2,500 ฿/เดือน</b></td><td>รวม</td><td class="sub">สัปดาห์ละ 2 ครั้ง = 8 ครั้ง/เดือน</td></tr>
+    </table>
+    </div>
+    <div class="note blue">🔑 <b>บทเรียนสำคัญจาก BEAT:</b> สนามพรีเมียมแยกบิลชัดเจน — <b>ค่าโค้ช 800 ฿ + ค่าคอร์ท 250–350 ฿ เก็บแยกกัน</b> ไม่เอามารวม แปลว่าคอร์ทได้เงินเต็มทุกชั่วโมงไม่ว่าใครใช้ · <b>นี่คือวิธีที่สนามไม่เสียเปรียบโค้ช และเราควรทำแบบเดียวกัน</b></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🏫 อคาเดมีของเราเอง — ทางเดียวที่จะถึง 30% ได้จริง</h3>
+    <p class="sub" style="margin-bottom:10px">คลาสรายครั้งอย่างเดียวไม่มีทางถึง 30% เพราะรายได้ไม่ต่อเนื่องและไม่สะสม — ต้องเป็น<b>อคาเดมีเก็บรายเดือน</b> แบบที่ T.Thailand (200 นักกีฬา) และบ้านทองหยอด (18 คอร์ท 2 โรงยิม) ทำ</p>
+    <div class="controls">
+      <div class="ctrl"><label>จำนวนนักเรียนประจำ: <span class="val" id="acNv">80</span> คน</label><input type="range" id="acN" min="0" max="400" step="10" value="80" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าเรียน: <span class="val" id="acFeev">2,500</span> ฿/คน/เดือน</label><input type="range" id="acFee" min="1000" max="6000" step="100" value="2500" oninput="recalc()"></div>
+      <div class="ctrl"><label>เรียน: <span class="val" id="acSesv">8</span> ครั้ง/เดือน/คน <span class="sub">(สัปดาห์ละ 2)</span></label><input type="range" id="acSes" min="4" max="16" step="1" value="8" oninput="recalc()"></div>
+      <div class="ctrl"><label>ขนาดคลาส: <span class="val" id="acSizev">6</span> คน/คอร์ท</label><input type="range" id="acSize" min="2" max="12" step="1" value="6" oninput="recalc()"></div>
+      <div class="ctrl"><label>ค่าจ้างโค้ช: <span class="val" id="acPayv">450</span> ฿/ชม.</label><input type="range" id="acPay" min="250" max="900" step="25" value="450" oninput="recalc()"></div>
+      <div class="ctrl"><label>ชั่วโมงต่อคลาส: <span class="val" id="acHrv">1.5</span> ชม.</label><input type="range" id="acHr" min="1" max="3" step="0.5" value="1.5" oninput="recalc()"></div>
+    </div>
+    <div style="overflow-x:auto"><table id="acPL"></table></div>
+    <div class="kpis" style="margin-top:10px">
+      <div class="kpi"><div class="t">กำไรอคาเดมี</div><div class="v" id="acNet"></div><div class="s">ต่อเดือน หลังหักค่าโค้ช</div></div>
+      <div class="kpi"><div class="t">ชั่วโมงคอร์ทที่ใช้</div><div class="v" id="acHrs"></div><div class="s" id="acHrsSub"></div></div>
+      <div class="kpi"><div class="t">กำไรต่อคอร์ท-ชม.</div><div class="v" id="acPerHr"></div><div class="s" id="acPerHrSub"></div></div>
+      <div class="kpi"><div class="t">รายได้ต่อนักเรียน</div><div class="v" id="acPerHead"></div><div class="s">ต่อปี</div></div>
+    </div>
+    <div class="note" id="acWarn"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📈 อคาเดมีโตยังไง — อย่าตั้งเป้าปีแรกสูงเกินจริง</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>ช่วง</th><th class="r">นักเรียน</th><th>ที่มาของนักเรียน</th><th class="r">รายได้/เดือน</th></tr>
+      <tr><td>เดือน 1–6</td><td class="r">20–40</td><td>คนแถวบ้าน + ลูกลูกค้าที่มาเล่นอยู่แล้ว + คลาสทดลองฟรี</td><td class="r" id="acR1"></td></tr>
+      <tr><td>เดือน 7–18</td><td class="r">60–100</td><td>ปากต่อปาก + เด็กเริ่มมีผลแข่ง + คลาสเช้าเสาร์-อาทิตย์เต็ม</td><td class="r" id="acR2"></td></tr>
+      <tr style="background:#eef7f1"><td><b>ปีที่ 3 ขึ้นไป</b></td><td class="r"><b>150–250</b></td><td>มีชื่อจากรายการแข่งที่เราจัดเอง + โค้ชประจำ 3–4 คน</td><td class="r" id="acR3"></td></tr>
+    </table>
+    </div>
+    <div class="note blue">🔗 <b>เสา 1 กับ เสา 2 หนุนกันเอง</b> — เราจัดแข่งเอง → เด็กในอคาเดมีมีเวทีลงแข่งถึงบ้าน → ผู้ปกครองเห็นผล → บอกต่อ → อคาเดมีโต → มีนักกีฬาป้อนรายการแข่งของเราเอง · <b>นี่คือสูตรเดียวกับที่ T.Thailand ใช้</b> (อคาเดมี 200 คน + จัดแข่ง 6 รายการ) และเป็นเหตุผลที่เขาไม่ต้องแข่งราคาค่าคอร์ทกับใคร</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🤝 ถ้ายังไม่ทำอคาเดมีเอง — 4 โมเดลจ้างโค้ชแบบเดิม</h3>
+    <p class="sub" style="margin-bottom:10px">ปรับได้ที่หน้า "รายได้ &amp; คืนทุน" · ตารางนี้เทียบให้เห็นว่าแต่ละแบบสนามได้เท่าไร</p>
+    <div style="overflow-x:auto"><table id="coachTable2"></table></div>
+    <div class="note" id="coachNote2"></div>
+  </div>
+
+  <div class="pagenav"><button class="btn ghost" onclick="go('p15')">← แข่งขัน &amp; Event</button><button class="btn" onclick="go('p7')">ถัดไป: รายได้รวม →</button></div>
+</section>
+
+<!-- ================= P17 งบจริงคู่แข่ง (DBD) ================= -->
+<section class="page" id="p17">
+  <h2>📉 งบการเงินจริงของคู่แข่ง — จากกรมพัฒนาธุรกิจการค้า</h2>
+  <div class="note blue" style="margin-bottom:14px">ทุกตัวเลขในหน้านี้ดึงจาก <b>DBD DataWarehouse+</b> ของกรมพัฒนาธุรกิจการค้า (งบที่นิติบุคคลยื่นจริงตามกฎหมาย) เมื่อ 3 ส.ค. 2569 — ไม่ใช่การประมาณการ</div>
+
+  <div class="card">
+    <h3 style="margin-top:0">⚠️ ความจริงข้อแรก: ค่ากลางของอุตสาหกรรมนี้คือ "ขาดทุน"</h3>
+    <div class="kpis">
+      <div class="kpi"><div class="t">รายได้ค่ามัธยฐาน</div><div class="v">1.11 ลบ.</div><div class="s">ต่อปี · ธุรกิจสนามกีฬาขนาดเล็ก</div></div>
+      <div class="kpi"><div class="t">กำไรสุทธิค่ามัธยฐาน</div><div class="v warn">−11,786</div><div class="s">บาท/ปี — ครึ่งหนึ่งของตลาดขาดทุน</div></div>
+      <div class="kpi"><div class="t">กำไรรวมทั้งกลุ่ม</div><div class="v warn">−825 ลบ.</div><div class="s">อุตสาหกรรมขนาดเล็กรวมกัน ปี 2566</div></div>
+      <div class="kpi"><div class="t">จำนวนนิติบุคคล</div><div class="v">987</div><div class="s">รหัสธุรกิจ 93111 ทั่วประเทศ</div></div>
+    </div>
+    <div class="note">🏦 <b>ธนาคารจะเห็นตัวเลขนี้แน่นอน</b> — ต้องอธิบายให้ได้ว่าทำไมเราไม่ใช่ค่ามัธยฐาน · คำตอบอยู่ในตารางถัดไป: <b>ธุรกิจนี้แพ้เพราะเล็กเกินไป ไม่ใช่เพราะตลาดไม่ดี</b></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📏 เส้นแบ่งความอยู่รอด = รายได้ 5 ล้านบาท/ปี</h3>
+    <p class="sub" style="margin-bottom:10px">แยกบริษัทสนามแบด 29 รายที่ยื่นงบจริง ตามขนาดรายได้</p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>กลุ่มรายได้/ปี</th><th class="r">จำนวน</th><th class="r">กำไร</th><th class="r">ขาดทุน</th><th class="r">มาร์จิ้นกลาง</th><th>สรุป</th></tr>
+      <tr style="background:#eef7f1"><td><b>≥ 5 ล้าน</b></td><td class="r">6</td><td class="r" style="color:#1e7a3c"><b>5</b></td><td class="r">1</td><td class="r" style="color:#1e7a3c"><b>+11.3%</b></td><td><b>รอด และกำไรดี</b></td></tr>
+      <tr style="background:#fdecec"><td>1.5–5 ล้าน</td><td class="r">7</td><td class="r">3</td><td class="r" style="color:#b3261e"><b>4</b></td><td class="r" style="color:#b3261e"><b>−2.0%</b></td><td>โซนอันตราย — ขาดทุนมากกว่ากำไร</td></tr>
+      <tr><td>&lt; 1.5 ล้าน</td><td class="r">16</td><td class="r">7</td><td class="r">4</td><td class="r">0.0%</td><td class="sub">เล็กมาก หลายรายทำบัญชีขั้นต่ำ</td></tr>
+      <tr class="total"><td><b>โครงการเรา (ตามที่ตั้งค่าอยู่)</b></td><td class="r">—</td><td class="r" colspan="2" id="dbdOurRev"></td><td class="r" id="dbdOurMargin"></td><td id="dbdOurNote"></td></tr>
+    </table>
+    </div>
+    <div class="note blue">💡 <b>นี่คือเหตุผลที่ 18 คอร์ทถูกต้อง</b> — สนาม 4–7 คอร์ททำรายได้ไม่ถึง 5 ล้าน/ปี ไม่ว่าจะบริหารดีแค่ไหน ก็ไม่พ้นโซนขาดทุน · ธุรกิจนี้ต้องข้ามเส้น scale ให้ได้ก่อนถึงจะมีกำไร</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🏢 บริษัทสนามแบดที่ยื่นงบจริง (เรียงตามรายได้)</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>บริษัท</th><th>จังหวัด</th><th class="r">รายได้/ปี</th><th class="r">กำไรสุทธิ</th><th class="r">มาร์จิ้น</th></tr>
+      <tr style="background:#eef7f1"><td>คิปคอมเพล็กซ์</td><td>กรุงเทพฯ</td><td class="r">11.37 ลบ.</td><td class="r">+3.11 ลบ.</td><td class="r"><b>27.3%</b></td></tr>
+      <tr style="background:#eef7f1"><td>เอื้อตั้งกิจ</td><td>กรุงเทพฯ</td><td class="r">11.23 ลบ.</td><td class="r">+3.15 ลบ.</td><td class="r"><b>28.1%</b></td></tr>
+      <tr><td>ซีแทรค พร็อพเพอร์ตี้</td><td>ปทุมธานี</td><td class="r">11.24 ลบ.</td><td class="r">+0.38 ลบ.</td><td class="r">3.4%</td></tr>
+      <tr><td>ภัคธรรศ (2018)</td><td>กรุงเทพฯ</td><td class="r">8.68 ลบ.</td><td class="r">+0.98 ลบ.</td><td class="r">11.3%</td></tr>
+      <tr style="background:#fdecec"><td>แบดมินตัน โปร</td><td>กรุงเทพฯ</td><td class="r">6.25 ลบ.</td><td class="r">−0.56 ลบ.</td><td class="r">−9.0%</td></tr>
+      <tr style="background:#fff8ec"><td><b>คุรุ เฮลท์ฯ (KURU ทุ่งครุ)</b></td><td>กรุงเทพฯ</td><td class="r">5.96 ลบ.</td><td class="r">+0.55 ลบ.</td><td class="r">9.3%</td></tr>
+      <tr><td class="sub" colspan="5" style="text-align:center">— เส้นแบ่ง 5 ล้านบาท/ปี —</td></tr>
+      <tr><td>อิชิ สปอร์ตคลับ</td><td>ฉะเชิงเทรา</td><td class="r">2.22 ลบ.</td><td class="r" style="color:#b3261e">−1.57 ลบ.</td><td class="r">−70.8%</td></tr>
+      <tr><td>ซุปเปอร์ เค แอทเลติก</td><td>กรุงเทพฯ</td><td class="r">1.74 ลบ.</td><td class="r" style="color:#b3261e">−0.41 ลบ.</td><td class="r">−23.6%</td></tr>
+      <tr><td>เอ็นเจ แบดมินตัน คอร์ท</td><td>กรุงเทพฯ</td><td class="r">1.73 ลบ.</td><td class="r" style="color:#b3261e">−0.82 ลบ.</td><td class="r">−47.6%</td></tr>
+      <tr><td>เอสยี่สิบเก้าแบดมินตัน</td><td>กรุงเทพฯ</td><td class="r">1.66 ลบ.</td><td class="r">+0.30 ลบ.</td><td class="r">18.1%</td></tr>
+      <tr><td>มันตา แบดมินตันคอร์ท</td><td>กรุงเทพฯ</td><td class="r">1.66 ลบ.</td><td class="r">+0.15 ลบ.</td><td class="r">9.3%</td></tr>
+      <tr><td>เอส พี แบดมินตันคอร์ท</td><td>กรุงเทพฯ</td><td class="r">1.54 ลบ.</td><td class="r">−0.03 ลบ.</td><td class="r">−2.0%</td></tr>
+      <tr><td>ชัทเทิลสแมช แบดมินตัน คลับ</td><td>เชียงใหม่</td><td class="r">1.38 ลบ.</td><td class="r">+0.30 ลบ.</td><td class="r">21.6%</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🔬 กรณีศึกษาที่ตรงที่สุด — KURU Badminton Park (ทุ่งครุ)</h3>
+    <p class="sub" style="margin-bottom:10px">สนามเปิดใหม่ฝั่งธนใต้ ใกล้โซนเรา · จดบริษัท ก.ค. 2567 · ราคา 280–380 ฿/ชม. · <b>เป็นสนามเดียวในฐานข้อมูลที่เห็นงบ "ปีแรกเต็ม" ครบทุกบรรทัด</b></p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>รายการ</th><th class="r">ปี 2567 (ก่อนเปิด)</th><th class="r">ปี 2568 (ปีแรกเต็ม)</th><th>อ่านว่าอะไร</th></tr>
+      <tr><td>รายได้รวม</td><td class="r">0</td><td class="r"><b>5,962,429</b></td><td>≈ 497,000 ฿/เดือน</td></tr>
+      <tr><td>ต้นทุนขาย</td><td class="r">—</td><td class="r">2,176,531</td><td>36.5% ของรายได้</td></tr>
+      <tr><td>กำไรขั้นต้น</td><td class="r">—</td><td class="r">3,785,898</td><td><b>63.5%</b> — มาร์จิ้นขั้นต้นธุรกิจนี้สูงมาก</td></tr>
+      <tr><td>ค่าใช้จ่ายขาย+บริหาร</td><td class="r">1,195,826</td><td class="r">3,232,354</td><td>กินกำไรขั้นต้นไปเกือบหมด</td></tr>
+      <tr style="background:#fdecec"><td><b>กำไร(ขาดทุน)สุทธิ</b></td><td class="r" style="color:#b3261e"><b>−1,195,826</b></td><td class="r" style="color:#1e7a3c"><b>+553,543</b></td><td>ปีเตรียมเปิดขาดทุน 1.2 ลบ.</td></tr>
+      <tr><td>ดอกเบี้ยจ่าย</td><td class="r">0</td><td class="r">0</td><td><b>ไม่มีหนี้เลย</b> — เขาใช้เงินตัวเอง</td></tr>
+    </table>
+    </div>
+    <div class="note">📌 <b>3 บทเรียนที่เอามาใช้กับเราได้ทันที</b><br>
+      <b>1.</b> ปีก่อนเปิด<b>ขาดทุน 1.2 ล้าน</b> — ตรงกับที่เราคำนวณว่าต้องเตรียมเงินหมุนเวียนเพิ่ม ~1.4 ลบ. นอกงบลงทุน (ดูหน้า "กระแสเงินสด &amp; ภาษี")<br>
+      <b>2.</b> กำไรขั้นต้น 63.5% แต่เหลือสุทธิแค่ 9.3% — <b>ตัวฆ่าคือค่าใช้จ่ายบริหาร ไม่ใช่ต้นทุนตรง</b> ต้องคุมจำนวนคนและงบการตลาดให้อยู่<br>
+      <b>3.</b> <b>เขาไม่มีดอกเบี้ยเลย เรามีค่างวด ~225,000 ฿/เดือน</b> = เราต้องทำรายได้สูงกว่า KURU อย่างมีนัยสำคัญถึงจะรอด ซึ่งคือเหตุผลที่ต้องมี 18 คอร์ท + 3 เสารายได้ ไม่ใช่ขายค่าคอร์ทอย่างเดียว</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🕵️ ตัวตนจริงของคู่แข่ง 6 เจ้าที่เราเทียบ</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>สนาม</th><th>นิติบุคคล</th><th class="r">รายได้/ปี</th><th class="r">กำไรสุทธิ</th><th>เขาอยู่ได้เพราะอะไร</th></tr>
+      <tr><td><b>BEAT Discovery</b></td><td>เครือ <b>ภิรัชบุรี</b> (เจ้าของ BITEC บางนา)</td><td class="r">697.9 ลบ.</td><td class="r">+124.4 ลบ.</td><td><b>ทุนอสังหาพันล้าน</b> — สนามกีฬาเป็นของแถมเพิ่มมูลค่าที่ดิน ไม่ต้องคืนทุนจากค่าคอร์ท</td></tr>
+      <tr><td><b>18 คอร์ท ราชพฤกษ์</b></td><td>บจ. <b>ห้างทองเยาวราช18คอร์ด</b></td><td class="r">71.1 ลบ.</td><td class="r">+0.45 ลบ.</td><td><b>รายได้ 97% มาจากขายทอง</b> — สนามแบดคือธุรกิจเสริม จึงขาย 120–130 ฿ ได้แบบไม่ต้องกำไร</td></tr>
+      <tr><td><b>15 คอร์ต ลาดปลาเค้า</b></td><td>บจ. ลาดปลาเค้า สปอร์ตเซ็นเตอร์</td><td class="r">1.68 ลบ.</td><td class="r">+0.16 ลบ.</td><td>ยื่นงบเลขกลมทุกปี ต้นทุนนิ่ง 1.5 ลบ. <b>หยุดส่งงบหลังปี 2566</b> — บัญชีขั้นต่ำ เงินสดจริงไม่อยู่ในงบ</td></tr>
+      <tr><td><b>CC Badminton</b></td><td class="sub">ไม่มีนิติบุคคล — บุคคลธรรมดา</td><td class="r sub">ไม่เปิดเผย</td><td class="r sub">—</td><td>ที่ดินตัวเอง ไม่มีค่าเช่า ไม่มีค่างวด</td></tr>
+      <tr><td><b>Guy Badminton</b></td><td class="sub">ไม่มีนิติบุคคล — บุคคลธรรมดา</td><td class="r sub">ไม่เปิดเผย</td><td class="r sub">—</td><td>ครอบครัวทำเอง ต้นทุนคนต่ำ</td></tr>
+      <tr><td><b>T.Thailand</b></td><td class="sub">ไม่มีนิติบุคคล — บุคคลธรรมดา</td><td class="r sub">ไม่เปิดเผย</td><td class="r sub">—</td><td>สโมสร 18 ปี + อคาเดมี 200 คน = รายได้จากคน ไม่ใช่จากคอร์ท</td></tr>
+    </table>
+    </div>
+    <div class="note">🎯 <b>ข้อสรุปสำคัญที่สุดของทั้งหน้านี้</b><br>
+      <b>ไม่มีคู่แข่งรายไหนเลยที่อยู่ได้ด้วยกำไรจากค่าคอร์ทล้วนๆ</b> — 1 รายใช้ทุนอสังหา · 1 รายใช้ห้างทองอุ้ม · 1 รายทำบัญชีขั้นต่ำ · 3 รายเป็นบุคคลธรรมดาบนที่ดินตัวเอง<br>
+      <b>เราจ่ายค่าเช่า 120,000 ฿/เดือน + ค่างวดธนาคารอีก ~225,000 ฿/เดือน</b> → ลงไปเล่นสงครามราคากับพวกเขา = แพ้แน่นอน<br>
+      ✅ <b>ทางเดียวที่ชนะคือขายสิ่งที่เขาไม่มี:</b> 18 คอร์ทจบงานแข่งใน 1 วัน · ที่จอด 200 คัน · เปิดกลางวัน · อคาเดมีของตัวเอง — ซึ่งคือเสาที่ 1 กับเสาที่ 2 พอดี</div>
+  </div>
+
+  <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p15')">ถัดไป: แข่งขัน &amp; Event →</button></div>
+</section>
+
 <footer>ตัวเลขทั้งหมดเป็นประมาณการเบื้องต้นเพื่อการตัดสินใจ ยังไม่ใช่ราคาก่อสร้างจริง · อ้างอิงแบบวัดหน้างานของสถาปนิก ก.ค. 2569</footer>
 </div>
 
@@ -1375,8 +1697,9 @@ const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mo
 /* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
 const GROUPS=[
   {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
-  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ดีมานด์'],['p8','Business Canvas']]},
-  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p7','รายได้ & คืนทุน'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
+  {id:'g5',n:'🏆 3 เสารายได้',pages:[['p15','แข่งขัน & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const PAGE_G={};
@@ -1416,6 +1739,52 @@ function setMix(m){
 }
 function setOcc(v,btn){el('occ').value=v;clearOc();btn.classList.add('active');recalc();}
 function clearOc(){document.querySelectorAll('.btn.oc').forEach(b=>b.classList.remove('active'));}
+
+/* ---------- เสาที่ 1: Event ---------- */
+let EV_MODE='mix';
+const EV_TXT={
+  mix :'ทำทั้งสองอย่าง — รับงานผู้จัดภายนอกด้วย และจัดรายการของตัวเองด้วย · เป็นแบบที่ CC และ T.Thailand ทำจริง',
+  rent:'ให้ผู้จัดภายนอกเช่าเหมาสนามทั้งวัน — เราไม่ต้องลงแรง ไม่มีความเสี่ยง แต่ได้เงินน้อยกว่าและไม่ได้สร้างแบรนด์ตัวเอง',
+  self:'เราเป็นผู้จัดเอง — เก็บค่าสมัครเต็ม ได้แบรนด์ ได้ลูกค้าใหม่เข้าฐาน แต่ต้องมีทีมงานและแบกความเสี่ยงคนไม่เต็ม'
+};
+function setEv(m,btn){
+  EV_MODE=m;
+  document.querySelectorAll('.btn.ev').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(m==='rent'){el('evSelfN').value=0; if(+el('evRentN').value===0)el('evRentN').value=3;}
+  if(m==='self'){el('evRentN').value=0; if(+el('evSelfN').value===0)el('evSelfN').value=2;}
+  if(m==='mix'){ if(+el('evRentN').value===0)el('evRentN').value=2; if(+el('evSelfN').value===0)el('evSelfN').value=1; }
+  recalc();
+}
+/* P&L ของงานที่เราจัดเอง 1 งาน */
+function eventCalc(){
+  const pairs=val('evPairs'), fee=val('evFee'), cats=val('evCats'), prize=val('evPrize');
+  const shSell=val('evShutSell'), shCost=val('evShutCost'), food=val('evFood'), ump=val('evUmp');
+  const players=pairs*2;
+  const shuttlesPerPair=10;                       // คูปอง 10 ดวง/คู่ ตามมาตรฐานตลาด
+  const revEntry=pairs*fee;
+  const revShut =pairs*shSell;
+  const costShut=pairs*shuttlesPerPair*shCost;
+  const costPrize=cats*prize;
+  const costTroph=cats*880;                       // ถ้วย 2 ใบ×200 + เหรียญ 8×60
+  const costFood=players*food;
+  const costFixed=1500+15000+4500+2590+3000;      // ระบบจัดแข่ง+ถ่ายทอด 2 กล้อง+ช่างภาพ+พยาบาล+ประกัน
+  const costCrew=10*800;                          // ทีมงานกลาง 10 คน
+  const costUmp=ump?18*1000:0;                    // กรรมการรายคอร์ท (ออปชัน)
+  const rev=revEntry+revShut;
+  const cost=costShut+costPrize+costTroph+costFood+costFixed+costCrew+costUmp;
+  return {pairs,players,revEntry,revShut,costShut,costPrize,costTroph,costFood,costFixed,costCrew,costUmp,
+          rev,cost,net:rev-cost,shutMargin:shSell-shuttlesPerPair*shCost};
+}
+/* ---------- เสาที่ 2: อคาเดมี ---------- */
+function acadCalc(){
+  const n=val('acN'), fee=val('acFee'), ses=val('acSes'), size=val('acSize'), pay=val('acPay'), hr=val('acHr');
+  const rev=n*fee;
+  const classesMo=size>0?Math.ceil(n/size)*ses:0;   // คลาสต่อเดือน
+  const hrs=classesMo*hr;                          // ชั่วโมงคอร์ทที่ใช้
+  const coachCost=hrs*pay;
+  return {n,fee,ses,size,hr,rev,classesMo,hrs,coachCost,net:rev-coachCost};
+}
 function syncCourts(v){el('courts').value=v;recalc();}
 function pmtCalc(P,r,n){const i=r/12,m=n*12;return P*i*Math.pow(1+i,m)/(Math.pow(1+i,m)-1);}
 
@@ -1579,15 +1948,16 @@ function recalc(){
   el('occVal').textContent=Math.round(occ*100);
   el('rateVal2').textContent=fmt(RATE);
   /* วันที่เหมาสนามทั้งวัน ขายรายชั่วโมงไม่ได้ → หักออกจากวันขายปกติ */
-  const wholeDays=Math.min(val('whole'),12), normDays=30-wholeDays;
+  const wholeDays=Math.min(val('evRentN')+val('evSelfN'),12), normDays=30-wholeDays;
   const perCourtDay=totalHrs*RATE;
   const maxMonth=totalCourts*perCourtDay*normDays;   // เพดานรายชั่วโมงจากวันที่ขายปกติ
   const courtRev=maxMonth*occ;
   el('ceilNote').innerHTML=`เพดานรายได้คอร์ทแบด = ${totalCourts} คอร์ท × ${totalHrs} ชม. × <b>${fmt(RATE)} ฿ (ราคาเดียวทั้งวัน)</b> × ${normDays} วันขายปกติ = <b>${fmt(maxMonth)} ฿/เดือน</b> ถ้าจองเต็ม 100% · อีก ${wholeDays} วันเป็นวันเหมาสนาม`;
   const shop=val('shop'), rent=val('rent');
   /* รายได้เสริม: คลาสสอน · เหมาสนามทั้งวัน · อีเวนต์ · บาส 3x3 */
-  const WHOLE_FEE=val('wfee'), EVT_PROFIT=18000;
-  const coachN=val('coach'), wholeN=val('whole'), evtN=val('evt');
+  const EV=eventCalc(), AC=acadCalc();
+  const WHOLE_FEE=val('evRentF'), EVT_PROFIT=EV.net;
+  const coachN=val('coach'), wholeN=val('evRentN'), evtN=val('evSelfN');
   /* บาส 3x3: คิดจากราคา × จำนวนสนาม × ชั่วโมงเปิด × อัตราการจองของบาสเอง */
   const bRate=val('brate'), bOcc=val('bocc')/100;
   const bask=Math.round(SD.bask*totalHrs*bRate*30*bOcc);
@@ -1600,8 +1970,6 @@ function recalc(){
   const whole=wholeN*WHOLE_FEE, evt=evtN*EVT_PROFIT;
   el('shopVal').textContent=fmt(shop); el('rentVal').textContent=fmt(rent);
   el('coachN').textContent=coachN; el('coachFee').textContent=fmt(cFee);
-  el('wholeN').textContent=wholeN; el('wholeFee').textContent=fmt(WHOLE_FEE);
-  el('evtN').textContent=evtN; el('evtFee').textContent=fmt(EVT_PROFIT);
   el('coachSub').textContent=`${coachN} คลาส/สัปดาห์ · โมเดล ${coachM}: ${CM[coachM].n}`;
   /* ตารางเทียบ 4 โมเดล + คำอธิบายสูตร */
   let ct=`<tr><th>โมเดล</th><th>วิธีคิด</th><th class="r">สนามได้/เดือน</th><th>เหมาะเมื่อ</th></tr>`;
@@ -1611,6 +1979,7 @@ function recalc(){
     ct+=`<tr${hl}><td>${k}. ${CM[k].n}</td><td class="sub">${CM[k].d}</td><td class="r">${fmt(r.court)}</td><td class="sub">${CM[k].when}</td></tr>`;
   });
   el('coachTable').innerHTML=ct;
+  const _ct2=el('coachTable2'); if(_ct2)_ct2.innerHTML=ct;
   el('coachNote').innerHTML=
     `📐 <b>สูตรคำนวณ (โมเดลที่เลือก = ${coachM})</b><br>`+
     `${coachN} คลาส/สัปดาห์ × 4.33 สัปดาห์/เดือน = <b>${sessions.toFixed(1)} คลาส/เดือน</b><br>`+
@@ -1618,6 +1987,7 @@ function recalc(){
     (coachM==='A'?`คอร์ทที่โค้ชเช่า ${cc.hrs.toFixed(1)} ชม. × ${fmt(dayRate)} ฿/ชม. = <b>สนามได้ ${fmt(cls)} ฿</b> (ค่าเรียนเป็นของโค้ชทั้งหมด)`
      :coachM==='D'?`ค่าเรียน ${fmt(cc.gross)} − ค่าจ้างโค้ช (${cc.hrs.toFixed(1)} ชม. × ${fmt(COACH_RATE)} ฿) = <b>สนามได้ ${fmt(cls)} ฿</b>`
      :`${fmt(cc.gross)} × ${coachM==='B'?'40':'60'}% = <b>สนามได้ ${fmt(cls)} ฿</b> · โค้ชได้ ${fmt(cc.gross-cls)} ฿`);
+  const _cn2=el('coachNote2'); if(_cn2)_cn2.innerHTML=el('coachNote').innerHTML;
   /* ---------- ระบบสมาชิก ---------- */
   const mfeeM=val('mfeeM'), mfeeY=val('mfeeY'), mn=val('mn');
   const myshare=val('myshare')/100;
@@ -1695,11 +2065,111 @@ function recalc(){
   el('rBask').textContent='+'+fmt(bask);
   el('rOpp').textContent=wholeDays?`(รวมในค่าเหมาแล้ว)`:'—';
   el('oppSub').textContent=wholeDays?`${wholeDays} วัน/เดือน ถูกกันไว้เป็นวันเหมา — เพดานรายชั่วโมงคิดจาก ${normDays} วันแล้ว`:'ไม่มีวันเหมาสนาม';
-  const extraRev=shop+rent+cls+whole+evt+bask;
+  const acad=AC.net;
+  el('rAcad').textContent='+'+fmt(acad);
+  el('acadSub').textContent=AC.n?`${AC.n} คน × ${fmt(AC.fee)} ฿/เดือน − ค่าโค้ช ${fmt(AC.coachCost)} ฿`:'ยังไม่เปิดอคาเดมี';
+  const extraRev=shop+rent+cls+acad+whole+evt+bask;
   const rev=courtRev+extraRev;
   el('rTotal').textContent=fmt(rev);
 
-  const staffN=totalCourts<=12?5:(totalCourts<=16?6:(totalCourts<=22?7:9));
+  /* ---------- สัดส่วน 3 เสารายได้ ---------- */
+  const P1=whole+evt, P2=cls+acad, P3=courtRev+bask, P4=shop+rent;
+  const core=P1+P2+P3;
+  const pc=x=>rev>0?(x/rev*100):0;
+  let mixHtml=`<tr><th>เสารายได้</th><th class="r">บาท/เดือน</th><th class="r">% ของรายได้</th><th class="r">เป้าที่ตั้งไว้</th><th>สถานะ</th></tr>`;
+  const rows=[
+    ['🏆 เสา 1 — แข่งขัน & Event',P1,50,'p15'],
+    ['🎓 เสา 2 — โค้ช & อคาเดมี',P2,30,'p16'],
+    ['🏸 เสา 3 — เล่นทั่วไป + บาส',P3,20,'p7']
+  ];
+  rows.forEach(([n2,v,t])=>{
+    const p=pc(v), gap=p-t;
+    const col=Math.abs(gap)<=7?'#1e7a3c':(gap<0?'#b3261e':'#b8860b');
+    const st=Math.abs(gap)<=7?'ตรงเป้า ✓':(gap<0?`ต่ำกว่าเป้า ${Math.abs(gap).toFixed(0)} จุด`:`สูงกว่าเป้า ${gap.toFixed(0)} จุด`);
+    mixHtml+=`<tr><td>${n2}</td><td class="r">${fmt(v)}</td><td class="r"><b>${p.toFixed(0)}%</b></td><td class="r">${t}%</td><td style="color:${col}">${st}</td></tr>`;
+  });
+  mixHtml+=`<tr><td>🛒 รายได้เสริม (ร้าน · คาเฟ่ · แผง · ป้าย)</td><td class="r">${fmt(P4)}</td><td class="r">${pc(P4).toFixed(0)}%</td><td class="r">—</td><td class="sub">ไม่นับในเป้า 50/30/20</td></tr>`;
+  mixHtml+=`<tr class="total"><td>รวม</td><td class="r">${fmt(rev)}</td><td class="r">100%</td><td class="r">—</td><td></td></tr>`;
+  el('mixTable').innerHTML=mixHtml;
+  const evShare=pc(P1), acShare=pc(P2);
+  el('mixNote').innerHTML= (evShare>=43&&acShare>=23)
+    ? `✅ <b>ตอนนี้ตั้งค่าไว้ใกล้เป้า 50/30/20 แล้ว</b> — แต่ต้องเข้าใจว่านี่คือภาพ <b>ปีที่ 3</b> ไม่ใช่ปีแรก · ปีแรกอคาเดมีมีแค่ 20–40 คน และเรายังไม่มีชื่อพอจะได้งานแข่งเดือนละหลายงาน`
+    : `📌 <b>ยังไม่ถึง 50/30/20</b> — ปรับตัวเลขที่หน้า <b>"แข่งขัน & Event"</b> (เพิ่มวันจัดงาน) และ <b>"โค้ช & อคาเดมี"</b> (เพิ่มนักเรียน) แล้วดูสัดส่วนขยับ · ` +
+      `ตอนนี้ Event ${evShare.toFixed(0)}% · โค้ช ${acShare.toFixed(0)}% · ทั่วไป ${pc(P3).toFixed(0)}%`;
+
+  /* ---------- หน้า Event: ตาราง P&L ---------- */
+  el('evModeNote').textContent=EV_TXT[EV_MODE]||'';
+  ['evRentN','evRentF','evSelfN','evPairs','evFee','evCats','evPrize','evShutSell','evShutCost','evFood']
+    .forEach(id=>{const e=el(id+'v'); if(e)e.textContent=fmt(val(id));});
+  el('evUmpv').textContent=val('evUmp')?'จ้าง (+18,000 ฿/งาน)':'ไม่จ้าง';
+  const dayNormal=Math.round(totalCourts*totalHrs*RATE*occ);   // รายได้วันธรรมดา 1 วันที่อัตราจองปัจจุบัน
+  let pl=`<tr><th>งานที่เราจัดเอง 1 งาน (1 วัน)</th><th class="r">บาท</th><th>ที่มาของตัวเลข</th></tr>`;
+  pl+=`<tr><td>ค่าสมัคร ${EV.pairs} คู่ × ${fmt(val('evFee'))} ฿</td><td class="r">+${fmt(EV.revEntry)}</td><td class="sub">ตลาด 1,100–1,600 ฿/คู่</td></tr>`;
+  pl+=`<tr><td>ขายคูปองลูกขนไก่ ${EV.pairs} คู่</td><td class="r">+${fmt(EV.revShut)}</td><td class="sub">คูปอง 10 ดวง/คู่</td></tr>`;
+  pl+=`<tr class="total"><td>รวมรายรับ</td><td class="r">+${fmt(EV.rev)}</td><td></td></tr>`;
+  pl+=`<tr><td>ต้นทุนลูกขนไก่ (${EV.pairs*10} ดวง)</td><td class="r">−${fmt(EV.costShut)}</td><td class="sub">${fmt(val('evShutCost'))} ฿/ดวง</td></tr>`;
+  pl+=`<tr><td>เงินรางวัล ${val('evCats')} รุ่น</td><td class="r">−${fmt(EV.costPrize)}</td><td class="sub">ตลาดจริง 8,000–13,800 ฿/รุ่น</td></tr>`;
+  pl+=`<tr><td>ถ้วย + เหรียญ</td><td class="r">−${fmt(EV.costTroph)}</td><td class="sub">ถ้วย 200 ฿ · เหรียญ 60 ฿</td></tr>`;
+  pl+=`<tr><td>ข้าวกล่อง+น้ำ ${EV.players} คน</td><td class="r">−${fmt(EV.costFood)}</td><td class="sub">ผู้จัดทุกงานแจกข้าว 1 กล่อง</td></tr>`;
+  pl+=`<tr><td>ระบบจัดแข่ง + ถ่ายทอดสด + ช่างภาพ + พยาบาล + ประกัน</td><td class="r">−${fmt(EV.costFixed)}</td><td class="sub">1,500 + 15,000 + 4,500 + 2,590 + 3,000</td></tr>`;
+  pl+=`<tr><td>ทีมงานกลาง 10 คน</td><td class="r">−${fmt(EV.costCrew)}</td><td class="sub">800 ฿/คน/วัน</td></tr>`;
+  if(EV.costUmp)pl+=`<tr><td>กรรมการรายคอร์ท 18 คน</td><td class="r">−${fmt(EV.costUmp)}</td><td class="sub">1,000 ฿/คน/วัน (อัตราภาครัฐ)</td></tr>`;
+  pl+=`<tr class="total"><td>รวมรายจ่าย</td><td class="r">−${fmt(EV.cost)}</td><td></td></tr>`;
+  pl+=`<tr class="total" style="background:${EV.net>0?'#eef7f1':'#fdecec'}"><td><b>กำไรสุทธิ 1 งาน (เราจัดเอง)</b></td><td class="r"><b>${EV.net>=0?'+':''}${fmt(EV.net)}</b></td><td class="sub">ยังไม่รวมค่าอาหาร/โปรช็อปที่ขายได้ในวันงาน</td></tr>`;
+  pl+=`<tr><td>เทียบ: ให้เช่าเหมา 1 วัน</td><td class="r">+${fmt(WHOLE_FEE)}</td><td class="sub">ไม่ต้องลงแรง ไม่มีความเสี่ยง</td></tr>`;
+  pl+=`<tr><td>เทียบ: ขายรายชั่วโมงตามปกติ 1 วัน</td><td class="r">+${fmt(dayNormal)}</td><td class="sub">${totalCourts} คอร์ท × ${totalHrs} ชม. × ${fmt(RATE)} ฿ × จอง ${(occ*100).toFixed(0)}%</td></tr>`;
+  el('evPL').innerHTML=pl;
+  const bestSelf=EV.net>WHOLE_FEE;
+  el('evCompare').innerHTML=
+    `📊 <b>เทียบ 3 ทางในวันเดียวกัน:</b> เราจัดเอง <b>${fmt(EV.net)} ฿</b> · ให้เช่าเหมา <b>${fmt(WHOLE_FEE)} ฿</b> · ขายรายชั่วโมงปกติ <b>${fmt(dayNormal)} ฿</b><br>`+
+    (bestSelf
+      ? `→ <b>จัดเองได้มากกว่าให้เช่า ${fmt(EV.net-WHOLE_FEE)} ฿/งาน</b> และมากกว่าวันขายปกติ ${(dayNormal>0?(EV.net/dayNormal).toFixed(1):'—')} เท่า · แต่ต้องมีทีมงานและรับความเสี่ยงคนไม่เต็ม`
+      : `→ <b>ให้เช่าเหมาคุ้มกว่าจัดเอง ${fmt(WHOLE_FEE-EV.net)} ฿/งาน</b> ที่ตัวเลขชุดนี้ · ลองเพิ่มจำนวนคู่หรือค่าสมัคร แล้วดูว่าจุดไหนจัดเองถึงจะคุ้ม`)+
+    `<br>💡 ไม่ว่าทางไหน <b>วันจัดงานทำเงินได้มากกว่าวันขายปกติหลายเท่า</b> — นี่คือเหตุผลทั้งหมดที่เสานี้ตั้งเป้าไว้ 50%`;
+  const shM=EV.shutMargin;
+  el('evWarn').innerHTML= shM<0
+    ? `⛔ <b>ตอนนี้ขาดทุนค่าลูกขนไก่ ${fmt(-shM)} ฿ ต่อคู่</b> — เก็บคูปอง ${fmt(val('evShutSell'))} ฿ แต่ต้นทุน 10 ดวง = ${fmt(val('evShutCost')*10)} ฿ · <b>ต้องขึ้นราคาคูปองหรือเปลี่ยนยี่ห้อลูก</b>`
+    : `🪶 <b>กำไรค่าลูกขนไก่แค่ ${fmt(shM)} ฿/คู่</b> (${fmt(EV.revShut-EV.costShut)} ฿ ทั้งงาน) — บรรทัดนี้แทบไม่ใช่กำไร เป็นแค่การส่งต่อต้นทุน · <b>อย่าเอาไปคิดเป็นรายได้หลัก</b> กำไรจริงมาจากค่าสมัคร`;
+  /* ปฏิทินเพดานเสา Event */
+  const evDaysUsed=wholeN+evtN;
+  let cal=`<tr><th>ใช้เสาร์-อาทิตย์กี่วัน</th><th class="r">ให้เช่าเหมา</th><th class="r">จัดเอง</th><th class="r">รายได้ Event/เดือน</th><th>เหลือเสาร์-อาทิตย์ขายปกติ</th></tr>`;
+  [[0,0],[1,0],[2,0],[2,1],[3,1],[4,2],[4,4]].forEach(([a,b])=>{
+    const tot=a*WHOLE_FEE+b*EV.net, used=a+b, left=Math.max(8-used,0);
+    const hl=(a===wholeN&&b===evtN)?' style="background:#eaf1fa;font-weight:600"':'';
+    cal+=`<tr${hl}><td>${used} วัน</td><td class="r">${a}</td><td class="r">${b}</td><td class="r">${fmt(tot)}</td><td>${left} วัน${left<=1?' <b style="color:#b3261e">— เสี่ยงเสียลูกค้าประจำวันหยุด</b>':''}</td></tr>`;
+  });
+  el('evCal').innerHTML=cal;
+
+  /* ---------- หน้าอคาเดมี ---------- */
+  ['acN','acFee','acSes','acSize','acPay'].forEach(id=>{const e=el(id+'v'); if(e)e.textContent=fmt(val(id));});
+  el('acHrv').textContent=val('acHr');
+  let ap=`<tr><th>อคาเดมีต่อเดือน</th><th class="r">บาท</th><th>วิธีคิด</th></tr>`;
+  ap+=`<tr><td>ค่าเรียน ${AC.n} คน × ${fmt(AC.fee)} ฿</td><td class="r">+${fmt(AC.rev)}</td><td class="sub">เก็บรายเดือน ล่วงหน้า</td></tr>`;
+  ap+=`<tr><td>ค่าจ้างโค้ช</td><td class="r">−${fmt(AC.coachCost)}</td><td class="sub">${AC.classesMo} คลาส × ${AC.hr} ชม. × ${fmt(val('acPay'))} ฿/ชม.</td></tr>`;
+  ap+=`<tr class="total" style="background:${AC.net>0?'#eef7f1':'#fdecec'}"><td><b>กำไรอคาเดมี</b></td><td class="r"><b>${AC.net>=0?'+':''}${fmt(AC.net)}</b></td><td class="sub">ยังไม่หักค่าเสียโอกาสคอร์ท</td></tr>`;
+  el('acPL').innerHTML=ap;
+  el('acNet').textContent=(AC.net>=0?'+':'')+fmt(AC.net)+' ฿';
+  el('acHrs').textContent=fmt(Math.round(AC.hrs))+' ชม.';
+  const capOff=totalCourts*dayHrs*normDays;   // ชั่วโมงคอร์ทช่วงกลางวัน (นอกพีค) ทั้งเดือน
+  el('acHrsSub').textContent=`จากคอร์ทกลางวันที่ว่าง ${fmt(Math.round(capOff))} ชม./เดือน (${(AC.hrs/capOff*100).toFixed(0)}%)`;
+  const perHr=AC.hrs>0?AC.net/AC.hrs:0;
+  el('acPerHr').textContent=fmt(Math.round(perHr))+' ฿';
+  el('acPerHrSub').textContent=`เทียบขายคอร์ทปกติได้ ${fmt(RATE)} ฿ — ${perHr>=RATE?'อคาเดมีคุ้มกว่า ✓':'ขายคอร์ทปกติคุ้มกว่า'}`;
+  el('acPerHead').textContent=fmt(AC.fee*12)+' ฿';
+  el('acWarn').innerHTML= AC.hrs>capOff
+    ? `⛔ <b>ชั่วโมงคลาสเกินคอร์ทกลางวันที่มี</b> (${fmt(Math.round(AC.hrs))} > ${fmt(Math.round(capOff))} ชม.) — ต้องไปเบียดช่วงพีค ซึ่งแย่งคอร์ทจากลูกค้าที่จ่ายเต็ม · ลดจำนวนนักเรียนหรือเพิ่มขนาดคลาส`
+    : (perHr>=RATE
+      ? `✅ <b>อคาเดมีให้ผลตอบแทนต่อคอร์ท-ชั่วโมง ${fmt(Math.round(perHr))} ฿ สูงกว่าขายคอร์ทปกติ ${fmt(RATE)} ฿</b> และใช้เฉพาะคอร์ทกลางวันที่คู่แข่งปิดกันหมด = รายได้เพิ่มแท้ๆ ไม่เบียดใคร`
+      : `⚠️ <b>ตอนนี้อคาเดมีให้ ${fmt(Math.round(perHr))} ฿/คอร์ท-ชม. ต่ำกว่าขายคอร์ทปกติ ${fmt(RATE)} ฿</b> — ยังคุ้มถ้าใช้ชั่วโมงกลางวันที่ขายไม่ออกอยู่แล้ว แต่ห้ามเอาไปจัดช่วงเย็นเด็ดขาด · ทางแก้: ขึ้นค่าเรียน เพิ่มคนต่อคลาส หรือลดค่าจ้างโค้ช`);
+  el('acR1').textContent=fmt(30*AC.fee);
+  el('acR2').textContent=fmt(80*AC.fee);
+  el('acR3').textContent=fmt(200*AC.fee);
+
+
+  const staffBase=totalCourts<=12?5:(totalCourts<=16?6:(totalCourts<=22?7:9));
+  const staffAcad=AC.n>0?Math.ceil(AC.n/80):0;      // ธุรการอคาเดมี 1 คน/นักเรียน 80 คน
+  const staffEvt=(wholeN+evtN)>=3?1:0;              // ผู้ประสานงานอีเวนต์ ถ้าจัด ≥3 งาน/เดือน
+  const staffN=staffBase+staffAcad+staffEvt;
   const staff=staffN*19000;
   const util=Math.round(totalCourts*4200+45000);
   const supply=Math.round(totalCourts*900+8000);
@@ -1710,7 +2180,7 @@ function recalc(){
   const lampReplace=Math.round(lightCost/(8*12));          // หลอด LED ~8 ปี
   const cleanFix=Math.round(totalCourts*950+12000);        // ล้างพื้น/ขัดเสื่อ + ซ่อมทั่วไป
   const maint=matReplace+netReplace+lampReplace+cleanFix;
-  el('staffSub').textContent=`${staffN} คน (แอดมิน 2 · ดูแลสนาม ${staffN-4} · แม่บ้าน 2)`;
+  el('staffSub').textContent=`${staffN} คน = ประจำสนาม ${staffBase}`+(staffAcad?` + ธุรการอคาเดมี ${staffAcad}`:'')+(staffEvt?` + ประสานงานอีเวนต์ ${staffEvt}`:'');
   el('eStaff').textContent=fmt(staff);
   el('eUtil').textContent=fmt(util);
   el('eSupply').textContent=fmt(supply);
@@ -1725,6 +2195,31 @@ function recalc(){
   el('eTotal').textContent=fmt(exp);
 
   const net=rev-exp, cash=net-pmt, dscr=net*12/(pmt*12);
+
+  /* ---------- หน้า DBD: ตำแหน่งเราในอุตสาหกรรม ---------- */
+  const revY=rev*12;
+  el('dbdOurRev').textContent=fmtM(revY);
+  el('dbdOurMargin').textContent=(revY>0?net*12/revY*100:0).toFixed(1)+'%';
+  /* เช็คความสมจริง — เทียบตัวเลขต่อคอร์ทกับงบจริงที่ยื่น DBD */
+  const mgn=rev>0?net/rev*100:0;
+  const perCourt=rev/totalCourts;                 // รายได้ต่อคอร์ทต่อเดือน
+  const KURU_PC=49700;                            // KURU 5.96 ลบ./ปี ÷ 12 ÷ ~10 คอร์ท
+  const ratio=perCourt/KURU_PC;
+  let sn=`<b>🔍 เช็คความสมจริง — 3 ตัวเลขที่ธนาคารจะถาม</b><br>`;
+  sn+=`<b>1. รายได้ต่อคอร์ท:</b> ${fmt(Math.round(perCourt))} ฿/คอร์ท/เดือน — เทียบ KURU (สนามจริงฝั่งธนใต้) ทำได้ ~49,700 ฿ = <b>${ratio.toFixed(1)} เท่า</b> `;
+  sn+= ratio>1.6
+    ? `<span style="color:#b3261e">⚠️ สูงกว่ามาก ทั้งที่เราขายถูกกว่าเขา (200 vs 280–380 ฿) — ต้องอธิบายให้ได้ว่ามาจากไหน</span><br>`
+    : `<span style="color:#1e7a3c">✓ อยู่ในระดับที่อธิบายได้</span><br>`;
+  sn+=`<b>2. มาร์จิ้นก่อนผ่อน:</b> ${mgn.toFixed(0)}% — เทียบสนามเก่งสุดในไทย 27–28% · KURU ปีแรก 9.3% · ค่ามัธยฐานตลาด <b>ติดลบ</b><br>`;
+  sn+=`<b>3. ที่มาของส่วนต่าง:</b> `;
+  sn+= (P1+P2)/Math.max(rev,1)>0.3
+    ? `<b>${(((P1+P2)/rev)*100).toFixed(0)}% ของรายได้มาจาก Event + อคาเดมี</b> ซึ่ง KURU และสนามทั่วไปแทบไม่มี — <b>นี่คือคำตอบที่ต้องพูดกับธนาคาร</b> และเป็นเหตุผลเดียวที่ตัวเลขเราสูงกว่าตลาดได้อย่างมีเหตุผล`
+    : `รายได้เกือบทั้งหมดมาจากค่าคอร์ท เหมือนสนามทั่วไป — <b>ถ้าเป็นแบบนี้จะอธิบายมาร์จิ้นที่สูงกว่าตลาดไม่ได้</b> ต้องดัน Event กับอคาเดมีขึ้นมาจริงๆ`;
+  sn+=`<br>📌 <b>ข้อควรระวัง:</b> ตัวเลขนี้คือภาพ<b>เต็มกำลังปีที่ 3</b> — ทั้ง 3 เสาทำงานพร้อมกัน · ปีที่ 1 ให้ดูหน้า "กระแสเงินสด &amp; ภาษี" ซึ่งไต่ระดับจาก 30% ของเป้า`;
+  el('mixSanity').innerHTML=sn;
+  el('dbdOurNote').innerHTML= revY>=5000000
+    ? `<b style="color:#1e7a3c">อยู่เหนือเส้น 5 ล้าน ✓</b> — ถ้าทำได้จริงจะเป็นสนามแบดที่รายได้สูงที่สุดในฐานข้อมูลนี้ (สูงกว่าอันดับ 1 ปัจจุบันที่ 11.4 ลบ.)`
+    : `<b style="color:#b3261e">ต่ำกว่าเส้น 5 ล้าน ⚠️</b> — อยู่ในโซนที่ตลาดขาดทุนมากกว่ากำไร`;
   el('kNet').textContent=fmt(net)+' ฿';
   const kc=el('kCash'); kc.textContent=(cash>=0?'+':'')+fmt(cash)+' ฿'; kc.classList.toggle('warn',cash<0);
   el('kCashSub').textContent=`หลังผ่อน ${fmt(pmt)} ฿`;
