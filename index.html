@@ -1539,7 +1539,7 @@
     <table>
       <tr><th>เฟส</th><th>ทำอะไร</th><th class="r">งบเพิ่ม</th><th>เงื่อนไขที่ต้องเกิดก่อนถึงจะลงเฟสถัดไป</th></tr>
       <tr style="background:#eef7f1"><td><b>เฟส 1</b><br><span class="sub">เดือน 0–7</span></td><td><b>งานโครงสร้างทั้งโรงงาน + คอร์ทชุดแรก</b><br><span class="sub">ปรับพื้นทั้งโถง · ปิด skylight + ฉนวน · ระบายอากาศ · ไฟฟ้าหลัก + หม้อแปลง · ทาสี · ห้องน้ำ-อาบน้ำ · คาเฟ่ · ที่จอด · <b>ปูพื้นยาง + ไฟ เฉพาะคอร์ทชุดแรก</b></span></td><td class="r" id="phP1"></td><td>เปิดบริการ เริ่มรับงานแข่ง สร้างฐานลูกค้าและก๊วนประจำ</td></tr>
-      <tr><td><b>เฟส 2</b><br><span class="sub">ปีที่ 2–3</span></td><td><b>ขยายคอร์ทให้เต็มโถง</b> (ตำแหน่งเตรียมไว้แล้วตั้งแต่เฟส 1)<br><span class="sub">เพิ่มพื้นยาง + ไฟ + เน็ต เท่านั้น — งานโครงสร้างทำครบไปแล้ว</span></td><td class="r" id="phP2"></td><td><b>อัตราการจองช่วงพีคเกิน 80% ต่อเนื่อง 3 เดือน</b> และมีคิวรอคอร์ทจริง</td></tr>
+      <tr><td><b>เฟส 2</b><br><span class="sub">ปีที่ 2–3</span></td><td><b>ขยายคอร์ทให้เต็มโถง + เติมส่วนที่เลื่อนไว้</b><br><span class="sub">พื้นยาง+ไฟ+เน็ตคอร์ทที่เพิ่ม · โซนแอร์ · โซนกินข้าว · โปรช็อป · ชั้น 2 · ป้าย LED · ภูมิทัศน์ · <b>สนามบาส 3x3</b></span></td><td class="r" id="phP2"></td><td><b>อัตราการจองช่วงพีคเกิน 80% ต่อเนื่อง 3 เดือน</b> และมีคิวรอคอร์ทจริง</td></tr>
       <tr><td><b>เฟส 3</b><br><span class="sub">ปีที่ 3+</span></td><td><b>บาส 3x3 ในเพิงข้าง + อคาเดมีเต็มรูปแบบ</b><br><span class="sub">ยกหลังคาเฉพาะโซนบาส · จ้างโค้ชประจำ · ห้องเรียน</span></td><td class="r" id="phP3"></td><td>เฟส 1–2 คืนเงินกู้ได้ตรงเวลา 12 เดือนติด และมีเงินสดสำรอง ≥6 เดือนของค่าใช้จ่าย</td></tr>
     </table>
     </div>
@@ -1554,7 +1554,7 @@
       <tr><th>วิธี</th><th class="r">ประหยัดได้</th><th>แลกกับอะไร</th><th class="r">แนะนำ</th></tr>
       <tr style="background:#eef7f1"><td><b>เริ่ม 12 คอร์ทแทน 18</b></td><td class="r" id="phSave1"></td><td>รับงานแข่งได้อยู่ แต่ค่าเหมาต่ำกว่าเพดาน · ขยายทีหลังได้</td><td class="r" style="color:#1e7a3c"><b>ทำเลย</b></td></tr>
       <tr style="background:#eef7f1"><td><b>ใช้พื้นยางเกรดกลาง (std) แทน pro</b></td><td class="r" id="phSave2"></td><td>อายุ 6 ปีแทน 9 ปี · เล่นทั่วไปและงานแข่งสมัครเล่นใช้ได้สบาย</td><td class="r" style="color:#1e7a3c"><b>ทำเลย</b></td></tr>
-      <tr><td>เลื่อนบาส 3x3 ไปเฟส 3</td><td class="r">~3.5 ลบ.</td><td>เสียรายได้บาส แต่ยังไม่ใช่เสาหลัก</td><td class="r" style="color:#1e7a3c">ทำเลย</td></tr>
+      <tr><td>เลื่อนบาส 3x3 ไปเฟส 3</td><td class="r" id="phSave3"></td><td>เสียรายได้บาส แต่ยังไม่ใช่เสาหลัก</td><td class="r" style="color:#1e7a3c">ทำเลย</td></tr>
       <tr style="background:#fdecec"><td>ลดสเปกระบายอากาศ / ไม่ปิดสกายไลท์</td><td class="r">~2–3 ลบ.</td><td><b>ลูกค้าไม่กลับมา</b> — ร้อนและแสงแยงตาคือ 2 เรื่องที่คนเลิกเล่นสนามนั้นทันที</td><td class="r" style="color:#b3261e"><b>ห้ามเด็ดขาด</b></td></tr>
     </table>
     </div>
@@ -2578,7 +2578,8 @@ function recalc(){
                ['เคาน์เตอร์น้ำ + โปรช็อป + เครื่องขึ้นเอ็น',600000,'เริ่มจากตู้เย็น+ชั้นวาง ค่อยเติมเครื่องขึ้นเอ็น'],
                ['ชั้น 2 ปรับปรุงเป็นที่พักส่วนตัว',1500000,'ยังไม่ย้ายเข้าอยู่ก็ได้'],
                ['ซุ้มทางเข้า + ป้ายไฟ LED ริมถนน',600000,'ใช้ป้ายไวนิลก่อน'],
-               ['ภูมิทัศน์ สวนหย่อม ทางเดิน',400000,'ไม่กระทบการเล่น']];
+               ['ภูมิทัศน์ สวนหย่อม ทางเดิน',400000,'ไม่กระทบการเล่น'],
+               ['สนามบาส 3x3 + ยกหลังคาโซนเพิง',5300000,'อยู่นอกโถงหลัก ทำทีหลังไม่กระทบสนามแบด']];
   const deferSum=DEFER.reduce((s,r)=>s+r[1],0);
   const FITOUT=total-STRUCT-perCourtKit*totalCourts;         // ส่วนบริการ+รอบนอก+ค่าสิทธิ์+ระบบ
   const cost1=STRUCT+(FITOUT-deferSum)+perCourtKit*n1;
@@ -2595,9 +2596,10 @@ function recalc(){
   el('phPmt').textContent=fmt(Math.round(pmt1))+' ฿';
   el('phP1').textContent=fmtM(cost1);
   el('phP2').textContent=cost2>0?fmtM(cost2):'—';
-  el('phP3').textContent='~3.5 ลบ.';
+  el('phP3').textContent=fmtM(3500000)+' (อคาเดมี/โค้ช)';
   el('phSave1').textContent=fmtM(perCourtKit*Math.max(18-12,0));
   el('phSave2').textContent=fmtM((gSum(GRADES.pro)-gSum(GRADES.std))*n1);
+  el('phSave3').textContent=fmtM(5300000);
   let pt=`<tr><th>รายการ</th><th class="r">เฟส 1 (${n1} คอร์ท)</th><th class="r">เฟส 2 (+${Math.max(totalCourts-n1,0)} คอร์ท)</th><th>ทำไมแบ่งแบบนี้</th></tr>`;
   pt+=`<tr><td>งานโครงสร้างทั้งโถง <span class="sub">ปรับพื้น · ปิดสกายไลท์+ฉนวน · ระบายอากาศ · ไฟฟ้า+หม้อแปลง · ทาสี · ซ่อมหลังคา</span></td><td class="r">${fmtM(STRUCT)}</td><td class="r">—</td><td class="sub"><b>ต้องทำครั้งเดียวตอนโรงงานว่าง</b> ทำทีหลังต้องปิดสนาม</td></tr>`;
   pt+=`<tr><td>ห้องน้ำ-อาบน้ำ · คาเฟ่ · ที่จอด · ระบบจอง · ค่าสิทธิ์อาคาร</td><td class="r">${fmtM(FITOUT)}</td><td class="r">—</td><td class="sub">ใช้ร่วมกันทั้งโครงการ ไม่ขึ้นกับจำนวนคอร์ท</td></tr>`;
