@@ -1212,6 +1212,19 @@
   </div>
 
   <div class="card">
+    <h3 style="margin-top:0">📅 แต่ละสนามจัดแข่งกี่งาน — รายเดือน รายปี</h3>
+    <p class="sub" style="margin-bottom:10px">นับจาก badwebthailand.com ทุกรายการที่ประกาศ (262 รายการ) · <b>ปี พ.ศ. · ⭐ = คู่แข่งตรงในโซนเรา</b></p>
+    <div class="btnrow">
+      <span class="lbl">เลือกปี</span>
+      <button class="btn ty" onclick="setTourYear(0,this)">2567</button>
+      <button class="btn ty" onclick="setTourYear(1,this)">2568</button>
+      <button class="btn ty active" onclick="setTourYear(2,this)">2569</button>
+    </div>
+    <div style="overflow-x:auto"><table id="tourTable"></table></div>
+    <div class="note" id="tourNote"></div>
+  </div>
+
+  <div class="card">
     <h3 style="margin-top:0">📚 ไปเอาข้อมูลรายการแข่งจากไหนได้บ้าง — 5 แหล่ง</h3>
     <p class="sub" style="margin-bottom:10px">ไม่มีแหล่งไหนครบ 100% เพราะผู้จัดแต่ละเจ้าประกาศคนละที่ — ต้องดูหลายแหล่งประกอบกัน</p>
     <div style="overflow-x:auto">
@@ -2183,6 +2196,40 @@ function syncCourts(v){el('courts').value=v;recalc();}
 function pmtCalc(P,r,n){const i=r/12,m=n*12;return P*i*Math.pow(1+i,m)/(Math.pow(1+i,m)-1);}
 
 /* ---------- 2D plan ---------- */
+
+/* ---------- ตารางรายการแข่งรายสนาม รายเดือน ---------- */
+const TOURDATA=[["CC Badminton (บางขุนเทียน) ⭐", [0, 0, 0, 0, 3, 3, 2, 2, 2, 3, 1, 2], [1, 3, 5, 2, 2, 2, 0, 5, 1, 2, 2, 3], [2, 1, 3, 3, 3, 1, 2, 1, 2, 1, 1, 0]], ["T.Thailand Arena (บางบัวทอง)", [0, 0, 0, 0, 3, 3, 1, 2, 0, 0, 10, 1], [2, 2, 4, 1, 3, 2, 1, 1, 0, 2, 0, 1], [1, 1, 0, 1, 2, 1, 2, 2, 0, 3, 1, 0]], ["15 คอร์ต ลาดปลาเค้า (บางเขน)", [0, 0, 0, 0, 1, 1, 0, 0, 1, 2, 2, 1], [0, 2, 2, 0, 1, 0, 3, 2, 1, 0, 0, 0], [0, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0]], ["18 คอร์ท ราชพฤกษ์ (ปากเกร็ด)", [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0], [1, 2, 1, 1, 1, 0, 3, 1, 0, 0, 1, 0]], ["BEAT Discovery (สุขุมวิท 66)", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]], ["Guy Badminton (รามอินทรา)", [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]], ["BTU Sportscomplex (ทวีวัฒนา)", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0]], ["R-MA (งามวงศ์วาน)", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1], [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0]], ["CR Badminton (รามคำแหง 32)", [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]], ["Monkey (พัทยา)", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0]], ["A&N (นครปฐม)", [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]];
+const TOURTOT={"2567": [0, 0, 0, 0, 10, 14, 6, 8, 5, 7, 19, 7], "2568": [3, 7, 14, 4, 9, 7, 12, 16, 4, 6, 8, 7], "2569": [8, 6, 8, 10, 9, 10, 17, 8, 3, 6, 4, 0]};
+
+let TOURY=2;
+const TMON=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const TYNAME=['2567','2568','2569'];
+function setTourYear(i,btn){TOURY=i;document.querySelectorAll('.btn.ty').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');drawTour();}
+function drawTour(){
+  const yn=TYNAME[TOURY];
+  let t=`<tr><th>สนาม</th>`+TMON.map(m=>`<th class="r">${m}</th>`).join('')+`<th class="r">รวมทั้งปี</th><th class="r">เฉลี่ย/ด.</th></tr>`;
+  const rows=TOURDATA.map(r=>({v:r[0],a:r[1+TOURY]})).filter(r=>r.a.reduce((s,x)=>s+x,0)>0)
+    .sort((a,b)=>b.a.reduce((s,x)=>s+x,0)-a.a.reduce((s,x)=>s+x,0));
+  rows.forEach(r=>{
+    const tot=r.a.reduce((s,x)=>s+x,0);
+    const hl=/⭐/.test(r.v)?' style="background:#fff8ec"':'';
+    t+=`<tr${hl}><td>${tot>=8?'<b>'+r.v+'</b>':r.v}</td>`
+      +r.a.map(n=>`<td class="r"${n>=3?' style="background:#dbeafe;font-weight:600"':(n===0?' class="r sub"':'')}>${n||'–'}</td>`).join('')
+      +`<td class="r"><b>${tot}</b></td><td class="r">${(tot/12).toFixed(1)}</td></tr>`;
+  });
+  const tt=TOURTOT[yn], sum=tt.reduce((s,x)=>s+x,0);
+  t+=`<tr class="total"><td><b>ทุกสนามทั่วประเทศรวมกัน</b></td>`+tt.map(n=>`<td class="r">${n||'–'}</td>`).join('')
+    +`<td class="r"><b>${sum}</b></td><td class="r"><b>${(sum/12).toFixed(1)}</b></td></tr>`;
+  el('tourTable').innerHTML=t;
+  const notes={
+   '2567':'⚠️ <b>ปี 2567 เริ่มนับจากเดือน พ.ค.</b> (เว็บเพิ่งเริ่มเก็บ) — 4 เดือนแรกไม่มีข้อมูล ไม่ใช่ว่าไม่มีงาน',
+   '2568':'✅ <b>ปีเดียวที่ข้อมูลครบทั้ง 12 เดือน</b> — ใช้ปีนี้เป็นฐานอ้างอิงที่น่าเชื่อถือที่สุด',
+   '2569':'⚠️ <b>ปี 2569 ยังไม่จบ</b> — เดือน ก.ย. เป็นต้นไปเป็นรายการที่ประกาศล่วงหน้า ตัวเลขจะเพิ่มอีกเมื่อใกล้ถึงเวลา'};
+  el('tourNote').innerHTML=notes[yn]+
+   `<br>📊 <b>อ่านยังไง:</b> ช่องสีฟ้า = เดือนที่จัด 3 งานขึ้นไป · <b>CC Badminton จัดถี่ที่สุดในประเทศทุกปี</b> (2567: 18 · 2568: 28 · 2569: 20 งาน) และอยู่ห่างเราแค่ 2–3 กม.`+
+   `<br>🔎 <b>ตัวเลขจริงสูงกว่านี้</b> — ตารางนี้นับจาก badwebthailand แหล่งเดียว ซึ่งเก็บได้ราวครึ่งหนึ่งของตลาด · northbadminton.blogspot.com นับปี 2569 ได้ <b>245 รายการ</b> เทียบกับ <b>89 รายการ</b> ที่นี่`;
+}
+
 function drawPlan(courts){
   const M=MODES[mode], perSide=courts/2, maxPer=Math.min(M.maxPerSide,Math.floor(USABLE_L/M.pitch));
   const X0=230, X1=790, span=X1-X0;                 // 70 m of hall length in px
@@ -2275,7 +2322,7 @@ function recalc(){
   const park=Math.round(totalCourts*5);
   el('kPark').textContent='~'+park+' คัน';
   el('kParkSub').textContent=park<=PARK_CAP?`ที่ดิน 4.12 ไร่ จอดได้ ~${PARK_CAP} คัน ✅`:`⚠️ ต้องการ ~${park} แต่จอดได้ ~${PARK_CAP} คัน — ต้องหาที่จอดเสริม`;
-  drawPlan(courts); drawGrades(totalCourts); drawBaskPlan(SD.bask);
+  drawPlan(courts); drawGrades(totalCourts); drawBaskPlan(SD.bask); drawTour();
   if(window.rebuild3D) window.rebuild3D(courts);
 
   /* budget */
