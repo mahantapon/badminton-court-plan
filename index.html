@@ -840,7 +840,7 @@
 
 <!-- ================= P9 ตลาด & คู่แข่ง ================= -->
 <section class="page" id="p9">
-  <h2>ตลาด &amp; คู่แข่ง — สนามแบดในรัศมี 5–8 กม.</h2>
+  <h2>ตลาด &amp; คู่แข่ง — ใครอยู่ตรงไหน ราคาเท่าไหร่</h2>
   <div class="card">
     <h3 style="margin-top:0">🆚 คู่แข่งที่ต้องรู้ (ข้อมูลสาธารณะ)</h3>
     <div style="overflow-x:auto">
@@ -894,6 +894,12 @@
     </div>
   </div>
 
+  <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง &amp; คอร์ท</button><button class="btn" onclick="go('p20')">ถัดไป: อัตราจองสด →</button></div>
+</section>
+
+<!-- ================= P20 อัตราจองสด ================= -->
+<section class="page" id="p20">
+  <h2>อัตราการจองสด — วันนี้ทั้งตลาดเป็นยังไง</h2>
   <div class="card">
     <h3 style="margin-top:0">📡 อัตราการจองจริงของคู่แข่ง — ดึงสดจากระบบจอง</h3>
     <p class="sub" style="margin-bottom:10px">อ่านตรงจากระบบจองของแต่ละสนาม สถานะรายคอร์ท (CC + Winning ผ่าน Matchday · BEAT ผ่าน Okrabook) · เก็บอัตโนมัติวันละ 2 รอบ (17:45 และ 21:30) · <span id="lbUpdated">กำลังโหลด…</span></p>
@@ -922,6 +928,12 @@
     <div class="note" id="mkFallback" style="display:none">⚠️ โหลดข้อมูลตลาดไม่ได้ (เปิดจากไฟล์ในเครื่อง) — ดูได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/market-latest.json" target="_blank">market-latest.json</a></div>
   </div>
 
+  <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p21')">ถัดไป: ย้อนหลัง →</button></div>
+</section>
+
+<!-- ================= P21 ย้อนหลัง ================= -->
+<section class="page" id="p21">
+  <h2>ย้อนหลัง &amp; จองล่วงหน้า — เลือกวัน เลือกช่วงเวลา</h2>
   <div class="card">
     <h3 style="margin-top:0">🕰️ ย้อนหลัง &amp; จองล่วงหน้า — เลือกวัน เลือกช่วงเวลา ได้เอง</h3>
     <p class="sub" style="margin-bottom:10px" id="hsIntro">กำลังโหลดคลังข้อมูล…</p>
@@ -951,6 +963,12 @@
     <div class="note" id="hsFallback" style="display:none">⚠️ โหลดคลังย้อนหลังไม่ได้ (เปิดจากไฟล์ในเครื่อง) — ดูได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/history.json" target="_blank">history.json</a></div>
   </div>
 
+  <div class="pagenav"><button class="btn ghost" onclick="go('p20')">← อัตราจองสด</button><button class="btn" onclick="go('p22')">ถัดไป: รีวิวคู่แข่ง →</button></div>
+</section>
+
+<!-- ================= P22 รีวิว & สำรวจเอง ================= -->
+<section class="page" id="p22">
+  <h2>รีวิวคู่แข่ง &amp; การสำรวจภาคสนาม</h2>
   <div class="card">
     <h3 style="margin-top:0">🗣️ จุดอ่อนคู่แข่งจากรีวิวจริง — ขุดเมื่อ 4 ส.ค. 2569</h3>
     <p class="sub" style="margin-bottom:10px">ไล่อ่านรีวิว Google/Trip.com/Wongnai/lemon8/Pantip ของทั้ง 6 สนาม · รายงานเฉพาะที่มีหลักฐานจริง — สนามไหนหาไม่เจอบอกตรงๆ ว่าไม่เจอ</p>
@@ -993,10 +1011,9 @@
       <div class="step"><span class="n"></span><div><b>ถามแม่ค้าน้ำ/ร้านข้าวหน้าสนาม</b> — รู้ดีที่สุดว่าวันไหนคนเยอะ ก๊วนไหนมาประจำ และลูกค้าบ่นอะไร</div></div>
     </div>
   </div>
-  <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง &amp; คอร์ท</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้น →</button></div>
+    <div class="pagenav"><button class="btn ghost" onclick="go('p21')">← ย้อนหลัง</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้น →</button></div>
 </section>
 
-<!-- ================= P10 กระแสเงินสด & ภาษี ================= -->
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
   <div class="note blue" id="phaseBanner10" style="margin-bottom:14px"></div>
@@ -2357,7 +2374,7 @@ const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mo
 /* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
 const GROUPS=[
   {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
-  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
   {id:'g5',n:'🏆 3 เสารายได้',pages:[['p15','แข่งขัน & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
