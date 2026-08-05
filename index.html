@@ -2471,6 +2471,29 @@ function drawGrades(courts){
 }
 
 /* ---------- main ---------- */
+/* ---------- อัตราการจองสดจาก data/booking-latest.json ---------- */
+async function loadLiveBook(){
+  const tbl=el('liveBookTable'), upd=el('lbUpdated'), fb=el('lbFallback');
+  if(!tbl) return;
+  try{
+    const r=await fetch('data/booking-latest.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('http '+r.status);
+    const d=await r.json();
+    if(upd) upd.textContent='อัปเดตล่าสุด: '+d.updated;
+    let t=`<tr><th>สนาม</th><th class="r">คอร์ท</th><th class="r">เย็นวันนี้จองแล้ว</th><th class="r">กลางวันวันนี้</th><th class="r">พรุ่งนี้ (จองล่วงหน้า)</th><th>ช่วงที่เต็ม</th></tr>`;
+    (d.snapshots||[]).forEach(s=>{
+      if(s.error){t+=`<tr><td>${s.venue}</td><td colspan="5" class="sub">ดึงไม่ได้: ${s.error}</td></tr>`;return;}
+      const c=v=>v==null?'—':`<b style="color:${v>=80?'#b3261e':(v>=50?'#b8860b':'#1e7a3c')}">${v}%</b>`;
+      t+=`<tr><td><b>${s.venue}</b><span class="sub"> · ${s.date}</span></td><td class="r">${s.courts}</td><td class="r">${c(s.evening_pct)}</td><td class="r">${c(s.daytime_pct)}</td><td class="r">${c(s.tomorrow_evening_pct)}</td><td class="sub">${s.full_from_to||'—'}</td></tr>`;
+    });
+    tbl.innerHTML=t;
+  }catch(e){
+    if(upd) upd.textContent='';
+    tbl.style.display='none';
+    if(fb) fb.style.display='';
+  }
+}
+
 function recalc(){
   const mx=maxCourts();
   el('courts').max=mx; el('courts2').max=mx;
@@ -2990,6 +3013,7 @@ function bHeatClick(d,s){
 function bHeatReset(){localStorage.removeItem(BH_KEY);bHeatRender();}
 
 buildNav();
+loadLiveBook();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
@@ -3223,26 +3247,7 @@ window.init3D=function(){
   buildCourts(curCourts); buildBask(curBask);
   applyVis(); applyNight();
   
-/* ---------- อัตราการจองสดจาก data/booking-latest.json ---------- */
-(async function loadLiveBook(){
-  try{
-    const r=await fetch('data/booking-latest.json',{cache:'no-store'});
-    if(!r.ok) throw 0;
-    const d=await r.json();
-    el('lbUpdated').textContent='อัปเดตล่าสุด: '+d.updated;
-    let t=`<tr><th>สนาม</th><th class="r">คอร์ท</th><th class="r">เย็นวันนี้จองแล้ว</th><th class="r">กลางวันวันนี้</th><th class="r">พรุ่งนี้ (จองล่วงหน้า)</th><th>ช่วงที่เต็ม</th></tr>`;
-    d.snapshots.forEach(s=>{
-      if(s.error){t+=`<tr><td>${s.venue}</td><td colspan="5" class="sub">ดึงไม่ได้: ${s.error}</td></tr>`;return;}
-      const c=v=>v==null?'—':`<b style="color:${v>=80?'#b3261e':(v>=50?'#b8860b':'#1e7a3c')}">${v}%</b>`;
-      t+=`<tr><td><b>${s.venue}</b><span class="sub"> · ${s.date}</span></td><td class="r">${s.courts}</td><td class="r">${c(s.evening_pct)}</td><td class="r">${c(s.daytime_pct)}</td><td class="r">${c(s.tomorrow_evening_pct)}</td><td class="sub">${s.full_from_to||'—'}</td></tr>`;
-    });
-    el('liveBookTable').innerHTML=t;
-  }catch(e){
-    el('lbUpdated').textContent='';
-    el('liveBookTable').style.display='none';
-    el('lbFallback').style.display='';
-  }
-})();
+
 
 window.addEventListener('resize',onResize);
 
