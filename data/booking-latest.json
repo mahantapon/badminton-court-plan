@@ -1,12 +1,12 @@
 {
- "updated": "2026-08-05 17:57",
- "note": "เย็น = 18:00–22:00 · กลางวัน = 10:00–17:00 · ดึงตรงจากระบบจอง Matchday",
+ "updated": "2026-08-05 18:38",
+ "note": "เย็น = 18:00–22:00 · กลางวัน = 10:00–17:00 · ดึงตรงจากระบบจองของแต่ละสนาม (CC/Winning = Matchday · BEAT = Okrabook)",
  "snapshots": [
   {
    "venue": "CC Badminton",
    "courts": 18,
    "date": "2026-08-05",
-   "evening_pct": 97,
+   "evening_pct": 99,
    "daytime_pct": 5,
    "full_from_to": "18:00–20:30",
    "tomorrow_evening_pct": 92
@@ -28,6 +28,15 @@
    "daytime_pct": 96,
    "full_from_to": "10:00–20:30",
    "tomorrow_evening_pct": 100
+  },
+  {
+   "venue": "BEAT Discovery",
+   "courts": 16,
+   "date": "2026-08-05",
+   "evening_pct": 94,
+   "daytime_pct": null,
+   "full_from_to": "",
+   "tomorrow_evening_pct": 84
   }
  ]
 }
