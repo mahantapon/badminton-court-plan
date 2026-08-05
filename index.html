@@ -3280,6 +3280,61 @@ function hsNote(){
     `⚠️ <b>ทำไมย้อนหลังได้แค่ไม่กี่วัน:</b> ระบบจอง Matchday <b>ปิดการจองย้อนหลัง</b> — วันที่ผ่านไปเกิน ~4 วันจะถูกรายงานว่า "ว่าง 0 คอร์ท" ทั้งหมด ซึ่งไม่ใช่ยอดจองจริง เราเคยดึงย้อนหลัง 8 สัปดาห์แล้วพบว่าตัวเลขปนเปื้อนแบบนี้ จึง<b>ลบทิ้งทั้งหมด</b> เหลือเฉพาะวันที่อ่านตอนยังเป็นปัจจุบัน · คลังจะยาวขึ้นเองวันละ 1 วันจากรอบเก็บอัตโนมัติ 2 รอบ/วัน<br>`+
     `📌 วันอนาคต (🔮) = ยอดจองล่วงหน้าจริง ณ ตอนเก็บ ยังเพิ่มได้อีกจนถึงวันจริง — ส่วนนี้เชื่อถือได้เต็มที่ ใช้ดูว่าตลาดจองข้ามวันแค่ไหน`;
 }
+let SPSUM=null;
+async function loadSportSummary(){
+  try{
+    const r=await fetch('data/sport-summary.json',{cache:'no-store'});
+    if(!r.ok) throw 0;
+    SPSUM=await r.json();
+    renderP24(); renderSportCompare();
+  }catch(e){}
+}
+const SPMETA={badminton:['🏸 แบดมินตัน',10],tennis:['🎾 เทนนิส',2],pickleball:['🥒 Pickleball',4],basketball:['🏀 บาส 3x3',1]};
+function renderP24(){
+  const t=el('p24rev'); if(!t||!SPSUM) return;
+  const HRS=14,D=30;
+  const READ={badminton:'ฐานรายได้ · เย็นเต็มแน่ กลางวันว่าง',
+              tennis:'<b>ดาวเด่นเหนือความคาดหมาย</b> — กลางวันก็เต็ม',
+              pickleball:'<b>ราคาแพงแต่คนยังไม่แน่น</b> — ตลาดยังใหม่',
+              basketball:'เติมกลางวันได้ดี ราคาต่อคอร์ทสูงสุด'};
+  let html='<tr><th>กีฬา</th><th class="r">คอร์ท</th><th class="r">฿/ชม.<br><span class="sub">ค่ากลางตลาด</span></th><th class="r">อัตราจองจริง<br><span class="sub">ทั้งวัน · ตลาด</span></th><th class="r">รายได้/เดือน</th><th>อ่านว่าอะไร</th></tr>';
+  let tot=0;
+  ['badminton','tennis','pickleball','basketball'].forEach(sp=>{
+    const s=SPSUM.sports[sp]; if(!s||s.a==null) return;
+    const ct=SPMETA[sp][1], price=sp==='basketball'?800:(s.price||0);
+    const rev=Math.round(ct*price*HRS*(s.a/100)*D); tot+=rev;
+    html+=`<tr><td>${SPMETA[sp][0]}</td><td class="r">${ct}</td><td class="r">${price}</td>`+
+      `<td class="r"><b>${s.a}%</b><br><span class="sub">${s.n} สนาม</span></td>`+
+      `<td class="r"><b>${rev.toLocaleString()}</b></td><td class="sub">${READ[sp]}</td></tr>`;
+  });
+  const b=SPSUM.sports.badminton;
+  const p1=b?Math.round(18*(b.price||200)*HRS*(b.a/100)*D):0;
+  html+=`<tr style="background:#eef7f1"><td><b>รวมค่าคอร์ทแผน 2</b></td><td class="r"><b>17</b></td><td></td><td></td><td class="r"><b>≈ ${tot.toLocaleString()}</b></td><td class="sub">ยังไม่รวมคาเฟ่ · โค้ช · งานแข่ง</td></tr>`+
+    `<tr><td class="sub">เทียบ แผน 1 — แบด 18 คอร์ทล้วน</td><td class="r sub">18</td><td class="r sub">${b?b.price:'—'}</td><td class="r sub">${b?b.a:'—'}%</td><td class="r sub">≈ ${p1.toLocaleString()}</td><td class="sub">ต่างกัน ${tot>p1?'+':''}${(tot-p1).toLocaleString()} ฿/เดือน</td></tr>`;
+  t.innerHTML=html;
+  const n=el('p24note'), T=SPSUM.sports.tennis, P=SPSUM.sports.pickleball;
+  if(n&&T&&P){
+    n.innerHTML=`💡 <b>ข้อมูลจริงพลิกสมมติฐานเดิม 2 ข้อ:</b> (1) <b>เทนนิสคือตัวจริง ไม่ใช่ pickleball</b> — เทนนิส ${T.n} สนามในกรุงเทพจองเฉลี่ยทั้งวัน <b>${T.a}%</b> และ<b>กลางวันยังเต็มถึง ${T.d}%</b> สวนทางกับแบดที่กลางวันว่าง = เทนนิสมีตลาดกลางวันจริง `+
+      `(2) <b>pickleball ราคาแพงแต่ยังไม่แน่น</b> — ${P.n} สนาม ค่ากลาง ${P.price} ฿/ชม. (แพงกว่าแบดเท่าตัว) แต่จองทั้งวันแค่ <b>${P.a}%</b> เย็นก็แค่ ${P.e}% · คอร์ทผุดเร็วกว่าคนเล่น<br>`+
+      `→ <b>ข้อเสนอ:</b> ถ้าทำแผน 2 ให้น้ำหนักเทนนิสมากกว่า pickleball · pickleball ลงทุนถูก (acrylic บนคอนกรีตเดิม) ใส่ 4 คอร์ทเป็นตัวเสริมได้ แต่<b>อย่าให้เป็นเสาหลักของรายได้</b><br>`+
+      `⚠️ ตัวเลขจาก <b>${SPSUM.days} วันที่เก็บได้จริง</b> เท่านั้น (ดูข้อจำกัดย้อนหลังที่แท็บ "ย้อนหลัง") — เทนนิสมีแค่ ${T.n} สนามในตลาด ค่ากลางจึงหยาบกว่าแบดที่มี ${SPSUM.sports.badminton.n} สนาม ต้องเก็บต่ออีกหลายสัปดาห์ก่อนผูกงบจริง`;
+  }
+}
+function renderSportCompare(){
+  const t=el('spTodayTable'); if(!t||!SPSUM) return;
+  const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:46px;padding:2px 7px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'}">${x}%</span>`;
+  let html='<tr><th>กีฬา</th><th class="r">สนามในตลาด</th><th class="r">คอร์ทรวม</th><th class="r">฿/ชม.<br><span class="sub">ค่ากลาง</span></th><th class="r">เย็น</th><th class="r">กลางวัน</th><th class="r">ทั้งวัน</th></tr>';
+  [['badminton','🏸 แบดมินตัน'],['tennis','🎾 เทนนิส'],['pickleball','🥒 Pickleball'],['basketball','🏀 บาส']].forEach(([sp,lb])=>{
+    const s=SPSUM.sports[sp]; if(!s) return;
+    html+=`<tr><td><b>${lb}</b></td><td class="r">${s.n}</td><td class="r">${s.courts}</td><td class="r">${s.price??'—'}</td>`+
+      `<td class="r">${pc(s.e)}</td><td class="r">${pc(s.d)}</td><td class="r">${pc(s.a)}</td></tr>`;
+  });
+  t.innerHTML=html;
+  const n=el('spTodayNote'), S=SPSUM.sports, ex=(SPSUM.excluded||[]).length;
+  if(n) n.innerHTML=`💡 <b>เรียงจากแน่นสุด (ทั้งวัน):</b> เทนนิส ${S.tennis?.a}% → บาส ${S.basketball?.a}% → แบด ${S.badminton?.a}% → pickleball ${S.pickleball?.a}%<br>`+
+    `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
+    (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
+}
 function drawPlan2(){
   const svg=el('plan2svg'); if(!svg||svg.dataset.done) return;
   const px=9, X0=70, Y0=46, HL=80*px, HW=40*px;
