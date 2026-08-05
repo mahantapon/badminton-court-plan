@@ -1,0 +1,216 @@
+{
+ "source": "matchday.co.th/books/all (113 venues nationwide, filtered to Bangkok metro badminton)",
+ "n": 35,
+ "venues": [
+  {
+   "slug": "aibc",
+   "name": "All In Badminton Club",
+   "district": "มีนบุรี",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "bdbadminton",
+   "name": "BD Badminton",
+   "district": "บางกอกน้อย",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "s11",
+   "name": "Badminton Court Soi Suwinthawong 11",
+   "district": "มีนบุรี",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "badmintonhouse",
+   "name": "Badminton House",
+   "district": "สะพานสูง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "bluehouse",
+   "name": "Bluehouse Badminton",
+   "district": "ทุ่งครุ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "ccbadminton",
+   "name": "CC Badminton Court",
+   "district": "บางขุนเทียน",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "FBT",
+   "name": "FBT Sport Park",
+   "district": "ลาดกระบัง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "kuru",
+   "name": "KURU Badminton Park",
+   "district": "ทุ่งครุ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "njbadminton",
+   "name": "NJ Badminton Court",
+   "district": "หลักสี่",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "pjsportclub",
+   "name": "PJ Sport Club",
+   "district": "บางบ่อ",
+   "prov": "สมุทรปราการ"
+  },
+  {
+   "slug": "r58",
+   "name": "R58 Badminton",
+   "district": "บางกะปิ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "rpkbadminton",
+   "name": "RPK Badminton",
+   "district": "ลาดกระบัง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "rooftop",
+   "name": "Rooftop สนามแบดมินตันบางพลี",
+   "district": "บางพลี",
+   "prov": "สมุทรปราการ"
+  },
+  {
+   "slug": "spann",
+   "name": "SPANN Sports Complex",
+   "district": "สามพราน",
+   "prov": "นครปฐม"
+  },
+  {
+   "slug": "skp",
+   "name": "Sakolpan Sports Club",
+   "district": "วัฒนา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sandhaus",
+   "name": "Sand Haus Badminton Club",
+   "district": "วังทองหลาง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sigmabad",
+   "name": "Sigma Badminton",
+   "district": "เมืองสมุทรสาคร",
+   "prov": "สมุทรสาคร"
+  },
+  {
+   "slug": "skyville",
+   "name": "Skyville Badminton",
+   "district": "ปากเกร็ด",
+   "prov": "นนทบุรี"
+  },
+  {
+   "slug": "tsmash",
+   "name": "T SMASH พระราม2",
+   "district": "จอมทอง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "tsmsu",
+   "name": "T SMASH สุวรรณภูมิ",
+   "district": "บางพลี",
+   "prov": "สมุทรปราการ"
+  },
+  {
+   "slug": "badwtn",
+   "name": "T SMASH แจ้งวัฒนะ",
+   "district": "ปากเกร็ด",
+   "prov": "นนทบุรี"
+  },
+  {
+   "slug": "tsr001",
+   "name": "The Street Arena",
+   "district": "ดินแดง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "the88rajburana",
+   "name": "The88Rajburana",
+   "district": "ราษฎร์บูรณะ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "vibecourt",
+   "name": "VIBE COURT",
+   "district": "มีนบุรี",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "winning",
+   "name": "Winning Badminton & Basketball",
+   "district": "ตลิ่งชัน",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "bbun",
+   "name": "บีบียูไนเต็ด สนามฟุตบอลและแบดมินตัน",
+   "district": "บางซื่อ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sbn",
+   "name": "สนามบินน้ำแบดมินตัน",
+   "district": "เมืองนนทบุรี",
+   "prov": "นนทบุรี"
+  },
+  {
+   "slug": "pcc24",
+   "name": "สนามแบดมินตัน ประชาชื่น 24",
+   "district": "บางซื่อ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "nadda",
+   "name": "สนามแบดมินตันนัดดา",
+   "district": "เมืองนนทบุรี",
+   "prov": "นนทบุรี"
+  },
+  {
+   "slug": "Biriyabad",
+   "name": "สนามแบดมินตันพิริยะ",
+   "district": "บางซื่อ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sai4bad",
+   "name": "สนามแบดมินตันสายสี่",
+   "district": "สามพราน",
+   "prov": "นครปฐม"
+  },
+  {
+   "slug": "senanikom",
+   "name": "สนามแบดมินตันเสนานิคม",
+   "district": "ลาดพร้าว",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sathu49",
+   "name": "สนามแบดสาธุ 49 (สำนักงานใหญ่)",
+   "district": "ยานนาวา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "senawp",
+   "name": "สนามแบดเสนาวัชรพล",
+   "district": "บางเขน",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "itsaraphap38",
+   "name": "อิสระภาพ 38 แบดมินตัน",
+   "district": "บางกอกใหญ่",
+   "prov": "กรุงเทพมหานคร"
+  }
+ ]
+}
