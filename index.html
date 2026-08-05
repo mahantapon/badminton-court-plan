@@ -107,8 +107,12 @@
 <body>
 
 <header>
-  <h1>🏸 โครงการสนามแบดมินตัน — แปลงโรงงาน บางขุนเทียน</h1>
-  <p>โถง 40 × 80 ม. · เพดาน 6.33–9.42 ม. · คอร์ทแนวตั้ง indoor ทั้งหมด · เลือกได้ 2 ผัง: มาตรฐาน BWF หรือ อัดเต็มพื้นที่</p>
+  <h1 id="hdTitle">🏸 โครงการสนามกีฬา — แปลงโรงงาน บางขุนเทียน</h1>
+  <p id="hdSub">โถง 40 × 80 ม. · เพดาน 6.33–9.42 ม. · คอร์ทแนวตั้ง indoor ทั้งหมด</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+    <button id="planBtn1" onclick="setPlan('1')" style="padding:10px 22px;border-radius:12px;border:2px solid #fff;background:#fff;color:#1c3f6e;font-weight:700;font-size:.95rem;cursor:pointer">🏸 แผน 1 — แบด 18 คอร์ท + บาส</button>
+    <button id="planBtn2" onclick="setPlan('2')" style="padding:10px 22px;border-radius:12px;border:2px solid rgba(255,255,255,.7);background:transparent;color:#fff;font-weight:700;font-size:.95rem;cursor:pointer">🎾 แผน 2 — 4 กีฬา: แบด · เทนนิส · Pickleball · บาส</button>
+  </div>
 </header>
 
 <nav>
@@ -928,6 +932,13 @@
     <div class="note" id="mkFallback" style="display:none">⚠️ โหลดข้อมูลตลาดไม่ได้ (เปิดจากไฟล์ในเครื่อง) — ดูได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/market-latest.json" target="_blank">market-latest.json</a></div>
   </div>
 
+  <div class="card">
+    <h3 style="margin-top:0">🎾🥒🏀 ตลาด 3 กีฬาใหม่ — เทนนิส · Pickleball · บาส (สำหรับแผน 2)</h3>
+    <p class="sub" style="margin-bottom:10px">ดึงจากระบบจองจริงชุดเดียวกับแบด · ตัวเลข = ค่ากลางของวันนี้ · ดูรายสนาม/ย้อนหลังได้ที่แท็บ "ย้อนหลัง & ล่วงหน้า" แล้วกดเลือกกีฬา</p>
+    <div style="overflow-x:auto"><table id="spTodayTable"><tr><td class="sub">กำลังโหลด…</td></tr></table></div>
+    <div class="note blue" id="spTodayNote"></div>
+  </div>
+
   <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p21')">ถัดไป: ย้อนหลัง →</button></div>
 </section>
 
@@ -938,6 +949,13 @@
     <h3 style="margin-top:0">🕰️ ย้อนหลัง &amp; จองล่วงหน้า — เลือกวัน เลือกช่วงเวลา ได้เอง</h3>
     <p class="sub" style="margin-bottom:10px" id="hsIntro">กำลังโหลดคลังข้อมูล…</p>
 
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+      <span class="sub">กีฬา</span>
+      <button class="btn hsp active" data-sp="badminton" onclick="hsSetSport('badminton')">🏸 แบด</button>
+      <button class="btn hsp" data-sp="tennis" onclick="hsSetSport('tennis')">🎾 เทนนิส</button>
+      <button class="btn hsp" data-sp="pickleball" onclick="hsSetSport('pickleball')">🥒 Pickleball</button>
+      <button class="btn hsp" data-sp="basketball" onclick="hsSetSport('basketball')">🏀 บาส</button>
+    </div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
       <label class="sub">📅 วันที่ <select id="hsDate" onchange="hsSetDate(this.value)" style="padding:6px 10px;border-radius:8px;border:1px solid #c9d6e4;font-size:.9rem"></select></label>
       <span class="sub">⏰ ช่วงเวลา</span>
@@ -1012,6 +1030,73 @@
     </div>
   </div>
     <div class="pagenav"><button class="btn ghost" onclick="go('p21')">← ย้อนหลัง</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้น →</button></div>
+</section>
+
+<!-- ================= P23 ผัง 4 กีฬา (แผน 2) ================= -->
+<section class="page" id="p23">
+  <h2>แผน 2 — ผัง 4 กีฬาในโถงเดียว</h2>
+  <div class="card">
+    <h3 style="margin-top:0">🗺️ ผังพื้น: เทนนิสฝั่งตะวันตก · แบดฝั่งตะวันออก · Pickleball + บาสโซนเพิง</h3>
+    <div style="overflow-x:auto">
+      <svg id="plan2svg" viewBox="0 0 940 560" style="min-width:820px;width:100%;background:#fbfdff;border:1px solid #dce6f0;border-radius:10px"></svg>
+    </div>
+    <p class="sub" id="plan2Caption" style="margin-top:8px"></p>
+    <div class="kpis">
+      <div class="kpi"><div class="t">🏸 แบดมินตัน</div><div class="v">10 คอร์ท</div><div class="s">อัดแน่น 5 ต่อแถว × 2 แถว ฝั่งตะวันออก</div></div>
+      <div class="kpi"><div class="t">🎾 เทนนิส</div><div class="v">2 คอร์ท</div><div class="s">36.6 × 18.3 ม./คอร์ท ฝั่งตะวันตก</div></div>
+      <div class="kpi"><div class="t">🥒 Pickleball</div><div class="v">4 คอร์ท</div><div class="s">โซนเพิงข้างบาส 15.2 × 9.1 ม./คอร์ท</div></div>
+      <div class="kpi"><div class="t">🏀 บาส 3x3</div><div class="v">1 คอร์ท</div><div class="s">โซนเพิงเดิม (ยกหลังคา)</div></div>
+    </div>
+    <div class="note">⚠️ <b>ความจริงเรื่องเพดานที่ต้องรู้ก่อนตัดสินใจแผน 2:</b> โถงเราสูง 6.33 ม. ที่ริม → 9.42 ม. กลางโถง · มาตรฐาน ITF ต้องการ ~9 ม.ขึ้นไปเหนือคอร์ท · คอร์ทเทนนิสของเราจึงเป็นเกรด<b>ตีเล่น/ซ้อม/สอน</b> — ลูกโด่งสุดแรงอาจติดโครงหลังคาริมคอร์ท ไม่เหมาะจัดแข่งทางการ แต่<b>ตลาดเช่าซ้อม+โค้ชคือตลาดหลักของเทนนิสในเมืองอยู่แล้ว</b> (ราคาตลาด 300–600 ฿/ชม. ดูแท็บตลาด)<br>
+      💡 Pickleball ต้องการเพดานแค่ ~5.5 ม. — โซนเพิงยกหลังคาแล้วใช้ได้สบาย และราคาตลาดต่อชั่วโมงสูงกว่าแบด 2–4 เท่าทั้งที่คอร์ทเล็กกว่าครึ่ง</div>
+  </div>
+  <div class="pagenav"><span></span><button class="btn" onclick="go('p24')">ถัดไป: งบ &amp; รายได้แผน 2 →</button></div>
+</section>
+
+<!-- ================= P24 งบ & รายได้ แผน 2 ================= -->
+<section class="page" id="p24">
+  <h2>แผน 2 — งบลงทุน &amp; รายได้ (ประมาณการรอบแรก)</h2>
+  <div class="card">
+    <h3 style="margin-top:0">💰 งบลงทุนต่างจากแผน 1 ยังไง</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>รายการ</th><th class="r">แผน 1 (แบดล้วน)</th><th class="r">แผน 2 (4 กีฬา)</th><th>หมายเหตุ</th></tr>
+      <tr><td>พื้นยางแบด + เสา/เน็ต</td><td class="r">18 คอร์ท</td><td class="r">10 คอร์ท <b style="color:#1e6b45">(ประหยัด ~1.6–2.0 ล.)</b></td><td>แผ่นยาง+ติดตั้ง ~2–2.5 แสน/คอร์ท</td></tr>
+      <tr><td>พื้นเทนนิส acrylic 2 คอร์ท</td><td class="r">—</td><td class="r"><b style="color:#a33">+0.9–1.4 ล.</b></td><td>รวมปรับพื้น ตีเส้น เสาเน็ต</td></tr>
+      <tr><td>พื้น pickleball 4 คอร์ท (โซนเพิง)</td><td class="r">—</td><td class="r"><b style="color:#a33">+0.5–0.8 ล.</b></td><td>acrylic บนคอนกรีตเดิม + เน็ต</td></tr>
+      <tr><td>บาส 3x3 + ยกหลังคาเพิง</td><td class="r">5.3 ล. (เฟส 2)</td><td class="r">5.3 ล. (เฟส 2)</td><td>เท่ากันทั้ง 2 แผน</td></tr>
+      <tr style="background:#eef7f1"><td><b>ส่วนต่างสุทธิโซนสนาม</b></td><td class="r">ฐาน</td><td class="r"><b>≈ ±0 ถึง +0.5 ล.</b></td><td>ที่ประหยัดจากแบด 8 คอร์ทไปจ่ายค่าพื้นเทนนิส+PB เกือบพอดี</td></tr>
+    </table>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">📈 รายได้/เดือน — ราคาจากราคากลางตลาดจริง · อัตราจองอิงข้อมูลย้อนหลังที่เก็บ</h3>
+    <div style="overflow-x:auto">
+    <table id="p24rev">
+      <tr><th>กีฬา</th><th class="r">คอร์ท</th><th class="r">฿/ชม. (ตลาด)</th><th class="r">ชม.ขายได้/วัน</th><th class="r">อัตราจองเฉลี่ย</th><th class="r">รายได้/เดือน</th></tr>
+      <tr><td>🏸 แบดมินตัน</td><td class="r">10</td><td class="r">200</td><td class="r">14</td><td class="r">45%</td><td class="r"><b>378,000</b></td></tr>
+      <tr><td>🎾 เทนนิส</td><td class="r">2</td><td class="r">400</td><td class="r">14</td><td class="r">40%</td><td class="r"><b>134,400</b></td></tr>
+      <tr><td>🥒 Pickleball</td><td class="r">4</td><td class="r">400</td><td class="r">14</td><td class="r">40%</td><td class="r"><b>268,800</b></td></tr>
+      <tr><td>🏀 บาส 3x3</td><td class="r">1</td><td class="r">800</td><td class="r">14</td><td class="r">50%</td><td class="r"><b>168,000</b></td></tr>
+      <tr style="background:#eef7f1"><td><b>รวมค่าคอร์ทแผน 2</b></td><td class="r">17</td><td></td><td></td><td></td><td class="r"><b>≈ 949,000</b></td></tr>
+      <tr><td class="sub" colspan="5">เทียบ: แผน 1 แบด 18 คอร์ทที่สมมติฐานเดียวกัน (45%)</td><td class="r sub">≈ 680,000</td></tr>
+    </table>
+    </div>
+    <div class="note blue" id="p24note">💡 <b>ทำไมแผน 2 น่าสนใจแม้คอร์ทรวมน้อยกว่า:</b> รายได้ต่อตารางเมตรของ pickleball สูงสุดในตลาด (คอร์ทเล็กกว่าแบดครึ่งหนึ่ง ราคา/ชม. สูงกว่า 2 เท่า) · <b>ความเสี่ยงหลัก:</b> pickleball เป็นกีฬากระแส ต้องดูอัตราจองจริงรายวันที่เราเก็บว่ายืนระยะมั้ยก่อนผูกงบจริง<br>
+      ⚠️ ตัวเลขหน้านี้เป็น<b>ประมาณการรอบแรก</b> — ราคามาจากระบบจองจริง ส่วนอัตราจองจะแม่นขึ้นเมื่อคลังย้อนหลัง 4 กีฬาเก็บครบเดือน (ดูของจริงที่แท็บ "ย้อนหลัง" เลือกกีฬาได้)</div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p23')">← ผัง 4 กีฬา</button><button class="btn" onclick="go('p2')">ถัดไป: ภาพ 3D →</button></div>
+</section>
+
+<!-- ================= P25 Event 4 กีฬา ================= -->
+<section class="page" id="p25">
+  <h2>Event &amp; การแข่งขัน — 4 กีฬา</h2>
+  <div class="card" id="p25body">
+    <h3 style="margin-top:0">🏆 ภาพรวมตลาดจัดแข่งของแต่ละกีฬา</h3>
+    <p class="sub">🏸 แบดมินตัน: รายละเอียดเต็มอยู่ที่แผน 1 → แท็บ "แข่งขัน &amp; Event" (ปฏิทิน 3 ปี + เศรษฐศาสตร์ผู้จัด)</p>
+    <div id="p25research"><p class="sub">⏳ กำลังรวบรวมข้อมูลรายการแข่งเทนนิส / Pickleball / บาส 3x3 …</p></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p24')">← งบ &amp; รายได้</button><span></span></div>
 </section>
 
 <section class="page" id="p10">
@@ -2379,12 +2464,38 @@ const GROUPS=[
   {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
+const GROUPS2=[
+  {id:'h1',n:'🏗️ โครงการแผน 2',pages:[['p23','ผัง 4 กีฬา'],['p24','งบ & รายได้แผน 2'],['p2','ภาพ 3D']]},
+  {id:'g2',n:'📊 ตลาด',pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p17','งบจริงคู่แข่ง']]},
+  {id:'h3',n:'🏆 Event 4 กีฬา',pages:[['p25','Event & การแข่งขัน']]},
+  {id:'g4',n:'📋 แผนงาน',pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
+];
+let PLAN=localStorage.getItem('bplan')||'1';
+function curGroups(){return PLAN==='2'?GROUPS2:GROUPS;}
 const PAGE_G={};
-GROUPS.forEach(g=>g.pages.forEach(([p])=>{PAGE_G[p]=g;}));
-function buildNav(){
-  el('navtop').innerHTML=GROUPS.map(g=>`<button data-g="${g.id}" onclick="goGroup('${g.id}')">${g.n}</button>`).join('');
+function rebuildPageG(){
+  for(const k in PAGE_G) delete PAGE_G[k];
+  curGroups().forEach(g=>g.pages.forEach(([p])=>{PAGE_G[p]=g;}));
 }
-function goGroup(gid){const g=GROUPS.find(x=>x.id===gid);go(g.pages[0][0]);}
+rebuildPageG();
+function setPlan(pl){
+  PLAN=pl; localStorage.setItem('bplan',pl);
+  window.__plan=pl;
+  rebuildPageG(); buildNav();
+  const b1=el('planBtn1'),b2=el('planBtn2');
+  const on='padding:10px 22px;border-radius:12px;border:2px solid #fff;background:#fff;color:#1c3f6e;font-weight:700;font-size:.95rem;cursor:pointer';
+  const off='padding:10px 22px;border-radius:12px;border:2px solid rgba(255,255,255,.7);background:transparent;color:#fff;font-weight:700;font-size:.95rem;cursor:pointer';
+  b1.style.cssText=pl==='1'?on:off; b2.style.cssText=pl==='2'?on:off;
+  el('hdTitle').textContent=pl==='2'?'🎾 โครงการศูนย์กีฬา 4 ชนิด — แปลงโรงงาน บางขุนเทียน':'🏸 โครงการสนามแบดมินตัน — แปลงโรงงาน บางขุนเทียน';
+  el('hdSub').textContent=pl==='2'?'โถง 40 × 80 ม. · แบด ~10 คอร์ท ฝั่งหนึ่ง · เทนนิส 2 คอร์ทอีกฝั่ง · Pickleball 4 + บาส 3x3 โซนเพิง':'โถง 40 × 80 ม. · เพดาน 6.33–9.42 ม. · คอร์ทแนวตั้ง indoor ทั้งหมด · เลือกได้ 2 ผัง: มาตรฐาน BWF หรือ อัดเต็มพื้นที่';
+  go(curGroups()[0].pages[0][0]);
+  if(pl==='2'&&typeof drawPlan2==='function') setTimeout(drawPlan2,50);
+  if(window.replan3D) window.replan3D();
+}
+function buildNav(){
+  el('navtop').innerHTML=curGroups().map(g=>`<button data-g="${g.id}" onclick="goGroup('${g.id}')">${g.n}</button>`).join('');
+}
+function goGroup(gid){const g=curGroups().find(x=>x.id===gid);go(g.pages[0][0]);}
 function go(id){
   const g=PAGE_G[id]; if(!g) return;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -2393,7 +2504,8 @@ function go(id){
   el('navsub').innerHTML=g.pages.map(([p,n])=>
     `<button onclick="go('${p}')"${p===id?' class="active"':''}>${n}</button>`).join('');
   window.scrollTo({top:0,behavior:'smooth'});
-  if(id==='p2'&&window.init3D) window.init3D();
+  if(id==='p2'&&window.init3D){window.__plan=PLAN;window.init3D();}
+  if(id==='p23'&&typeof drawPlan2==='function') setTimeout(drawPlan2,30);
 }
 function setMode(m){
   mode=m;
@@ -3048,7 +3160,8 @@ const BH_EST=[[30,35,45,55,70,60,25],BH_WD,BH_WD,BH_WD,BH_WD,BH_WD,[35,42,52,62,
 const BH_KEY='bkt_bheat_v1';
 const bhStore=()=>{try{return JSON.parse(localStorage.getItem(BH_KEY)||'{}');}catch(e){return {};}};
 function bhVal(d,s){const o=bhStore();return (d+'-'+s) in o?o[d+'-'+s]:BH_EST[d][s];}
-let HIST=null,hsState={date:null,h1:0,h2:23,win:'all'};
+let HIST=null,hsState={date:null,h1:0,h2:23,win:'all',sport:'badminton'};
+const SPTH={badminton:'แบดมินตัน',tennis:'เทนนิส',pickleball:'Pickleball',basketball:'บาสเกตบอล'};
 const THDAY=['อา','จ','อ','พ','พฤ','ศ','ส'];
 function hsDow(d){return new Date(d+'T12:00:00').getDay();}
 function hsIsWknd(d){const w=hsDow(d);return w===0||w===6;}
@@ -3059,7 +3172,7 @@ async function loadHistory(){
     if(!r.ok) throw new Error('http '+r.status);
     HIST=await r.json();
     const dates=hsDates();
-    intro.innerHTML=`คลังข้อมูลจริงจากระบบจอง <b>${HIST.venues.length} สนาม</b> · <b>${dates.length} วัน</b> (${thDate(HIST.first)} → ${thDate(HIST.last)}) · อัปเดต ${HIST.generated} — ระบบจองเก็บสถานะทุกวันในอดีตไว้ เราจึงดึงย้อนหลังได้ทั้งช่วง ไม่ใช่แค่วันที่เริ่มเก็บ`;
+    intro.innerHTML=`คลังข้อมูลจริงจากระบบจอง <b>${HIST.venues.length} สนาม 4 กีฬา</b> (🏸 ${HIST.venues.filter(v=>(v.sport||'badminton')==='badminton').length} · 🎾 ${HIST.venues.filter(v=>v.sport==='tennis').length} · 🥒 ${HIST.venues.filter(v=>v.sport==='pickleball').length} · 🏀 ${HIST.venues.filter(v=>v.sport==='basketball').length}) · <b>${dates.length} วัน</b> (${thDate(HIST.first)} → ${thDate(HIST.last)}) · อัปเดต ${HIST.generated} — ระบบจองเก็บสถานะทุกวันในอดีตไว้ เราจึงดึงย้อนหลังได้ทั้งช่วง ไม่ใช่แค่วันที่เริ่มเก็บ`;
     const sel=el('hsDate');
     sel.innerHTML=dates.map(d=>{
       const fut=d>HIST.today, w=THDAY[hsDow(d)];
@@ -3071,6 +3184,7 @@ async function loadHistory(){
     hsState.date=HIST.today;
     hsRenderSeries();
     hsSetWin('all');
+    spTodayRender();
   }catch(e){ intro.textContent=''; el('hsFallback').style.display=''; }
 }
 function hsDates(){
@@ -3099,7 +3213,13 @@ function hsVenueWin(v,date){
   return Math.round(ps.reduce((a,b)=>a+b,0)/ps.length);
 }
 function hsMedian(arr){if(!arr.length)return null;const a=[...arr].sort((x,y)=>x-y);const m=a.length>>1;return a.length%2?a[m]:Math.round((a[m-1]+a[m])/2);}
-function hsLiveVenues(date){return HIST.venues.filter(v=>v.days[date]&&v.days[date].a>0);}
+function hsVs(){return HIST.venues.filter(v=>(v.sport||'badminton')===hsState.sport);}
+function hsLiveVenues(date){return hsVs().filter(v=>v.days[date]&&v.days[date].a>0);}
+function hsSetSport(sp){
+  hsState.sport=sp;
+  document.querySelectorAll('.btn.hsp').forEach(b=>b.classList.toggle('active',b.dataset.sp===sp));
+  hsRenderSeries(); hsRender();
+}
 function hsRender(){
   if(!HIST||!hsState.date)return;
   const date=hsState.date,fut=date>HIST.today,w=THDAY[hsDow(date)];
@@ -3127,7 +3247,7 @@ function hsRender(){
   el('hsTblHead').textContent=`รายสนาม — ${w} ${thDate(date)} · ช่วง ${lbl}`;
   let t='<tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th class="r">฿/ชม.</th><th class="r">ช่วงที่เลือก</th><th class="r">เย็น</th><th class="r">กลางวัน</th><th class="r">ทั้งวัน</th></tr>';
   const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'};font-variant-numeric:tabular-nums">${x}%</span>`;
-  [...HIST.venues].map(v=>({v,wv:hsVenueWin(v,date),dd:v.days[date]}))
+  [...hsVs()].map(v=>({v,wv:hsVenueWin(v,date),dd:v.days[date]}))
     .sort((a,b)=>((b.wv??-1)-(a.wv??-1)))
     .forEach(({v,wv,dd})=>{
       const dead=dd&&dd.a===0;
@@ -3163,11 +3283,84 @@ function hsRenderSeries(){
 }
 function hsNote(){
   const s=HIST._sum||{};
-  el('hsNote').innerHTML=`🔍 <b>สรุปจากทั้งคลัง (${s.nPast} วันย้อนหลัง):</b> `+
+  el('hsNote').innerHTML=`🔍 <b>สรุปจากทั้งคลัง — ${SPTH[hsState.sport]} (${s.nPast} วันย้อนหลัง):</b> `+
     `จันทร์–ศุกร์ ค่ากลาง เย็น <b>${s.wkdE??'—'}%</b> · กลางวัน <b>${s.wkdD??'—'}%</b> — `+
     `เสาร์–อาทิตย์ เย็น <b>${s.wndE??'—'}%</b> · กลางวัน <b>${s.wndD??'—'}%</b>`+
     `${s.wndD!=null&&s.wkdD!=null?` → กลางวันเสาร์-อาทิตย์ขายได้<b>มากกว่าวันธรรมดา ${s.wndD-s.wkdD} จุด</b> — นี่คือตลาดกลางวันที่มีอยู่จริง`:''}<br>`+
     `📌 วันอนาคต (🔮) = ยอดจองล่วงหน้า ณ วันที่อัปเดตล่าสุด ยังเพิ่มได้อีกเรื่อยๆ จนถึงวันจริง — ใช้ดู "ตลาดนี้จองข้ามวันแค่ไหน" · ข้อมูลทุกตัวอ่านตรงจากระบบจอง ไม่มีการเดา`;
+}
+function spTodayRender(){
+  const tbl=el('spTodayTable'); if(!tbl||!HIST) return;
+  const d=HIST.today;
+  let t='<tr><th>กีฬา</th><th class="r">สนามที่ดึงได้</th><th class="r">คอร์ทรวม</th><th class="r">฿/ชม. ค่ากลาง</th><th class="r">เย็นวันนี้</th><th class="r">กลางวันวันนี้</th><th class="r">ทั้งวัน</th></tr>';
+  const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'}">${x}%</span>`;
+  [['tennis','🎾 เทนนิส'],['pickleball','🥒 Pickleball'],['basketball','🏀 บาส']].forEach(([sp,lb])=>{
+    const vs=HIST.venues.filter(v=>v.sport===sp);
+    const live=vs.filter(v=>v.days[d]&&v.days[d].a>0);
+    const m=f=>hsMedian(live.map(f).filter(x=>x!=null));
+    const prices=vs.map(v=>typeof v.price==='number'?v.price:null).filter(Boolean);
+    t+=`<tr><td><b>${lb}</b></td><td class="r">${vs.length}</td><td class="r">${vs.reduce((a,v)=>a+v.courts,0)}</td>`+
+       `<td class="r">${prices.length?hsMedian(prices):'—'}</td>`+
+       `<td class="r">${pc(m(v=>v.days[d].e))}</td><td class="r">${pc(m(v=>v.days[d].d))}</td><td class="r">${pc(m(v=>v.days[d].a))}</td></tr>`;
+  });
+  tbl.innerHTML=t;
+  const note=el('spTodayNote');
+  if(note){
+    const pb=HIST.venues.filter(v=>v.sport==='pickleball');
+    const pbPrices=pb.map(v=>typeof v.price==='number'?v.price:null).filter(Boolean).sort((a,b)=>a-b);
+    note.innerHTML=`💡 <b>อ่านตารางนี้:</b> pickleball ${pb.length} สนามราคา ${pbPrices[0]||'—'}–${pbPrices[pbPrices.length-1]||'—'} ฿/ชม. (แบดค่ากลางแค่ 210) — คอร์ทเล็กกว่าครึ่งแต่ราคาสูงกว่า 2 เท่า คือเหตุผลเชิงธุรกิจของแผน 2 · เทนนิสมี tt tennis อยู่บางขุนเทียนโซนเราแล้ว (350 ฿/ชม.) และ COSMIC บางขุนเทียนทำบาสอยู่ (800–1,400 ฿/ชม.) — ดีมานด์โซนเรามีจริงทั้ง 3 กีฬา`;
+  }
+}
+function drawPlan2(){
+  const svg=el('plan2svg'); if(!svg||svg.dataset.done) return;
+  const px=9, X0=70, Y0=46, HL=80*px, HW=40*px;
+  let s=`<rect x="${X0}" y="${Y0}" width="${HL}" height="${HW}" fill="#f5f9fd" stroke="#28527e" stroke-width="2.5"/>`;
+  const LOB=8*px;
+  s+=`<rect x="${X0+HL-LOB}" y="${Y0}" width="${LOB}" height="${HW}" fill="#fdf3e3" stroke="#c9a35c" stroke-dasharray="6 3"/>`
+    +`<text x="${X0+HL-LOB/2}" y="${Y0+HW/2}" font-size="11" fill="#8a6d2f" text-anchor="middle" transform="rotate(90 ${X0+HL-LOB/2} ${Y0+HW/2})">ทางเข้า · เคาน์เตอร์ · นั่งพัก (8 ม.)</text>`;
+  const TZL=36.6*px, TCW=18.3*px, tx=X0+0.8*px;
+  for(let i=0;i<2;i++){
+    const ty=Y0+(1.7+i*18.3)*px;
+    s+=`<rect x="${tx}" y="${ty}" width="${TZL}" height="${TCW}" fill="#dcefdb" stroke="#2e7d4f" stroke-width="1.4"/>`;
+    const cx=tx+(36.6-23.77)/2*px, cy=ty+(18.3-10.97)/2*px, cl=23.77*px, cw=10.97*px;
+    s+=`<rect x="${cx}" y="${cy}" width="${cl}" height="${cw}" fill="#5e9e77" stroke="#fff" stroke-width="1.6"/>`
+      +`<line x1="${cx+cl/2}" y1="${ty+8}" x2="${cx+cl/2}" y2="${ty+TCW-8}" stroke="#fff" stroke-width="2.2"/>`
+      +`<rect x="${cx}" y="${(cy+(10.97-8.23)/2*px).toFixed(1)}" width="${cl}" height="${8.23*px}" fill="none" stroke="#fff" stroke-width="1"/>`
+      +`<text x="${tx+TZL/2}" y="${ty+14}" font-size="11" fill="#1c5c38" text-anchor="middle">🎾 เทนนิส ${i+1} (36.6 × 18.3 ม.)</text>`;
+  }
+  const dvx=X0+38.4*px;
+  s+=`<line x1="${dvx}" y1="${Y0}" x2="${dvx}" y2="${Y0+HW}" stroke="#a33" stroke-width="2" stroke-dasharray="8 5"/>`
+    +`<text x="${dvx}" y="${Y0-8}" font-size="10" fill="#a33" text-anchor="middle">ม่านกั้น 2 ม.</text>`;
+  const bz0=X0+40.4*px, bzL=(80-40.4-8)*px, pitch=bzL/5, bw=6.1*px, bl=13.4*px;
+  const EDGE=(40-2*13.4-3.6)/2;
+  for(let i=0;i<5;i++){
+    [[Y0+EDGE*px,1],[Y0+HW-EDGE*px-bl,2]].forEach(([y,row])=>{
+      const x=bz0+i*pitch+(pitch-bw)/2;
+      s+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw}" height="${bl}" fill="#b5d4f4" stroke="#185fa5" stroke-width="1.2"/>`
+        +`<line x1="${x.toFixed(1)}" y1="${(y+bl/2).toFixed(1)}" x2="${(x+bw).toFixed(1)}" y2="${(y+bl/2).toFixed(1)}" stroke="#185fa5" stroke-width="1.5"/>`
+        +`<text x="${(x+bw/2).toFixed(1)}" y="${(y+bl/2-4).toFixed(1)}" font-size="10" fill="#0e3d6b" text-anchor="middle">${row===1?i+1:i+6}</text>`;
+    });
+  }
+  s+=`<text x="${bz0+bzL/2}" y="${Y0+HW/2+4}" font-size="11" fill="#28527e" text-anchor="middle">🏸 แบด 10 คอร์ท (ช่องกลาง 3.6 ม.)</text>`;
+  const AY=Y0+HW+18, AH=12*px;
+  s+=`<rect x="${X0}" y="${AY}" width="${HL}" height="${AH}" fill="#fdf7ef" stroke="#b98a3c" stroke-width="1.6" stroke-dasharray="7 4"/>`
+    +`<text x="${X0-12}" y="${AY+AH/2}" font-size="11" fill="#8a6d2f" text-anchor="middle" transform="rotate(-90 ${X0-12} ${AY+AH/2})">โซนเพิง</text>`;
+  for(let i=0;i<4;i++){
+    const px2=X0+(2+i*16)*px, py=AY+1.4*px, pl=15.2*px, pw=9.1*px;
+    s+=`<rect x="${px2}" y="${py.toFixed(1)}" width="${pl}" height="${pw}" fill="#efe3f6" stroke="#7b3fa0" stroke-width="1.3"/>`
+      +`<line x1="${(px2+pl/2).toFixed(1)}" y1="${py.toFixed(1)}" x2="${(px2+pl/2).toFixed(1)}" y2="${(py+pw).toFixed(1)}" stroke="#7b3fa0" stroke-width="1.6"/>`
+      +`<text x="${(px2+pl/2).toFixed(1)}" y="${(py+pw/2+4).toFixed(1)}" font-size="10" fill="#4e2766" text-anchor="middle">🥒 PB ${i+1}</text>`;
+  }
+  const bbx=X0+67*px, bby=AY+0.7*px, bbl=11*px, bbw=10.6*px;
+  s+=`<rect x="${bbx}" y="${bby.toFixed(1)}" width="${bbl}" height="${bbw}" fill="#fde3d2" stroke="#c25e1e" stroke-width="1.4"/>`
+    +`<circle cx="${(bbx+bbl/2).toFixed(1)}" cy="${(bby+2.2*px).toFixed(1)}" r="${1.8*px}" fill="none" stroke="#c25e1e" stroke-width="1.2"/>`
+    +`<text x="${(bbx+bbl/2).toFixed(1)}" y="${(bby+bbw-8).toFixed(1)}" font-size="10" fill="#7c3a0e" text-anchor="middle">🏀 3x3</text>`;
+  s+=`<text x="${X0+HL/2}" y="${Y0-24}" font-size="12" fill="#28527e" text-anchor="middle" font-weight="700">โถงหลัก 80 × 40 ม. (แผน 2 — 4 กีฬา)</text>`
+    +`<text x="${X0+18.5*px}" y="${AY-6}" font-size="10" fill="#2e7d4f">← โซนเทนนิส 38.4 ม. →</text>`
+    +`<text x="${bz0+bzL/2-40}" y="${AY-6}" font-size="10" fill="#185fa5">← โซนแบด 31.6 ม. →</text>`;
+  svg.innerHTML=s; svg.dataset.done='1';
+  const cap=el('plan2Caption');
+  if(cap) cap.textContent='ทุกระยะเป็นเมตรจริงตามสัดส่วน · เทนนิสฝั่งตะวันตก (แนวกลางโถงคือจุดเพดานสูงสุด 9.42 ม.) · แบดอัดแน่น 10 คอร์ทฝั่งตะวันออก · โซนเพิงใส่ Pickleball 4 คอร์ท + บาส 3x3';
 }
 function mkColor(v){
   const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
@@ -3254,6 +3447,7 @@ function bHeatClick(d,s){
 }
 function bHeatReset(){localStorage.removeItem(BH_KEY);bHeatRender();}
 
+window.__plan=PLAN;
 buildNav();
 loadLiveBook();
 loadMarket();
@@ -3262,7 +3456,7 @@ setDeal('rent');
 setSide('b2');
 setMode('dense');
 bHeatRender();
-go('p1');
+if(PLAN==='2'){setPlan('2');}else{go('p1')};
 </script>
 
 <script type="importmap">
@@ -3364,6 +3558,48 @@ function quad(a,b,c,d,m){
 }
 
 /* ================= ลายเส้นสนาม ================= */
+let tennisTexCache=null,pbTexCache=null;
+function tennisTex(){
+  if(tennisTexCache) return tennisTexCache;
+  const W=1024,H=473;                                  // 23.77 x 10.97 ratio
+  const c=document.createElement('canvas');c.width=W;c.height=H;
+  const g=c.getContext('2d');
+  g.fillStyle='#2a6e4b';g.fillRect(0,0,W,H);
+  const X0=24,X1=1000,Y0=14,Y1=459, M=(X1-X0)/23.77;
+  g.fillStyle='#3f7fb5';g.fillRect(X0,Y0,X1-X0,Y1-Y0);   // hard court blue
+  g.strokeStyle='#fff';g.lineWidth=5;
+  g.strokeRect(X0,Y0,X1-X0,Y1-Y0);                       // doubles
+  const NET=(X0+X1)/2, YC=(Y0+Y1)/2, sIn=1.37*M;
+  g.beginPath();
+  g.moveTo(X0,Y0+sIn);g.lineTo(X1,Y0+sIn);               // singles sidelines
+  g.moveTo(X0,Y1-sIn);g.lineTo(X1,Y1-sIn);
+  g.moveTo(NET-6.4*M,Y0+sIn);g.lineTo(NET-6.4*M,Y1-sIn); // service lines
+  g.moveTo(NET+6.4*M,Y0+sIn);g.lineTo(NET+6.4*M,Y1-sIn);
+  g.moveTo(NET-6.4*M,YC);g.lineTo(NET+6.4*M,YC);         // centre service line
+  g.stroke();
+  g.lineWidth=7;g.beginPath();g.moveTo(NET,Y0);g.lineTo(NET,Y1);g.stroke();
+  const t=new THREE.CanvasTexture(c);t.anisotropy=4;tennisTexCache=t;return t;
+}
+function pbTex(){
+  if(pbTexCache) return pbTexCache;
+  const W=1024,H=455;                                  // 13.41 x 6.10 ratio
+  const c=document.createElement('canvas');c.width=W;c.height=H;
+  const g=c.getContext('2d');
+  g.fillStyle='#3b2a52';g.fillRect(0,0,W,H);
+  const X0=22,X1=1002,Y0=16,Y1=439, M=(X1-X0)/13.41;
+  g.fillStyle='#6f4c9b';g.fillRect(X0,Y0,X1-X0,Y1-Y0);
+  const NET=(X0+X1)/2, YC=(Y0+Y1)/2;
+  g.strokeStyle='#fff';g.lineWidth=5;
+  g.strokeRect(X0,Y0,X1-X0,Y1-Y0);
+  g.beginPath();
+  g.moveTo(NET-2.13*M,Y0);g.lineTo(NET-2.13*M,Y1);       // non-volley (kitchen)
+  g.moveTo(NET+2.13*M,Y0);g.lineTo(NET+2.13*M,Y1);
+  g.moveTo(X0,YC);g.lineTo(NET-2.13*M,YC);               // centre lines
+  g.moveTo(NET+2.13*M,YC);g.lineTo(X1,YC);
+  g.stroke();
+  g.lineWidth=7;g.beginPath();g.moveTo(NET,Y0);g.lineTo(NET,Y1);g.stroke();
+  const t=new THREE.CanvasTexture(c);t.anisotropy=4;pbTexCache=t;return t;
+}
 function courtTex(){
   if(courtTexCache) return courtTexCache;
   const W=1024,H=482;
@@ -3488,7 +3724,7 @@ window.init3D=function(){
   }
 
   buildSite(); buildHall(); buildOffice(); buildAmenities(); buildDorm();
-  buildCourts(curCourts); buildBask(curBask);
+  buildCourts(curCourts); buildBask(curBask); buildPB();
   applyVis(); applyNight();
   
 
@@ -3660,6 +3896,7 @@ function buildHall(){
 function buildCourts(n){
   if(courtGroup){scene.remove(courtGroup);}
   courtGroup=new THREE.Group();scene.add(courtGroup);
+  if(window.__plan==='2'){ buildCourtsPlan2(); return; }
   const M=(window.__mode3d==='bwf')?{pitch:8.1}:{pitch:6.6};
   const per=n/2, hl=HALL_L/2;
   const cxA=HALL_W/2-EDGE-COURT_L/2;
@@ -3696,7 +3933,83 @@ function buildCourts(n){
     mat(0x14406e,{transparent:true,opacity:.7,side:THREE.DoubleSide}));
   cur.rotation.y=Math.PI/2;cur.position.set(0,2.9,0);courtGroup.add(cur);
 }
-window.rebuild3D=function(n){curCourts=n;if(started){buildCourts(n);applyNight();}};
+/* ================= แผน 2 — แบด 10 + เทนนิส 2 ในโถงเดียว ================= */
+const T_L=23.77, T_W=10.97, T_ZONE=36.6, T_LANE=18.3;
+function buildCourtsPlan2(){
+  const hl=HALL_L/2, hw=HALL_W/2;
+  /* --- เทนนิส 2 คอร์ท: ยาวตามแกน Z ฝั่ง -Z (ตะวันตก), เรียงตามแกน X --- */
+  const tzZ=-hl+0.8+T_ZONE/2;                      // จุดกลางโซนเทนนิสตามยาว
+  const TF=[],TN=[],TP=[];
+  for(let i=0;i<2;i++){
+    const cx=-hw+T_LANE/2+i*T_LANE;
+    TF.push([cx,.06,tzZ,-Math.PI/2,0,Math.PI/2]);  // หมุนให้ด้านยาวขนานแกน Z
+    TN.push([cx,.55,tzZ,0,0,0]);
+    TP.push([cx-T_W/2-.3,.53,tzZ]);TP.push([cx+T_W/2+.3,.53,tzZ]);
+  }
+  const tg=new THREE.PlaneGeometry(T_L+1.2,T_W+1.2);
+  inst(courtGroup,tg,new THREE.MeshStandardMaterial({map:tennisTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}),TF);
+  inst(courtGroup,new THREE.BoxGeometry(.06,1.07,T_W+.6),MT.net,TN);
+  inst(courtGroup,new THREE.CylinderGeometry(.06,.06,1.07,8),MT.dark,TP);
+  /* --- ม่านกั้นเทนนิส/แบด --- */
+  const divZ=-hl+T_ZONE+2.0;
+  const cur=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W-1,5.2),
+    mat(0xa33322,{transparent:true,opacity:.62,side:THREE.DoubleSide}));
+  cur.position.set(0,3.3,divZ);courtGroup.add(cur);
+  /* --- แบด 10 คอร์ท: 5 ต่อฝั่ง เหมือนแผน 1 แต่เริ่มหลังม่าน --- */
+  const pitch=6.6, per=5, z0=divZ+2.2;
+  const cxA=hw-EDGE-COURT_L/2;
+  const matW=Math.min(COURT_W+.7,pitch-.2);
+  const cm=new THREE.MeshStandardMaterial({map:courtTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
+  const fg=new THREE.PlaneGeometry(COURT_L+1,matW);
+  const F=[],N=[],P=[],S=[],L=[];
+  for(let sd=0;sd<2;sd++){
+    const sg=sd?1:-1, cx=sg*cxA, bx=sg*(hw-2.0);
+    for(let i=0;i<per;i++){
+      const z=z0+i*pitch+COURT_W/2;
+      F.push([cx,.07,z,-Math.PI/2]);
+      N.push([cx,.79,z,0,Math.PI/2]);
+      P.push([cx,.78,z-(COURT_W+.6)/2]);P.push([cx,.78,z+(COURT_W+.6)/2]);
+      S.push([bx,.44,z]);
+      L.push([cx,EAVE+.55,z]);
+    }
+  }
+  inst(courtGroup,fg,cm,F);
+  inst(courtGroup,GE.net,MT.net,N);
+  inst(courtGroup,GE.post,MT.dark,P);
+  inst(courtGroup,GE.seat,MT.chair,S,true);
+  inst(courtGroup,GE.lampBar,MT.lamp,L);
+  const cur2=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L-T_ZONE-6,4.4),
+    mat(0x14406e,{transparent:true,opacity:.7,side:THREE.DoubleSide}));
+  cur2.rotation.y=Math.PI/2;cur2.position.set(0,2.9,z0+(per*pitch)/2);courtGroup.add(cur2);
+  /* --- ไฟเทนนิส --- */
+  const TL=[];
+  for(let i=0;i<2;i++){const cx=-hw+T_LANE/2+i*T_LANE;
+    for(let k=-1;k<=1;k++) TL.push([cx,RIDGE-.6,tzZ+k*10]);}
+  inst(courtGroup,GE.lampBar,MT.lamp,TL);
+}
+/* ================= Pickleball 4 คอร์ท (โซนเพิง แผน 2) ================= */
+let pbGroup=null;
+function buildPB(){
+  if(pbGroup){scene.remove(pbGroup);pbGroup=null;}
+  if(window.__plan!=='2') return;
+  pbGroup=new THREE.Group();scene.add(pbGroup);
+  const hw=HALL_W/2, cx=-hw-BAY_D/2;
+  const PL=13.41,PW=6.10,pitch=16;
+  const F=[],N=[],P=[],L=[];
+  for(let i=0;i<4;i++){
+    const z=-34+i*pitch;
+    F.push([cx,.05,z,-Math.PI/2,0,Math.PI/2]);
+    N.push([cx,.45,z,0,0,0]);
+    P.push([cx-PW/2-.25,.43,z]);P.push([cx+PW/2+.25,.43,z]);
+    L.push([cx,7.4,z]);
+  }
+  inst(pbGroup,new THREE.PlaneGeometry(PL+1.4,PW+1.6),
+    new THREE.MeshStandardMaterial({map:pbTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}),F);
+  inst(pbGroup,new THREE.BoxGeometry(.05,.86,PW+.5),MT.net,N);
+  inst(pbGroup,new THREE.CylinderGeometry(.05,.05,.86,8),MT.dark,P);
+  inst(pbGroup,GE.lampBar,MT.lamp,L);
+}
+window.rebuild3D=function(n){curCourts=n;if(started){buildCourts(n);buildPB();applyNight();}};
 
 /* ================= บาส 3x3 แนวตั้ง (แนวเดียวกับคอร์ทแบด) + ยกหลังคาเฉพาะโซน ================= */
 function buildBask(n){
@@ -3757,6 +4070,7 @@ function buildBask(n){
   inst(baskGroup,new THREE.BoxGeometry(2.2,.08,.45),MT.wood,BN,true);
 }
 window.rebuildBask=function(n){curBask=n;if(started){buildBask(n);applyVis();applyNight();}};
+window.replan3D=function(){if(started){buildCourts(curCourts);buildPB();applyVis();applyNight();}};
 
 /* ================= อาคาร 2 ชั้น (แอดมิน/ร้านแบด/ที่พัก) ================= */
 function buildOffice(){

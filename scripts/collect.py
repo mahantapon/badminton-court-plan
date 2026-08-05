@@ -61,20 +61,25 @@ for v in reg:
         courts=get(f'{B}/providers/{cid}/courts')
     except Exception as e:
         errs.append(f'{v["slug"]}: {e}'); continue
-    bad=[c for c in courts if 'แบดมินตัน' in (c.get('sport') or '') and (c.get('physicalCourts') or [])]
-    bas=[c for c in courts if 'บาสเกตบอล' in (c.get('sport') or '') and (c.get('physicalCourts') or [])]
-    if not bad: continue
-    pr=sorted({c.get('pricePerHour') for c in bad if c.get('pricePerHour')})
-    vi=len(meta)
-    meta.append({'venue':v['name'],'district':v['district'],'prov':v['prov'],
-                 'courts':sum(len(c['physicalCourts']) for c in bad),
-                 'price':pr[0] if len(pr)==1 else (f'{pr[0]}–{pr[-1]}' if pr else None),
-                 'open':bad[0].get('openTime'),'close':bad[0].get('closeTime'),
-                 'cid':cid,'slug':v['slug'],
-                 'bas':[(c['id'],len(c['physicalCourts'])) for c in bas]})
-    for c in bad:
-        gc=len(c['physicalCourts'])
-        for d in DATES: jobs.append((vi,c['id'],gc,d))
+    SPMAP={'แบดมินตัน':'badminton','เทนนิส':'tennis','พิคเคิล':'pickleball','บาสเกตบอล':'basketball'}
+    bysport={}
+    for c in courts:
+        if not (c.get('physicalCourts') or []): continue
+        sp=next((v2 for k,v2 in SPMAP.items() if k in (c.get('sport') or '')),None)
+        if sp: bysport.setdefault(sp,[]).append(c)
+    bas=bysport.get('basketball',[])
+    for sport,grp in bysport.items():
+        pr=sorted({c.get('pricePerHour') for c in grp if c.get('pricePerHour')})
+        vi=len(meta)
+        meta.append({'venue':v['name'],'district':v['district'],'prov':v['prov'],'sport':sport,
+                     'courts':sum(len(c['physicalCourts']) for c in grp),
+                     'price':pr[0] if len(pr)==1 else (f'{pr[0]}–{pr[-1]}' if pr else None),
+                     'open':grp[0].get('openTime'),'close':grp[0].get('closeTime'),
+                     'cid':cid,'slug':v['slug'],
+                     'bas':[(c['id'],len(c['physicalCourts'])) for c in bas] if sport=='basketball' else []})
+        for c in grp:
+            gc=len(c['physicalCourts'])
+            for d in DATES: jobs.append((vi,c['id'],gc,d))
 
 res={}
 def work(j):
@@ -138,12 +143,13 @@ hist={'generated':NOW,'today':TODAY.isoformat(),'venues':[]}
 if os.path.exists('data/history.json'):
     hist=json.load(open('data/history.json'))
 hist['generated']=NOW; hist['today']=TODAY.isoformat()
-byname={v['venue']:v for v in hist['venues']}
-def upsert(name,info,daymap):
-    v=byname.get(name)
+for v in hist['venues']: v.setdefault('sport','badminton')
+byname={(v['venue'],v['sport']):v for v in hist['venues']}
+def upsert(name,sport,info,daymap):
+    v=byname.get((name,sport))
     if v is None:
-        v={'venue':name,**info,'days':{}}
-        hist['venues'].append(v); byname[name]=v
+        v={'venue':name,'sport':sport,**info,'days':{}}
+        hist['venues'].append(v); byname[(name,sport)]=v
     else:
         v.update(info)
     v['days'].update(daymap)
@@ -152,9 +158,9 @@ for vi,m in enumerate(meta):
     for d in DATES:
         b=res.get((vi,d))
         if b: daymap[d]=pct_windows(b)
-    upsert(m['venue'],{'district':m['district'],'prov':m['prov'],'courts':m['courts'],
+    upsert(m['venue'],m['sport'],{'district':m['district'],'prov':m['prov'],'courts':m['courts'],
                        'price':m['price'],'open':m['open'],'close':m['close']},daymap)
-upsert('BEAT Discovery',{'district':'พระโขนง (สุขุมวิท 66)','prov':'กรุงเทพมหานคร','courts':16,
+upsert('BEAT Discovery','badminton',{'district':'พระโขนง (สุขุมวิท 66)','prov':'กรุงเทพมหานคร','courts':16,
                          'price':'250–350','open':'7:00','close':'22:00','src':'okrabook'},
        {d:pct_windows(b) for d,b in beat.items()})
 dl=sorted({d for v in hist['venues'] for d in v['days']})
@@ -166,6 +172,7 @@ TMR=(TODAY+datetime.timedelta(days=1)).isoformat()
 live=[]
 excluded=[]
 for v in hist['venues']:
+    if v.get('sport','badminton')!='badminton': continue
     t=v['days'].get(TODAY.isoformat()); m=v['days'].get(TMR)
     if not t: continue
     dead=(t.get('a')==0) and (not m or m.get('a')==0)
@@ -209,8 +216,8 @@ def card(name,label,courts,daymapT,daymapM):
             'evening_pct':t.get('e'),'daytime_pct':t.get('d'),
             'full_from_to':f'{full[0]}:00–{int(full[-1])+1}:00' if full else '',
             'tomorrow_evening_pct':m.get('e') if m else None}
-def days_of(name):
-    v=byname.get(name,{});return v.get('days',{}).get(TODAY.isoformat()),v.get('days',{}).get(TMR)
+def days_of(name,sport='badminton'):
+    v=byname.get((name,sport),{});return v.get('days',{}).get(TODAY.isoformat()),v.get('days',{}).get(TMR)
 ccT,ccM=days_of('CC Badminton Court')
 wT,wM=days_of('Winning Badminton & Basketball')
 bT,bM=days_of('BEAT Discovery')
@@ -235,4 +242,8 @@ top=market['venues'][:3]; bot=market['venues'][-3:]
 print('แน่นสุด:', ' · '.join(f"{r['venue']} {r['eve']}%" for r in top))
 print('เบาสุด:', ' · '.join(f"{r['venue']} {r['eve']}%" for r in bot))
 print('ตัดออก:', ', '.join(excluded) if excluded else '-')
+bysp={}
+for v in hist['venues']:
+    sp=v.get('sport','badminton'); bysp.setdefault(sp,[0,0]); bysp[sp][0]+=1; bysp[sp][1]+=v['courts']
+print('คลัง 4 กีฬา:', ' · '.join(f"{k} {n} สนาม/{c} คอร์ท" for k,(n,c) in sorted(bysp.items())))
 if errs: print('ปัญหา:', ' | '.join(errs[:5]))

@@ -1,6 +1,6 @@
 {
- "source": "matchday.co.th/books/all (113 venues nationwide, filtered to Bangkok metro badminton)",
- "n": 36,
+ "source": "matchday.co.th/books/all — Bangkok metro, all sports (badminton/tennis/pickleball/basketball groups auto-detected per slug)",
+ "n": 59,
  "venues": [
   {
    "slug": "aibc",
@@ -217,6 +217,144 @@
    "name": "อิสระภาพ 38 แบดมินตัน",
    "district": "บางกอกใหญ่",
    "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sppkb",
+   "name": "SP Pickleball Club",
+   "district": "บางนา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "papaya",
+   "name": "Papaya Pickleball",
+   "district": "สวนหลวง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "pkbramintra",
+   "name": "Pickleball Ramintra",
+   "district": "คันนายาว",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "club46",
+   "name": "Club 46 Pickleball Courts",
+   "district": "สวนหลวง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "everyday",
+   "name": "Everyday Pickleball",
+   "district": "เมืองสมุทรปราการ",
+   "prov": "สมุทรปราการ"
+  },
+  {
+   "slug": "s9",
+   "name": "S9 Pickleball Club",
+   "district": "เมืองสมุทรปราการ",
+   "prov": "สมุทรปราการ"
+  },
+  {
+   "slug": "the8club",
+   "name": "The Eight Club : Tennis & Pickleball",
+   "district": "วัฒนา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "pickacourt",
+   "name": "Pick A Court",
+   "district": "พระโขนง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "level4sport",
+   "name": "Level4 pickleball club",
+   "district": "ลำลูกกา",
+   "prov": "ปทุมธานี"
+  },
+  {
+   "slug": "tttennis",
+   "name": "tt tennis court",
+   "district": "บางขุนเทียน",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "ptnk38",
+   "name": "Phatthanakan38 Indoor Tennis",
+   "district": "สวนหลวง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "gtnc",
+   "name": "Grand Tennis Club",
+   "district": "ทวีวัฒนา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "rsc",
+   "name": "RSC Ratchaphruek Sports Club",
+   "district": "ตลิ่งชัน",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "jtnc2",
+   "name": "soma tennis club",
+   "district": "บางบัวทอง",
+   "prov": "นนทบุรี"
+  },
+  {
+   "slug": "matchpoint",
+   "name": "Match Point Riverdale Marina",
+   "district": "เมืองปทุมธานี",
+   "prov": "ปทุมธานี"
+  },
+  {
+   "slug": "911streetball",
+   "name": "911 Streetball",
+   "district": "สวนหลวง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "pxsport",
+   "name": "Pixel Sport Club",
+   "district": "ยานนาวา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "idoram24",
+   "name": "I DO RAM24",
+   "district": "บางกะปิ",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "theprimary",
+   "name": "The Primary Bangna",
+   "district": "บางพลี",
+   "prov": "สมุทรปราการ"
+  },
+  {
+   "slug": "cosmicsporthub",
+   "name": "COSMIC SPORT HUB",
+   "district": "บางขุนเทียน",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "ram144",
+   "name": "Kickzone 144",
+   "district": "สะพานสูง",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "sukspace",
+   "name": "Sukspace",
+   "district": "วัฒนา",
+   "prov": "กรุงเทพมหานคร"
+  },
+  {
+   "slug": "usport",
+   "name": "U Sport Arena",
+   "district": "คลองหลวง",
+   "prov": "ปทุมธานี"
   }
  ]
 }
