@@ -1076,6 +1076,22 @@
     </div>
     <div class="note blue" id="p24note"></div>
   </div>
+  <div class="card">
+    <h3 style="margin-top:0">⚖️ เลือกแผนไหนดี — ข้อดี/ข้อเสียแบบตรงไปตรงมา</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>ประเด็น</th><th>🏸 แผน 1 — แบด 18 คอร์ท</th><th>🎾 แผน 2 — 4 กีฬา</th></tr>
+      <tr><td><b>ความรู้เรื่องธุรกิจ</b></td><td style="background:#eef7f1">เรารู้ตลาดแบดลึกที่สุด · มีข้อมูล 35 สนามเทียบได้</td><td>เทนนิส/PB เรายังไม่เคยทำ ต้องหาโค้ชและคนดูแลคนละสาย</td></tr>
+      <tr><td><b>ความเสี่ยงกระจุกตัว</b></td><td>ทุกบาทอยู่กับกีฬาเดียว ถ้าแบดซบเราเจ็บเต็มๆ</td><td style="background:#eef7f1">4 กีฬาช่วยกันรับ ถ้ากีฬาใดตกกีฬาอื่นพยุงได้</td></tr>
+      <tr><td><b>ตลาดกลางวัน</b></td><td>อ่อนที่สุด — ค่ากลางตลาดจองแค่ <b id="cmpBadDay">—</b>%</td><td style="background:#eef7f1">เทนนิสกลางวัน <b id="cmpTenDay">—</b>% · บาส <b id="cmpBasDay">—</b>% เติมชั่วโมงที่แบดขายไม่ได้</td></tr>
+      <tr><td><b>รับงานแข่งแบด</b></td><td style="background:#eef7f1">18 คอร์ทจบงานใน 1 วัน = รับงานใหญ่ได้ ค่าเหมา 20,000+</td><td>เหลือ 10 คอร์ท <b>รับงานแข่งแบดใหญ่ไม่ได้แล้ว</b> — เสียจุดขายนี้ไป</td></tr>
+      <tr><td><b>งานก่อสร้าง</b></td><td style="background:#eef7f1">พื้นชนิดเดียว ผู้รับเหมาเจ้าเดียว คุมง่าย</td><td>พื้น 3 ชนิด (ยางแบด · acrylic เทนนิส · acrylic PB) หลายผู้รับเหมา คุมยากกว่า</td></tr>
+      <tr><td><b>เพดานโรงงาน</b></td><td style="background:#eef7f1">6.33–9.42 ม. เกินพอสำหรับแบด (ต้องการ 9 ม. เหนือคอร์ท)</td><td><b>เทนนิสได้แค่เกรดซ้อม</b> — จัดแข่งทางการไม่ได้ ต้องบอกลูกค้าตรงๆ</td></tr>
+      <tr><td><b>รายได้ค่าคอร์ท/เดือน</b><br><span class="sub">คิดจากอัตราจองจริงของตลาด</span></td><td class="r" id="cmpRev1">—</td><td class="r" id="cmpRev2">—</td></tr>
+    </table>
+    </div>
+    <div class="note" id="cmpNote"></div>
+  </div>
   <div class="pagenav"><button class="btn ghost" onclick="go('p23')">← ผัง 4 กีฬา</button><button class="btn" onclick="go('p2')">ถัดไป: ภาพ 3D →</button></div>
 </section>
 
@@ -3312,6 +3328,13 @@ function renderP24(){
   html+=`<tr style="background:#eef7f1"><td><b>รวมค่าคอร์ทแผน 2</b></td><td class="r"><b>17</b></td><td></td><td></td><td class="r"><b>≈ ${tot.toLocaleString()}</b></td><td class="sub">ยังไม่รวมคาเฟ่ · โค้ช · งานแข่ง</td></tr>`+
     `<tr><td class="sub">เทียบ แผน 1 — แบด 18 คอร์ทล้วน</td><td class="r sub">18</td><td class="r sub">${b?b.price:'—'}</td><td class="r sub">${b?b.a:'—'}%</td><td class="r sub">≈ ${p1.toLocaleString()}</td><td class="sub">ต่างกัน ${tot>p1?'+':''}${(tot-p1).toLocaleString()} ฿/เดือน</td></tr>`;
   t.innerHTML=html;
+  const S=SPSUM.sports;
+  const put=(id,v)=>{const e=el(id); if(e) e.textContent=v;};
+  put('cmpBadDay',S.badminton?.d); put('cmpTenDay',S.tennis?.d); put('cmpBasDay',S.basketball?.d);
+  put('cmpRev1','≈ '+p1.toLocaleString()+' ฿'); put('cmpRev2','≈ '+tot.toLocaleString()+' ฿');
+  const cn=el('cmpNote');
+  if(cn) cn.innerHTML=`🎯 <b>อ่านตารางนี้ยังไง:</b> แผน 2 ให้รายได้ค่าคอร์ทสูงกว่าราว <b>${(tot-p1).toLocaleString()} ฿/เดือน</b> บนงบลงทุนใกล้เคียงกัน และกระจายความเสี่ยงได้ดีกว่า — <b>แต่แลกด้วยการทิ้งจุดขาย "สนาม 18 คอร์ทรับงานแข่ง" ซึ่งเป็นสิ่งที่คู่แข่งในโซนเราไม่มี</b><br>
+    → <b>คำถามที่ต้องตอบก่อนตัดสินใจ:</b> รายได้จากงานแข่งแบด + ชื่อเสียงจากการเป็นเจ้าภาพ มีค่ามากกว่าส่วนต่าง ${(tot-p1).toLocaleString()} ฿/เดือน หรือเปล่า · ถ้ายังตอบไม่ได้ ให้รอข้อมูลอีก 2–4 สัปดาห์ ระบบเก็บให้อัตโนมัติอยู่แล้ว โดยเฉพาะเทนนิสที่ตอนนี้มีแค่ ${S.tennis?.n} สนามในกลุ่มตัวอย่าง`;
   const n=el('p24note'), T=SPSUM.sports.tennis, P=SPSUM.sports.pickleball;
   if(n&&T&&P){
     n.innerHTML=`💡 <b>ข้อมูลจริงพลิกสมมติฐานเดิม 2 ข้อ:</b> (1) <b>เทนนิสคือตัวจริง ไม่ใช่ pickleball</b> — เทนนิส ${T.n} สนามในกรุงเทพจองเฉลี่ยทั้งวัน <b>${T.a}%</b> และ<b>กลางวันยังเต็มถึง ${T.d}%</b> สวนทางกับแบดที่กลางวันว่าง = เทนนิสมีตลาดกลางวันจริง `+
