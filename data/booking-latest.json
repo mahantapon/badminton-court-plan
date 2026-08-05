@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-05 18:38",
+ "updated": "2026-08-05 18:50",
  "note": "เย็น = 18:00–22:00 · กลางวัน = 10:00–17:00 · ดึงตรงจากระบบจองของแต่ละสนาม (CC/Winning = Matchday · BEAT = Okrabook)",
  "snapshots": [
   {
@@ -33,10 +33,10 @@
    "venue": "BEAT Discovery",
    "courts": 16,
    "date": "2026-08-05",
-   "evening_pct": 94,
+   "evening_pct": 97,
    "daytime_pct": null,
-   "full_from_to": "",
-   "tomorrow_evening_pct": 84
+   "full_from_to": "19:00–20:00",
+   "tomorrow_evening_pct": 92
   }
  ]
 }
