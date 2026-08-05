@@ -1072,18 +1072,9 @@
   <div class="card">
     <h3 style="margin-top:0">📈 รายได้/เดือน — ราคาจากราคากลางตลาดจริง · อัตราจองอิงข้อมูลย้อนหลังที่เก็บ</h3>
     <div style="overflow-x:auto">
-    <table id="p24rev">
-      <tr><th>กีฬา</th><th class="r">คอร์ท</th><th class="r">฿/ชม. (ตลาด)</th><th class="r">ชม.ขายได้/วัน</th><th class="r">อัตราจองเฉลี่ย</th><th class="r">รายได้/เดือน</th></tr>
-      <tr><td>🏸 แบดมินตัน</td><td class="r">10</td><td class="r">200</td><td class="r">14</td><td class="r">45%</td><td class="r"><b>378,000</b></td></tr>
-      <tr><td>🎾 เทนนิส</td><td class="r">2</td><td class="r">400</td><td class="r">14</td><td class="r">40%</td><td class="r"><b>134,400</b></td></tr>
-      <tr><td>🥒 Pickleball</td><td class="r">4</td><td class="r">400</td><td class="r">14</td><td class="r">40%</td><td class="r"><b>268,800</b></td></tr>
-      <tr><td>🏀 บาส 3x3</td><td class="r">1</td><td class="r">800</td><td class="r">14</td><td class="r">50%</td><td class="r"><b>168,000</b></td></tr>
-      <tr style="background:#eef7f1"><td><b>รวมค่าคอร์ทแผน 2</b></td><td class="r">17</td><td></td><td></td><td></td><td class="r"><b>≈ 949,000</b></td></tr>
-      <tr><td class="sub" colspan="5">เทียบ: แผน 1 แบด 18 คอร์ทที่สมมติฐานเดียวกัน (45%)</td><td class="r sub">≈ 680,000</td></tr>
-    </table>
+    <table id="p24rev"><tr><td class="sub">กำลังโหลดตัวเลขจริงจากคลังข้อมูล…</td></tr></table>
     </div>
-    <div class="note blue" id="p24note">💡 <b>ทำไมแผน 2 น่าสนใจแม้คอร์ทรวมน้อยกว่า:</b> รายได้ต่อตารางเมตรของ pickleball สูงสุดในตลาด (คอร์ทเล็กกว่าแบดครึ่งหนึ่ง ราคา/ชม. สูงกว่า 2 เท่า) · <b>ความเสี่ยงหลัก:</b> pickleball เป็นกีฬากระแส ต้องดูอัตราจองจริงรายวันที่เราเก็บว่ายืนระยะมั้ยก่อนผูกงบจริง<br>
-      ⚠️ ตัวเลขหน้านี้เป็น<b>ประมาณการรอบแรก</b> — ราคามาจากระบบจองจริง ส่วนอัตราจองจะแม่นขึ้นเมื่อคลังย้อนหลัง 4 กีฬาเก็บครบเดือน (ดูของจริงที่แท็บ "ย้อนหลัง" เลือกกีฬาได้)</div>
+    <div class="note blue" id="p24note"></div>
   </div>
   <div class="pagenav"><button class="btn ghost" onclick="go('p23')">← ผัง 4 กีฬา</button><button class="btn" onclick="go('p2')">ถัดไป: ภาพ 3D →</button></div>
 </section>
@@ -3184,7 +3175,6 @@ async function loadHistory(){
     hsState.date=HIST.today;
     hsRenderSeries();
     hsSetWin('all');
-    spTodayRender();
   }catch(e){ intro.textContent=''; el('hsFallback').style.display=''; }
 }
 function hsDates(){
@@ -3283,33 +3273,12 @@ function hsRenderSeries(){
 }
 function hsNote(){
   const s=HIST._sum||{};
-  el('hsNote').innerHTML=`🔍 <b>สรุปจากทั้งคลัง — ${SPTH[hsState.sport]} (${s.nPast} วันย้อนหลัง):</b> `+
-    `จันทร์–ศุกร์ ค่ากลาง เย็น <b>${s.wkdE??'—'}%</b> · กลางวัน <b>${s.wkdD??'—'}%</b> — `+
-    `เสาร์–อาทิตย์ เย็น <b>${s.wndE??'—'}%</b> · กลางวัน <b>${s.wndD??'—'}%</b>`+
-    `${s.wndD!=null&&s.wkdD!=null?` → กลางวันเสาร์-อาทิตย์ขายได้<b>มากกว่าวันธรรมดา ${s.wndD-s.wkdD} จุด</b> — นี่คือตลาดกลางวันที่มีอยู่จริง`:''}<br>`+
-    `📌 วันอนาคต (🔮) = ยอดจองล่วงหน้า ณ วันที่อัปเดตล่าสุด ยังเพิ่มได้อีกเรื่อยๆ จนถึงวันจริง — ใช้ดู "ตลาดนี้จองข้ามวันแค่ไหน" · ข้อมูลทุกตัวอ่านตรงจากระบบจอง ไม่มีการเดา`;
-}
-function spTodayRender(){
-  const tbl=el('spTodayTable'); if(!tbl||!HIST) return;
-  const d=HIST.today;
-  let t='<tr><th>กีฬา</th><th class="r">สนามที่ดึงได้</th><th class="r">คอร์ทรวม</th><th class="r">฿/ชม. ค่ากลาง</th><th class="r">เย็นวันนี้</th><th class="r">กลางวันวันนี้</th><th class="r">ทั้งวัน</th></tr>';
-  const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'}">${x}%</span>`;
-  [['tennis','🎾 เทนนิส'],['pickleball','🥒 Pickleball'],['basketball','🏀 บาส']].forEach(([sp,lb])=>{
-    const vs=HIST.venues.filter(v=>v.sport===sp);
-    const live=vs.filter(v=>v.days[d]&&v.days[d].a>0);
-    const m=f=>hsMedian(live.map(f).filter(x=>x!=null));
-    const prices=vs.map(v=>typeof v.price==='number'?v.price:null).filter(Boolean);
-    t+=`<tr><td><b>${lb}</b></td><td class="r">${vs.length}</td><td class="r">${vs.reduce((a,v)=>a+v.courts,0)}</td>`+
-       `<td class="r">${prices.length?hsMedian(prices):'—'}</td>`+
-       `<td class="r">${pc(m(v=>v.days[d].e))}</td><td class="r">${pc(m(v=>v.days[d].d))}</td><td class="r">${pc(m(v=>v.days[d].a))}</td></tr>`;
-  });
-  tbl.innerHTML=t;
-  const note=el('spTodayNote');
-  if(note){
-    const pb=HIST.venues.filter(v=>v.sport==='pickleball');
-    const pbPrices=pb.map(v=>typeof v.price==='number'?v.price:null).filter(Boolean).sort((a,b)=>a-b);
-    note.innerHTML=`💡 <b>อ่านตารางนี้:</b> pickleball ${pb.length} สนามราคา ${pbPrices[0]||'—'}–${pbPrices[pbPrices.length-1]||'—'} ฿/ชม. (แบดค่ากลางแค่ 210) — คอร์ทเล็กกว่าครึ่งแต่ราคาสูงกว่า 2 เท่า คือเหตุผลเชิงธุรกิจของแผน 2 · เทนนิสมี tt tennis อยู่บางขุนเทียนโซนเราแล้ว (350 ฿/ชม.) และ COSMIC บางขุนเทียนทำบาสอยู่ (800–1,400 ฿/ชม.) — ดีมานด์โซนเรามีจริงทั้ง 3 กีฬา`;
-  }
+  const wknd=s.wndE!=null&&s.wkdE!=null;
+  el('hsNote').innerHTML=`🔍 <b>${SPTH[hsState.sport]} — ค่ากลางจาก ${s.nPast} วันที่เก็บได้จริง:</b> `+
+    `จันทร์–ศุกร์ เย็น <b>${s.wkdE??'—'}%</b> · กลางวัน <b>${s.wkdD??'—'}%</b>`+
+    (wknd?` — เสาร์–อาทิตย์ เย็น <b>${s.wndE}%</b> · กลางวัน <b>${s.wndD}%</b>`:' <span class="sub">(ยังไม่มีวันเสาร์-อาทิตย์พอให้เทียบ)</span>')+`<br>`+
+    `⚠️ <b>ทำไมย้อนหลังได้แค่ไม่กี่วัน:</b> ระบบจอง Matchday <b>ปิดการจองย้อนหลัง</b> — วันที่ผ่านไปเกิน ~4 วันจะถูกรายงานว่า "ว่าง 0 คอร์ท" ทั้งหมด ซึ่งไม่ใช่ยอดจองจริง เราเคยดึงย้อนหลัง 8 สัปดาห์แล้วพบว่าตัวเลขปนเปื้อนแบบนี้ จึง<b>ลบทิ้งทั้งหมด</b> เหลือเฉพาะวันที่อ่านตอนยังเป็นปัจจุบัน · คลังจะยาวขึ้นเองวันละ 1 วันจากรอบเก็บอัตโนมัติ 2 รอบ/วัน<br>`+
+    `📌 วันอนาคต (🔮) = ยอดจองล่วงหน้าจริง ณ ตอนเก็บ ยังเพิ่มได้อีกจนถึงวันจริง — ส่วนนี้เชื่อถือได้เต็มที่ ใช้ดูว่าตลาดจองข้ามวันแค่ไหน`;
 }
 function drawPlan2(){
   const svg=el('plan2svg'); if(!svg||svg.dataset.done) return;
@@ -3452,6 +3421,7 @@ buildNav();
 loadLiveBook();
 loadMarket();
 loadHistory();
+loadSportSummary();
 setDeal('rent');
 setSide('b2');
 setMode('dense');

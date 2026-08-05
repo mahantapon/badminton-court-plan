@@ -16,7 +16,7 @@ NOWDT=datetime.datetime.now(BKK)
 NOW=NOWDT.strftime('%F %H:%M')
 TODAY=NOWDT.date()
 CURH=NOWDT.hour
-DATES=[(TODAY+datetime.timedelta(days=i)).isoformat() for i in range(-2,15)]
+DATES=[(TODAY+datetime.timedelta(days=i)).isoformat() for i in range(-1,15)]
 THWD=['จันทร์','อังคาร','พุธ','พฤหัส','ศุกร์','เสาร์','อาทิตย์']
 
 B='https://app2.matchday-backend.com/api'
@@ -145,6 +145,7 @@ if os.path.exists('data/history.json'):
 hist['generated']=NOW; hist['today']=TODAY.isoformat()
 for v in hist['venues']: v.setdefault('sport','badminton')
 byname={(v['venue'],v['sport']):v for v in hist['venues']}
+TODAY_S=TODAY.isoformat()
 def upsert(name,sport,info,daymap):
     v=byname.get((name,sport))
     if v is None:
@@ -152,7 +153,12 @@ def upsert(name,sport,info,daymap):
         hist['venues'].append(v); byname[(name,sport)]=v
     else:
         v.update(info)
-    v['days'].update(daymap)
+    # Matchday reports every slot as unavailable once a date is more than a few
+    # days old, so a late re-read of a past day is worthless. Keep whatever we
+    # stored while that day was still current; only future/today may be refreshed.
+    for d,x in daymap.items():
+        if d < TODAY_S and d in v['days']: continue
+        v['days'][d]=x
 for vi,m in enumerate(meta):
     daymap={}
     for d in DATES:
