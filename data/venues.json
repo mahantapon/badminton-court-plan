@@ -1,6 +1,6 @@
 {
  "source": "matchday.co.th/books/all (113 venues nationwide, filtered to Bangkok metro badminton)",
- "n": 35,
+ "n": 36,
  "venues": [
   {
    "slug": "aibc",
@@ -163,6 +163,12 @@
    "name": "สนามบินน้ำแบดมินตัน",
    "district": "เมืองนนทบุรี",
    "prov": "นนทบุรี"
+  },
+  {
+   "slug": "navasri",
+   "name": "สนามแบดนวศรี",
+   "district": "วังทองหลาง",
+   "prov": "กรุงเทพมหานคร"
   },
   {
    "slug": "pcc24",
