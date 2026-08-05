@@ -893,6 +893,15 @@
   </div>
 
   <div class="card">
+    <h3 style="margin-top:0">📡 อัตราการจองจริงของคู่แข่ง — ดึงสดจากระบบจอง</h3>
+    <p class="sub" style="margin-bottom:10px">อ่านตรงจากฐานข้อมูลระบบจอง Matchday ของสนามคู่แข่ง (สถานะรายคอร์ท ราย 30 นาที) · ระบบเก็บอัตโนมัติวันละ 2 รอบ (17:45 และ 21:30) · <span id="lbUpdated">กำลังโหลด…</span></p>
+    <div style="overflow-x:auto"><table id="liveBookTable"><tr><td class="sub">กำลังโหลดข้อมูลล่าสุด…</td></tr></table></div>
+    <div class="note blue">🔍 <b>วิธีอ่าน:</b> "เย็น" = 18:00–22:00 · "กลางวัน" = 10:00–17:00 · "พรุ่งนี้ (จองล่วงหน้า)" = ยอดจองของเย็นพรุ่งนี้ที่เห็น ณ ตอนเก็บข้อมูล — ถ้าสูงแปลว่าตลาดนี้ต้องจองข้ามวัน<br>
+      💡 <b>3 ข้อที่ข้อมูลสดยืนยันแล้วตั้งแต่วันแรก (พุธ 5 ส.ค. 69):</b> (1) <b>เย็นวันธรรมดาขายหมดล่วงหน้า</b> — CC เต็ม 97% / Winning เต็ม 100% และของพรุ่งนี้ถูกจองไปแล้ว 92–98% ตั้งแต่เย็นวันก่อน (2) <b>กลางวันว่างจริง</b> — CC กลางวันจองแค่ 5% = ตลาดกลางวันที่เราจะเข้าไม่มีใครแย่ง (3) <b>บาสครึ่งคอร์ทแน่นช่วงกลางวัน (96%)</b> สวนทางแบด — บาส 3x3 ของเราจะเติมชั่วโมงที่แบดขายไม่ได้พอดี</div>
+    <div class="note" id="lbFallback" style="display:none">⚠️ โหลดข้อมูลสดไม่ได้ (เปิดจากไฟล์ในเครื่อง หรือยังไม่มีรอบเก็บข้อมูล) — ดูตัวเลขล่าสุดได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/booking-latest.json" target="_blank">booking-latest.json</a></div>
+  </div>
+
+  <div class="card">
     <h3 style="margin-top:0">🗣️ จุดอ่อนคู่แข่งจากรีวิวจริง — ขุดเมื่อ 4 ส.ค. 2569</h3>
     <p class="sub" style="margin-bottom:10px">ไล่อ่านรีวิว Google/Trip.com/Wongnai/lemon8/Pantip ของทั้ง 6 สนาม · รายงานเฉพาะที่มีหลักฐานจริง — สนามไหนหาไม่เจอบอกตรงๆ ว่าไม่เจอ</p>
     <div style="overflow-x:auto">
@@ -3182,7 +3191,29 @@ window.init3D=function(){
   buildSite(); buildHall(); buildOffice(); buildAmenities(); buildDorm();
   buildCourts(curCourts); buildBask(curBask);
   applyVis(); applyNight();
-  window.addEventListener('resize',onResize);
+  
+/* ---------- อัตราการจองสดจาก data/booking-latest.json ---------- */
+(async function loadLiveBook(){
+  try{
+    const r=await fetch('data/booking-latest.json',{cache:'no-store'});
+    if(!r.ok) throw 0;
+    const d=await r.json();
+    el('lbUpdated').textContent='อัปเดตล่าสุด: '+d.updated;
+    let t=`<tr><th>สนาม</th><th class="r">คอร์ท</th><th class="r">เย็นวันนี้จองแล้ว</th><th class="r">กลางวันวันนี้</th><th class="r">พรุ่งนี้ (จองล่วงหน้า)</th><th>ช่วงที่เต็ม</th></tr>`;
+    d.snapshots.forEach(s=>{
+      if(s.error){t+=`<tr><td>${s.venue}</td><td colspan="5" class="sub">ดึงไม่ได้: ${s.error}</td></tr>`;return;}
+      const c=v=>v==null?'—':`<b style="color:${v>=80?'#b3261e':(v>=50?'#b8860b':'#1e7a3c')}">${v}%</b>`;
+      t+=`<tr><td><b>${s.venue}</b><span class="sub"> · ${s.date}</span></td><td class="r">${s.courts}</td><td class="r">${c(s.evening_pct)}</td><td class="r">${c(s.daytime_pct)}</td><td class="r">${c(s.tomorrow_evening_pct)}</td><td class="sub">${s.full_from_to||'—'}</td></tr>`;
+    });
+    el('liveBookTable').innerHTML=t;
+  }catch(e){
+    el('lbUpdated').textContent='';
+    el('liveBookTable').style.display='none';
+    el('lbFallback').style.display='';
+  }
+})();
+
+window.addEventListener('resize',onResize);
 
   /* วนเรนเดอร์แบบประหยัด: นิ่งแล้วหยุดวาด */
   let idle=0;
