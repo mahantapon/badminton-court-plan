@@ -17,3 +17,7 @@
 {"ts": "2026-08-05 23:24", "venue": "Winning แบด", "courts": 16, "date": "2026-08-05", "evening_pct": 100, "daytime_pct": 25, "full_from_to": "18:00–22:00", "tomorrow_evening_pct": 98}
 {"ts": "2026-08-05 23:24", "venue": "Winning บาสครึ่งคอร์ท", "courts": 2, "date": "2026-08-05", "evening_pct": 62, "daytime_pct": 49, "full_from_to": "17:00–21:00", "tomorrow_evening_pct": 94}
 {"ts": "2026-08-05 23:24", "venue": "BEAT Discovery", "error": "no data"}
+{"ts": "2026-08-06 00:18", "venue": "CC Badminton", "courts": 18, "date": "2026-08-06", "evening_pct": 92, "daytime_pct": 0, "full_from_to": "18:00–20:00", "tomorrow_evening_pct": 88}
+{"ts": "2026-08-06 00:18", "venue": "Winning แบด", "courts": 16, "date": "2026-08-06", "evening_pct": 98, "daytime_pct": 15, "full_from_to": "18:00–21:00", "tomorrow_evening_pct": 95}
+{"ts": "2026-08-06 00:18", "venue": "Winning บาสครึ่งคอร์ท", "courts": 2, "date": "2026-08-06", "evening_pct": 94, "daytime_pct": 55, "full_from_to": "20:00–22:00", "tomorrow_evening_pct": 88}
+{"ts": "2026-08-06 00:18", "venue": "BEAT Discovery", "courts": 16, "date": "2026-08-06", "evening_pct": 94, "daytime_pct": 13, "full_from_to": "19:00–21:00", "tomorrow_evening_pct": 95}

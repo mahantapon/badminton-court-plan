@@ -1,8 +1,8 @@
 {
- "generated": "2026-08-05 23:24",
+ "generated": "2026-08-06 00:18",
  "first": "2026-08-01",
- "today": "2026-08-05",
- "days": 5,
+ "today": "2026-08-06",
+ "days": 6,
  "excluded": [
   {
    "venue": "Bluehouse Badminton",
@@ -13,6 +13,16 @@
    "venue": "The Street Arena",
    "sport": "badminton",
    "why": "เต็ม 100% ตลอด = คอร์ทไม่ได้เปิดขายออนไลน์"
+  },
+  {
+   "venue": "Match Point Riverdale Marina",
+   "sport": "badminton",
+   "why": "ข้อมูลยังน้อยเกินไป"
+  },
+  {
+   "venue": "Sakolpan Sports Club",
+   "sport": "tennis",
+   "why": "ข้อมูลยังน้อยเกินไป"
   },
   {
    "venue": "Pickleball Ramintra",
@@ -30,6 +40,11 @@
    "why": "ระบบจองว่าง 0% ตลอด = ยังไม่ได้ใช้จริง"
   },
   {
+   "venue": "VIBE COURT",
+   "sport": "pickleball",
+   "why": "ข้อมูลยังน้อยเกินไป"
+  },
+  {
    "venue": "The Street Arena",
    "sport": "basketball",
    "why": "เต็ม 100% ตลอด = คอร์ทไม่ได้เปิดขายออนไลน์"
@@ -40,14 +55,10 @@
    "n": 35,
    "courts": 328,
    "price": 210,
-   "e": 92,
-   "d": 12,
-   "a": 45,
+   "e": 90.5,
+   "d": 11.0,
+   "a": 44.0,
    "advance": [
-    {
-     "d": "2026-08-06",
-     "e": 94.5
-    },
     {
      "d": "2026-08-07",
      "e": 94.0
@@ -99,6 +110,10 @@
     {
      "d": "2026-08-19",
      "e": 83.0
+    },
+    {
+     "d": "2026-08-20",
+     "e": 79.5
     }
    ],
    "venues": [
@@ -107,216 +122,216 @@
      "district": "วังทองหลาง",
      "courts": 10,
      "price": 290,
-     "e": 100,
-     "d": 57,
-     "a": 72
-    },
-    {
-     "venue": "RPK Badminton",
-     "district": "ลาดกระบัง",
-     "courts": 8,
-     "price": 220,
-     "e": 100,
-     "d": 33,
-     "a": 70
+     "e": 100.0,
+     "d": 58.5,
+     "a": 72.5
     },
     {
      "venue": "NJ Badminton Court",
      "district": "หลักสี่",
      "courts": 5,
      "price": 180,
-     "e": 100,
-     "d": 30,
-     "a": 68
+     "e": 100.0,
+     "d": 30.0,
+     "a": 68.5
+    },
+    {
+     "venue": "RPK Badminton",
+     "district": "ลาดกระบัง",
+     "courts": 8,
+     "price": 220,
+     "e": 100.0,
+     "d": 30.5,
+     "a": 68.0
     },
     {
      "venue": "KURU Badminton Park",
      "district": "ทุ่งครุ",
      "courts": 12,
      "price": "280–380",
-     "e": 96,
-     "d": 49,
-     "a": 64
-    },
-    {
-     "venue": "Badminton House",
-     "district": "สะพานสูง",
-     "courts": 12,
-     "price": "210–230",
-     "e": 100,
-     "d": 26,
-     "a": 62
+     "e": 96.0,
+     "d": 40.5,
+     "a": 61.5
     },
     {
      "venue": "Sakolpan Sports Club",
      "district": "วัฒนา",
      "courts": 4,
      "price": 250,
-     "e": 94,
-     "d": 46,
-     "a": 62
+     "e": 97.0,
+     "d": 46.0,
+     "a": 61.5
+    },
+    {
+     "venue": "Badminton House",
+     "district": "สะพานสูง",
+     "courts": 12,
+     "price": "210–230",
+     "e": 99.0,
+     "d": 25.5,
+     "a": 59.5
     },
     {
      "venue": "สนามแบดมินตันพิริยะ",
      "district": "บางซื่อ",
      "courts": 12,
      "price": "170–200",
-     "e": 97,
-     "d": 29,
-     "a": 59
+     "e": 95.5,
+     "d": 19.5,
+     "a": 59.0
     },
     {
      "venue": "บีบียูไนเต็ด สนามฟุตบอลและแบดมินตัน",
      "district": "บางซื่อ",
      "courts": 5,
      "price": 200,
-     "e": 95,
-     "d": 17,
-     "a": 58
+     "e": 97.5,
+     "d": 15.0,
+     "a": 57.0
     },
     {
      "venue": "สนามแบดมินตัน ประชาชื่น 24",
      "district": "บางซื่อ",
      "courts": 6,
      "price": 170,
-     "e": 100,
-     "d": 17,
-     "a": 56
-    },
-    {
-     "venue": "สนามแบดมินตันนัดดา",
-     "district": "เมืองนนทบุรี",
-     "courts": 10,
-     "price": 210,
-     "e": 89,
-     "d": 18,
-     "a": 53
+     "e": 100.0,
+     "d": 11.5,
+     "a": 56.5
     },
     {
      "venue": "R58 Badminton",
      "district": "บางกะปิ",
      "courts": 9,
      "price": 200,
-     "e": 100,
-     "d": 22,
-     "a": 52
+     "e": 100.0,
+     "d": 21.5,
+     "a": 51.0
+    },
+    {
+     "venue": "สนามแบดมินตันนัดดา",
+     "district": "เมืองนนทบุรี",
+     "courts": 10,
+     "price": 210,
+     "e": 90.5,
+     "d": 15.5,
+     "a": 50.5
     },
     {
      "venue": "สนามบินน้ำแบดมินตัน",
      "district": "เมืองนนทบุรี",
      "courts": 4,
      "price": 190,
-     "e": 100,
-     "d": 20,
-     "a": 51
+     "e": 100.0,
+     "d": 17.0,
+     "a": 49.5
     },
     {
      "venue": "CC Badminton Court",
      "district": "บางขุนเทียน",
      "courts": 18,
      "price": 210,
-     "e": 94,
-     "d": 12,
-     "a": 49
+     "e": 93.0,
+     "d": 8.5,
+     "a": 46.0
     },
     {
      "venue": "Skyville Badminton",
      "district": "ปากเกร็ด",
      "courts": 8,
      "price": 240,
-     "e": 81,
-     "d": 12,
-     "a": 47
+     "e": 87.5,
+     "d": 11.0,
+     "a": 45.5
     },
     {
      "venue": "BD Badminton",
      "district": "บางกอกน้อย",
      "courts": 8,
      "price": "210–280",
-     "e": 100,
-     "d": 11,
-     "a": 47
-    },
-    {
-     "venue": "สนามแบดมินตันเสนานิคม",
-     "district": "ลาดพร้าว",
-     "courts": 15,
-     "price": 240,
-     "e": 98,
-     "d": 20,
-     "a": 45
+     "e": 100.0,
+     "d": 6.0,
+     "a": 45.5
     },
     {
      "venue": "SPANN Sports Complex",
      "district": "สามพราน",
      "courts": 6,
      "price": 180,
-     "e": 92,
-     "d": 12,
-     "a": 45
+     "e": 87.5,
+     "d": 10.0,
+     "a": 44.5
     },
     {
      "venue": "อิสระภาพ 38 แบดมินตัน",
      "district": "บางกอกใหญ่",
      "courts": 8,
      "price": 220,
-     "e": 100,
-     "d": 12,
-     "a": 45
+     "e": 100.0,
+     "d": 10.5,
+     "a": 44.5
     },
     {
      "venue": "Winning Badminton & Basketball",
      "district": "ตลิ่งชัน",
      "courts": 16,
      "price": 280,
-     "e": 100,
-     "d": 33,
-     "a": 45
+     "e": 100.0,
+     "d": 29.0,
+     "a": 44.0
     },
     {
-     "venue": "Sigma Badminton",
-     "district": "เมืองสมุทรสาคร",
-     "courts": 6,
+     "venue": "สนามแบดมินตันเสนานิคม",
+     "district": "ลาดพร้าว",
+     "courts": 15,
      "price": 240,
-     "e": 77,
-     "d": 7,
-     "a": 42
+     "e": 98.0,
+     "d": 17.0,
+     "a": 42.5
     },
     {
      "venue": "T SMASH สุวรรณภูมิ",
      "district": "บางพลี",
      "courts": 5,
      "price": 210,
-     "e": 90,
-     "d": 10,
-     "a": 42
+     "e": 89.0,
+     "d": 8.5,
+     "a": 42.0
     },
     {
-     "venue": "สนามแบดเสนาวัชรพล",
-     "district": "บางเขน",
-     "courts": 12,
+     "venue": "Sigma Badminton",
+     "district": "เมืองสมุทรสาคร",
+     "courts": 6,
      "price": 240,
-     "e": 79,
-     "d": 10,
-     "a": 39
-    },
-    {
-     "venue": "Rooftop สนามแบดมินตันบางพลี",
-     "district": "บางพลี",
-     "courts": 4,
-     "price": 190,
-     "e": 81,
-     "d": 0,
-     "a": 39
+     "e": 77.0,
+     "d": 6.0,
+     "a": 40.0
     },
     {
      "venue": "สนามแบดนวศรี",
      "district": "วังทองหลาง",
      "courts": 5,
      "price": 150,
-     "e": 80,
-     "d": 7,
-     "a": 38
+     "e": 85.0,
+     "d": 10.5,
+     "a": 38.5
+    },
+    {
+     "venue": "สนามแบดเสนาวัชรพล",
+     "district": "บางเขน",
+     "courts": 12,
+     "price": 240,
+     "e": 79.0,
+     "d": 9.0,
+     "a": 38.0
+    },
+    {
+     "venue": "Rooftop สนามแบดมินตันบางพลี",
+     "district": "บางพลี",
+     "courts": 4,
+     "price": 190,
+     "e": 79.5,
+     "d": 3.0,
+     "a": 37.5
     },
     {
      "venue": "BEAT Discovery",
@@ -328,85 +343,85 @@
      "a": 37
     },
     {
+     "venue": "All In Badminton Club",
+     "district": "มีนบุรี",
+     "courts": 7,
+     "price": 200,
+     "e": 89.0,
+     "d": 12.5,
+     "a": 35.0
+    },
+    {
      "venue": "สนามแบดมินตันสายสี่",
      "district": "สามพราน",
      "courts": 12,
      "price": 180,
-     "e": 90,
-     "d": 5,
-     "a": 33
+     "e": 86.5,
+     "d": 3.5,
+     "a": 30.5
     },
     {
      "venue": "T SMASH แจ้งวัฒนะ",
      "district": "ปากเกร็ด",
      "courts": 5,
      "price": 190,
-     "e": 60,
-     "d": 6,
-     "a": 31
+     "e": 67.5,
+     "d": 4.5,
+     "a": 30.5
     },
     {
      "venue": "FBT Sport Park",
      "district": "ลาดกระบัง",
      "courts": 11,
      "price": "180–220",
-     "e": 75,
-     "d": 10,
-     "a": 31
-    },
-    {
-     "venue": "All In Badminton Club",
-     "district": "มีนบุรี",
-     "courts": 7,
-     "price": 200,
-     "e": 90,
-     "d": 4,
-     "a": 30
-    },
-    {
-     "venue": "VIBE COURT",
-     "district": "มีนบุรี",
-     "courts": 12,
-     "price": 240,
-     "e": 69,
-     "d": 11,
-     "a": 29
+     "e": 82.0,
+     "d": 7.0,
+     "a": 30.5
     },
     {
      "venue": "T SMASH พระราม2",
      "district": "จอมทอง",
      "courts": 9,
      "price": 190,
-     "e": 53,
-     "d": 21,
-     "a": 28
+     "e": 53.5,
+     "d": 17.5,
+     "a": 30.0
+    },
+    {
+     "venue": "VIBE COURT",
+     "district": "มีนบุรี",
+     "courts": 12,
+     "price": 240,
+     "e": 69.0,
+     "d": 8.0,
+     "a": 27.5
     },
     {
      "venue": "The88Rajburana",
      "district": "ราษฎร์บูรณะ",
      "courts": 7,
      "price": 220,
-     "e": 70,
-     "d": 2,
-     "a": 24
+     "e": 76.0,
+     "d": 1.0,
+     "a": 24.0
     },
     {
      "venue": "PJ Sport Club",
      "district": "บางบ่อ",
      "courts": 12,
      "price": 160,
-     "e": 61.0,
-     "d": 1.5,
-     "a": 19.5
+     "e": 58,
+     "d": 2,
+     "a": 19
     },
     {
      "venue": "Badminton Court Soi Suwinthawong 11",
      "district": "มีนบุรี",
      "courts": 12,
      "price": 140,
-     "e": 64,
-     "d": 1,
-     "a": 19
+     "e": 66.0,
+     "d": 1.0,
+     "a": 18.5
     },
     {
      "venue": "สนามแบดสาธุ 49 (สำนักงานใหญ่)",
@@ -414,8 +429,8 @@
      "courts": 17,
      "price": 280,
      "e": 21.5,
-     "d": 1,
-     "a": 9
+     "d": 0.5,
+     "a": 6.0
     }
    ]
   },
@@ -423,14 +438,10 @@
    "n": 5,
    "courts": 14,
    "price": 425,
-   "e": 100,
-   "d": 71,
-   "a": 76,
+   "e": 100.0,
+   "d": 82.0,
+   "a": 76.0,
    "advance": [
-    {
-     "d": "2026-08-06",
-     "e": 100
-    },
     {
      "d": "2026-08-07",
      "e": 94
@@ -482,6 +493,10 @@
     {
      "d": "2026-08-19",
      "e": 0
+    },
+    {
+     "d": "2026-08-20",
+     "e": 19
     }
    ],
    "venues": [
@@ -490,45 +505,45 @@
      "district": "สวนหลวง",
      "courts": 2,
      "price": 600,
-     "e": 100,
-     "d": 100,
-     "a": 94
+     "e": 100.0,
+     "d": 100.0,
+     "a": 94.0
     },
     {
      "venue": "Grand Tennis Club",
      "district": "ทวีวัฒนา",
      "courts": 2,
      "price": 300,
-     "e": 100,
-     "d": 100,
-     "a": 85
+     "e": 100.0,
+     "d": 100.0,
+     "a": 85.0
     },
     {
      "venue": "soma tennis club",
      "district": "บางบัวทอง",
      "courts": 4,
      "price": "450–550",
-     "e": 100,
-     "d": 71,
-     "a": 76
+     "e": 100.0,
+     "d": 82.0,
+     "a": 76.0
     },
     {
      "venue": "The Eight Club : Tennis & Pickleball",
      "district": "วัฒนา",
      "courts": 4,
      "price": 500,
-     "e": 47,
-     "d": 23,
-     "a": 33
+     "e": 45.5,
+     "d": 22.0,
+     "a": 31.5
     },
     {
      "venue": "tt tennis court",
      "district": "บางขุนเทียน",
      "courts": 2,
      "price": 350,
-     "e": 0,
-     "d": 0,
-     "a": 3
+     "e": 0.0,
+     "d": 0.0,
+     "a": 1.5
     }
    ]
   },
@@ -536,14 +551,10 @@
    "n": 10,
    "courts": 47,
    "price": 400,
-   "e": 60.0,
-   "d": 24,
-   "a": 32.0,
+   "e": 54.8,
+   "d": 19.0,
+   "a": 30.2,
    "advance": [
-    {
-     "d": "2026-08-06",
-     "e": 56.0
-    },
     {
      "d": "2026-08-07",
      "e": 39.5
@@ -595,6 +606,10 @@
     {
      "d": "2026-08-19",
      "e": 0.0
+    },
+    {
+     "d": "2026-08-20",
+     "e": 12.5
     }
    ],
    "venues": [
@@ -603,90 +618,90 @@
      "district": "สวนหลวง",
      "courts": 6,
      "price": 1000,
-     "e": 92,
-     "d": 93,
-     "a": 79
+     "e": 91.0,
+     "d": 94.5,
+     "a": 80.0
     },
     {
      "venue": "SP Pickleball Club",
      "district": "บางนา",
      "courts": 6,
      "price": 400,
-     "e": 62,
-     "d": 67,
-     "a": 62
+     "e": 62.0,
+     "d": 63.5,
+     "a": 60.5
     },
     {
      "venue": "RSC Ratchaphruek Sports Club",
      "district": "ตลิ่งชัน",
      "courts": 3,
      "price": 500,
-     "e": 100,
-     "d": 33,
-     "a": 47
+     "e": 96.0,
+     "d": 31.0,
+     "a": 44.0
     },
     {
      "venue": "Everyday Pickleball",
      "district": "เมืองสมุทรปราการ",
      "courts": 4,
      "price": 200,
-     "e": 69,
+     "e": 65.5,
      "d": null,
-     "a": 34
+     "a": 32.5
     },
     {
      "venue": "Club 46 Pickleball Courts",
      "district": "สวนหลวง",
      "courts": 6,
      "price": 400,
-     "e": 58,
-     "d": 24,
-     "a": 32
+     "e": 71.5,
+     "d": 19.0,
+     "a": 32.0
     },
     {
      "venue": "The Eight Club : Tennis & Pickleball",
      "district": "วัฒนา",
      "courts": 2,
      "price": 400,
-     "e": 25,
-     "d": 21,
-     "a": 32
+     "e": 25.0,
+     "d": 17.5,
+     "a": 28.5
     },
     {
      "venue": "Match Point Riverdale Marina",
      "district": "เมืองปทุมธานี",
      "courts": 6,
      "price": 300,
-     "e": 62,
-     "d": 5,
-     "a": 27
-    },
-    {
-     "venue": "Pick A Court",
-     "district": "พระโขนง",
-     "courts": 7,
-     "price": "400–750",
-     "e": 15,
-     "d": 31,
-     "a": 22
+     "e": 47.5,
+     "d": 3.5,
+     "a": 25.5
     },
     {
      "venue": "S9 Pickleball Club",
      "district": "เมืองสมุทรปราการ",
      "courts": 3,
      "price": 400,
-     "e": 25,
-     "d": 5,
-     "a": 21
+     "e": 21.0,
+     "d": 8.5,
+     "a": 21.0
+    },
+    {
+     "venue": "Pick A Court",
+     "district": "พระโขนง",
+     "courts": 7,
+     "price": "400–750",
+     "e": 15.0,
+     "d": 24.5,
+     "a": 20.0
     },
     {
      "venue": "Level4 pickleball club",
      "district": "ลำลูกกา",
      "courts": 4,
      "price": 350,
-     "e": 12,
-     "d": 4,
-     "a": 16
+     "e": 18.5,
+     "d": 5.5,
+     "a": 17.0
     }
    ]
   },
@@ -694,14 +709,10 @@
    "n": 4,
    "courts": 21,
    "price": null,
-   "e": 72.0,
-   "d": 61.5,
-   "a": 57.5,
+   "e": 77.8,
+   "d": 60.5,
+   "a": 60.0,
    "advance": [
-    {
-     "d": "2026-08-06",
-     "e": 93.0
-    },
     {
      "d": "2026-08-07",
      "e": 90.0
@@ -753,6 +764,10 @@
     {
      "d": "2026-08-19",
      "e": 65.5
+    },
+    {
+     "d": "2026-08-20",
+     "e": 68.0
     }
    ],
    "venues": [
@@ -761,36 +776,36 @@
      "district": "สวนหลวง",
      "courts": 3,
      "price": "400–800",
-     "e": 100,
-     "d": 88,
-     "a": 82
+     "e": 98.0,
+     "d": 84.5,
+     "a": 79.0
     },
     {
      "venue": "Pixel Sport Club",
      "district": "ยานนาวา",
      "courts": 8,
      "price": "100–1400",
-     "e": 67,
-     "d": 74,
-     "a": 66
+     "e": 75.5,
+     "d": 69.0,
+     "a": 70.0
     },
     {
      "venue": "Winning Badminton & Basketball",
      "district": "ตลิ่งชัน",
      "courts": 6,
      "price": "800–1400",
-     "e": 77,
-     "d": 49,
-     "a": 49
+     "e": 80.0,
+     "d": 52.0,
+     "a": 50.0
     },
     {
      "venue": "COSMIC SPORT HUB",
      "district": "บางขุนเทียน",
      "courts": 4,
      "price": "800–1400",
-     "e": 6,
-     "d": 11,
-     "a": 8
+     "e": 6.0,
+     "d": 9.0,
+     "a": 8.0
     }
    ]
   }
