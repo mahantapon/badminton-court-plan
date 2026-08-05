@@ -906,6 +906,23 @@
   </div>
 
   <div class="card">
+    <h3 style="margin-top:0">🗺️ อัตราการจองทั้งกรุงเทพฯ &amp; ปริมณฑล — <span id="mkHead">กำลังโหลด…</span></h3>
+    <p class="sub" style="margin-bottom:10px">ไม่ใช่ตัวเลขที่เราเดา — อ่านสถานะรายคอร์ทราย 30 นาทีตรงจากระบบจองของทุกสนามที่เปิดจองออนไลน์ใน กทม.–ปริมณฑล พร้อมกันในนาทีเดียว <span id="mkUpdated"></span></p>
+
+    <div class="kpis" id="mkKpis"></div>
+
+    <h4 style="margin:20px 0 6px">⏰ เส้นอุปสงค์จริงของตลาด — ค่ากลางอัตราการจองรายชั่วโมง</h4>
+    <p class="sub" style="margin:0 0 10px">แต่ละแท่ง = ค่ากลาง (median) ของทุกสนามที่เปิดในชั่วโมงนั้น · ตัวเลขในวงเล็บ = จำนวนสนามที่นับได้</p>
+    <div id="mkChart" style="overflow-x:auto"></div>
+
+    <h4 style="margin:22px 0 6px">📋 รายสนาม — เรียงจากเย็นแน่นที่สุด</h4>
+    <div style="overflow-x:auto"><table id="mkTable"><tr><td class="sub">กำลังโหลด…</td></tr></table></div>
+
+    <div class="note blue" id="mkNote"></div>
+    <div class="note" id="mkFallback" style="display:none">⚠️ โหลดข้อมูลตลาดไม่ได้ (เปิดจากไฟล์ในเครื่อง) — ดูได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/market-latest.json" target="_blank">market-latest.json</a></div>
+  </div>
+
+  <div class="card">
     <h3 style="margin-top:0">🗣️ จุดอ่อนคู่แข่งจากรีวิวจริง — ขุดเมื่อ 4 ส.ค. 2569</h3>
     <p class="sub" style="margin-bottom:10px">ไล่อ่านรีวิว Google/Trip.com/Wongnai/lemon8/Pantip ของทั้ง 6 สนาม · รายงานเฉพาะที่มีหลักฐานจริง — สนามไหนหาไม่เจอบอกตรงๆ ว่าไม่เจอ</p>
     <div style="overflow-x:auto">
@@ -2985,6 +3002,60 @@ const BH_EST=[[30,35,45,55,70,60,25],BH_WD,BH_WD,BH_WD,BH_WD,BH_WD,[35,42,52,62,
 const BH_KEY='bkt_bheat_v1';
 const bhStore=()=>{try{return JSON.parse(localStorage.getItem(BH_KEY)||'{}');}catch(e){return {};}};
 function bhVal(d,s){const o=bhStore();return (d+'-'+s) in o?o[d+'-'+s]:BH_EST[d][s];}
+function mkColor(v){
+  const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
+  return `rgb(${r},${g},${b})`;
+}
+async function loadMarket(){
+  const head=el('mkHead'); if(!head) return;
+  try{
+    const r=await fetch('data/market-latest.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('http '+r.status);
+    const d=await r.json();
+    head.textContent=`${d.n_venues} สนาม ${d.n_courts} คอร์ท`;
+    el('mkUpdated').innerHTML='· เก็บเมื่อ <b>'+d.collected+'</b> (วัน'+d.weekday+')';
+    const m=d.median;
+    el('mkKpis').innerHTML=
+      kpi('ค่ากลาง เย็น 18:00–22:00', m.eve+'%', 'ทั้งตลาดเต็มเกือบหมดพร้อมกัน')+
+      kpi('ค่ากลาง กลางวัน 10:00–17:00', m.day+'%', 'ช่องว่างที่ยังไม่มีใครกิน', true)+
+      kpi('ค่ากลาง ทั้งวัน', m.all+'%', 'ตัวเลขที่แผนเราต้องเทียบ')+
+      kpi('ค่ากลาง ราคา/ชม.', m.price+' ฿', 'จาก '+d.n_venues+' สนาม')+
+      kpi('ค่ากลาง ขนาดสนาม', m.courts+' คอร์ท', '18 คอร์ทของเรา = ใหญ่กว่าตลาด 2 เท่า');
+    // chart
+    let c='<table style="min-width:640px"><tr>';
+    d.hourly.forEach(x=>{c+=`<th class="r" style="font-size:.74rem;padding:2px 4px">${String(x.h).padStart(2,'0')}</th>`;});
+    c+='</tr><tr>';
+    d.hourly.forEach(x=>{
+      const hgt=Math.max(3,Math.round(x.median*1.05));
+      c+=`<td style="vertical-align:bottom;padding:2px 4px"><div title="${x.median}% · ${x.n} สนาม" style="height:${hgt}px;background:${mkColor(x.median)};border-radius:3px 3px 0 0;min-width:26px"></div></td>`;
+    });
+    c+='</tr><tr>';
+    d.hourly.forEach(x=>{c+=`<td class="r" style="font-size:.72rem;padding:3px 4px;font-variant-numeric:tabular-nums"><b>${Math.round(x.median)}%</b><br><span class="sub">(${x.n})</span></td>`;});
+    c+='</tr></table>';
+    el('mkChart').innerHTML=c;
+    // table
+    let t='<tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th class="r">฿/ชม.</th><th>เวลาเปิด</th><th class="r">เย็น</th><th class="r">พรุ่งนี้เย็น</th><th class="r">กลางวัน</th></tr>';
+    d.venues.forEach(v=>{
+      const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'};font-variant-numeric:tabular-nums">${x}%</span>`;
+      t+=`<tr><td>${v.venue}${v.src?' <span class="sub">('+v.src+')</span>':''}</td><td class="sub">${v.district}${v.prov!=='กรุงเทพมหานคร'?' · '+v.prov:''}</td>`+
+         `<td class="r">${v.courts}</td><td class="r">${v.price==null?'—':v.price}</td><td class="sub">${v.open}–${v.close}</td>`+
+         `<td class="r">${pc(v.eve)}</td><td class="r">${pc(v.eve_tmr)}</td><td class="r">${pc(v.day)}</td></tr>`;
+    });
+    el('mkTable').innerHTML=t;
+    const ex=(d.excluded||[]).length?`<br>📌 <b>ไม่นับรวม ${d.excluded.length} สนาม</b> (${d.excluded.join(', ')}) เพราะระบบจองว่าง 0% ทั้งวันทั้งพรุ่งนี้ = เขายังไม่ได้ใช้ระบบจองออนไลน์จริง ถ้านับเข้าไปจะดึงค่ากลางให้ต่ำผิดความจริง`:'';
+    el('mkNote').innerHTML=
+      `🔍 <b>อ่านกราฟนี้ให้ขาด — นี่คือแก่นของธุรกิจสนามแบดทั้งเมือง:</b><br>`+
+      `(1) <b>08:00–14:00 ค่ากลาง 0%</b> — ไม่ใช่ "น้อย" แต่คือ<b>ศูนย์</b> สนามส่วนใหญ่เปิดไฟรอโดยไม่มีคนเลย · (2) <b>17:00 พุ่งจาก 20% เป็น 65% ภายในชั่วโมงเดียว</b> แล้ว <b>18:00–20:00 เต็ม 100%</b> · (3) <b>22:00 ร่วงเหลือ 37%</b><br>`+
+      `→ ตลาดนี้ขายของได้จริงแค่ <b>4–5 ชั่วโมงต่อวัน</b> ค่ากลางทั้งวันจึงอยู่แค่ <b>${m.all}%</b> — ใครวางแผนโดยคิดว่าจะได้ 60–70% ทั้งวัน คือคิดผิดตั้งแต่ต้น<br>`+
+      `→ <b>แผนเราตั้งไว้ที่ 50% เฉลี่ยทั้งวัน = สูงกว่าค่ากลางตลาด ${(50-m.all).toFixed(1)} จุด</b> ส่วนต่างนี้ต้องมาจากกลางวันล้วนๆ (อคาเดมี บุฟเฟต์ บาส 3x3 งานแข่ง) เพราะเย็นเต็ม 96% อยู่แล้วทุกสนาม — <b>ไม่มีที่ให้โตในช่วงเย็นอีกแล้ว</b>${ex}`;
+  }catch(e){
+    head.textContent='—';
+    el('mkFallback').style.display='';
+  }
+}
+function kpi(t,v,s,warn){
+  return `<div class="kpi"><div class="t">${t}</div><div class="v${warn?' warn':''}">${v}</div><div class="s">${s}</div></div>`;
+}
 function bhColor(v){
   const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
   return `rgb(${r},${g},${b})`;
@@ -3018,6 +3089,7 @@ function bHeatReset(){localStorage.removeItem(BH_KEY);bHeatRender();}
 
 buildNav();
 loadLiveBook();
+loadMarket();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
