@@ -923,6 +923,35 @@
   </div>
 
   <div class="card">
+    <h3 style="margin-top:0">🕰️ ย้อนหลัง &amp; จองล่วงหน้า — เลือกวัน เลือกช่วงเวลา ได้เอง</h3>
+    <p class="sub" style="margin-bottom:10px" id="hsIntro">กำลังโหลดคลังข้อมูล…</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+      <label class="sub">📅 วันที่ <select id="hsDate" onchange="hsSetDate(this.value)" style="padding:6px 10px;border-radius:8px;border:1px solid #c9d6e4;font-size:.9rem"></select></label>
+      <span class="sub">⏰ ช่วงเวลา</span>
+      <button class="btn hsw" data-w="all" onclick="hsSetWin('all')">ทั้งวัน</button>
+      <button class="btn hsw" data-w="day" onclick="hsSetWin('day')">กลางวัน 10–17</button>
+      <button class="btn hsw" data-w="eve" onclick="hsSetWin('eve')">เย็น 18–22</button>
+      <label class="sub">เอง: <select id="hsH1" onchange="hsSetWin('custom')" style="padding:4px 6px;border-radius:6px;border:1px solid #c9d6e4"></select>–<select id="hsH2" onchange="hsSetWin('custom')" style="padding:4px 6px;border-radius:6px;border:1px solid #c9d6e4"></select> น.</label>
+    </div>
+
+    <div class="kpis" id="hsKpis"></div>
+
+    <h4 style="margin:20px 0 6px" id="hsChartHead">อัตราจองรายชั่วโมง (ค่ากลางทั้งตลาด) ของวันที่เลือก</h4>
+    <div id="hsChart" style="overflow-x:auto"></div>
+
+    <h4 style="margin:22px 0 6px">📈 เส้นเวลาย้อนหลัง — ค่ากลางทั้งตลาดรายวัน (แท่งเข้ม = เย็น · แท่งอ่อน = กลางวัน · พื้นเหลือง = เสาร์-อาทิตย์)</h4>
+    <p class="sub" style="margin:0 0 8px">กดที่แท่งวันไหนเพื่อกระโดดไปดูวันนั้น · วันหลังเส้นประ = อนาคต (ยอดจองล่วงหน้า ณ วันนี้ ยังเพิ่มขึ้นได้อีก)</p>
+    <div id="hsSeries" style="overflow-x:auto"></div>
+
+    <h4 style="margin:22px 0 6px" id="hsTblHead">รายสนามในวันที่เลือก</h4>
+    <div style="overflow-x:auto"><table id="hsTable"></table></div>
+
+    <div class="note blue" id="hsNote"></div>
+    <div class="note" id="hsFallback" style="display:none">⚠️ โหลดคลังย้อนหลังไม่ได้ (เปิดจากไฟล์ในเครื่อง) — ดูได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/history.json" target="_blank">history.json</a></div>
+  </div>
+
+  <div class="card">
     <h3 style="margin-top:0">🗣️ จุดอ่อนคู่แข่งจากรีวิวจริง — ขุดเมื่อ 4 ส.ค. 2569</h3>
     <p class="sub" style="margin-bottom:10px">ไล่อ่านรีวิว Google/Trip.com/Wongnai/lemon8/Pantip ของทั้ง 6 สนาม · รายงานเฉพาะที่มีหลักฐานจริง — สนามไหนหาไม่เจอบอกตรงๆ ว่าไม่เจอ</p>
     <div style="overflow-x:auto">
@@ -3002,6 +3031,127 @@ const BH_EST=[[30,35,45,55,70,60,25],BH_WD,BH_WD,BH_WD,BH_WD,BH_WD,[35,42,52,62,
 const BH_KEY='bkt_bheat_v1';
 const bhStore=()=>{try{return JSON.parse(localStorage.getItem(BH_KEY)||'{}');}catch(e){return {};}};
 function bhVal(d,s){const o=bhStore();return (d+'-'+s) in o?o[d+'-'+s]:BH_EST[d][s];}
+let HIST=null,hsState={date:null,h1:0,h2:23,win:'all'};
+const THDAY=['อา','จ','อ','พ','พฤ','ศ','ส'];
+function hsDow(d){return new Date(d+'T12:00:00').getDay();}
+function hsIsWknd(d){const w=hsDow(d);return w===0||w===6;}
+async function loadHistory(){
+  const intro=el('hsIntro'); if(!intro) return;
+  try{
+    const r=await fetch('data/history.json',{cache:'no-store'});
+    if(!r.ok) throw new Error('http '+r.status);
+    HIST=await r.json();
+    const dates=hsDates();
+    intro.innerHTML=`คลังข้อมูลจริงจากระบบจอง <b>${HIST.venues.length} สนาม</b> · <b>${dates.length} วัน</b> (${thDate(HIST.first)} → ${thDate(HIST.last)}) · อัปเดต ${HIST.generated} — ระบบจองเก็บสถานะทุกวันในอดีตไว้ เราจึงดึงย้อนหลังได้ทั้งช่วง ไม่ใช่แค่วันที่เริ่มเก็บ`;
+    const sel=el('hsDate');
+    sel.innerHTML=dates.map(d=>{
+      const fut=d>HIST.today, w=THDAY[hsDow(d)];
+      return `<option value="${d}"${d===HIST.today?' selected':''}>${fut?'🔮 ':''}${w} ${thDate(d)}${d===HIST.today?' (วันนี้)':''}${fut?' — ล่วงหน้า':''}${hsIsWknd(d)?' 🟡':''}</option>`;
+    }).join('');
+    const h1=el('hsH1'),h2=el('hsH2');
+    for(let i=6;i<=23;i++){h1.innerHTML+=`<option value="${i}">${String(i).padStart(2,'0')}</option>`;h2.innerHTML+=`<option value="${i}">${String(i).padStart(2,'0')}</option>`;}
+    h1.value=6;h2.value=23;
+    hsState.date=HIST.today;
+    hsRenderSeries();
+    hsSetWin('all');
+  }catch(e){ intro.textContent=''; el('hsFallback').style.display=''; }
+}
+function hsDates(){
+  const s=new Set(); HIST.venues.forEach(v=>Object.keys(v.days).forEach(d=>s.add(d)));
+  return [...s].sort();
+}
+function thDate(d){
+  const M=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const[y,m,dd]=d.split('-');return `${+dd} ${M[+m-1]} ${+y+543-2500+''}`;
+}
+function hsSetDate(d){hsState.date=d;hsRender();}
+function hsSetWin(w){
+  hsState.win=w;
+  if(w==='all'){hsState.h1=0;hsState.h2=23;}
+  else if(w==='day'){hsState.h1=10;hsState.h2=16;el('hsH1').value=10;el('hsH2').value=16;}
+  else if(w==='eve'){hsState.h1=18;hsState.h2=21;el('hsH1').value=18;el('hsH2').value=21;}
+  else {hsState.h1=+el('hsH1').value;hsState.h2=+el('hsH2').value;if(hsState.h2<hsState.h1){hsState.h2=hsState.h1;el('hsH2').value=hsState.h1;}}
+  document.querySelectorAll('.btn.hsw').forEach(b=>b.classList.toggle('active',b.dataset.w===w));
+  hsRender();
+}
+function hsVenueWin(v,date){
+  const day=v.days[date]; if(!day) return null;
+  const ps=[];
+  for(const hh in day.bh){const H=+hh; if(H>=hsState.h1&&H<=hsState.h2) ps.push(day.bh[hh]);}
+  if(!ps.length) return null;
+  return Math.round(ps.reduce((a,b)=>a+b,0)/ps.length);
+}
+function hsMedian(arr){if(!arr.length)return null;const a=[...arr].sort((x,y)=>x-y);const m=a.length>>1;return a.length%2?a[m]:Math.round((a[m-1]+a[m])/2);}
+function hsLiveVenues(date){return HIST.venues.filter(v=>v.days[date]&&v.days[date].a>0);}
+function hsRender(){
+  if(!HIST||!hsState.date)return;
+  const date=hsState.date,fut=date>HIST.today,w=THDAY[hsDow(date)];
+  const live=hsLiveVenues(date);
+  const winVals=live.map(v=>hsVenueWin(v,date)).filter(x=>x!=null);
+  const eves=live.map(v=>v.days[date].e).filter(x=>x!=null);
+  const days=live.map(v=>v.days[date].d).filter(x=>x!=null);
+  const alls=live.map(v=>v.days[date].a).filter(x=>x!=null);
+  const lbl=hsState.win==='all'?'ทั้งวัน':hsState.win==='day'?'กลางวัน 10–17':hsState.win==='eve'?'เย็น 18–22':`${hsState.h1}:00–${hsState.h2}:59`;
+  el('hsKpis').innerHTML=
+    kpi(`ช่วงที่เลือก (${lbl})`,(hsMedian(winVals)??'—')+'%',`ค่ากลางจาก ${winVals.length} สนาม`)+
+    kpi('เย็น 18–22',(hsMedian(eves)??'—')+'%','')+
+    kpi('กลางวัน 10–17',(hsMedian(days)??'—')+'%','',true)+
+    kpi('ทั้งวัน',(hsMedian(alls)??'—')+'%','');
+  // hourly chart for the date
+  const agg={};
+  live.forEach(v=>{const bh=v.days[date].bh;for(const hh in bh){agg[hh]=agg[hh]||[];agg[hh].push(bh[hh]);}});
+  const hours=Object.keys(agg).map(Number).sort((a,b)=>a-b).filter(hh=>agg[hh].length>=5);
+  let c='<table style="min-width:640px"><tr>'+hours.map(hh=>`<th class="r" style="font-size:.74rem;padding:2px 4px">${String(hh).padStart(2,'0')}</th>`).join('')+'</tr><tr>';
+  hours.forEach(hh=>{const m=hsMedian(agg[hh]);c+=`<td style="vertical-align:bottom;padding:2px 4px"><div title="${m}%" style="height:${Math.max(3,Math.round(m*1.05))}px;background:${mkColor(m)};border-radius:3px 3px 0 0;min-width:26px"></div></td>`;});
+  c+='</tr><tr>'+hours.map(hh=>`<td class="r" style="font-size:.72rem;padding:3px 4px"><b>${hsMedian(agg[hh])}%</b><br><span class="sub">(${agg[hh].length})</span></td>`).join('')+'</tr></table>';
+  el('hsChart').innerHTML=c;
+  el('hsChartHead').textContent=`อัตราจองรายชั่วโมง (ค่ากลางทั้งตลาด) — ${w} ${thDate(date)}${fut?' · ยอดจองล่วงหน้า ณ วันนี้':''}`;
+  // table
+  el('hsTblHead').textContent=`รายสนาม — ${w} ${thDate(date)} · ช่วง ${lbl}`;
+  let t='<tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th class="r">฿/ชม.</th><th class="r">ช่วงที่เลือก</th><th class="r">เย็น</th><th class="r">กลางวัน</th><th class="r">ทั้งวัน</th></tr>';
+  const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'};font-variant-numeric:tabular-nums">${x}%</span>`;
+  [...HIST.venues].map(v=>({v,wv:hsVenueWin(v,date),dd:v.days[date]}))
+    .sort((a,b)=>((b.wv??-1)-(a.wv??-1)))
+    .forEach(({v,wv,dd})=>{
+      const dead=dd&&dd.a===0;
+      t+=`<tr${dead?' style="opacity:.45"':''}><td>${v.venue}${v.src?' <span class="sub">('+v.src+')</span>':''}${dead?' <span class="sub">ระบบจองไม่ได้ใช้</span>':''}</td><td class="sub">${v.district}</td><td class="r">${v.courts}</td><td class="r">${v.price??'—'}</td><td class="r">${pc(wv)}</td><td class="r">${pc(dd?.e)}</td><td class="r">${pc(dd?.d)}</td><td class="r">${pc(dd?.a)}</td></tr>`;
+    });
+  el('hsTable').innerHTML=t;
+  hsNote();
+}
+function hsRenderSeries(){
+  const dates=hsDates();
+  let bars='<table style="min-width:'+(dates.length*30)+'px"><tr>';
+  const med={};
+  dates.forEach(d=>{
+    const live=hsLiveVenues(d);
+    med[d]={e:hsMedian(live.map(v=>v.days[d].e).filter(x=>x!=null)),d:hsMedian(live.map(v=>v.days[d].d).filter(x=>x!=null))};
+  });
+  dates.forEach(d=>{
+    const m=med[d],fut=d>HIST.today,wk=hsIsWknd(d);
+    bars+=`<td onclick="el('hsDate').value='${d}';hsSetDate('${d}')" style="cursor:pointer;vertical-align:bottom;padding:1px 2px;${wk?'background:#fff8e0;':''}${fut?'border-top:2px dashed #d3672a;':''}" title="${THDAY[hsDow(d)]} ${thDate(d)} · เย็น ${m.e??'—'}% · กลางวัน ${m.d??'—'}%">`+
+      `<div style="height:${Math.max(2,Math.round((m.e??0)*0.75))}px;background:${mkColor(m.e??0)};border-radius:2px 2px 0 0;min-width:22px"></div>`+
+      `<div style="height:${Math.max(2,Math.round((m.d??0)*0.75))}px;background:${mkColor((m.d??0)*0.55)};border-radius:0 0 2px 2px;min-width:22px;margin-top:1px"></div></td>`;
+  });
+  bars+='</tr><tr>'+dates.map(d=>`<td class="r" style="font-size:.62rem;color:${hsIsWknd(d)?'#b8860b':'var(--muted)'};padding:2px 1px;white-space:nowrap">${THDAY[hsDow(d)]}<br>${+d.slice(8)}${d.slice(8,10)==='01'||d===dates[0]?'/'+(+d.slice(5,7)):''}</td>`).join('')+'</tr></table>';
+  el('hsSeries').innerHTML=bars;
+  // weekday vs weekend summary
+  const past=dates.filter(d=>d<=HIST.today);
+  const wkdE=[],wkdD=[],wndE=[],wndD=[];
+  past.forEach(d=>{
+    const m=med[d]; if(m.e==null)return;
+    (hsIsWknd(d)?wndE:wkdE).push(m.e); if(m.d!=null)(hsIsWknd(d)?wndD:wkdD).push(m.d);
+  });
+  HIST._sum={wkdE:hsMedian(wkdE),wkdD:hsMedian(wkdD),wndE:hsMedian(wndE),wndD:hsMedian(wndD),nPast:past.length};
+}
+function hsNote(){
+  const s=HIST._sum||{};
+  el('hsNote').innerHTML=`🔍 <b>สรุปจากทั้งคลัง (${s.nPast} วันย้อนหลัง):</b> `+
+    `จันทร์–ศุกร์ ค่ากลาง เย็น <b>${s.wkdE??'—'}%</b> · กลางวัน <b>${s.wkdD??'—'}%</b> — `+
+    `เสาร์–อาทิตย์ เย็น <b>${s.wndE??'—'}%</b> · กลางวัน <b>${s.wndD??'—'}%</b>`+
+    `${s.wndD!=null&&s.wkdD!=null?` → กลางวันเสาร์-อาทิตย์ขายได้<b>มากกว่าวันธรรมดา ${s.wndD-s.wkdD} จุด</b> — นี่คือตลาดกลางวันที่มีอยู่จริง`:''}<br>`+
+    `📌 วันอนาคต (🔮) = ยอดจองล่วงหน้า ณ วันที่อัปเดตล่าสุด ยังเพิ่มได้อีกเรื่อยๆ จนถึงวันจริง — ใช้ดู "ตลาดนี้จองข้ามวันแค่ไหน" · ข้อมูลทุกตัวอ่านตรงจากระบบจอง ไม่มีการเดา`;
+}
 function mkColor(v){
   const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
   return `rgb(${r},${g},${b})`;
@@ -3090,6 +3240,7 @@ function bHeatReset(){localStorage.removeItem(BH_KEY);bHeatRender();}
 buildNav();
 loadLiveBook();
 loadMarket();
+loadHistory();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
