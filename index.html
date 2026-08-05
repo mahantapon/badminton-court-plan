@@ -49,6 +49,8 @@
   .btn{border:1.5px solid var(--bad);background:#fff;color:var(--bad-dark);padding:7px 15px;border-radius:999px;font-family:inherit;font-size:.87rem;cursor:pointer;transition:.15s}
   .btn:hover{background:#eaf1fa}
   .btn.active{background:var(--bad);color:#fff}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .btn:disabled:hover{background:#fff}
   .btn.ghost{border-color:#c8d2dc;color:var(--muted)}
   .modebar{display:flex;gap:10px;flex-wrap:wrap;background:#eef4fb;border:1px solid #d3e1f0;border-radius:12px;padding:11px;margin-bottom:16px}
   .modebar .mb{flex:1;min-width:230px;border:2px solid #c8d6e6;background:#fff;border-radius:10px;padding:11px 15px;cursor:pointer;transition:.15s}
@@ -204,7 +206,7 @@
         <g fill="#5b7089">
           <circle cx="250" cy="190" r="3.4"/><circle cx="290" cy="190" r="3.4"/><circle cx="330" cy="190" r="3.4"/><circle cx="370" cy="190" r="3.4"/><circle cx="410" cy="190" r="3.4"/><circle cx="450" cy="190" r="3.4"/><circle cx="490" cy="190" r="3.4"/><circle cx="530" cy="190" r="3.4"/><circle cx="570" cy="190" r="3.4"/><circle cx="610" cy="190" r="3.4"/><circle cx="650" cy="190" r="3.4"/><circle cx="690" cy="190" r="3.4"/><circle cx="730" cy="190" r="3.4"/><circle cx="770" cy="190" r="3.4"/>
         </g>
-        <text x="786" y="184" font-size="9.5" fill="#c0504d" text-anchor="end">ม่านกั้นกลาง + เสากลาง (ทางเดิน 7.4 ม.)</text>
+        <text x="786" y="184" font-size="9.5" fill="#c0504d" text-anchor="end">ม่านกั้นกลาง + เสากลาง (ทางเดิน 3.6 ม.)</text>
 
         <!-- side shed -->
         <rect x="150" y="362" width="640" height="66" fill="#eceff1" stroke="#7a9184" stroke-width="1.4"/>
@@ -489,6 +491,14 @@
 <!-- ================= P6 BUDGET ================= -->
 <section class="page" id="p6">
   <h2>งบลงทุนรวม (โมเดลปรับปรุงโรงงานเดิม)</h2>
+  <div class="card" style="border:2px solid #185fa5">
+    <h3 style="margin-top:0">🔀 เลือกโหมด — ตัวเลขในหน้านี้และหน้า "รายได้" "กระแสเงินสด" "งบ 10 ปี" จะเปลี่ยนตามกันทั้งหมด</h3>
+    <div class="btnrow">
+      <button class="btn ph active" data-ph="full" onclick="setPhase1(false)">🏗️ เต็มโครงการ (18 คอร์ท + บาส + ครบทุกส่วน)</button>
+      <button class="btn ph" data-ph="1" onclick="setPhase1(true)">📦 เฟส 1 เท่านั้น (12 คอร์ท เปิดก่อน — ตัดส่วนที่เลื่อนได้ 10.5 ลบ. ออก)</button>
+    </div>
+    <p class="sub" id="phaseModeNote" style="margin-top:6px"></p>
+  </div>
   <div class="card">
     <div class="btnrow">
       <span class="lbl">โหมดพื้นยาง</span>
@@ -556,6 +566,7 @@
 <!-- ================= P7 REVENUE ================= -->
 <section class="page" id="p7">
   <h2>รายได้ &amp; คืนทุน</h2>
+  <div class="note blue" id="phaseBanner7" style="margin-bottom:14px"></div>
   <div class="card">
     <p class="sub" id="ceilNote" style="margin-bottom:10px"></p>
     <div class="btnrow">
@@ -929,6 +940,7 @@
 <!-- ================= P10 กระแสเงินสด & ภาษี ================= -->
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
+  <div class="note blue" id="phaseBanner10" style="margin-bottom:14px"></div>
   <div class="note" style="margin-top:0">🔴 <b>หน้านี้คือสิ่งที่ทำให้ธุรกิจใหม่ตายบ่อยที่สุด</b> — ตัวเลขในหน้า "รายได้ &amp; คืนทุน" คิดที่อัตราการจองเป้าหมายตั้งแต่เดือนแรก ซึ่งเป็นไปไม่ได้ หน้านี้จำลองการไต่ระดับจริงและบอกว่า<b>ต้องเตรียมเงินสดสำรองเท่าไหร่</b></div>
 
   <div class="card">
@@ -972,6 +984,7 @@
 <!-- ================= P11 งบ 10 ปี · IRR · Sensitivity ================= -->
 <section class="page" id="p11">
   <h2>งบการเงิน 10 ปี · IRR/NPV · Sensitivity</h2>
+  <div class="note blue" id="phaseBanner11" style="margin-bottom:14px"></div>
   <div class="card">
     <h3 style="margin-top:0">📊 ประมาณการ 10 ปี (ค่าเช่าขึ้น 10% ทุก 4 ปี)</h3>
     <div style="overflow-x:auto"><table id="pnlTable"></table></div>
@@ -1577,6 +1590,7 @@
 <section class="page" id="p18">
   <h2>🚦 Feasibility &amp; แผนแบ่งเฟส — เริ่มเล็ก แล้วค่อยโต</h2>
   <div class="note blue" style="margin-bottom:14px">📌 หน้านี้ตอบคำถามเดียว: <b>ด้วยเงินที่มีตอนนี้ เริ่มได้ไหม และเริ่มยังไงให้ไม่ตาย</b> · คำตอบสั้นๆ คือ <b>เริ่มที่ 12 คอร์ทได้ และควรเริ่มแบบนั้น</b></div>
+  <div class="note blue" id="phaseBanner18" style="margin-bottom:14px"></div>
 
   <div class="card">
     <h3 style="margin-top:0">🚥 ด่านที่ต้องผ่านก่อนวางเงิน — เรียงตามลำดับที่ต้องทำ</h3>
@@ -1612,7 +1626,12 @@
   </div>
 
   <div class="card">
-    <h3 style="margin-top:0">📦 แผนแบ่งเฟส — ปรับดูได้ว่าเริ่มกี่คอร์ท</h3>
+    <h3 style="margin-top:0">📦 แผนแบ่งเฟส — ลองดูว่าเริ่มกี่คอร์ทงบเท่าไหร่ <span class="sub" style="font-weight:400">(เครื่องคิดเลขสำรวจ — ไม่กระทบหน้าอื่น)</span></h3>
+    <p class="sub" style="margin-bottom:10px">ตารางนี้ไว้ <b>ลองเทียบ</b> ว่าเปิดกี่คอร์ทงบเท่าไหร่ · <b>ถ้าจะให้หน้ารายได้ กระแสเงินสด และงบ 10 ปี คำนวณเป็นเฟส 1 จริง ให้กดปุ่มด้านล่างหรือไปกดที่หน้า "งบลงทุน & เงินกู้"</b></p>
+    <div class="btnrow" style="margin-bottom:10px">
+      <button class="btn ph" data-ph="1" onclick="setPhase1(true);go('p18')">📦 ใช้เฟส 1 (12 คอร์ท) กับทั้งเว็บตอนนี้</button>
+      <button class="btn ph active" data-ph="full" onclick="setPhase1(false);go('p18')">🏗️ กลับไปเต็มโครงการ</button>
+    </div>
     <div class="controls">
       <div class="ctrl"><label>เฟส 1 เปิดกี่คอร์ท: <span class="val" id="phN1v">12</span> คอร์ท</label><input type="range" id="phN1" min="8" max="18" step="1" value="12" oninput="recalc()"></div>
       <div class="ctrl"><label>เงินทุนตัวเองที่มี: <span class="val" id="phEqv">6.0</span> ล้านบาท</label><input type="range" id="phEq" min="2" max="20" step="0.5" value="6" oninput="recalc()"></div>
@@ -1951,7 +1970,24 @@ const MODES={
   dense:{pitch:6.6, maxPerSide:10, label:'อัดเต็มพื้นที่', gap:'0.5 ม.'},
   bwf:  {pitch:8.1, maxPerSide:8,  label:'มาตรฐาน BWF',  gap:'2.0 ม.'}
 };
-let mode='dense', grade='pro', mix='single', deal='rent', side='b2', coachM='C';
+let mode='dense', grade='pro', mix='single', deal='rent', side='b2', coachM='C', phase1=false;
+const PHASE1_COURTS=12;
+let savedCourts=null;
+function setPhase1(p){
+  phase1=p;
+  if(p){ savedCourts=val('courts'); }
+  else if(savedCourts!=null){ el('courts').value=savedCourts; el('courts2').value=savedCourts; savedCourts=null; }
+  document.querySelectorAll('.btn.ph').forEach(b=>b.classList.toggle('active',b.dataset.ph===(p?'1':'full')));
+  const c=el('courts'), c2=el('courts2');
+  if(c)c.disabled=p; if(c2)c2.disabled=p;
+  document.querySelectorAll('.btn.sb').forEach(b=>b.disabled=p);
+  recalc();
+}
+function phaseBannerHTML(){
+  return phase1
+    ? `📦 <b>กำลังดูโหมด: เฟส 1 เท่านั้น (${PHASE1_COURTS} คอร์ท)</b> — ตัวเลขในหน้านี้ตัดบาส 3x3 + โซนแอร์ + โซนกินข้าว + โปรช็อป + ชั้น 2 + ป้าย LED + ภูมิทัศน์ออกแล้ว (รวม 10.5 ลบ.) · <button class="btn ghost" style="padding:2px 10px;font-size:.8rem" onclick="setPhase1(false)">สลับไปเต็มโครงการ</button>`
+    : `🏗️ <b>กำลังดูโหมด: เต็มโครงการ (18 คอร์ท + บาส + ครบทุกส่วน)</b> · <button class="btn ghost" style="padding:2px 10px;font-size:.8rem" onclick="setPhase1(true)">สลับไปเฟส 1 (12 คอร์ท)</button>`;
+}
 /* โมเดลข้อตกลงกับโค้ช — สนามได้เท่าไหร่ต่างกันตามว่าใครหานักเรียนมา */
 const CM={
   A:{n:'โค้ชเช่าคอร์ทเอง', d:'โค้ชจ่ายค่าคอร์ทตามปกติ แล้วเก็บค่าเรียนทั้งหมดเอง — สนามได้แค่ค่าเช่าคอร์ท',
@@ -2368,14 +2404,14 @@ function drawGrades(courts){
 function recalc(){
   const mx=maxCourts();
   el('courts').max=mx; el('courts2').max=mx;
-  let courts=Math.min(val('courts'),mx);
+  let courts=phase1?Math.min(PHASE1_COURTS,mx):Math.min(val('courts'),mx);
   el('courts').value=courts; el('courts2').value=courts;
   el('courtsVal').textContent=courts;
   el('courtsVal2').textContent=courts;
-  el('maxHint').textContent=`(สูงสุด ${mx} ในผังนี้)`;
+  el('maxHint').textContent=phase1?'(ล็อกที่เฟส 1 — สลับกลับเต็มโครงการเพื่อปรับ)':`(สูงสุด ${mx} ในผังนี้)`;
 
   const M=MODES[mode], perSide=courts/2, maxPer=mx/2;
-  const SD=SIDE[side], totalCourts=courts;      /* โถงโรงงานไม่ยกหลังคา → คอร์ทแบดคงที่ */
+  const SD=phase1?{bask:0,cost:0,area:'— (เลื่อนไปเฟส 2)'}:SIDE[side], totalCourts=courts;      /* โถงโรงงานไม่ยกหลังคา → คอร์ทแบดคงที่ */
   el('kTotalCourts').textContent=totalCourts+' คอร์ท';
   el('kTotalSub').textContent=`แบด ${totalCourts} คอร์ทในโถง + บาส 3x3 ${SD.bask} สนาม`;
   el('kMode').textContent=M.label;
@@ -2419,9 +2455,9 @@ function recalc(){
   el('bNet').textContent=fmt(netCost);
   el('bLand').textContent=fmt(landCost);
 
-  const renoFixed=1200000+2000000+2500000+900000+1500000+800000;
-  const interior=350000+1200000+1800000+900000+600000+1500000;
-  const outdoor=1500000+600000+400000+500000;
+  const renoFixed=1200000+2000000+2500000+900000+1500000+800000;   // งานโครงสร้างทั้งโถง — ทำครั้งเดียวไม่ว่าเฟสไหน
+  const interior=phase1?350000+1800000:350000+1200000+1800000+900000+600000+1500000;   // เฟส 1 เก็บแค่ห้องแอดมิน+ห้องน้ำ
+  const outdoor=phase1?1500000+500000:1500000+600000+400000+500000;                    // เฟส 1 เก็บแค่ที่จอด+รั้ว
   const systems=300000;
   const sideCost=SD.cost;
   el('bSide').textContent=fmt(sideCost);
@@ -2436,6 +2472,11 @@ function recalc(){
   const reno=preDesign+design;
   const total=landCost+reno;
   el('bTotal').textContent=fmt(total)+'  ('+fmtM(total)+')';
+  ['phaseBanner7','phaseBanner10','phaseBanner11','phaseBanner18'].forEach(id=>{const e=el(id);if(e)e.innerHTML=phaseBannerHTML();});
+  const pmn=el('phaseModeNote');
+  if(pmn)pmn.innerHTML=phase1
+    ?`📦 กำลังดู <b>เฟส 1</b> — ${totalCourts} คอร์ท · งบรวม ${fmtM(total)} · คอร์ทมากกว่านี้และบาส 3x3 อยู่ในเฟส 2–3 (ดูหน้า Feasibility)`
+    :`🏗️ กำลังดู <b>เต็มโครงการ</b> — ${totalCourts} คอร์ท + บาส ${SD.bask} สนาม · งบรวม ${fmtM(total)}`;
   el('bPerCourt').textContent=fmtM(total/totalCourts);
   el('bPerCourtSub').textContent=`= ${fmt(total/totalCourts)} ฿/คอร์ท (รวมทุกอย่าง ÷ ${totalCourts} คอร์ท)`;
   el('bReno').textContent=fmtM(reno);
@@ -2897,6 +2938,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 /* ================= ค่าคงที่จากแบบวัดหน้างาน ================= */
 const HALL_W=40, HALL_L=80, OFFICE_L=10;
 const COURT_L=13.4, COURT_W=6.1;
+const RUNOFF=1.8, EDGE=HALL_W/2-RUNOFF-COURT_L;   // เดียวกับผัง 2D — คอร์ทชิดเสากลาง ริมเป็นที่นั่ง
 const EAVE=6.33, RIDGE=9.42;          // ท้อง truss ริม → กลาง (ไม่ยกหลังคาโรงงาน)
 const SHED_W=14.18, SHED_LO=4.48, SHED_HI=5.62;
 const BAY_D=19, BAY_H=9.0;            // โซนบาสยกหลังคา ลึก 19 ม. = คอร์ท 15 + run-off 2 ม.ทั้ง 2 ข้าง
@@ -3221,11 +3263,11 @@ function buildHall(){
   const g=new THREE.Group();scene.add(g);
   const floor=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W,HALL_L),MT.floorDark);
   floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;g.add(floor);
-  const aisle=new THREE.Mesh(new THREE.PlaneGeometry(4.8,HALL_L),MT.aisle);
+  const aisle=new THREE.Mesh(new THREE.PlaneGeometry(RUNOFF*2,HALL_L),MT.aisle);
   aisle.rotation.x=-Math.PI/2;aisle.position.y=.02;aisle.receiveShadow=true;g.add(aisle);
   [-1,1].forEach(s=>{
-    const r=new THREE.Mesh(new THREE.PlaneGeometry(4.2,HALL_L),MT.rest);
-    r.rotation.x=-Math.PI/2;r.position.set(s*(hw-2.1),.02,0);r.receiveShadow=true;g.add(r);
+    const r=new THREE.Mesh(new THREE.PlaneGeometry(EDGE,HALL_L),MT.rest);
+    r.rotation.x=-Math.PI/2;r.position.set(s*(hw-EDGE/2),.02,0);r.receiveShadow=true;g.add(r);
   });
   const zl=[];[-2.45,2.45,-15.75,15.75].forEach(x=>zl.push([x,.045,0]));
   inst(g,new THREE.BoxGeometry(.14,.03,HALL_L-1),MT.line,zl);
@@ -3279,8 +3321,8 @@ function buildCourts(n){
   if(courtGroup){scene.remove(courtGroup);}
   courtGroup=new THREE.Group();scene.add(courtGroup);
   const M=(window.__mode3d==='bwf')?{pitch:8.1}:{pitch:6.6};
-  const per=n/2, hl=HALL_L/2, OUTER=4.2;
-  const cxA=HALL_W/2-OUTER-COURT_L/2;
+  const per=n/2, hl=HALL_L/2;
+  const cxA=HALL_W/2-EDGE-COURT_L/2;
   const matW=Math.min(COURT_W+.7,M.pitch-.2);
   const cm=new THREE.MeshStandardMaterial({map:courtTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
   const fg=new THREE.PlaneGeometry(COURT_L+1,matW);
