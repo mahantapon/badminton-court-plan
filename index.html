@@ -503,6 +503,10 @@
 <!-- ================= P6 BUDGET ================= -->
 <section class="page" id="p6">
   <h2>งบลงทุนรวม (โมเดลปรับปรุงโรงงานเดิม)</h2>
+  <div class="card p2only" style="display:none">
+    <h3 style="margin-top:0">💰 งบลงทุนรวม &amp; เงินกู้ — แผน 2 (4 กีฬา)</h3>
+    <div id="p2capex"></div>
+  </div>
   <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="card" style="border:2px solid #185fa5">
     <h3 style="margin-top:0">🔀 เลือกโหมด — ตัวเลขในหน้านี้และหน้า "รายได้" "กระแสเงินสด" "งบ 10 ปี" จะเปลี่ยนตามกันทั้งหมด</h3>
@@ -1348,6 +1352,10 @@
 <!-- ================= P29 คู่แข่งเทนนิส ================= -->
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
+  <div class="card p2only" style="display:none">
+    <h3 style="margin-top:0">💵 กระแสเงินสด &amp; ภาษี — แผน 2 (4 กีฬา)</h3>
+    <div id="p2cash"></div>
+  </div>
   <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="note blue" id="phaseBanner10" style="margin-bottom:14px"></div>
   <div class="note" style="margin-top:0">🔴 <b>หน้านี้คือสิ่งที่ทำให้ธุรกิจใหม่ตายบ่อยที่สุด</b> — ตัวเลขในหน้า "รายได้ &amp; คืนทุน" คิดที่อัตราการจองเป้าหมายตั้งแต่เดือนแรก ซึ่งเป็นไปไม่ได้ หน้านี้จำลองการไต่ระดับจริงและบอกว่า<b>ต้องเตรียมเงินสดสำรองเท่าไหร่</b></div>
@@ -1393,6 +1401,10 @@
 <!-- ================= P11 งบ 10 ปี · IRR · Sensitivity ================= -->
 <section class="page" id="p11">
   <h2>งบการเงิน 10 ปี · IRR/NPV · Sensitivity</h2>
+  <div class="card p2only" style="display:none">
+    <h3 style="margin-top:0">📈 งบ 10 ปี · IRR — แผน 2 (4 กีฬา)</h3>
+    <div id="p2irr"></div>
+  </div>
   <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="note blue" id="phaseBanner11" style="margin-bottom:14px"></div>
   <div class="card">
@@ -2518,6 +2530,8 @@ function rentSched20(base){               // ค่าเช่า 20 ปี ข
 }
 
 function buildFinance(D){
+  window.__D=D;                                   // เก็บสมมติฐานแผน 1 ไว้ให้การ์ดแผน 2 ใช้ต่อ
+  if(typeof renderPlan2Fin==='function') setTimeout(renderPlan2Fin,0);
   const {totalCourts,maxMonth,occ,extraRev,opexNoRentAll,rentBase,pmt,loan,equity,
          total,reno,RATE,totalHrs,matCost,lightCost,netCost,rate,yrs,isRent,keyMoney,net,occBE}=D;
 
@@ -3620,6 +3634,113 @@ function renderSportCompare(){
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
 }
+/* ================= การเงินแผน 2 (p6 · p10 · p11) ================= */
+function plan2Numbers(){
+  if(!SPSUM||typeof SPORTS==='undefined'||!window.__D) return null;
+  const D=window.__D, HRS=14, MDAYS=30;
+  /* --- รายได้ค่าคอร์ทรายกีฬา --- */
+  let court=0; const lines=[];
+  ['badminton','tennis','pickleball','basketball'].forEach(k=>{
+    const s=SPSUM.sports[k], sp=SPORTS.find(x=>x.k===k); if(!s||!sp||s.a==null) return;
+    const price=k==='basketball'?800:(s.price||0);
+    const rev=Math.round(sp.n*price*HRS*(s.a/100)*MDAYS);
+    court+=rev; lines.push({k,rev,price,occ:s.a,n:sp.n});
+  });
+  /* --- รายได้เสริม (สมมติฐานเดียวกับแผน 1) --- */
+  const addons=70000+45000+18720+124400+66000;
+  const revMonth=court+addons, revYear=revMonth*12;
+  /* --- งบลงทุน: ใช้ของแผน 1 แล้วสลับเฉพาะก้อน "พื้น+อุปกรณ์สนาม" --- */
+  const courtKit1=D.matCost+D.lightCost+D.netCost;          // ชุดสนามแบด 18 คอร์ทของแผน 1
+  let kit2lo=0,kit2hi=0;
+  SPORTS.forEach(sp=>{const c=costOf(sp); kit2lo+=c.lo*sp.n; kit2hi+=c.hi*sp.n;});
+  const kit2=(kit2lo+kit2hi)/2;
+  const total2=D.total-courtKit1+kit2;
+  const loanPct=D.total>0?D.loan/D.total:0.7;
+  const loan2=total2*loanPct, equity2=total2-loan2;
+  const pmt2=pmtCalc(loan2,D.rate,D.yrs);
+  /* --- ค่าใช้จ่าย: อาคารเดียวกัน คนเท่ากัน → ใช้ของแผน 1 --- */
+  const opex=D.opexNoRentAll, rent=D.rentBase;
+  const ebitdaM=revMonth-opex-rent, ebitdaY=ebitdaM*12;
+  /* --- ค่าเสื่อม --- */
+  const renoOnly=Math.max(total2-kit2-1200000,0);
+  const dep=renoOnly/20+kit2/10+240000;
+  return {D,lines,court,addons,revMonth,revYear,kit2,kit2lo,kit2hi,courtKit1,total2,
+          loan2,equity2,pmt2,opex,rent,ebitdaM,ebitdaY,dep,loanPct};
+}
+function renderPlan2Fin(){
+  const P=plan2Numbers(); if(!P) return;
+  const F=n=>Math.round(n).toLocaleString();
+  /* ---------- งบลงทุน (p6) ---------- */
+  const cap=el('p2capex');
+  if(cap) cap.innerHTML=`<div style="overflow-x:auto"><table>
+    <tr><th>รายการ</th><th class="r">แผน 1</th><th class="r">แผน 2</th><th>ต่างกันเพราะ</th></tr>
+    <tr><td>พื้น + อุปกรณ์สนาม</td><td class="r">${F(P.courtKit1)}</td><td class="r"><b>${F(P.kit2)}</b><br><span class="sub">ช่วง ${F(P.kit2lo)}–${F(P.kit2hi)}</span></td><td class="sub">แบดลดเหลือ 10 คอร์ท แต่เพิ่มเทนนิส 2 · PB 4 · บาส 1</td></tr>
+    <tr><td>ส่วนอื่นทั้งหมด<span class="sub"> (ปรับปรุงอาคาร · ระบบ · รอบนอก · แปะเจี๊ยะ)</span></td><td class="r" colspan="2" style="text-align:center">${F(P.D.total-P.courtKit1)} — <b>เท่ากันทั้ง 2 แผน</b></td><td class="sub">อาคารเดียวกัน</td></tr>
+    <tr style="background:#eef7f1"><td><b>งบลงทุนรวม</b></td><td class="r"><b>${F(P.D.total)}</b></td><td class="r"><b>${F(P.total2)}</b></td><td class="sub">ต่างกัน ${P.total2>P.D.total?'+':''}${F(P.total2-P.D.total)} ฿</td></tr>
+    <tr><td>เงินกู้ ${Math.round(P.loanPct*100)}%</td><td class="r">${F(P.D.loan)}</td><td class="r"><b>${F(P.loan2)}</b></td><td class="sub">สัดส่วนเดียวกับที่ตั้งไว้หน้าแผน 1</td></tr>
+    <tr><td>เงินลงทุนเอง</td><td class="r">${F(P.D.equity)}</td><td class="r"><b>${F(P.equity2)}</b></td><td></td></tr>
+    <tr><td>ผ่อนธนาคาร/เดือน</td><td class="r">${F(P.D.pmt)}</td><td class="r"><b>${F(P.pmt2)}</b></td><td class="sub">ดอกเบี้ย ${(P.D.rate*100).toFixed(2)}% · ${P.D.yrs} ปี</td></tr>
+    </table></div>
+    <div class="note blue">💡 งบลงทุนแผน 2 <b>${P.total2>P.D.total?'สูงกว่า':'ต่ำกว่า'}แผน 1 เพียง ${F(Math.abs(P.total2-P.D.total))} ฿</b> เพราะที่ประหยัดจากแบด 8 คอร์ทเกือบหักลบกับค่าพื้นเทนนิส+PB พอดี — <b>ส่วนที่ต่างจริงๆ คือรายได้ ไม่ใช่ต้นทุน</b></div>
+    <div class="note">⚠️ ยังไม่รวม <b>ค่าขยายหม้อแปลง/ระบบไฟ</b> — เทนนิสต้องการ ≥500 lux ซึ่งกินไฟมากกว่าแบด · ยังไม่มีข้อมูลระบบไฟเดิมของโรงงาน</div>`;
+  /* ---------- กระแสเงินสด + ภาษี (p10) ---------- */
+  const cash=el('p2cash');
+  if(cash){
+    const int1=P.loan2*P.D.rate;
+    const taxable=P.ebitdaY-int1-P.dep;
+    const cit=smeTax(taxable);
+    const netY=P.ebitdaY-int1-cit;
+    const principal=P.pmt2*12-int1;
+    const freeCash=netY-principal;
+    cash.innerHTML=`<div style="overflow-x:auto"><table>
+      <tr><th>รายการ</th><th class="r">ต่อเดือน</th><th class="r">ต่อปี</th><th>ที่มา</th></tr>
+      <tr><td>รายได้ค่าคอร์ท 4 กีฬา</td><td class="r">${F(P.court)}</td><td class="r">${F(P.court*12)}</td><td class="sub">ราคาตลาด × อัตราจองจริงที่วัดได้</td></tr>
+      <tr><td>รายได้เสริม</td><td class="r">${F(P.addons)}</td><td class="r">${F(P.addons*12)}</td><td class="sub">โปรช็อป · แผงตลาด · คลาสสอน · อคาเดมี · เหมาสนาม</td></tr>
+      <tr style="background:#eef7f1"><td><b>รายได้รวม</b></td><td class="r"><b>${F(P.revMonth)}</b></td><td class="r"><b>${F(P.revYear)}</b></td><td></td></tr>
+      <tr><td>หัก ค่าดำเนินการ (ไม่รวมค่าเช่า)</td><td class="r">−${F(P.opex)}</td><td class="r">−${F(P.opex*12)}</td><td class="sub">พนักงาน · ไฟ/น้ำ · ของใช้ · ซ่อมบำรุง · ประกัน — <b>ใช้ค่าเดียวกับแผน 1</b></td></tr>
+      <tr><td>หัก ค่าเช่าโรงงาน</td><td class="r">−${F(P.rent)}</td><td class="r">−${F(P.rent*12)}</td><td class="sub">อาคารเดียวกัน</td></tr>
+      <tr style="background:#eef7f1"><td><b>EBITDA</b></td><td class="r"><b>${F(P.ebitdaM)}</b></td><td class="r"><b>${F(P.ebitdaY)}</b></td><td class="sub">กำไรก่อนดอกเบี้ย ภาษี ค่าเสื่อม</td></tr>
+      <tr><td>หัก ดอกเบี้ยปีแรก</td><td class="r">−${F(int1/12)}</td><td class="r">−${F(int1)}</td><td class="sub">เงินกู้ ${F(P.loan2)} × ${(P.D.rate*100).toFixed(2)}%</td></tr>
+      <tr><td>หัก ค่าเสื่อม/ตัดจำหน่าย</td><td class="r">−${F(P.dep/12)}</td><td class="r">−${F(P.dep)}</td><td class="sub">ปรับปรุง 20 ปี · พื้นสนาม 10 ปี · อุปกรณ์</td></tr>
+      <tr><td>กำไรก่อนภาษี</td><td class="r">${F(taxable/12)}</td><td class="r">${F(taxable)}</td><td></td></tr>
+      <tr><td>ภาษีนิติบุคคล SME</td><td class="r">−${F(cit/12)}</td><td class="r">−${F(cit)}</td><td class="sub">ยกเว้น 3 แสนแรก · 15% ถึง 3 ล. · 20% ส่วนเกิน</td></tr>
+      <tr style="background:#eef7f1"><td><b>กำไรสุทธิ</b></td><td class="r"><b>${F(netY/12)}</b></td><td class="r"><b>${F(netY)}</b></td><td></td></tr>
+      <tr><td>หัก เงินต้นที่ต้องคืนธนาคาร</td><td class="r">−${F(principal/12)}</td><td class="r">−${F(principal)}</td><td class="sub">ผ่อนรวม ${F(P.pmt2)}/เดือน</td></tr>
+      <tr style="background:${freeCash>0?'#eef7f1':'#fdecec'}"><td><b>เงินสดเหลือจริงในกระเป๋า</b></td><td class="r"><b>${F(freeCash/12)}</b></td><td class="r"><b>${F(freeCash)}</b></td><td class="sub">${freeCash>0?'บวก — จ่ายหนี้ไหวและมีเหลือ':'<b style=\"color:#a33\">ติดลบ — ต้องเติมเงินทุกเดือน</b>'}</td></tr>
+      </table></div>
+      <div class="note blue">🔍 <b>อ่านบรรทัดสุดท้ายให้ขาด:</b> "เงินสดเหลือจริง" คือเงินที่เหลือหลังจ่ายทุกอย่างรวมเงินต้นแล้ว — <b>ตัวเลขนี้เท่านั้นที่บอกว่าธุรกิจอยู่ได้จริงมั้ย</b> ไม่ใช่กำไรสุทธิทางบัญชี (ซึ่งยังไม่ได้หักเงินต้น)</div>`;
+  }
+  /* ---------- 10 ปี + IRR (p11) ---------- */
+  const box=el('p2irr');
+  if(box){
+    const sch=rentSched20(P.rent);
+    const rentOf=y=>sch.rows[Math.min(Math.floor((y-1)/4),4)].m;
+    const cf=[-P.equity2]; let rows='', bal=P.loan2, cum=-P.equity2, payback=null;
+    for(let y=1;y<=10;y++){
+      const ramp=y===1?0.75:y===2?0.9:1;                  // ปีแรกยังไม่เต็มกำลัง
+      const rev=P.revMonth*12*ramp;
+      const eb=rev-P.opex*12-rentOf(y)*12;
+      const int=bal*P.D.rate;
+      const prin=Math.min(P.pmt2*12-int,bal); bal=Math.max(bal-prin,0);
+      const tax=smeTax(eb-int-P.dep);
+      const fc=eb-int-tax-prin;
+      cf.push(fc); cum+=fc;
+      if(payback===null&&cum>0) payback=y;
+      rows+=`<tr${y<=2?' style="background:#fff8ec"':''}><td>ปี ${y}</td><td class="r sub">${Math.round(ramp*100)}%</td><td class="r">${F(rev)}</td><td class="r">${F(eb)}</td><td class="r">−${F(int)}</td><td class="r">−${F(tax)}</td><td class="r">−${F(prin)}</td><td class="r"><b>${F(fc)}</b></td><td class="r" style="color:${cum>0?'#1e6b45':'#a33'}">${F(cum)}</td></tr>`;
+    }
+    const r=irr(cf);
+    box.innerHTML=`<div style="overflow-x:auto"><table>
+      <tr><th>ปี</th><th class="r">กำลังผลิต</th><th class="r">รายได้</th><th class="r">EBITDA</th><th class="r">ดอกเบี้ย</th><th class="r">ภาษี</th><th class="r">เงินต้น</th><th class="r">เงินสดสุทธิ</th><th class="r">สะสม</th></tr>${rows}</table></div>
+      <div class="kpis">
+        ${kpi('IRR 10 ปี (ต่อเงินลงทุนเอง)',r!=null?(r*100).toFixed(1)+'%':'—',r!=null&&r>0.15?'สูงกว่าเกณฑ์ที่ธนาคารมองว่าน่าลงทุน (12–15%)':'ต่ำกว่าเกณฑ์ทั่วไป',r==null||r<0.12)}
+        ${kpi('คืนทุนเงินสด',payback?'ปีที่ '+payback:'เกิน 10 ปี','นับจากเงินลงทุนเอง '+F(P.equity2)+' ฿',!payback)}
+        ${kpi('เงินลงทุนเอง',F(P.equity2)+' ฿','งบรวม '+F(P.total2)+' · กู้ '+Math.round(P.loanPct*100)+'%')}
+        ${kpi('เงินสดสุทธิปีที่ 10',F(cf[10])+' ฿','หลังจ่ายดอกเบี้ย ภาษี และเงินต้นครบแล้ว')}
+      </div>
+      <div class="note">📌 <b>สมมติฐานที่ใช้:</b> ปีที่ 1 เดินเครื่องได้ 75% · ปีที่ 2 ได้ 90% · ปีที่ 3 เป็นต้นไปเต็ม 100% · ค่าเช่าขึ้น 10% ทุก 4 ปีตามสัญญา · <b>อัตราจองคงที่ตลอด 10 ปีตามที่วัดได้วันนี้</b><br>
+        ⚠️ <b>ยังไม่ได้ใส่ค่าสอนเทนนิส</b> ซึ่งคลาสกลุ่มทำรายได้ 1,400–1,800 ฿/ชม.คอร์ท (เทียบค่าเช่าเปล่า ~400) — <b>ถ้าใส่เข้าไป IRR จะสูงกว่านี้พอสมควร</b> แต่ต้องมีโค้ชก่อน จึงยังไม่นับ</div>`;
+  }
+}
 /* ================= รายได้รวมแผน 2 (p7) ================= */
 function renderP7Plan2(){
   const t=el('p7rev2'); if(!t||!SPSUM||typeof SPORTS==='undefined') return;
@@ -3648,6 +3769,60 @@ function renderP7Plan2(){
   if(n) n.innerHTML=`⚖️ <b>เทียบแผน 1</b> (แบด 18 คอร์ท + บาส 2 สนาม ที่อัตราจองเดียวกัน): ค่าคอร์ท ${p1court.toLocaleString()} + เสริม ${add.toLocaleString()} = <b>${p1.toLocaleString()} ฿/เดือน</b><br>`+
     `→ แผน 2 ได้ <b>${tot>p1?'มากกว่า':'น้อยกว่า'} ${Math.abs(tot-p1).toLocaleString()} ฿/เดือน</b> (${Math.abs(Math.round((tot-p1)/p1*100))}%)<br>`+
     `💡 <b>ยังไม่ได้ใส่ค่าสอนเทนนิส ซึ่งตอนนี้มีเรตจริงแล้ว:</b> คลาสกลุ่มเทนนิสสร้างรายได้ <b>1,400–1,800 ฿ ต่อชั่วโมงคอร์ท</b> (จาก Bearing 68) เทียบกับค่าเช่าคอร์ทเปล่า ~400 ฿ = <b>4 เท่า</b> · และอคาเดมีเทนนิสเก็บ <b>4,800 ฿/เดือน/คน</b> (Noah) เทียบอคาเดมีแบดของเราที่ 2,500 ฿ = <b>1.9 เท่า</b><br>→ ถ้ากันคอร์ทเทนนิสกลางวันทำคลาสกลุ่มแทนปล่อยเช่า <b>รายได้เทนนิสจะสูงกว่าตัวเลขในตารางนี้มาก</b> — ดูรายละเอียดที่ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p16')">② สอน &amp; อคาเดมี</button>`;
+}
+/* ================= รีวิว 3 กีฬา (p22) ================= */
+const REV3={
+ tennis:{
+  found:true,
+  rows:[
+   ['CDC — Crystal Sports','ลาดพร้าว','<b style="color:#a33">จองยากมากกก แบบมากกกก</b> — ผู้เล่นบอกว่าเวลาที่จองได้ส่วนใหญ่คือ <b>6 โมงเช้ากับ 23:00</b>','สนามได้มาตรฐาน vibe ดี · 8 คอร์ทในร่มผิว US Open · <b>มา 4 คนหารกันตกคนละ 200</b>','Lemon8'],
+   ['Noah BKK 26','สุขุมวิท 26','ราคาไม่ประกาศ ต้องถามเอง','<b>มีไม้ให้ลองเยอะที่สุด</b> · เล่นกลางคืนได้','Lemon8'],
+   ['อิสรภาพ สปอร์ตคลับ','<b>ฝั่งธนฯ</b>','<b style="color:#a33">พื้นแตกร้าว สึก · ทางเข้ามืด</b>','—','Lemon8'],
+   ['ศิวาลัย คลับเฮาส์','<b>ฝั่งธนฯ</b>','—','พื้น Plexipave สภาพดี เส้นชัด','Lemon8'],
+   ['Racket One','—','—','<b>เช็คคิวว่างผ่าน LINE ได้</b> — คู่แข่งเริ่มใช้ LINE เป็นระบบจอง','Lemon8'],
+   ['ธนาซิตี้ คันทรีคลับ','บางพลี','ไกล','สนามสวย พื้นดี มีคอร์ทดินด้วย','Lemon8'],
+   ['The Peninsula','เจริญนคร','<b style="color:#a33">จองยากจริงๆ</b>','คอร์ทหญ้าในโรงแรม','TikTok'],
+   ['ALM x Impact','เมืองทอง','<span class="sub">ยังไม่มีรีวิวผู้ใช้จริง</span> — เพิ่งเปิด เม.ย. 69 มีแต่ข่าว PR','14 คอร์ท คอร์ทดินอิตาลี','ข่าว'],
+  ],
+  insight:'🔥 <b>2 อย่างที่รีวิวเทนนิสบอกแล้วตรงกับข้อมูลจองของเรา:</b><br>'+
+   '(1) <b>"จองยาก" เป็นคำที่โผล่ซ้ำในทุกสนามดี</b> — CDC, Peninsula ล้วนโดนบ่นเรื่องเดียวกัน ตรงกับที่เราวัดได้ว่าเทนนิสจองทั้งวัน 76% สูงสุดในทั้ง 4 กีฬา<br>'+
+   '(2) <b>ฝั่งธนฯ มีแต่สนามสภาพไม่ดี</b> — อิสรภาพ สปอร์ตคลับ โดนบ่นว่าพื้นแตกร้าว ทางเข้ามืด · และมีกระทู้ Pantip คนอยู่<b>ถนนเจริญนคร</b>ถามหาสนามเทนนิสใกล้บ้านพร้อมน็อคเกอร์<br>'+
+   '→ <b>นี่คือหลักฐานตรงที่สุดว่าฝั่งธนฯ-บางขุนเทียนขาดคอร์ทเทนนิสที่สภาพดี</b> ซึ่งเป็นช่องของแผน 2 พอดี<br>'+
+   '💡 <b>ของแถมที่ควรลอกเลย:</b> Racket One ให้เช็คคิวว่างผ่าน LINE — ต้นทุนเกือบศูนย์ แต่แก้ปัญหา "จองยาก" ที่ลูกค้าบ่นทุกสนามได้ทันที'},
+ pickleball:{
+  found:true,
+  rows:[
+   ['สวนเบญจกิติ','คลองเตย','<b style="color:#a33">คนเยอะมาก · จองค่อนข้างยาก</b>','สนามสาธารณะ ราคาถูก','kapook'],
+   ['Diadem Club Riverdale Marina','ปทุมธานี','ไกลจากเมือง','<b>ราคาเป็นกันเอง คุ้มค่า</b> เหมาะทั้งมือใหม่และมือโปร','pingpongsport'],
+   ['ตลาดรวม','กรุงเทพ–ปริมณฑล','<span class="sub">รีวิวเชิงลึกยังหายากมาก</span> — วงการเพิ่งเริ่ม คนรีวิวน้อย','ราคาเช่าเริ่มต้นที่เห็นประกาศ ~100 ฿','Fastwork'],
+  ],
+  insight:'📊 <b>สิ่งที่การหารีวิวบอกเรา (ทั้งที่หาไม่ค่อยเจอ):</b> pickleball มีรีวิวสาธารณะ<b>น้อยกว่าแบดหลายเท่า</b> — ตรงกับ DBD ที่มีแค่ 13 บริษัททั้งประเทศ และอัตราจองที่เราวัดได้ 30%<br>'+
+   '→ <b>วงการยังเล็กเกินกว่าจะมีชุมชนรีวิว</b> ซึ่งแปลว่า (ก) การตลาดปากต่อปากยังไม่ทำงาน ต้องใช้เงินโฆษณาเอง (ข) แต่ก็ยังไม่มีเจ้าไหนสร้างชื่อจนคนจำได้ — <b>เข้าตลาดตอนนี้ยังไม่สาย</b><br>'+
+   '⚠️ ที่เจอชัดคือ<b>สนามสาธารณะ (เบญจกิติ) คนล้น</b> — ดีมานด์ระดับเริ่มต้นมีจริง แต่คนยังไม่ยอมจ่ายแพง'},
+ basketball:{
+  found:true,
+  rows:[
+   ['พัฒนา สปอร์ต รีสอร์ท','ชลบุรี','ไกล','<b>1,000 ฿/ชม.</b> · พื้น PU มาตรฐาน FIBA รองรับแรงกระแทก · โปรเล่น 10 ชม. แถม 1','เว็บสนาม'],
+   ['สนาม 3x3 ทั่วไป','กรุงเทพ','<span class="sub">รีวิวผู้ใช้แทบไม่มีเลย</span>','ราคาที่เห็นประกาศ 3xx ฿/ชม.','Facebook'],
+   ['ตลาดรวม','—','บาสส่วนใหญ่อยู่ในโรงเรียน/หน่วยงาน ไม่เปิดให้เช่า จึงไม่มีวัฒนธรรมรีวิว','—','—'],
+  ],
+  insight:'🔧 <b>เจอข้อมูลเชิงเทคนิคที่มีค่ากับเราโดยตรง</b> — ผู้รับเหมาพื้นสนามเตือนว่า:<br>'+
+   '<b>"ถ้าไม่เช็คความชื้นของผิวคอนกรีตและลงชั้นรองพื้นอย่างถูกวิธี จะทำให้พื้นเกิดอาการสีบวมและหลุดล่อน"</b><br>'+
+   '→ <b>ตรงกับสถานการณ์เราเป๊ะ</b> เพราะเราจะทา acrylic ทับพื้นคอนกรีตโรงงานเดิมที่ใช้งานมานาน ทั้งเทนนิส pickleball และบาส · <b>ต้องบังคับให้ผู้รับเหมาวัดความชื้นพื้นก่อนลงงาน และเขียนลงในสัญญา</b> ไม่งั้นพื้นบวมหลุดภายใน 1–2 ปี = เสียงบซ้ำ<br>'+
+   '💡 <b>โปรที่ควรลอก:</b> พัฒนาฯ ใช้ "เล่น 10 ชม. แถม 1" — ล็อกลูกค้าทีมบาสที่มาประจำได้ดี ต้นทุนแค่ 9% ของรายได้'},
+};
+function renderRev3(){
+  Object.keys(REV3).forEach(sp=>{
+    const box=el(sp==='tennis'?'rvTennis':sp==='pickleball'?'rvPB':'rvBB'); if(!box) return;
+    const r=REV3[sp], s=SPSUM?SPSUM.sports[sp]:null;
+    let t='<div style="overflow-x:auto"><table><tr><th>สนาม</th><th>ทำเล</th><th>เสียงบ่น</th><th>เสียงชม</th><th class="sub">แหล่ง</th></tr>';
+    r.rows.forEach(x=>{ t+=`<tr><td><b>${x[0]}</b></td><td class="sub">${x[1]}</td><td>${x[2]}</td><td>${x[3]}</td><td class="sub">${x[4]}</td></tr>`; });
+    t+='</table></div>';
+    t+=`<div class="note" style="margin-top:12px">${r.insight}</div>`;
+    if(s) t+=`<div class="note blue">📊 <b>ตัวเลขที่วัดได้เองสำหรับ${DBDTH[sp][1]}:</b> ${s.n} สนามในตลาด · ราคาค่ากลาง ${s.price??'—'} ฿/ชม. · จองเย็น <b>${s.e}%</b> · กลางวัน <b>${s.d}%</b> · ทั้งวัน <b>${s.a}%</b></div>`;
+    t+='<div class="note"><b>วิธีเก็บ:</b> ค้น Google/Lemon8/TikTok/Pantip/เว็บสนาม เมื่อ 6 ส.ค. 2569 · <b>รายงานเฉพาะที่เจอหลักฐานจริง สนามไหนไม่มีรีวิวเขียนว่าไม่มี</b> — กีฬาทั้ง 3 นี้มีรีวิวสาธารณะน้อยกว่าแบดมากอย่างเห็นได้ชัด ซึ่งเป็นสัญญาณตลาดในตัวมันเอง</div>';
+    box.innerHTML=t;
+  });
 }
 /* ================= เนื้อหา 4 กีฬาของหน้าอื่นๆ (สอน · รายได้ · เสี่ยง · ไทม์ไลน์) ================= */
 function spTabRender(tabsId,cur,fn){
@@ -3846,16 +4021,7 @@ function renderCpDyn(){
       ? `💡 <b>สรุปแบบสั้น:</b> ${s.n} สนามในตลาด ราคาค่ากลาง <b>${s.price} ฿/ชม.</b> (แพงกว่าแบดเท่าตัว) แต่จองทั้งวันแค่ <b>${s.a}%</b> เย็นก็แค่ ${s.e}%<br>→ <b>คอร์ทผุดเร็วกว่าคนเล่น</b> — ใส่ 4 คอร์ทเป็นตัวเสริมได้เพราะลงทุนถูก แต่<b>อย่าให้เป็นเสาหลักของรายได้</b>`
       : `💡 <b>สรุปแบบสั้น:</b> มีแค่ ${s.n} สนามที่เปิดจองออนไลน์ — บาสส่วนใหญ่อยู่ในโรงเรียน/หน่วยงานที่ไม่เปิดให้เช่า<br>→ จองทั้งวัน <b>${s.a}%</b> · <b>กลางวัน ${s.d}%</b> ซึ่งสวนทางแบดที่กลางวันตาย = <b>บาสคือตัวเติมชั่วโมงกลางวันที่ดีที่สุด</b>`;
   });
-  // รีวิว 3 กีฬา
-  const mk=(sp,id,extra)=>{
-    const box=el(id); if(!box) return;
-    const s=SPSUM.sports[sp];
-    box.innerHTML=`<div class="note">🔎 <b>ยังไม่ได้ไล่อ่านรีวิวของกีฬานี้ — บอกตรงๆ</b><br>งานขุดรีวิวเชิงลึก (Google · Wongnai · Trip.com · Pantip) ทำครบเฉพาะ<b>แบดมินตัน</b> เพราะเป็นกีฬาหลักของโครงการ · ${DBDTH[sp][1]}ยังไม่ได้ทำ ถ้าต้องการสั่งได้</div>`+
-      `<div class="note blue">📊 <b>แต่สิ่งที่วัดได้จริงแล้วสำหรับ${DBDTH[sp][1]}:</b> ${s.n} สนามในตลาด · ราคาค่ากลาง ${s.price??'—'} ฿/ชม. · จองเย็น <b>${s.e}%</b> · กลางวัน <b>${s.d}%</b> · ทั้งวัน <b>${s.a}%</b><br>${extra}</div>`;
-  };
-  mk('tennis','rvTennis','<b>สัญญาณที่แรงที่สุด</b> — CDC (8 คอร์ท 500–600 ฿) ขายหมดล่วงหน้า 2 สัปดาห์จนคนทั่วไปจองไม่ได้ · ดูรายละเอียดที่หน้า "① ใครแข่งกับเรา" แท็บเทนนิส');
-  mk('pickleball','rvPB','ราคาแพงแต่คนยังไม่แน่น — เป็นกีฬากระแสที่ต้องดูต่ออีก 2–3 เดือนก่อนตัดสินใจ');
-  mk('basketball','rvBB','กลุ่มตัวอย่างเล็กมาก ตัวเลขยังหยาบ — ใช้ประกอบการตัดสินใจได้ แต่ยังผูกงบไม่ได้');
+  renderRev3();
 }
 /* ================= Event 4 กีฬา (p25) ================= */
 const EV={
@@ -4372,6 +4538,7 @@ setRvSport('badminton');
 renderCoach();
 renderRvn();
 renderP7Plan2();
+renderPlan2Fin();
 renderRisk();
 renderTL();
 setDeal('rent');
