@@ -503,6 +503,7 @@
 <!-- ================= P6 BUDGET ================= -->
 <section class="page" id="p6">
   <h2>งบลงทุนรวม (โมเดลปรับปรุงโรงงานเดิม)</h2>
+  <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="card" style="border:2px solid #185fa5">
     <h3 style="margin-top:0">🔀 เลือกโหมด — ตัวเลขในหน้านี้และหน้า "รายได้" "กระแสเงินสด" "งบ 10 ปี" จะเปลี่ยนตามกันทั้งหมด</h3>
     <div class="btnrow">
@@ -585,6 +586,17 @@
     <div id="rvnBody"></div>
   </div>
   <div class="note blue" id="phaseBanner7" style="margin-bottom:14px"></div>
+  <div class="p2only" style="display:none">
+    <div class="card">
+      <h3 style="margin-top:0">🧮 รายได้รวมต่อเดือน — แผน 2 (4 กีฬา)</h3>
+      <p class="sub" style="margin-bottom:10px">ค่าคอร์ทของแต่ละกีฬาคิดจาก <b>ราคาตลาดจริง × อัตราจองจริงที่วัดได้</b> · รายได้เสริมใช้สมมติฐานเดียวกับแผน 1</p>
+      <div style="overflow-x:auto"><table id="p7rev2"></table></div>
+      <div class="note blue" id="p7rev2Note"></div>
+    </div>
+  </div>
+
+  <div class="p1only">
+
   <div class="card">
     <p class="sub" id="ceilNote" style="margin-bottom:10px"></p>
     <div class="btnrow">
@@ -732,7 +744,9 @@
     <div class="note blue" id="rentVerdict"></div>
   </div>
 
-  <div class="pagenav"><button class="btn ghost" onclick="go('p6')">← งบลงทุน</button><button class="btn" onclick="go('p8')">ถัดไป: Business Canvas →</button></div>
+    </div>
+
+<div class="pagenav"><button class="btn ghost" onclick="go('p6')">← งบลงทุน</button><button class="btn" onclick="go('p8')">ถัดไป: Business Canvas →</button></div>
 </section>
 
 <!-- ================= P8 BUSINESS CANVAS ================= -->
@@ -1293,6 +1307,7 @@
 <!-- ================= P29 คู่แข่งเทนนิส ================= -->
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
+  <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="note blue" id="phaseBanner10" style="margin-bottom:14px"></div>
   <div class="note" style="margin-top:0">🔴 <b>หน้านี้คือสิ่งที่ทำให้ธุรกิจใหม่ตายบ่อยที่สุด</b> — ตัวเลขในหน้า "รายได้ &amp; คืนทุน" คิดที่อัตราการจองเป้าหมายตั้งแต่เดือนแรก ซึ่งเป็นไปไม่ได้ หน้านี้จำลองการไต่ระดับจริงและบอกว่า<b>ต้องเตรียมเงินสดสำรองเท่าไหร่</b></div>
 
@@ -1337,6 +1352,7 @@
 <!-- ================= P11 งบ 10 ปี · IRR · Sensitivity ================= -->
 <section class="page" id="p11">
   <h2>งบการเงิน 10 ปี · IRR/NPV · Sensitivity</h2>
+  <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="note blue" id="phaseBanner11" style="margin-bottom:14px"></div>
   <div class="card">
     <h3 style="margin-top:0">📊 ประมาณการ 10 ปี (ค่าเช่าขึ้น 10% ทุก 4 ปี)</h3>
@@ -1988,6 +2004,7 @@
 <!-- ================= P18 FEASIBILITY & แผนเฟส ================= -->
 <section class="page" id="p18">
   <h2>🚦 Feasibility &amp; แผนแบ่งเฟส — เริ่มเล็ก แล้วค่อยโต</h2>
+  <div class="note p2only" style="display:none;margin-bottom:14px;background:#fdecec;border-left-color:#a33">⚠️ <b>หน้านี้ยังคิดจากตัวเลขแผน 1</b> (แบด 18 คอร์ท) — ยังไม่ได้ทำเวอร์ชันแผน 2 · สำหรับแผน 2 ให้ดู <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p24')">งบ &amp; รายได้แผน 2</button> และ <button class="btn ghost" style="padding:2px 9px;font-size:.8rem" onclick="go('p7')">รายได้รวมทุกกีฬา</button></div>
   <div class="note blue" style="margin-bottom:14px">📌 หน้านี้ตอบคำถามเดียว: <b>ด้วยเงินที่มีตอนนี้ เริ่มได้ไหม และเริ่มยังไงให้ไม่ตาย</b> · คำตอบสั้นๆ คือ <b>เริ่มที่ 12 คอร์ทได้ และควรเริ่มแบบนั้น</b></div>
   <div class="note blue" id="phaseBanner18" style="margin-bottom:14px"></div>
 
@@ -3506,7 +3523,7 @@ async function loadSportSummary(){
     const r=await fetch('data/sport-summary.json',{cache:'no-store'});
     if(!r.ok) throw 0;
     SPSUM=await r.json();
-    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn(); renderRvn();
+    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn(); renderRvn(); renderP7Plan2();
   }catch(e){}
 }
 const SPMETA={badminton:['🏸 แบดมินตัน',10],tennis:['🎾 เทนนิส',2],pickleball:['🥒 Pickleball',4],basketball:['🏀 บาส 3x3',1]};
@@ -3561,6 +3578,35 @@ function renderSportCompare(){
   if(n) n.innerHTML=`💡 <b>เรียงจากแน่นสุด (ทั้งวัน):</b> เทนนิส ${S.tennis?.a}% → บาส ${S.basketball?.a}% → แบด ${S.badminton?.a}% → pickleball ${S.pickleball?.a}%<br>`+
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
+}
+/* ================= รายได้รวมแผน 2 (p7) ================= */
+function renderP7Plan2(){
+  const t=el('p7rev2'); if(!t||!SPSUM||typeof SPORTS==='undefined') return;
+  const HRS=14,D=30;
+  let court=0, rows='';
+  ['badminton','tennis','pickleball','basketball'].forEach(k=>{
+    const s=SPSUM.sports[k], sp=SPORTS.find(x=>x.k===k); if(!s||!sp) return;
+    const price=k==='basketball'?800:(s.price||0);
+    const rev=Math.round(sp.n*price*HRS*(s.a/100)*D); court+=rev;
+    const [ic,th]=DBDTH[k];
+    rows+=`<tr><td>${ic} ค่าคอร์ท${th}</td><td class="sub">${sp.n} คอร์ท × ${price} ฿ × ${HRS} ชม. × จอง ${s.a}% × 30 วัน</td><td class="r"><b>${rev.toLocaleString()}</b></td></tr>`;
+  });
+  const AD=[['🛍️ โปรช็อป + ขึ้นเอ็น + คาเฟ่',70000,'สมมติฐานเดียวกับแผน 1'],
+            ['🏪 ค่าเช่าแผงตลาดนัด + ป้ายโฆษณา',45000,'สมมติฐานเดียวกับแผน 1'],
+            ['🎓 คลาสสอน / จ้างโค้ชรายครั้ง',18720,'6 คลาส/สัปดาห์ · แบ่งรายได้ 60/40'],
+            ['🎓 อคาเดมีรายเดือน',124400,'80 คน × 2,500 ฿ − ค่าโค้ช 75,600 ฿'],
+            ['🏆 ให้เช่าเหมาสนามจัดแข่ง',66000,'3 วัน/เดือน × 22,000 ฿']];
+  let add=0; AD.forEach(([n,v,d])=>{add+=v; rows+=`<tr><td>${n}</td><td class="sub">${d}</td><td class="r">+${v.toLocaleString()}</td></tr>`;});
+  const tot=court+add;
+  t.innerHTML='<tr><th>รายการ</th><th>คิดยังไง</th><th class="r">บาท/เดือน</th></tr>'+rows+
+    `<tr style="background:#eef7f1"><td><b>รวมรายได้แผน 2</b></td><td class="sub">ค่าคอร์ท ${court.toLocaleString()} + รายได้เสริม ${add.toLocaleString()}</td><td class="r"><b>${tot.toLocaleString()}</b></td></tr>`;
+  const b=SPSUM.sports.badminton;
+  const p1court=Math.round(18*(b.price||200)*HRS*(b.a/100)*D)+Math.round(2*800*HRS*0.2*D);
+  const p1=p1court+add;
+  const n=el('p7rev2Note');
+  if(n) n.innerHTML=`⚖️ <b>เทียบแผน 1</b> (แบด 18 คอร์ท + บาส 2 สนาม ที่อัตราจองเดียวกัน): ค่าคอร์ท ${p1court.toLocaleString()} + เสริม ${add.toLocaleString()} = <b>${p1.toLocaleString()} ฿/เดือน</b><br>`+
+    `→ แผน 2 ได้ <b>${tot>p1?'มากกว่า':'น้อยกว่า'} ${Math.abs(tot-p1).toLocaleString()} ฿/เดือน</b> (${Math.abs(Math.round((tot-p1)/p1*100))}%)<br>`+
+    `⚠️ <b>ยังไม่ได้ใส่ 2 อย่างที่น่าจะสำคัญที่สุดของแผน 2:</b> (1) <b>ค่าสอนเทนนิส</b> — เทนนิสเป็นกีฬาที่ต้องเรียนถึงเล่นได้ และกลางวันเต็ม ${SPSUM.sports.tennis.d}% ซึ่งคือชั่วโมงเรียน · ยังไม่มีเรตตลาดให้คำนวณ (2) <b>ค่าสมาชิก</b> ซึ่ง CDC ใช้เป็นตัวล็อกลูกค้า — ดูหน้า "① ใครแข่งกับเรา" แท็บเทนนิส`;
 }
 /* ================= เนื้อหา 4 กีฬาของหน้าอื่นๆ (สอน · รายได้ · เสี่ยง · ไทม์ไลน์) ================= */
 function spTabRender(tabsId,cur,fn){
@@ -4229,6 +4275,7 @@ setCpSport('badminton');
 setRvSport('badminton');
 renderCoach();
 renderRvn();
+renderP7Plan2();
 renderRisk();
 renderTL();
 setDeal('rent');
