@@ -65,6 +65,13 @@
   .kpi.big .v{font-size:1.9rem}
   .kpi .v.warn{color:var(--red)}
   .kpi .s{font-size:.76rem;color:var(--muted)}
+  .sptabs{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 14px}
+  .sptabs button{padding:8px 16px;border-radius:10px;border:2px solid #d9e4f0;background:#fff;font-weight:600;font-size:.92rem;cursor:pointer;color:#4a5a6a;font-family:inherit}
+  .sptabs button.on{border-color:var(--bad);background:#eaf1fa;color:var(--bad-dark)}
+  .sptabs button.on.sp-tennis{border-color:#2e7d4f;background:#e8f4ea;color:#1c5c38}
+  .sptabs button.on.sp-pickleball{border-color:#7b3fa0;background:#f2e9f8;color:#4e2766}
+  .sptabs button.on.sp-basketball{border-color:#c25e1e;background:#fdeee2;color:#7c3a0e}
+  .spwrap{display:none}.spwrap.on{display:block}
   .note{background:#fff8ec;border-left:4px solid var(--amb);border-radius:8px;padding:13px 16px;font-size:.88rem;margin-top:14px}
   .note b{color:#9a6a1c}
   .note.blue{background:#eef4fb;border-left-color:var(--bad)}
@@ -1105,6 +1112,30 @@
     <div id="p25research"><p class="sub">⏳ กำลังรวบรวมข้อมูลรายการแข่งเทนนิส / Pickleball / บาส 3x3 …</p></div>
   </div>
   <div class="pagenav"><button class="btn ghost" onclick="go('p24')">← งบ &amp; รายได้</button><span></span></div>
+</section>
+
+<!-- ================= P26 ราคาสร้างสนาม แยกกีฬา ================= -->
+<section class="page" id="p26">
+  <h2>ราคาสร้างสนาม — แยกทีละกีฬา</h2>
+  <div class="card">
+    <h3 style="margin-top:0">🧱 จุดตั้งต้นที่ทำให้เราถูกกว่าคนอื่นมาก</h3>
+    <div class="note blue">โรงงานเดิม<b>มีพื้นคอนกรีตอยู่แล้ว</b> — งานสร้างสนามทั่วไปต้องเทพื้นใหม่ที่ <b>800–1,200 ฿/ตร.ม.</b> ซึ่งเป็นก้อนใหญ่ที่สุดของงบพื้น เราข้ามขั้นนี้ไปได้ เหลือแค่<b>ปรับระดับ + ปูผิว</b><br>
+      → นี่คือเหตุผลที่ตัวเลขในหน้านี้ต่ำกว่าราคาตลาด "สนามเทนนิสคอร์ทละ 1–1.5 ล้าน" ที่ผู้รับเหมาประกาศกัน<br>
+      <span class="sub">ราคาต่อหน่วยอ้างอิงจากผู้รับเหมาสนามกีฬาไทยที่ประกาศราคาสาธารณะ (easywarehouse-thailand, sukrita2008) · พื้นที่คิดจากผังจริงของเรา · <b>ทุกช่วงราคาเป็นการประเมิน ต้องขอใบเสนอราคาจริงก่อนตัดสินใจ</b></span></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">💵 เลือกกีฬาที่ต้องการดู</h3>
+    <div class="sptabs" id="costTabs"></div>
+    <div id="costBody"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">📊 สรุปรวมทั้ง 4 กีฬา</h3>
+    <div style="overflow-x:auto"><table id="costTotal"></table></div>
+    <div class="note" id="costTotalNote"></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p5')">← เกรดพื้นยาง</button><button class="btn" onclick="go('p6')">ถัดไป: งบลงทุนรวม →</button></div>
 </section>
 
 <section class="page" id="p10">
@@ -2469,14 +2500,14 @@ const GROUPS=[
   {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
   {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
   {id:'g5',n:'🏆 3 เสารายได้',pages:[['p15','แข่งขัน & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
-  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const GROUPS2=[
   {id:'h1',n:'🏗️ โครงการ',   pages:[['p23','ผัง 4 กีฬา'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
   {id:'g2',n:'📊 ตลาด',      pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
   {id:'h3',n:'🏆 เสารายได้',  pages:[['p25','Event 4 กีฬา'],['p15','แข่งแบด & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
-  {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 let PLAN=localStorage.getItem('bplan')||'1';
@@ -3329,8 +3360,8 @@ function renderP24(){
   });
   const b=SPSUM.sports.badminton;
   const p1=b?Math.round(18*(b.price||200)*HRS*(b.a/100)*D):0;
-  html+=`<tr style="background:#eef7f1"><td><b>รวมค่าคอร์ทแผน 2</b></td><td class="r"><b>17</b></td><td></td><td></td><td class="r"><b>≈ ${tot.toLocaleString()}</b></td><td class="sub">ยังไม่รวมคาเฟ่ · โค้ช · งานแข่ง</td></tr>`+
-    `<tr><td class="sub">เทียบ แผน 1 — แบด 18 คอร์ทล้วน</td><td class="r sub">18</td><td class="r sub">${b?b.price:'—'}</td><td class="r sub">${b?b.a:'—'}%</td><td class="r sub">≈ ${p1.toLocaleString()}</td><td class="sub">ต่างกัน ${tot>p1?'+':''}${(tot-p1).toLocaleString()} ฿/เดือน</td></tr>`;
+  html+=`<tr style="background:#eef7f1"><td><b>รวมค่าคอร์ทแผน 2</b></td><td class="r"><b>17</b></td><td></td><td></td><td class="r"><b>≈ ${tot.toLocaleString()}</b></td><td></td><td class="sub">ยังไม่รวมคาเฟ่ · โค้ช · งานแข่ง</td></tr>`+
+    `<tr><td class="sub">เทียบ แผน 1 — แบด 18 คอร์ทล้วน</td><td class="r sub">18</td><td class="r sub">${b?b.price:'—'}</td><td class="r sub">${b?b.a:'—'}%</td><td class="r sub">≈ ${p1.toLocaleString()}</td><td></td><td class="sub">ต่างกัน ${tot>p1?'+':''}${(tot-p1).toLocaleString()} ฿/เดือน</td></tr>`;
   t.innerHTML=html;
   const S=SPSUM.sports;
   const put=(id,v)=>{const e=el(id); if(e) e.textContent=v;};
@@ -3361,6 +3392,88 @@ function renderSportCompare(){
   if(n) n.innerHTML=`💡 <b>เรียงจากแน่นสุด (ทั้งวัน):</b> เทนนิส ${S.tennis?.a}% → บาส ${S.basketball?.a}% → แบด ${S.badminton?.a}% → pickleball ${S.pickleball?.a}%<br>`+
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
+}
+/* ================= ราคาสร้างสนาม แยกกีฬา (p26) ================= */
+const SPORTS=[
+  {k:'badminton', ic:'🏸', th:'แบดมินตัน', n:10, area:103.7,
+   note:'พื้นแบดใช้<b>ยาง PVC ม้วนปูทับ</b> ไม่ใช่ระบบทาสี acrylic เหมือนอีก 3 กีฬา — ปูเร็ว รื้อย้ายได้ และเป็นตัวเดียวที่ลูกค้าดูออกว่าเกรดไหน (ดูหน้า "เกรดพื้นยาง")',
+   rows:[
+    ['ปรับระดับพื้นเดิม (self-levelling)','150–300 ฿/ตร.ม.',150,300,'area'],
+    ['ยาง PVC เกรดพรีเมียม 5.0 มม. + ติดตั้ง','800–1,100 ฿/ตร.ม.',800,1100,'area'],
+    ['เสา + เน็ต + ที่ยึดพื้น','8,000–15,000 ฿/คอร์ท',8000,15000,'court'],
+    ['ไฟ LED 8 ดวง/คอร์ท (แนวข้างคอร์ท)','25,000–40,000 ฿/คอร์ท',25000,40000,'court'],
+   ]},
+  {k:'tennis', ic:'🎾', th:'เทนนิส', n:2, area:668.9,
+   note:'ตัวที่แพงที่สุดต่อคอร์ท เพราะ<b>พื้นที่ต่อคอร์ทใหญ่กว่าแบด 6.5 เท่า</b> (668.9 vs 103.7 ตร.ม.) · ไม่ต้องมีรั้วและระบบระบายน้ำเพราะอยู่ในร่ม จึงถูกกว่าคอร์ทกลางแจ้งที่ผู้รับเหมาคิด 1.1–1.5 ล้าน/คอร์ท',
+   rows:[
+    ['ปรับระดับพื้นเดิม (ต้องเรียบกว่าแบดมาก)','300–600 ฿/ตร.ม.',300,600,'area'],
+    ['ระบบ acrylic hard court (รองพื้น+สี+ตีเส้น)','500–1,000 ฿/ตร.ม.',500,1000,'area'],
+    ['เสา + เน็ต + สายรัดกลาง (เกรดแข่ง)','25,000–45,000 ฿/คอร์ท',25000,45000,'court'],
+    ['เก้าอี้กรรมการ · ม้านั่ง · ที่หมุนเน็ต','20,000–40,000 ฿/คอร์ท',20000,40000,'court'],
+    ['ไฟ LED ในร่ม 12–16 ดวง (≥500 lux)','120,000–220,000 ฿/คอร์ท',120000,220000,'court'],
+   ]},
+  {k:'pickleball', ic:'🥒', th:'Pickleball', n:4, area:167.2,
+   note:'<b>ถูกที่สุดต่อคอร์ทในบรรดา 3 กีฬาที่ต้องทาพื้น</b> เพราะคอร์ทเล็ก (167 ตร.ม. รวมพื้นที่ปลอดภัย) — และเป็นกีฬาที่<b>ราคาค่าเช่าต่อชั่วโมงสูงกว่าแบดเท่าตัว</b> จึงคืนทุนต่อตารางเมตรเร็วที่สุดถ้าดีมานด์มาจริง',
+   rows:[
+    ['ปรับระดับพื้นเดิม','300–600 ฿/ตร.ม.',300,600,'area'],
+    ['ระบบ acrylic + ตีเส้น (รวมเส้น kitchen)','500–1,000 ฿/ตร.ม.',500,1000,'area'],
+    ['เสา + เน็ต (แบบยึดพื้น ไม่ใช่แบบเข็น)','12,000–30,000 ฿/คอร์ท',12000,30000,'court'],
+    ['ไฟ LED โซนเพิง','40,000–70,000 ฿/คอร์ท',40000,70000,'court'],
+   ]},
+  {k:'basketball', ic:'🏀', th:'บาส 3x3', n:1, area:200,
+   note:'ตัวเลขนี้คือ<b>เฉพาะพื้นและอุปกรณ์</b> — <b>ไม่รวมค่ายกหลังคาโซนเพิง 5.3 ล้าน</b> ซึ่งอยู่ในงบเฟส 2 หน้า "งบลงทุนรวม" · แป้นเกรดแข่งปรับความสูงได้แพงกว่าแป้นทั่วไปเกือบ 3 เท่า แต่ใช้จัดงาน 3x3 ได้',
+   rows:[
+    ['ปรับระดับพื้นเดิม','300–600 ฿/ตร.ม.',300,600,'area'],
+    ['ระบบ acrylic / PU + ตีเส้น 3x3','500–1,000 ฿/ตร.ม.',500,1000,'area'],
+    ['แป้น + แบ็คบอร์ดกระจก ปรับสูงได้ (เกรดแข่ง)','80,000–180,000 ฿/คอร์ท',80000,180000,'court'],
+    ['ไฟ LED โซนเพิง','50,000–90,000 ฿/คอร์ท',50000,90000,'court'],
+   ]},
+];
+let costSport='tennis';
+const B=n=>Math.round(n).toLocaleString();
+function costOf(sp){
+  let lo=0,hi=0;
+  sp.rows.forEach(r=>{ const m=r[4]==='area'?sp.area:1; lo+=r[2]*m*(r[4]==='area'?1:1); hi+=r[3]*m; });
+  return {lo:lo,hi:hi};                       // ต่อคอร์ท
+}
+function renderCost(){
+  const tabs=el('costTabs'); if(!tabs) return;
+  tabs.innerHTML=SPORTS.map(s=>`<button class="sp-${s.k}${s.k===costSport?' on':''}" onclick="setCostSport('${s.k}')">${s.ic} ${s.th} (${s.n} คอร์ท)</button>`).join('');
+  const sp=SPORTS.find(s=>s.k===costSport);
+  let t=`<div style="overflow-x:auto"><table><tr><th>รายการ</th><th class="r">ราคาต่อหน่วย</th><th class="r">ต่อ 1 คอร์ท</th><th class="r">รวม ${sp.n} คอร์ท</th></tr>`;
+  let lo=0,hi=0;
+  sp.rows.forEach(r=>{
+    const m=r[4]==='area'?sp.area:1;
+    const a=r[2]*m, b=r[3]*m; lo+=a; hi+=b;
+    t+=`<tr><td>${r[0]}</td><td class="r sub">${r[1]}</td><td class="r">${B(a)}–${B(b)}</td><td class="r"><b>${B(a*sp.n)}–${B(b*sp.n)}</b></td></tr>`;
+  });
+  t+=`<tr style="background:#eef7f1"><td><b>รวมต่อคอร์ท</b></td><td></td><td class="r"><b>${B(lo)}–${B(hi)}</b></td><td class="r"><b>${B(lo*sp.n)}–${B(hi*sp.n)}</b></td></tr>`;
+  t+=`<tr><td class="sub">คิดเป็นต่อตารางเมตร</td><td></td><td class="r sub">${B(lo/sp.area)}–${B(hi/sp.area)} ฿/ตร.ม.</td><td class="r sub">พื้นที่รวม ${B(sp.area*sp.n)} ตร.ม.</td></tr>`;
+  t+='</table></div>';
+  t+=`<div class="note blue" style="margin-top:12px">📐 <b>${sp.ic} ${sp.th}</b> — ${sp.n} คอร์ท · พื้นที่ปูจริง <b>${sp.area.toLocaleString(undefined,{maximumFractionDigits:1})} ตร.ม./คอร์ท</b><br>${sp.note}</div>`;
+  el('costBody').innerHTML=t;
+  renderCostTotal();
+}
+function setCostSport(k){costSport=k;renderCost();}
+function renderCostTotal(){
+  const tb=el('costTotal'); if(!tb) return;
+  let t='<tr><th>กีฬา</th><th class="r">คอร์ท</th><th class="r">ตร.ม. รวม</th><th class="r">฿/ตร.ม.</th><th class="r">งบพื้น+อุปกรณ์รวม</th><th class="r">% ของงบสนาม</th></tr>';
+  const rows=SPORTS.map(sp=>{const c=costOf(sp);return{sp,lo:c.lo*sp.n,hi:c.hi*sp.n,c};});
+  const TL=rows.reduce((a,r)=>a+r.lo,0), TH=rows.reduce((a,r)=>a+r.hi,0);
+  rows.forEach(({sp,lo,hi,c})=>{
+    const mid=(lo+hi)/2, pct=Math.round(mid/((TL+TH)/2)*100);
+    t+=`<tr><td>${sp.ic} <b>${sp.th}</b></td><td class="r">${sp.n}</td><td class="r">${B(sp.area*sp.n)}</td>`+
+       `<td class="r sub">${B(c.lo/sp.area)}–${B(c.hi/sp.area)}</td>`+
+       `<td class="r"><b>${B(lo)}–${B(hi)}</b></td><td class="r">${pct}%</td></tr>`;
+  });
+  t+=`<tr style="background:#eef7f1"><td><b>รวมงบสนามแผน 2</b></td><td class="r"><b>17</b></td><td class="r"><b>${B(SPORTS.reduce((a,s)=>a+s.area*s.n,0))}</b></td><td></td><td class="r"><b>${B(TL)}–${B(TH)}</b></td><td class="r">100%</td></tr>`;
+  tb.innerHTML=t;
+  const badm=rows.find(r=>r.sp.k==='badminton'), ten=rows.find(r=>r.sp.k==='tennis');
+  const p1lo=badm.c.lo*18, p1hi=badm.c.hi*18;
+  el('costTotalNote').innerHTML=
+    `📌 <b>เทียบกับแผน 1 (แบด 18 คอร์ทล้วน):</b> งบสนามแผน 1 = <b>${B(p1lo)}–${B(p1hi)} ฿</b> · แผน 2 = <b>${B(TL)}–${B(TH)} ฿</b> → แผน 2 แพงกว่าราว <b>${B((TL+TH)/2-(p1lo+p1hi)/2)} ฿</b><br>`+
+    `⚠️ <b>ตัวเลขนี้แก้จากที่เคยประเมินไว้หน้า "งบ & รายได้แผน 2"</b> ซึ่งต่ำเกินไป (เคยใส่เทนนิส 0.9–1.4 ล. สำหรับ 2 คอร์ท) — ของจริงคือ <b>${B(ten.lo)}–${B(ten.hi)} ฿</b> เพราะคอร์ทเทนนิสกินพื้นที่ 668.9 ตร.ม. ไม่ใช่ขนาดเท่าคอร์ทแบด<br>`+
+    `💡 <b>อ่านคอลัมน์ ฿/ตร.ม. ให้ขาด:</b> แบดแพงต่อตารางเมตรที่สุดเพราะใช้ยาง PVC ม้วน (วัสดุแพงกว่าสีทา) แต่คอร์ทเล็กจึงรวมแล้วไม่มาก · เทนนิสถูกต่อตารางเมตรแต่<b>คอร์ทใหญ่มาก</b> จึงกินงบก้อนใหญ่สุด`;
 }
 function drawPlan2(){
   const svg=el('plan2svg'); if(!svg||svg.dataset.done) return;
@@ -3521,6 +3634,7 @@ loadLiveBook();
 loadMarket();
 loadHistory();
 loadSportSummary();
+renderCost();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
