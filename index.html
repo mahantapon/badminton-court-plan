@@ -852,7 +852,10 @@
 
 <!-- ================= P9 ตลาด & คู่แข่ง ================= -->
 <section class="page" id="p9">
-  <h2>ตลาด &amp; คู่แข่ง — ใครอยู่ตรงไหน ราคาเท่าไหร่</h2>
+  <h2>① ใครแข่งกับเรา</h2>
+  <p class="sub" style="margin:-8px 0 16px">รายชื่อสนามคู่แข่งพร้อมราคา ขนาด และจุดอ่อนจุดแข็ง · <b>กดปุ่มกีฬาเพื่อดูคู่แข่งของแต่ละกีฬา</b></p>
+  <div class="sptabs" id="cpTabs"></div>
+  <div class="spwrap on" id="cp-badminton">
   <div class="card">
     <h3 style="margin-top:0">🆚 คู่แข่งที่ต้องรู้ (ข้อมูลสาธารณะ)</h3>
     <div style="overflow-x:auto">
@@ -906,12 +909,97 @@
     </div>
   </div>
 
-  <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง &amp; คอร์ท</button><button class="btn" onclick="go('p20')">ถัดไป: อัตราจองสด →</button></div>
+  </div>
+
+  <div class="spwrap" id="cp-tennis">
+  <div class="card">
+    <h3 style="margin-top:0">🎾 CDC · Ace of Clubs · Noah · Impact — เทียบกันตรงๆ</h3>
+    <p class="sub" style="margin-bottom:10px">ทุกตัวเลขมาจากเว็บทางการ ข่าวเปิดตัว หรือระบบจองของสนามเอง · <b>ช่องไหนไม่เจอข้อมูลจะเขียนว่า "ไม่เปิดเผย" ไม่เดาแทน</b></p>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th>ประเภท / พื้น</th><th class="r">฿/ชม.</th><th>เวลาเปิด</th><th>จุดเด่นที่เราสู้ไม่ได้</th></tr>
+      <tr style="background:#eef7f1"><td><b>ALM x Impact</b><br><span class="sub">เปิด 16 เม.ย. 69</span></td><td>เมืองทองธานี<br><span class="sub">ติด ibis Bangkok Impact</span></td><td class="r"><b>14</b></td><td>ในร่ม 10 · Center Court 1 · กลางแจ้ง 1<br><b>ดินเหนียวนำเข้าอิตาลี 2</b> · หญ้า 1 (ก.ค. 69)</td><td class="r"><b>300</b> ก่อน 17:00<br><b>400</b> หลัง 17:00</td><td class="sub">ไม่เปิดเผย</td><td><b>ศูนย์ฝึกอย่างเป็นทางการของ ATF</b> + จับมือ Rafa Nadal Academy · มีคอร์ทดินและหญ้าที่แทบไม่มีที่ไหนในไทย</td></tr>
+      <tr><td><b>CDC — Crystal Tennis Center</b><br><span class="sub">Crystal Sports</span></td><td>ซ.ประดิษฐ์มนูธรรม 21<br>ลาดพร้าว</td><td class="r"><b>8</b><br><span class="sub">+ โซน G อีกชุด</span></td><td>ในร่มทั้งหมด<br>ฮาร์ดคอร์ทผิว US Open + ชั้นรองรับแรง</td><td class="r"><b>500</b> ก่อน 17:00<br><b>600</b> หลัง 17:00</td><td>06:00–23:00</td><td><b>สนามแรกและสนามเดียวในไทยที่ได้การรับรองจาก ITF</b> · เพดานสูงกว่ามาตรฐานอุตสาหกรรม</td></tr>
+      <tr><td><b>ACE of Clubs</b><br><span class="sub">เปิด 19 ต.ค. 68</span></td><td>พระราม 4 (4182/5-8)<br>พระโขนง คลองเตย</td><td class="r"><b>5</b></td><td>ในร่มทั้งหมด<br>Acrylic Toplus MC Pro (Medium pace) มาตรฐาน ITF</td><td class="r"><b>650</b><br><span class="sub">แพงสุดในกลุ่ม</span></td><td>06:00–23:00<br><span class="sub">จองรอบสุดท้าย 22:00</span></td><td>วางตัวเป็น <b>Social Tennis Destination</b> — คลับเฮาส์ ห้องอาบน้ำส่วนตัว เลานจ์ คาเฟ่ โปรช็อป · จอดฟรี 3 ชม.</td></tr>
+      <tr><td><b>Noah BKK 26</b></td><td>ซ.อรรถกวี 1 พระราม 4<br>คลองตัน คลองเตย</td><td class="r"><b>6</b></td><td><b>กลางแจ้ง 4</b> ฮาร์ดคอร์ทเกรด ITF<br><b>ในร่ม 2 หญ้าเทียม ติดแอร์</b></td><td class="r"><span class="sub">ไม่เปิดเผย</span></td><td>06:30–23:30<br><span class="sub">เปิดทุกวันตลอดปี</span></td><td>มี<b>ฟุตซอลในร่ม 3 คอร์ท</b> + สตูดิโอ 9.95×5.6 ม. + นวด + โค้ชญี่ปุ่น = ศูนย์รวมหลายกีฬาในที่เดียว</td></tr>
+      <tr style="background:#fff8ec"><td><b>🏸 โครงการเรา (แผน 2)</b></td><td>บางขุนเทียน-ชายทะเล</td><td class="r"><b>2</b></td><td>ในร่ม · acrylic บนพื้นโรงงานเดิม</td><td class="r"><b>~400</b><br><span class="sub">ค่ากลางตลาด</span></td><td>10:00–24:00</td><td><b>เกรดซ้อม/สอน ไม่ใช่เกรดแข่ง</b> — เพดานไม่ถึง 9 ม.ตลอดคอร์ท</td></tr>
+    </table>
+    </div>
+    <div class="note blue">💡 <b>อ่านตารางนี้ให้ขาด — 3 ข้อ:</b><br>
+      (1) <b>ยิ่งสนามใหญ่ ยิ่งขายถูก</b> — Impact 14 คอร์ทขาย 300–400 ฿ · CDC 8 คอร์ทขาย 500–600 ฿ · Ace 5 คอร์ทขาย 650 ฿ · <b>สวนทางกับสัญชาตญาณ</b> เพราะสนามใหญ่กระจายต้นทุนคงที่ได้ดีกว่า และสนามเล็กต้องขายความพรีเมียมแทน<br>
+      (2) <b>ทั้ง 4 เจ้าเป็นในร่มเกือบทั้งหมด</b> — เทนนิสในกรุงเทพแข่งกันที่ "เล่นได้ทุกสภาพอากาศ" ไม่ใช่ราคา · เราเป็นในร่มเหมือนกัน <b>แต่เพดานเราคือจุดอ่อน</b><br>
+      (3) <b>2 ใน 4 เจ้าเพิ่งเปิดใน 12 เดือนล่าสุด</b> (Ace ต.ค. 68 · Impact เม.ย. 69) — <b>ตลาดเทนนิสพรีเมียมกรุงเทพกำลังลงทุนหนักพร้อมกัน</b> สอดคล้องกับข้อมูล DBD ที่บริษัทเทนนิสขาดทุน 61% คือมีคนเข้ามาเยอะแต่ยังไม่มีใครทำกำไรชัด</div>
+    <div class="note">📌 <b>สนามที่ไม่มีระบบจองออนไลน์สาธารณะ:</b> <b>Ace of Clubs</b> จองผ่าน LINE OA (@aceofclubs) หรือโทร 061-384-5555 · <b>Noah</b> และ <b>Impact</b> ไม่เปิดระบบจองออนไลน์ · <b>ราคาของ Noah ไม่ประกาศที่ไหนเลย ต้องโทรถาม</b></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🔥 CDC เต็มขนาดไหน — อ่านตรงจากระบบจองของเขาเอง</h3>
+    <p class="sub" style="margin-bottom:10px">เข้าระบบจองของ Crystal Sports แล้วไล่อ่านครบ <b>ทั้ง 8 คอร์ท × 18 ช่วงเวลา (06:00–23:00) × หลายวัน</b> จนถึง 2 สัปดาห์ล่วงหน้า</p>
+    <div style="overflow-x:auto">
+    <table style="font-variant-numeric:tabular-nums">
+      <tr><th>คอร์ท</th><th style="text-align:left">06 · 07 · 08 · 09 · 10 · 11 · 12 · 13 · 14 · 15 · 16 · 17 · 18 · 19 · 20 · 21 · 22 · 23</th><th class="r">เต็ม</th></tr>
+      <tr><td>North-3</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>North-2</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>North-1</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>Center-2</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>Center-1</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>South-3</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>South-2</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr><td>South-1</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
+      <tr style="background:#fdecec"><td><b>รวม</b></td><td><b>ว่างแค่ 06:00 ช่องเดียวของทุกคอร์ท</b> — เหมือนกันหมดทุกวันที่ตรวจ</td><td class="r"><b>136/144<br>= 94%</b></td></tr>
+    </table>
+    </div>
+    <div class="note" style="background:#fdecec;border-left-color:#a33">🔥 <b>ทำไมถึงเต็มเหมือนกันเป๊ะทุกคอร์ท — คำอธิบายจากคนในวงการ:</b><br>
+      CDC มี<b>ระบบสมาชิกที่ได้สิทธิ์จองล่วงหน้าก่อนคนทั่วไป</b> สมาชิกจึงกวาดคอร์ทไปหมดตั้งแต่รอบแรก · <b>คนทั่วไปเปิดระบบมาก็ไม่เหลือให้จองแล้ว</b> และเวลามีคนปล่อยคอร์ทคืน จะมีคนมาแย่งต่อทันที<br>
+      → ช่อง <b>06:00 ที่ว่างอยู่ช่องเดียว คือช่วงที่ไม่มีใครอยากได้</b> (เช้ามืด) ไม่ใช่ช่องที่ระบบกันไว้<br>
+      <span class="sub">ที่มา: ระบบจอง Crystal Sports (อ่านเมื่อ 6 ส.ค. 2569) + feedback จากกลุ่มผู้เล่น — <b>เป็นการอ่านสถานะปุ่มจองในระบบ ไม่ใช่ตัวเลข % ที่สนามประกาศ</b> จึงไม่ได้อยู่ในชุดข้อมูลอัตโนมัติเดียวกับ Matchday</span></div>
+    <div class="kpis">
+      <div class="kpi"><div class="t">คอร์ท-ชั่วโมงที่ขายได้/วัน</div><div class="v">128</div><div class="s">8 คอร์ท × 16 ชม. (จาก 18 ชม.ที่เปิด)</div></div>
+      <div class="kpi"><div class="t">ประมาณรายได้ค่าคอร์ท/วัน</div><div class="v">~68,800 ฿</div><div class="s">คิดที่ 500 ฿ ก่อน 17:00 · 600 ฿ หลัง 17:00</div></div>
+      <div class="kpi"><div class="t">ต่อเดือน</div><div class="v">~2.06 ล.</div><div class="s">ยังไม่รวมค่าสมาชิก · โค้ช · โปรช็อป</div></div>
+      <div class="kpi big"><div class="t">ต่อปี (ถ้าเต็มระดับนี้ตลอด)</div><div class="v">~25 ล้าน ฿</div><div class="s">เทียบ: บริษัทเทนนิสที่รายได้สูงสุดใน DBD คือ 32.5 ล./ปี — ตัวเลขนี้จึงอยู่ในระดับที่เป็นไปได้จริง</div></div>
+    </div>
+    <div class="note blue">💡 <b>นี่คือหลักฐานดีมานด์เทนนิสที่หนักที่สุดที่เรามี</b> — หนักกว่าตัวเลข 76% ที่วัดจาก 5 สนามบน Matchday ด้วยซ้ำ เพราะนี่คือสนาม <b>8 คอร์ท ราคา 500–600 ฿ (แพงกว่าค่ากลางตลาด 400)</b> ที่ยัง<b>ขายหมดล่วงหน้า 2 สัปดาห์</b><br>
+      → <b>แปลว่าตลาดเทนนิสกรุงเทพไม่ได้ขาดคนเล่น แต่ขาดคอร์ท</b> · และ CDC อยู่ลาดพร้าว-ประดิษฐ์มนูธรรม ซึ่งคนละฝั่งเมืองกับเรา — <b>ฝั่งธนฯ/บางขุนเทียนแทบไม่มีคอร์ทเทนนิสให้เช่าเลย</b><br>
+      ⚠️ <b>แต่อย่าเพิ่งดีใจเกินไป:</b> CDC เต็มเพราะเป็นสนาม ITF เกรดสูงสุดในประเทศ + มีระบบสมาชิก · <b>2 คอร์ทเกรดซ้อมของเราไม่ได้ลูกค้ากลุ่มเดียวกัน</b> เราได้กลุ่มที่ไม่อยากขับข้ามเมือง ซึ่งเล็กกว่ามาก</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">🎯 แล้วเราอยู่ตรงไหนในตลาดนี้</h3>
+    <div class="note">⚠️ <b>ความจริงที่ต้องยอมรับ:</b> เราไม่ได้แข่งกับ 4 เจ้านี้ และไม่ควรพยายาม<br>
+      • <b>ทำเลคนละโลก</b> — ทั้ง 4 อยู่พระราม 4 / ลาดพร้าว / เมืองทอง ซึ่งเป็นย่านที่ลูกค้าเทนนิสกำลังซื้อสูงอยู่ · เราอยู่บางขุนเทียน-ชายทะเล<br>
+      • <b>สเกลคนละชั้น</b> — เขามี 5–14 คอร์ทเป็นธุรกิจหลัก เรามี 2 คอร์ทเป็นของแถมในสนามแบด<br>
+      • <b>เกรดคนละระดับ</b> — เขาได้ ITF / ATF / Rafa Nadal เราได้แค่เกรดซ้อม<br>
+      <b>→ ลูกค้าเทนนิสของเราคือคนในรัศมี 5–8 กม. ที่ไม่อยากขับข้ามเมือง</b> ไม่ใช่คนที่เลือกสนามตามคุณภาพ · ตั้งราคาให้ต่ำกว่า CDC (500–600) และใกล้ค่ากลางตลาด 400 ฿ แล้วขายความสะดวก</div>
+    <div class="note blue">✅ <b>สิ่งที่ยืนยันได้จากข้อมูลจองจริง:</b> เทนนิสในกรุงเทพที่จองออนไลน์ได้ 5 สนาม มีอัตราจอง<b>ทั้งวัน 76% · กลางวัน 82%</b> ซึ่งสูงที่สุดในทั้ง 4 กีฬา — <b>ดีมานด์มีจริงและล้นด้วย</b> คำถามจึงไม่ใช่ "จะมีคนเล่นมั้ย" แต่คือ "<b>2 คอร์ทของเราคุ้มกับพื้นที่ 1,338 ตร.ม. ที่เสียไปมั้ย</b>" ซึ่งดูได้ที่หน้า "งบ &amp; รายได้แผน 2"</div>
+  </div>
+  </div>
+
+  <div class="spwrap" id="cp-pickleball">
+    <div class="card">
+      <h3 style="margin-top:0">🥒 คู่แข่ง Pickleball ในกรุงเทพฯ &amp; ปริมณฑล</h3>
+      <p class="sub" style="margin-bottom:10px">ดึงสดจากระบบจอง — เรียงตามอัตราการจองทั้งวัน</p>
+      <div style="overflow-x:auto"><table id="cpPBTable"></table></div>
+      <div class="note blue" id="cpPBNote"></div>
+    </div>
+  </div>
+
+  <div class="spwrap" id="cp-basketball">
+    <div class="card">
+      <h3 style="margin-top:0">🏀 คู่แข่งบาสเกตบอลในกรุงเทพฯ &amp; ปริมณฑล</h3>
+      <p class="sub" style="margin-bottom:10px">ดึงสดจากระบบจอง — เรียงตามอัตราการจองทั้งวัน</p>
+      <div style="overflow-x:auto"><table id="cpBBTable"></table></div>
+      <div class="note blue" id="cpBBNote"></div>
+    </div>
+  </div>
+
+  <div class="pagenav"><button class="btn ghost" onclick="go('p1')">← ผัง &amp; คอร์ท</button><button class="btn" onclick="go('p20')">ถัดไป: ② วันนี้คอร์ทเต็มแค่ไหน →</button></div>
 </section>
 
 <!-- ================= P20 อัตราจองสด ================= -->
 <section class="page" id="p20">
-  <h2>อัตราการจองสด — วันนี้ทั้งตลาดเป็นยังไง</h2>
+  <h2>② วันนี้คอร์ทเต็มแค่ไหน</h2>
+  <p class="sub" style="margin:-8px 0 16px">อ่านสถานะคอร์ทของ<b>วันนี้</b>ตรงจากระบบจองของทุกสนามในกรุงเทพฯ–ปริมณฑล ว่าชั่วโมงไหนเต็ม ชั่วโมงไหนว่าง · <b>กดปุ่มกีฬาเพื่อสลับดูทีละกีฬา</b></p>
   <div class="card">
     <h3 style="margin-top:0">📡 อัตราการจองจริงของคู่แข่ง — ดึงสดจากระบบจอง</h3>
     <p class="sub" style="margin-bottom:10px">อ่านตรงจากระบบจองของแต่ละสนาม สถานะรายคอร์ท (CC + Winning ผ่าน Matchday · BEAT ผ่าน Okrabook) · เก็บอัตโนมัติวันละ 2 รอบ (17:45 และ 21:30) · <span id="lbUpdated">กำลังโหลด…</span></p>
@@ -948,12 +1036,13 @@
     <div class="note blue" id="spTodayNote"></div>
   </div>
 
-  <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p21')">ถัดไป: ย้อนหลัง →</button></div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p21')">ถัดไป: ③ ย้อนดูอดีต →</button></div>
 </section>
 
 <!-- ================= P21 ย้อนหลัง ================= -->
 <section class="page" id="p21">
-  <h2>ย้อนหลัง &amp; จองล่วงหน้า — เลือกวัน เลือกช่วงเวลา</h2>
+  <h2>③ ย้อนดูอดีต + ยอดจองล่วงหน้า</h2>
+  <p class="sub" style="margin:-8px 0 16px"><b>ย้อนหลัง</b> = วันที่ผ่านมาแล้ว คนจองไปเท่าไหร่จริง · <b>ล่วงหน้า</b> = วันข้างหน้าที่คนจองไว้แล้ว (ยังเพิ่มได้อีกจนถึงวันจริง) — ใช้ดูว่าตลาดนี้ต้องจองข้ามวันแค่ไหน · <b>เลือกกีฬา เลือกวัน เลือกช่วงเวลาได้เอง</b></p>
   <div class="card">
     <h3 style="margin-top:0">🕰️ ย้อนหลัง &amp; จองล่วงหน้า — เลือกวัน เลือกช่วงเวลา ได้เอง</h3>
     <p class="sub" style="margin-bottom:10px" id="hsIntro">กำลังโหลดคลังข้อมูล…</p>
@@ -990,12 +1079,16 @@
     <div class="note" id="hsFallback" style="display:none">⚠️ โหลดคลังย้อนหลังไม่ได้ (เปิดจากไฟล์ในเครื่อง) — ดูได้ที่ <a href="https://github.com/mahantapon/badminton-court-plan/blob/main/data/history.json" target="_blank">history.json</a></div>
   </div>
 
-  <div class="pagenav"><button class="btn ghost" onclick="go('p20')">← อัตราจองสด</button><button class="btn" onclick="go('p22')">ถัดไป: รีวิวคู่แข่ง →</button></div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p20')">← วันนี้คอร์ทเต็มแค่ไหน</button><button class="btn" onclick="go('p27')">ถัดไป: ④ คู่แข่งกำไรหรือขาดทุน →</button></div>
 </section>
 
 <!-- ================= P22 รีวิว & สำรวจเอง ================= -->
 <section class="page" id="p22">
-  <h2>รีวิวคู่แข่ง &amp; การสำรวจภาคสนาม</h2>
+  <h2>⑤ ลูกค้าบ่นอะไร — รีวิว &amp; วิธีสำรวจเอง</h2>
+  <p class="sub" style="margin:-8px 0 16px">รวมเสียงลูกค้าจริงจากรีวิวสาธารณะ (Google · Wongnai · Trip.com · Pantip) ว่าคู่แข่งโดนบ่นเรื่องอะไร = ช่องที่เราทำให้ดีกว่าได้ · และวิธีลงพื้นที่นับเองก่อนลงเงิน</p>
+  <div class="sptabs" id="rvTabs"></div>
+
+  <div class="spwrap on" id="rv-badminton">
   <div class="card">
     <h3 style="margin-top:0">🗣️ จุดอ่อนคู่แข่งจากรีวิวจริง — ขุดเมื่อ 4 ส.ค. 2569</h3>
     <p class="sub" style="margin-bottom:10px">ไล่อ่านรีวิว Google/Trip.com/Wongnai/lemon8/Pantip ของทั้ง 6 สนาม · รายงานเฉพาะที่มีหลักฐานจริง — สนามไหนหาไม่เจอบอกตรงๆ ว่าไม่เจอ</p>
@@ -1018,6 +1111,11 @@
       ⚠️ <b>สิ่งที่ไม่ใช่ช่องโจมตี:</b> ที่จอดรถ — ทุกสนามได้คำชมเรื่องนี้หมด (เป็นมาตรฐานที่ต้องมี ไม่ใช่จุดขาย ยกเว้นวันจัดแข่ง) · ราคา — ไม่เจอใครบ่นแพงเลยทั้งโซน ยืนยันว่าตลาดรับ 120–220 ฿ ได้สบาย</div>
   </div>
 
+  </div>
+  <div class="spwrap" id="rv-tennis"><div class="card"><h3 style="margin-top:0">🎾 เสียงลูกค้าเทนนิส</h3><div id="rvTennis"></div></div></div>
+  <div class="spwrap" id="rv-pickleball"><div class="card"><h3 style="margin-top:0">🥒 เสียงลูกค้า Pickleball</h3><div id="rvPB"></div></div></div>
+  <div class="spwrap" id="rv-basketball"><div class="card"><h3 style="margin-top:0">🏀 เสียงลูกค้าบาสเกตบอล</h3><div id="rvBB"></div></div></div>
+
   <div class="card">
     <h3 style="margin-top:0">📊 ประมาณอัตราการจองรายชั่วโมง (กดที่ช่องเพื่อแก้เป็นเลขที่ไปนับจริง)</h3>
     <p class="sub" style="margin-bottom:10px">ไม่มีสนามไหนเปิดเผยตัวเลขจริง ตารางนี้เป็น<b>ประมาณการ</b>จากเวลาเปิดของคู่แข่งและพฤติกรรมตลาด — กด 1 ครั้งเพื่อวนค่า 0→25→50→75→100% ระบบจำค่าไว้ในเครื่อง</p>
@@ -1038,7 +1136,7 @@
       <div class="step"><span class="n"></span><div><b>ถามแม่ค้าน้ำ/ร้านข้าวหน้าสนาม</b> — รู้ดีที่สุดว่าวันไหนคนเยอะ ก๊วนไหนมาประจำ และลูกค้าบ่นอะไร</div></div>
     </div>
   </div>
-    <div class="pagenav"><button class="btn ghost" onclick="go('p21')">← ย้อนหลัง</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้น →</button></div>
+    <div class="pagenav"><button class="btn ghost" onclick="go('p27')">← คู่แข่งกำไรหรือขาดทุน</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้น →</button></div>
 </section>
 
 <!-- ================= P23 ผัง 4 กีฬา (แผน 2) ================= -->
@@ -1142,7 +1240,8 @@
 
 <!-- ================= P27 DBD แยกกีฬา ================= -->
 <section class="page" id="p27">
-  <h2>บริษัทในวงการ — งบจริงจาก DBD แยกทีละกีฬา</h2>
+  <h2>④ คู่แข่งกำไรหรือขาดทุน</h2>
+  <p class="sub" style="margin:-8px 0 16px">งบการเงิน<b>ที่ยื่นจริงต่อกรมพัฒนาธุรกิจการค้า (DBD)</b> ของบริษัทที่ทำสนามกีฬา — ดูว่าธุรกิจนี้รอดหรือเจ๊ง ก่อนที่เราจะลงเงิน · <b>กดปุ่มกีฬาเพื่อดูทีละกีฬา</b></p>
   <div class="card">
     <h3 style="margin-top:0">🏢 เลือกกีฬาที่ต้องการดู</h3>
     <p class="sub" style="margin-bottom:10px" id="dbdIntro">กำลังโหลด…</p>
@@ -1157,7 +1256,12 @@
     <div style="overflow-x:auto"><table id="dbdCompare"></table></div>
     <div class="note" id="dbdCompareNote"></div>
   </div>
-  <div class="pagenav"><button class="btn ghost" onclick="go('p17')">← งบจริงคู่แข่ง (แบด)</button><span></span></div>
+  <div class="card">
+    <h3 style="margin-top:0">📖 เจาะลึกเฉพาะแบดมินตัน</h3>
+    <p class="sub">หน้านี้เทียบ 4 กีฬาแบบภาพรวม · ถ้าอยากดู<b>เจาะลึกฝั่งแบด</b> — เส้นแบ่งความอยู่รอด 5 ล้าน/ปี · กรณีศึกษา KURU · ตัวตนจริงของคู่แข่ง 6 เจ้า — อยู่ที่หน้าแยกต่างหาก</p>
+    <button class="btn" onclick="go('p17')">📉 งบจริงคู่แข่งแบดมินตัน (เจาะลึก) →</button>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p20')">← วันนี้คอร์ทเต็มแค่ไหน</button><button class="btn" onclick="go('p22')">ถัดไป: ลูกค้าบ่นอะไร →</button></div>
 </section>
 
 <!-- ================= P28 ขนาดสนามมาตรฐาน ================= -->
@@ -1177,72 +1281,6 @@
 </section>
 
 <!-- ================= P29 คู่แข่งเทนนิส ================= -->
-<section class="page" id="p29">
-  <h2>คู่แข่งเทนนิส — 4 สนามเรือธงของกรุงเทพฯ</h2>
-  <div class="card">
-    <h3 style="margin-top:0">🎾 CDC · Ace of Clubs · Noah · Impact — เทียบกันตรงๆ</h3>
-    <p class="sub" style="margin-bottom:10px">ทุกตัวเลขมาจากเว็บทางการ ข่าวเปิดตัว หรือระบบจองของสนามเอง · <b>ช่องไหนไม่เจอข้อมูลจะเขียนว่า "ไม่เปิดเผย" ไม่เดาแทน</b></p>
-    <div style="overflow-x:auto">
-    <table>
-      <tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th>ประเภท / พื้น</th><th class="r">฿/ชม.</th><th>เวลาเปิด</th><th>จุดเด่นที่เราสู้ไม่ได้</th></tr>
-      <tr style="background:#eef7f1"><td><b>ALM x Impact</b><br><span class="sub">เปิด 16 เม.ย. 69</span></td><td>เมืองทองธานี<br><span class="sub">ติด ibis Bangkok Impact</span></td><td class="r"><b>14</b></td><td>ในร่ม 10 · Center Court 1 · กลางแจ้ง 1<br><b>ดินเหนียวนำเข้าอิตาลี 2</b> · หญ้า 1 (ก.ค. 69)</td><td class="r"><b>300</b> ก่อน 17:00<br><b>400</b> หลัง 17:00</td><td class="sub">ไม่เปิดเผย</td><td><b>ศูนย์ฝึกอย่างเป็นทางการของ ATF</b> + จับมือ Rafa Nadal Academy · มีคอร์ทดินและหญ้าที่แทบไม่มีที่ไหนในไทย</td></tr>
-      <tr><td><b>CDC — Crystal Tennis Center</b><br><span class="sub">Crystal Sports</span></td><td>ซ.ประดิษฐ์มนูธรรม 21<br>ลาดพร้าว</td><td class="r"><b>8</b><br><span class="sub">+ โซน G อีกชุด</span></td><td>ในร่มทั้งหมด<br>ฮาร์ดคอร์ทผิว US Open + ชั้นรองรับแรง</td><td class="r"><b>500</b> ก่อน 17:00<br><b>600</b> หลัง 17:00</td><td>06:00–23:00</td><td><b>สนามแรกและสนามเดียวในไทยที่ได้การรับรองจาก ITF</b> · เพดานสูงกว่ามาตรฐานอุตสาหกรรม</td></tr>
-      <tr><td><b>ACE of Clubs</b><br><span class="sub">เปิด 19 ต.ค. 68</span></td><td>พระราม 4 (4182/5-8)<br>พระโขนง คลองเตย</td><td class="r"><b>5</b></td><td>ในร่มทั้งหมด<br>Acrylic Toplus MC Pro (Medium pace) มาตรฐาน ITF</td><td class="r"><b>650</b><br><span class="sub">แพงสุดในกลุ่ม</span></td><td>06:00–23:00<br><span class="sub">จองรอบสุดท้าย 22:00</span></td><td>วางตัวเป็น <b>Social Tennis Destination</b> — คลับเฮาส์ ห้องอาบน้ำส่วนตัว เลานจ์ คาเฟ่ โปรช็อป · จอดฟรี 3 ชม.</td></tr>
-      <tr><td><b>Noah BKK 26</b></td><td>ซ.อรรถกวี 1 พระราม 4<br>คลองตัน คลองเตย</td><td class="r"><b>6</b></td><td><b>กลางแจ้ง 4</b> ฮาร์ดคอร์ทเกรด ITF<br><b>ในร่ม 2 หญ้าเทียม ติดแอร์</b></td><td class="r"><span class="sub">ไม่เปิดเผย</span></td><td>06:30–23:30<br><span class="sub">เปิดทุกวันตลอดปี</span></td><td>มี<b>ฟุตซอลในร่ม 3 คอร์ท</b> + สตูดิโอ 9.95×5.6 ม. + นวด + โค้ชญี่ปุ่น = ศูนย์รวมหลายกีฬาในที่เดียว</td></tr>
-      <tr style="background:#fff8ec"><td><b>🏸 โครงการเรา (แผน 2)</b></td><td>บางขุนเทียน-ชายทะเล</td><td class="r"><b>2</b></td><td>ในร่ม · acrylic บนพื้นโรงงานเดิม</td><td class="r"><b>~400</b><br><span class="sub">ค่ากลางตลาด</span></td><td>10:00–24:00</td><td><b>เกรดซ้อม/สอน ไม่ใช่เกรดแข่ง</b> — เพดานไม่ถึง 9 ม.ตลอดคอร์ท</td></tr>
-    </table>
-    </div>
-    <div class="note blue">💡 <b>อ่านตารางนี้ให้ขาด — 3 ข้อ:</b><br>
-      (1) <b>ยิ่งสนามใหญ่ ยิ่งขายถูก</b> — Impact 14 คอร์ทขาย 300–400 ฿ · CDC 8 คอร์ทขาย 500–600 ฿ · Ace 5 คอร์ทขาย 650 ฿ · <b>สวนทางกับสัญชาตญาณ</b> เพราะสนามใหญ่กระจายต้นทุนคงที่ได้ดีกว่า และสนามเล็กต้องขายความพรีเมียมแทน<br>
-      (2) <b>ทั้ง 4 เจ้าเป็นในร่มเกือบทั้งหมด</b> — เทนนิสในกรุงเทพแข่งกันที่ "เล่นได้ทุกสภาพอากาศ" ไม่ใช่ราคา · เราเป็นในร่มเหมือนกัน <b>แต่เพดานเราคือจุดอ่อน</b><br>
-      (3) <b>2 ใน 4 เจ้าเพิ่งเปิดใน 12 เดือนล่าสุด</b> (Ace ต.ค. 68 · Impact เม.ย. 69) — <b>ตลาดเทนนิสพรีเมียมกรุงเทพกำลังลงทุนหนักพร้อมกัน</b> สอดคล้องกับข้อมูล DBD ที่บริษัทเทนนิสขาดทุน 61% คือมีคนเข้ามาเยอะแต่ยังไม่มีใครทำกำไรชัด</div>
-    <div class="note">📌 <b>สนามที่ไม่มีระบบจองออนไลน์สาธารณะ:</b> <b>Ace of Clubs</b> จองผ่าน LINE OA (@aceofclubs) หรือโทร 061-384-5555 · <b>Noah</b> และ <b>Impact</b> ไม่เปิดระบบจองออนไลน์ · <b>ราคาของ Noah ไม่ประกาศที่ไหนเลย ต้องโทรถาม</b></div>
-  </div>
-
-  <div class="card">
-    <h3 style="margin-top:0">🔥 CDC เต็มขนาดไหน — อ่านตรงจากระบบจองของเขาเอง</h3>
-    <p class="sub" style="margin-bottom:10px">เข้าระบบจองของ Crystal Sports แล้วไล่อ่านครบ <b>ทั้ง 8 คอร์ท × 18 ช่วงเวลา (06:00–23:00) × หลายวัน</b> จนถึง 2 สัปดาห์ล่วงหน้า</p>
-    <div style="overflow-x:auto">
-    <table style="font-variant-numeric:tabular-nums">
-      <tr><th>คอร์ท</th><th style="text-align:left">06 · 07 · 08 · 09 · 10 · 11 · 12 · 13 · 14 · 15 · 16 · 17 · 18 · 19 · 20 · 21 · 22 · 23</th><th class="r">เต็ม</th></tr>
-      <tr><td>North-3</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>North-2</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>North-1</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>Center-2</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>Center-1</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>South-3</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>South-2</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr><td>South-1</td><td style="letter-spacing:3px;font-family:ui-monospace,monospace"><span style="color:#1e6b45">·</span><span style="color:#a33">XXXXXXXXXXXXXXXXX</span></td><td class="r">17/18</td></tr>
-      <tr style="background:#fdecec"><td><b>รวม</b></td><td><b>ว่างแค่ 06:00 ช่องเดียวของทุกคอร์ท</b> — เหมือนกันหมดทุกวันที่ตรวจ</td><td class="r"><b>136/144<br>= 94%</b></td></tr>
-    </table>
-    </div>
-    <div class="note" style="background:#fdecec;border-left-color:#a33">🔥 <b>ทำไมถึงเต็มเหมือนกันเป๊ะทุกคอร์ท — คำอธิบายจากคนในวงการ:</b><br>
-      CDC มี<b>ระบบสมาชิกที่ได้สิทธิ์จองล่วงหน้าก่อนคนทั่วไป</b> สมาชิกจึงกวาดคอร์ทไปหมดตั้งแต่รอบแรก · <b>คนทั่วไปเปิดระบบมาก็ไม่เหลือให้จองแล้ว</b> และเวลามีคนปล่อยคอร์ทคืน จะมีคนมาแย่งต่อทันที<br>
-      → ช่อง <b>06:00 ที่ว่างอยู่ช่องเดียว คือช่วงที่ไม่มีใครอยากได้</b> (เช้ามืด) ไม่ใช่ช่องที่ระบบกันไว้<br>
-      <span class="sub">ที่มา: ระบบจอง Crystal Sports (อ่านเมื่อ 6 ส.ค. 2569) + feedback จากกลุ่มผู้เล่น — <b>เป็นการอ่านสถานะปุ่มจองในระบบ ไม่ใช่ตัวเลข % ที่สนามประกาศ</b> จึงไม่ได้อยู่ในชุดข้อมูลอัตโนมัติเดียวกับ Matchday</span></div>
-    <div class="kpis">
-      <div class="kpi"><div class="t">คอร์ท-ชั่วโมงที่ขายได้/วัน</div><div class="v">128</div><div class="s">8 คอร์ท × 16 ชม. (จาก 18 ชม.ที่เปิด)</div></div>
-      <div class="kpi"><div class="t">ประมาณรายได้ค่าคอร์ท/วัน</div><div class="v">~68,800 ฿</div><div class="s">คิดที่ 500 ฿ ก่อน 17:00 · 600 ฿ หลัง 17:00</div></div>
-      <div class="kpi"><div class="t">ต่อเดือน</div><div class="v">~2.06 ล.</div><div class="s">ยังไม่รวมค่าสมาชิก · โค้ช · โปรช็อป</div></div>
-      <div class="kpi big"><div class="t">ต่อปี (ถ้าเต็มระดับนี้ตลอด)</div><div class="v">~25 ล้าน ฿</div><div class="s">เทียบ: บริษัทเทนนิสที่รายได้สูงสุดใน DBD คือ 32.5 ล./ปี — ตัวเลขนี้จึงอยู่ในระดับที่เป็นไปได้จริง</div></div>
-    </div>
-    <div class="note blue">💡 <b>นี่คือหลักฐานดีมานด์เทนนิสที่หนักที่สุดที่เรามี</b> — หนักกว่าตัวเลข 76% ที่วัดจาก 5 สนามบน Matchday ด้วยซ้ำ เพราะนี่คือสนาม <b>8 คอร์ท ราคา 500–600 ฿ (แพงกว่าค่ากลางตลาด 400)</b> ที่ยัง<b>ขายหมดล่วงหน้า 2 สัปดาห์</b><br>
-      → <b>แปลว่าตลาดเทนนิสกรุงเทพไม่ได้ขาดคนเล่น แต่ขาดคอร์ท</b> · และ CDC อยู่ลาดพร้าว-ประดิษฐ์มนูธรรม ซึ่งคนละฝั่งเมืองกับเรา — <b>ฝั่งธนฯ/บางขุนเทียนแทบไม่มีคอร์ทเทนนิสให้เช่าเลย</b><br>
-      ⚠️ <b>แต่อย่าเพิ่งดีใจเกินไป:</b> CDC เต็มเพราะเป็นสนาม ITF เกรดสูงสุดในประเทศ + มีระบบสมาชิก · <b>2 คอร์ทเกรดซ้อมของเราไม่ได้ลูกค้ากลุ่มเดียวกัน</b> เราได้กลุ่มที่ไม่อยากขับข้ามเมือง ซึ่งเล็กกว่ามาก</div>
-  </div>
-
-  <div class="card">
-    <h3 style="margin-top:0">🎯 แล้วเราอยู่ตรงไหนในตลาดนี้</h3>
-    <div class="note">⚠️ <b>ความจริงที่ต้องยอมรับ:</b> เราไม่ได้แข่งกับ 4 เจ้านี้ และไม่ควรพยายาม<br>
-      • <b>ทำเลคนละโลก</b> — ทั้ง 4 อยู่พระราม 4 / ลาดพร้าว / เมืองทอง ซึ่งเป็นย่านที่ลูกค้าเทนนิสกำลังซื้อสูงอยู่ · เราอยู่บางขุนเทียน-ชายทะเล<br>
-      • <b>สเกลคนละชั้น</b> — เขามี 5–14 คอร์ทเป็นธุรกิจหลัก เรามี 2 คอร์ทเป็นของแถมในสนามแบด<br>
-      • <b>เกรดคนละระดับ</b> — เขาได้ ITF / ATF / Rafa Nadal เราได้แค่เกรดซ้อม<br>
-      <b>→ ลูกค้าเทนนิสของเราคือคนในรัศมี 5–8 กม. ที่ไม่อยากขับข้ามเมือง</b> ไม่ใช่คนที่เลือกสนามตามคุณภาพ · ตั้งราคาให้ต่ำกว่า CDC (500–600) และใกล้ค่ากลางตลาด 400 ฿ แล้วขายความสะดวก</div>
-    <div class="note blue">✅ <b>สิ่งที่ยืนยันได้จากข้อมูลจองจริง:</b> เทนนิสในกรุงเทพที่จองออนไลน์ได้ 5 สนาม มีอัตราจอง<b>ทั้งวัน 76% · กลางวัน 82%</b> ซึ่งสูงที่สุดในทั้ง 4 กีฬา — <b>ดีมานด์มีจริงและล้นด้วย</b> คำถามจึงไม่ใช่ "จะมีคนเล่นมั้ย" แต่คือ "<b>2 คอร์ทของเราคุ้มกับพื้นที่ 1,338 ตร.ม. ที่เสียไปมั้ย</b>" ซึ่งดูได้ที่หน้า "งบ &amp; รายได้แผน 2"</div>
-  </div>
-  <div class="pagenav"><button class="btn ghost" onclick="go('p9')">← คู่แข่ง &amp; ราคา</button><button class="btn" onclick="go('p27')">ถัดไป: บริษัทในวงการ →</button></div>
-</section>
-
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
   <div class="note blue" id="phaseBanner10" style="margin-bottom:14px"></div>
@@ -2603,14 +2641,14 @@ const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mo
 /* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
 const GROUPS=[
   {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
-  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p29','คู่แข่งเทนนิส 4 เจ้า'],['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p27','บริษัทในวงการ 4 กีฬา'],['p8','Business Canvas']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p9','① ใครแข่งกับเรา'],['p20','② วันนี้คอร์ทเต็มแค่ไหน'],['p21','③ ย้อนดูอดีต + จองล่วงหน้า'],['p27','④ คู่แข่งกำไรหรือขาดทุน'],['p22','⑤ ลูกค้าบ่นอะไร'],['p8','⑥ สรุปโมเดลธุรกิจ']]},
   {id:'g5',n:'🏆 3 เสารายได้',pages:[['p15','แข่งขัน & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const GROUPS2=[
   {id:'h1',n:'🏗️ โครงการ',   pages:[['p23','ผัง 4 กีฬา'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
-  {id:'g2',n:'📊 ตลาด',      pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p29','คู่แข่งเทนนิส 4 เจ้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p27','บริษัทในวงการ 4 กีฬา'],['p8','Business Canvas']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p9','① ใครแข่งกับเรา'],['p20','② วันนี้คอร์ทเต็มแค่ไหน'],['p21','③ ย้อนดูอดีต + จองล่วงหน้า'],['p27','④ คู่แข่งกำไรหรือขาดทุน'],['p22','⑤ ลูกค้าบ่นอะไร'],['p8','⑥ สรุปโมเดลธุรกิจ']]},
   {id:'h3',n:'🏆 เสารายได้',  pages:[['p25','Event 4 กีฬา'],['p15','แข่งแบด & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
@@ -3443,7 +3481,7 @@ async function loadSportSummary(){
     const r=await fetch('data/sport-summary.json',{cache:'no-store'});
     if(!r.ok) throw 0;
     SPSUM=await r.json();
-    renderP24(); renderSportCompare(); renderMarketSport();
+    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn();
   }catch(e){}
 }
 const SPMETA={badminton:['🏸 แบดมินตัน',10],tennis:['🎾 เทนนิส',2],pickleball:['🥒 Pickleball',4],basketball:['🏀 บาส 3x3',1]};
@@ -3499,6 +3537,52 @@ function renderSportCompare(){
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
 }
+/* ================= ตัวกรองกีฬาของหน้าตลาด (p9 คู่แข่ง · p22 รีวิว) ================= */
+function spSwitch(prefix,tabsId,k,state){
+  window[state]=k;
+  const tb=el(tabsId);
+  if(tb) tb.innerHTML=Object.keys(DBDTH).map(s=>{
+    const [i2,t2]=DBDTH[s];
+    return `<button class="sp-${s}${s===k?' on':''}" onclick="${prefix==='cp'?'setCpSport':'setRvSport'}('${s}')">${i2} ${t2}</button>`;
+  }).join('');
+  Object.keys(DBDTH).forEach(s=>{ const w=el(prefix+'-'+s); if(w) w.classList.toggle('on',s===k); });
+}
+let cpSport='badminton', rvSport='badminton';
+function setCpSport(k){ spSwitch('cp','cpTabs',k,'cpSport'); renderCpDyn(); }
+function setRvSport(k){ spSwitch('rv','rvTabs',k,'rvSport'); }
+function renderCpDyn(){
+  if(!HIST||!SPSUM) return;
+  const D=HIST.today;
+  [['pickleball','cpPBTable','cpPBNote'],['basketball','cpBBTable','cpBBNote']].forEach(([sp,tid,nid])=>{
+    const tb=el(tid); if(!tb) return;
+    const vs=HIST.venues.filter(v=>v.sport===sp&&v.days[D]);
+    const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'}">${x}%</span>`;
+    let t='<tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th class="r">฿/ชม.</th><th>เวลาเปิด</th><th class="r">เย็น</th><th class="r">กลางวัน</th><th class="r">ทั้งวัน</th></tr>';
+    [...vs].sort((a,b)=>(b.days[D].a??-1)-(a.days[D].a??-1)).forEach(v=>{
+      const x=v.days[D], dead=x.a===0;
+      t+=`<tr${dead?' style="opacity:.45"':''}><td>${v.venue}${dead?' <span class="sub">ระบบจองไม่ได้ใช้</span>':''}</td><td class="sub">${v.district}${v.prov!=='กรุงเทพมหานคร'?' · '+v.prov:''}</td>`+
+         `<td class="r">${v.courts}</td><td class="r">${v.price??'—'}</td><td class="sub">${v.open}–${v.close}</td>`+
+         `<td class="r">${pc(x.e)}</td><td class="r">${pc(x.d)}</td><td class="r">${pc(x.a)}</td></tr>`;
+    });
+    const our={pickleball:4,basketball:1}[sp];
+    t+=`<tr style="background:#eef7f1"><td><b>🏸 โครงการเรา (แผน 2)</b></td><td>บางขุนเทียน-ชายทะเล</td><td class="r"><b>${our}</b></td><td class="r">${sp==='pickleball'?'~400':'~800'}</td><td>10:00–24:00</td><td colspan="3" class="sub">โซนเพิง (ยกหลังคา 9 ม.)</td></tr>`;
+    tb.innerHTML=t;
+    const s=SPSUM.sports[sp], n=el(nid);
+    if(n) n.innerHTML= sp==='pickleball'
+      ? `💡 <b>สรุปแบบสั้น:</b> ${s.n} สนามในตลาด ราคาค่ากลาง <b>${s.price} ฿/ชม.</b> (แพงกว่าแบดเท่าตัว) แต่จองทั้งวันแค่ <b>${s.a}%</b> เย็นก็แค่ ${s.e}%<br>→ <b>คอร์ทผุดเร็วกว่าคนเล่น</b> — ใส่ 4 คอร์ทเป็นตัวเสริมได้เพราะลงทุนถูก แต่<b>อย่าให้เป็นเสาหลักของรายได้</b>`
+      : `💡 <b>สรุปแบบสั้น:</b> มีแค่ ${s.n} สนามที่เปิดจองออนไลน์ — บาสส่วนใหญ่อยู่ในโรงเรียน/หน่วยงานที่ไม่เปิดให้เช่า<br>→ จองทั้งวัน <b>${s.a}%</b> · <b>กลางวัน ${s.d}%</b> ซึ่งสวนทางแบดที่กลางวันตาย = <b>บาสคือตัวเติมชั่วโมงกลางวันที่ดีที่สุด</b>`;
+  });
+  // รีวิว 3 กีฬา
+  const mk=(sp,id,extra)=>{
+    const box=el(id); if(!box) return;
+    const s=SPSUM.sports[sp];
+    box.innerHTML=`<div class="note">🔎 <b>ยังไม่ได้ไล่อ่านรีวิวของกีฬานี้ — บอกตรงๆ</b><br>งานขุดรีวิวเชิงลึก (Google · Wongnai · Trip.com · Pantip) ทำครบเฉพาะ<b>แบดมินตัน</b> เพราะเป็นกีฬาหลักของโครงการ · ${DBDTH[sp][1]}ยังไม่ได้ทำ ถ้าต้องการสั่งได้</div>`+
+      `<div class="note blue">📊 <b>แต่สิ่งที่วัดได้จริงแล้วสำหรับ${DBDTH[sp][1]}:</b> ${s.n} สนามในตลาด · ราคาค่ากลาง ${s.price??'—'} ฿/ชม. · จองเย็น <b>${s.e}%</b> · กลางวัน <b>${s.d}%</b> · ทั้งวัน <b>${s.a}%</b><br>${extra}</div>`;
+  };
+  mk('tennis','rvTennis','<b>สัญญาณที่แรงที่สุด</b> — CDC (8 คอร์ท 500–600 ฿) ขายหมดล่วงหน้า 2 สัปดาห์จนคนทั่วไปจองไม่ได้ · ดูรายละเอียดที่หน้า "① ใครแข่งกับเรา" แท็บเทนนิส');
+  mk('pickleball','rvPB','ราคาแพงแต่คนยังไม่แน่น — เป็นกีฬากระแสที่ต้องดูต่ออีก 2–3 เดือนก่อนตัดสินใจ');
+  mk('basketball','rvBB','กลุ่มตัวอย่างเล็กมาก ตัวเลขยังหยาบ — ใช้ประกอบการตัดสินใจได้ แต่ยังผูกงบไม่ได้');
+}
 /* ================= Event 4 กีฬา (p25) ================= */
 const EV={
  badminton:{ic:'🏸',th:'แบดมินตัน',
@@ -3543,7 +3627,9 @@ const EV={
   note:'💡 <b>ข้อได้เปรียบที่มองข้ามง่าย:</b> 3x3 ออกแบบมาให้จัดในพื้นที่เล็ก — <b>คอร์ทเดียวของเราจัดทัวร์นาเมนต์ 12–24 ทีมได้จริง</b> ในขณะที่แบดต้อง 12+ คอร์ท และ pickleball ต้องหลายคอร์ท<br>→ แต่ค่าสมัครแค่ 500 ฿/ทีม × 24 ทีม = 12,000 ฿ ทั้งงาน · <b>รายได้ตรงน้อยมาก คุณค่าอยู่ที่คนเข้าสนามและการตลาด ไม่ใช่ค่าเหมา</b>'},
 };
 let evSport='tennis';
-function setEvSport(k){evSport=k;renderEv();}
+function setEvSport(k){evSport=k;renderEv();
+setCpSport('badminton');
+setRvSport('badminton');}
 function renderEv(){
   const tabs=el('evTabs'); if(!tabs) return;
   tabs.innerHTML=Object.keys(EV).map(k=>`<button class="sp-${k}${k===evSport?' on':''}" onclick="setEvSport('${k}')">${EV[k].ic} ${EV[k].th}</button>`).join('');
