@@ -298,12 +298,13 @@
       <button class="btn" id="btnRoof" onclick="toggleRoof()">🏚️ ซ่อนหลังคา (ดูข้างใน)</button>
       <button class="btn" id="btnNight" onclick="toggleNight()">🌙 กลางคืน (เปิดไฟ)</button>
     </div>
-    <div class="controls" style="margin-top:6px">
+    <div class="controls p1only" style="margin-top:6px">
       <div class="ctrl">
         <label>จำนวนคอร์ท (ปรับได้ที่นี่ด้วย): <span class="val" id="courtsVal2">18</span></label>
         <input type="range" id="courts2" min="8" max="20" step="2" value="18" oninput="syncCourts(this.value)">
       </div>
     </div>
+    <div class="note p2only" style="display:none;margin-top:6px">🎾 <b>กำลังดูแผน 2</b> — โมเดลนี้ล็อกไว้ที่ <b>แบด 10 คอร์ท · เทนนิส 2 · Pickleball 4 · บาส 3x3 1</b> ตามผัง 4 กีฬา จึงปรับจำนวนคอร์ทไม่ได้ · กด "ซ่อนหลังคา" แล้วเลือก "มุมสูง" เพื่อดูการวางคอร์ททั้งหมดจากด้านบน</div>
     <div id="view3d"><div class="load3d">กำลังโหลดโมเดล 3D… (ครั้งแรกต้องต่ออินเทอร์เน็ต)</div></div>
     <p class="hint3d">🖱️ ลากซ้าย = หมุน · ลูกกลิ้ง = ซูม · ลากขวา = เลื่อน · มือถือ: 1 นิ้วหมุน / 2 นิ้วซูม — เลื่อนสไลเดอร์คอร์ทแล้วโมเดลจะสร้างใหม่ทันที · <b>มุมภายในอาคาร (ร้านแบด/คาเฟ่/ชั้น 2) จะซ่อนผนังให้อัตโนมัติ</b></p>
   </div>
@@ -2498,6 +2499,8 @@ function setPlan(pl){
   el('hdSub').textContent=pl==='2'?'โถง 40 × 80 ม. · แบด ~10 คอร์ท ฝั่งหนึ่ง · เทนนิส 2 คอร์ทอีกฝั่ง · Pickleball 4 + บาส 3x3 โซนเพิง':'โถง 40 × 80 ม. · เพดาน 6.33–9.42 ม. · คอร์ทแนวตั้ง indoor ทั้งหมด · เลือกได้ 2 ผัง: มาตรฐาน BWF หรือ อัดเต็มพื้นที่';
   go(curGroups()[0].pages[0][0]);
   if(pl==='2'&&typeof drawPlan2==='function') setTimeout(drawPlan2,50);
+  document.querySelectorAll('.p1only').forEach(n=>{n.style.display=pl==='2'?'none':'';});
+  document.querySelectorAll('.p2only').forEach(n=>{n.style.display=pl==='2'?'':'none';});
   if(window.replan3D) window.replan3D();
 }
 function buildNav(){
@@ -4054,10 +4057,11 @@ function buildPB(){
   if(window.__plan!=='2') return;
   pbGroup=new THREE.Group();scene.add(pbGroup);
   const hw=HALL_W/2, cx=-hw-BAY_D/2;
-  const PL=13.41,PW=6.10,pitch=16;
+  const PL=13.41,PW=6.10;
+  const ZC=[-30.4,-14.4,1.6,17.6];         // ตรงกับตำแหน่ง PB 1–4 ในผัง 2D
   const F=[],N=[],P=[],L=[];
   for(let i=0;i<4;i++){
-    const z=-34+i*pitch;
+    const z=ZC[i];
     F.push([cx,.05,z,-Math.PI/2,0,Math.PI/2]);
     N.push([cx,.45,z,0,0,0]);
     P.push([cx-PW/2-.25,.43,z]);P.push([cx+PW/2+.25,.43,z]);
@@ -4082,7 +4086,9 @@ function buildBask(n){
   const hw=HALL_W/2, hl=HALL_L/2;
   const xOut=-hw-BAY_D;                    // โซนยกหลังคาลึก 19 ม. (ล้ำเพิงเดิม ~4.8 ม.)
   const cx=-hw-BAY_D/2;
-  const pitch=13, span=n*pitch, z0=-span/2;
+  const P2=(window.__plan==='2');
+  if(P2) n=Math.min(n,1);                  // แผน 2 มีบาสคอร์ทเดียว (ที่เหลือเป็น Pickleball)
+  const pitch=13, span=n*pitch, z0=P2?24:-span/2;   // แผน 2 ดันไปท้ายโซนเพิงให้ตรงกับผัง 2D
   const zA=z0-2, zB=z0+span+2;             // ช่วง Z ของโซนยกหลังคา
   /* เสาเพิงเดิม — เว้นช่วงโซนบาส (เสาเดิมถูกรื้อตอนยกหลังคา จึงไม่มีเสากลางสนาม) */
   const sc=[];
