@@ -3578,7 +3578,7 @@ async function loadSportSummary(){
     const r=await fetch('data/sport-summary.json',{cache:'no-store'});
     if(!r.ok) throw 0;
     SPSUM=await r.json();
-    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn(); renderRvn(); renderP7Plan2();
+    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn(); renderRvn(); renderP7Plan2(); renderPlan2Fin(); renderCoach(); renderRev3();
   }catch(e){}
 }
 const SPMETA={badminton:['🏸 แบดมินตัน',10],tennis:['🎾 เทนนิส',2],pickleball:['🥒 Pickleball',4],basketball:['🏀 บาส 3x3',1]};
