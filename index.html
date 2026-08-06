@@ -3760,13 +3760,7 @@ const EV={
   note:'💡 <b>ข้อได้เปรียบที่มองข้ามง่าย:</b> 3x3 ออกแบบมาให้จัดในพื้นที่เล็ก — <b>คอร์ทเดียวของเราจัดทัวร์นาเมนต์ 12–24 ทีมได้จริง</b> ในขณะที่แบดต้อง 12+ คอร์ท และ pickleball ต้องหลายคอร์ท<br>→ แต่ค่าสมัครแค่ 500 ฿/ทีม × 24 ทีม = 12,000 ฿ ทั้งงาน · <b>รายได้ตรงน้อยมาก คุณค่าอยู่ที่คนเข้าสนามและการตลาด ไม่ใช่ค่าเหมา</b>'},
 };
 let evSport='tennis';
-function setEvSport(k){evSport=k;renderEv();
-setCpSport('badminton');
-setRvSport('badminton');
-renderCoach();
-renderRvn();
-renderRisk();
-renderTL();}
+function setEvSport(k){evSport=k;renderEv();}
 function renderEv(){
   const tabs=el('evTabs'); if(!tabs) return;
   tabs.innerHTML=Object.keys(EV).map(k=>`<button class="sp-${k}${k===evSport?' on':''}" onclick="setEvSport('${k}')">${EV[k].ic} ${EV[k].th}</button>`).join('');
@@ -3835,8 +3829,7 @@ const DIM={
   ]},
 };
 let dimSport='badminton';
-function setDimSport(k){dimSport=k;renderDim();
-renderEv();}
+function setDimSport(k){dimSport=k;renderDim();}
 function renderDim(){
   const tabs=el('dimTabs'); if(!tabs) return;
   tabs.innerHTML=Object.keys(DIM).map(k=>`<button class="sp-${k}${k===dimSport?' on':''}" onclick="setDimSport('${k}')">${DIM[k].ic} ${DIM[k].th}</button>`).join('');
@@ -4231,6 +4224,13 @@ loadSportSummary();
 renderCost();
 loadDBD();
 renderDim();
+renderEv();
+setCpSport('badminton');
+setRvSport('badminton');
+renderCoach();
+renderRvn();
+renderRisk();
+renderTL();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
