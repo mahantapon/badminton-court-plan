@@ -1138,6 +1138,26 @@
   <div class="pagenav"><button class="btn ghost" onclick="go('p5')">← เกรดพื้นยาง</button><button class="btn" onclick="go('p6')">ถัดไป: งบลงทุนรวม →</button></div>
 </section>
 
+<!-- ================= P27 DBD แยกกีฬา ================= -->
+<section class="page" id="p27">
+  <h2>บริษัทในวงการ — งบจริงจาก DBD แยกทีละกีฬา</h2>
+  <div class="card">
+    <h3 style="margin-top:0">🏢 เลือกกีฬาที่ต้องการดู</h3>
+    <p class="sub" style="margin-bottom:10px" id="dbdIntro">กำลังโหลด…</p>
+    <div class="sptabs" id="dbdTabs"></div>
+    <div class="kpis" id="dbdKpis"></div>
+    <h4 style="margin:20px 0 6px" id="dbdTblHead">รายชื่อบริษัท</h4>
+    <div style="overflow-x:auto"><table id="dbdTable"></table></div>
+    <div class="note blue" id="dbdNote"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">⚖️ เทียบทั้ง 4 กีฬาในตารางเดียว</h3>
+    <div style="overflow-x:auto"><table id="dbdCompare"></table></div>
+    <div class="note" id="dbdCompareNote"></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p17')">← งบจริงคู่แข่ง (แบด)</button><span></span></div>
+</section>
+
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
   <div class="note blue" id="phaseBanner10" style="margin-bottom:14px"></div>
@@ -2498,14 +2518,14 @@ const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mo
 /* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
 const GROUPS=[
   {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
-  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p27','บริษัทในวงการ 4 กีฬา'],['p8','Business Canvas']]},
   {id:'g5',n:'🏆 3 เสารายได้',pages:[['p15','แข่งขัน & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const GROUPS2=[
   {id:'h1',n:'🏗️ โครงการ',   pages:[['p23','ผัง 4 กีฬา'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
-  {id:'g2',n:'📊 ตลาด',      pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p27','บริษัทในวงการ 4 กีฬา'],['p8','Business Canvas']]},
   {id:'h3',n:'🏆 เสารายได้',  pages:[['p25','Event 4 กีฬา'],['p15','แข่งแบด & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
@@ -3393,6 +3413,71 @@ function renderSportCompare(){
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
 }
+/* ================= DBD แยกกีฬา (p27) ================= */
+let DBD=null, dbdSport='tennis';
+const DBDTH={badminton:['🏸','แบดมินตัน'],tennis:['🎾','เทนนิส'],pickleball:['🥒','Pickleball'],basketball:['🏀','บาสเกตบอล']};
+const M=n=>n==null?'—':(Math.abs(n)>=1e6?(n/1e6).toFixed(2)+' ล.':Math.round(n).toLocaleString());
+async function loadDBD(){
+  const intro=el('dbdIntro'); if(!intro) return;
+  try{
+    const r=await fetch('data/dbd-sports.json',{cache:'no-store'});
+    if(!r.ok) throw 0;
+    DBD=await r.json();
+    const tot=Object.values(DBD.sports).reduce((a,s)=>a+s.n,0);
+    intro.innerHTML=`ค้นทะเบียนนิติบุคคลด้วยชื่อกีฬา แล้ว<b>กรองเหลือเฉพาะ TSIC 931 (กิจกรรมด้านกีฬา)</b> เพื่อตัดบริษัทที่บังเอิญมีคำนั้นในชื่อแต่ทำธุรกิจอื่นออก — เหลือ <b>${tot} บริษัท</b> · งบการเงินปี ${DBD.fy} · ข้อมูล ณ ${DBD.asof}`;
+    renderDBD(); renderDBDCompare();
+  }catch(e){ intro.textContent='โหลดข้อมูล DBD ไม่ได้ (เปิดจากไฟล์ในเครื่อง)'; }
+}
+function setDbdSport(k){dbdSport=k;renderDBD();}
+function renderDBD(){
+  if(!DBD) return;
+  const s=DBD.sports[dbdSport], [ic,th]=DBDTH[dbdSport];
+  el('dbdTabs').innerHTML=Object.keys(DBDTH).map(k=>{
+    const [i2,t2]=DBDTH[k];
+    return `<button class="sp-${k}${k===dbdSport?' on':''}" onclick="setDbdSport('${k}')">${i2} ${t2} (${DBD.sports[k].n})</button>`;
+  }).join('');
+  el('dbdKpis').innerHTML=
+    kpi('บริษัทจดทะเบียน', s.n+' ราย', `ยังดำเนินกิจการ ${s.live} · กทม. ${s.bkk}`)+
+    kpi('ยื่นงบมีรายได้จริง', s.filed+' ราย', `= ${Math.round(s.filed/s.n*100)}% ของทั้งหมด`)+
+    kpi('รายได้ค่ากลาง/ปี', M(s.medRev)+' ฿', 'เฉพาะรายที่ยื่นงบ')+
+    kpi('สัดส่วนที่ขาดทุน', s.lossPct+'%', s.lossPct>=50?'เกินครึ่งขาดทุน':'ส่วนใหญ่ยังมีกำไร', s.lossPct>=50)+
+    kpi('รายได้เกิน 5 ล./ปี', s.over5m+' ราย', `= ${s.filed?Math.round(s.over5m/s.filed*100):0}% ของรายที่ยื่นงบ`);
+  el('dbdTblHead').textContent=`${ic} ${th} — ${s.n} บริษัท (เรียงตามรายได้)`;
+  let t='<tr><th>บริษัท</th><th>จังหวัด</th><th>สถานะ</th><th class="r">ทุนจดทะเบียน</th><th class="r">รายได้/ปี</th><th class="r">กำไร(ขาดทุน)</th><th>ประเภทธุรกิจ</th></tr>';
+  s.rows.forEach(r=>{
+    const [name,prov,live,cap,rev,pf,biz]=r;
+    const col=pf==null?'':(pf<0?'color:#a33':'color:#1e6b45');
+    t+=`<tr${live?'':' style="opacity:.5"'}><td>${name}</td><td class="sub">${prov}</td>`+
+       `<td class="sub">${live?'เปิดอยู่':'ปิด/เลิก'}</td><td class="r sub">${M(cap)}</td>`+
+       `<td class="r">${rev!=null?'<b>'+M(rev)+'</b>':'<span class="sub">ไม่ยื่น</span>'}</td>`+
+       `<td class="r" style="${col}">${pf!=null?M(pf):'—'}</td><td class="sub">${(biz||'').replace('การดำเนินงาน','')}</td></tr>`;
+  });
+  el('dbdTable').innerHTML=t;
+  const NOTE={
+    tennis:`เทนนิสมีบริษัทมากที่สุด (${s.n}) แต่<b>ยื่นงบมีรายได้จริงแค่ ${s.filed} ราย</b> และ<b>ขาดทุนถึง ${s.lossPct}%</b> ซึ่งสูงที่สุดในทั้ง 4 กีฬา — สวนทางกับอัตราการจองที่เราวัดได้ว่าสูงสุด (76% ทั้งวัน)<br>→ <b>อ่านว่า:</b> คอร์ทเทนนิสเต็มก็จริง แต่คอร์ทใหญ่ ต้นทุนพื้นที่ต่อคอร์ทสูง จำนวนคอร์ทต่อสนามน้อย (2–4) รายได้จึงไม่พอกลบค่าเช่าที่ · <b>เราได้เปรียบตรงที่ใช้พื้นที่ร่วมกับแบด ไม่ต้องเช่าที่แยก</b>`,
+    pickleball:`มีแค่ ${s.n} บริษัททั้งประเทศ และ<b>ทุกรายยังเปิดดำเนินการอยู่</b> — เป็นวงการที่<b>เพิ่งเกิด ยังไม่มีใครเจ๊ง เพราะยังไม่มีใครอยู่นานพอ</b><br>→ <b>ระวัง:</b> ${s.lossPct}% ของรายที่ยื่นงบขาดทุนแล้ว และรายได้ค่ากลางแค่ ${M(s.medRev)} ฿/ปี ซึ่งต่ำกว่าเส้นอยู่รอด 5 ล้านมาก · ตรงกับข้อมูลจองที่เราวัดได้ว่า pickleball แน่นแค่ ${'30'}% ทั้งวัน`,
+    basketball:`${s.n} บริษัท แต่ยื่นงบแค่ ${s.filed} ราย — <b>กลุ่มตัวอย่างเล็กเกินกว่าจะสรุปอะไรได้แน่น</b> · ที่เห็นคือขาดทุนน้อยที่สุด (${s.lossPct}%) และรายได้ค่ากลางสูงสุด (${M(s.medRev)} ฿) แต่มาจากแค่ ${s.filed} รายเท่านั้น<br>→ บาสส่วนใหญ่ในไทยเป็น<b>สนามในโรงเรียน/หน่วยงาน ไม่ได้จดบริษัท</b> ตัวเลขนี้จึงเห็นแค่ยอดภูเขาน้ำแข็ง`,
+    badminton:`ฐานข้อมูลที่แน่นที่สุด — ${s.filed} รายยื่นงบ · <b>ขาดทุน ${s.lossPct}% ต่ำที่สุดในทั้ง 4 กีฬา</b> และมี ${s.over5m} รายที่รายได้เกิน 5 ล้าน/ปี มากที่สุดเช่นกัน<br>→ <b>อ่านว่า:</b> แบดเป็นกีฬาเดียวในสี่ที่<b>พิสูจน์แล้วว่าทำเป็นธุรกิจแล้วรอดได้จริงในสเกลที่มีนัยยะ</b> — เป็นเหตุผลที่แผน 1 ยังเป็นตัวเลือกที่ปลอดภัยกว่า`
+  };
+  el('dbdNote').innerHTML='🔍 '+NOTE[dbdSport];
+}
+function renderDBDCompare(){
+  if(!DBD) return;
+  let t='<tr><th>กีฬา</th><th class="r">บริษัท</th><th class="r">ยังเปิด</th><th class="r">อยู่ กทม.</th><th class="r">ยื่นงบจริง</th><th class="r">รายได้ค่ากลาง</th><th class="r">ขาดทุน</th><th class="r">เกิน 5 ล./ปี</th></tr>';
+  Object.keys(DBDTH).forEach(k=>{
+    const s=DBD.sports[k], [ic,th]=DBDTH[k];
+    t+=`<tr><td>${ic} <b>${th}</b></td><td class="r">${s.n}</td><td class="r">${s.live}</td><td class="r">${s.bkk}</td>`+
+       `<td class="r">${s.filed}</td><td class="r"><b>${M(s.medRev)}</b></td>`+
+       `<td class="r" style="${s.lossPct>=50?'color:#a33':''}">${s.lossPct}%</td><td class="r">${s.over5m}</td></tr>`;
+  });
+  el('dbdCompare').innerHTML=t;
+  const S=DBD.sports;
+  el('dbdCompareNote').innerHTML=
+    `📌 <b>3 ข้อที่ตารางนี้บอก:</b> (1) <b>แบดคือกีฬาเดียวที่มีธุรกิจรอดจริงหลายราย</b> — ${S.badminton.over5m} บริษัทรายได้เกิน 5 ล้าน และขาดทุนต่ำสุด ${S.badminton.lossPct}% `+
+    `(2) <b>เทนนิสเป็นกับดัก</b> — บริษัทเยอะสุด ${S.tennis.n} ราย แต่ขาดทุน ${S.tennis.lossPct}% สูงสุด ทั้งที่คอร์ทเต็มที่สุด → ปัญหาไม่ใช่ลูกค้า แต่คือ<b>ต้นทุนพื้นที่ต่อคอร์ท</b> `+
+    `(3) <b>pickleball ยังเด็กเกินกว่าจะมีข้อมูล</b> — ${S.pickleball.n} บริษัท ยื่นงบ ${S.pickleball.filed} ราย ตัดสินใจลงทุนหนักจากข้อมูลชุดนี้ไม่ได้<br>`+
+    `⚠️ <b>ข้อจำกัดที่ต้องรู้:</b> ค้นจาก<b>ชื่อบริษัท</b> — สนามที่ตั้งชื่อบริษัทโดยไม่มีคำว่ากีฬานั้นจะไม่ถูกนับ (เช่น "เอื้อตั้งกิจ" ที่ทำสนามแบด) · และบริษัทหนึ่งอาจทำหลายกีฬา จึงนับซ้ำได้`;
+}
 /* ================= ราคาสร้างสนาม แยกกีฬา (p26) ================= */
 const SPORTS=[
   {k:'badminton', ic:'🏸', th:'แบดมินตัน', n:10, area:103.7,
@@ -3635,6 +3720,7 @@ loadMarket();
 loadHistory();
 loadSportSummary();
 renderCost();
+loadDBD();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
