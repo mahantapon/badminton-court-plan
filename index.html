@@ -1050,7 +1050,7 @@
     <div class="note">⚠️ <b>ความจริงเรื่องเพดานที่ต้องรู้ก่อนตัดสินใจแผน 2:</b> โถงเราสูง 6.33 ม. ที่ริม → 9.42 ม. กลางโถง · มาตรฐาน ITF ต้องการ ~9 ม.ขึ้นไปเหนือคอร์ท · คอร์ทเทนนิสของเราจึงเป็นเกรด<b>ตีเล่น/ซ้อม/สอน</b> — ลูกโด่งสุดแรงอาจติดโครงหลังคาริมคอร์ท ไม่เหมาะจัดแข่งทางการ แต่<b>ตลาดเช่าซ้อม+โค้ชคือตลาดหลักของเทนนิสในเมืองอยู่แล้ว</b> (ราคาตลาด 300–600 ฿/ชม. ดูแท็บตลาด)<br>
       💡 Pickleball ต้องการเพดานแค่ ~5.5 ม. — โซนเพิงยกหลังคาแล้วใช้ได้สบาย และราคาตลาดต่อชั่วโมงสูงกว่าแบด 2–4 เท่าทั้งที่คอร์ทเล็กกว่าครึ่ง</div>
   </div>
-  <div class="pagenav"><span></span><button class="btn" onclick="go('p24')">ถัดไป: งบ &amp; รายได้แผน 2 →</button></div>
+  <div class="pagenav"><span></span><button class="btn" onclick="go('p2')">ถัดไป: ภาพ 3D →</button></div>
 </section>
 
 <!-- ================= P24 งบ & รายได้ แผน 2 ================= -->
@@ -1092,7 +1092,7 @@
     </div>
     <div class="note" id="cmpNote"></div>
   </div>
-  <div class="pagenav"><button class="btn ghost" onclick="go('p23')">← ผัง 4 กีฬา</button><button class="btn" onclick="go('p2')">ถัดไป: ภาพ 3D →</button></div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p23')">← ผัง 4 กีฬา</button><button class="btn" onclick="go('p5')">ถัดไป: เกรดพื้นยาง →</button></div>
 </section>
 
 <!-- ================= P25 Event 4 กีฬา ================= -->
@@ -1100,7 +1100,7 @@
   <h2>Event &amp; การแข่งขัน — 4 กีฬา</h2>
   <div class="card" id="p25body">
     <h3 style="margin-top:0">🏆 ภาพรวมตลาดจัดแข่งของแต่ละกีฬา</h3>
-    <p class="sub">🏸 แบดมินตัน: รายละเอียดเต็มอยู่ที่แผน 1 → แท็บ "แข่งขัน &amp; Event" (ปฏิทิน 3 ปี + เศรษฐศาสตร์ผู้จัด)</p>
+    <p class="sub">🏸 แบดมินตัน: ดูปฏิทิน 3 ปี + เศรษฐศาสตร์ผู้จัดได้ที่แท็บ <button class="btn ghost" style="padding:3px 10px;font-size:.82rem" onclick="go('p15')">แข่งแบด &amp; Event →</button> (อยู่ในแผน 2 นี้แล้ว ไม่ต้องสลับแผน)</p>
     <div id="p25research"><p class="sub">⏳ กำลังรวบรวมข้อมูลรายการแข่งเทนนิส / Pickleball / บาส 3x3 …</p></div>
   </div>
   <div class="pagenav"><button class="btn ghost" onclick="go('p24')">← งบ &amp; รายได้</button><span></span></div>
@@ -2472,10 +2472,11 @@ const GROUPS=[
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const GROUPS2=[
-  {id:'h1',n:'🏗️ โครงการแผน 2',pages:[['p23','ผัง 4 กีฬา'],['p24','งบ & รายได้แผน 2'],['p2','ภาพ 3D']]},
-  {id:'g2',n:'📊 ตลาด',pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p17','งบจริงคู่แข่ง']]},
-  {id:'h3',n:'🏆 Event 4 กีฬา',pages:[['p25','Event & การแข่งขัน']]},
-  {id:'g4',n:'📋 แผนงาน',pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
+  {id:'h1',n:'🏗️ โครงการ',   pages:[['p23','ผัง 4 กีฬา'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
+  {id:'g2',n:'📊 ตลาด',      pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p8','Business Canvas']]},
+  {id:'h3',n:'🏆 เสารายได้',  pages:[['p25','Event 4 กีฬา'],['p15','แข่งแบด & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
+  {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 let PLAN=localStorage.getItem('bplan')||'1';
 function curGroups(){return PLAN==='2'?GROUPS2:GROUPS;}
@@ -3362,23 +3363,34 @@ function drawPlan2(){
   const svg=el('plan2svg'); if(!svg||svg.dataset.done) return;
   const px=9, X0=70, Y0=46, HL=80*px, HW=40*px;
   let s=`<rect x="${X0}" y="${Y0}" width="${HL}" height="${HW}" fill="#f5f9fd" stroke="#28527e" stroke-width="2.5"/>`;
+  /* ---- โถงเทนนิส: คอร์ทแนวตั้ง ด้านยาว 36.6 ม. วางขวางความกว้างโถง 40 ม. (แนวเดียวกับแบด) ---- */
+  const TZ_L=36.6, TZ_W=18.3, T_L=23.77, T_W=10.97;
+  const tY=Y0+(40-TZ_L)/2*px;                 // เว้นบน-ล่างข้างละ 1.7 ม.
+  for(let i=0;i<2;i++){
+    const tX=X0+(0.9+i*TZ_W)*px;
+    s+=`<rect x="${tX.toFixed(1)}" y="${tY.toFixed(1)}" width="${TZ_W*px}" height="${TZ_L*px}" fill="#dcefdb" stroke="#2e7d4f" stroke-width="1.4"/>`;
+    const cx=tX+(TZ_W-T_W)/2*px, cy=tY+(TZ_L-T_L)/2*px, cw=T_W*px, cl=T_L*px;
+    s+=`<rect x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" width="${cw}" height="${cl}" fill="#5e9e77" stroke="#fff" stroke-width="1.6"/>`
+      +`<line x1="${(cx-.5*px).toFixed(1)}" y1="${(cy+cl/2).toFixed(1)}" x2="${(cx+cw+.5*px).toFixed(1)}" y2="${(cy+cl/2).toFixed(1)}" stroke="#fff" stroke-width="2.4"/>`
+      +`<rect x="${(cx+1.37*px).toFixed(1)}" y="${cy.toFixed(1)}" width="${8.23*px}" height="${cl}" fill="none" stroke="#fff" stroke-width="1"/>`
+      +`<line x1="${(cx+1.37*px).toFixed(1)}" y1="${(cy+cl/2-6.4*px).toFixed(1)}" x2="${(cx+cw-1.37*px).toFixed(1)}" y2="${(cy+cl/2-6.4*px).toFixed(1)}" stroke="#fff" stroke-width="1"/>`
+      +`<line x1="${(cx+1.37*px).toFixed(1)}" y1="${(cy+cl/2+6.4*px).toFixed(1)}" x2="${(cx+cw-1.37*px).toFixed(1)}" y2="${(cy+cl/2+6.4*px).toFixed(1)}" stroke="#fff" stroke-width="1"/>`
+      +`<line x1="${(cx+cw/2).toFixed(1)}" y1="${(cy+cl/2-6.4*px).toFixed(1)}" x2="${(cx+cw/2).toFixed(1)}" y2="${(cy+cl/2+6.4*px).toFixed(1)}" stroke="#fff" stroke-width="1"/>`
+      +`<text x="${(tX+TZ_W*px/2).toFixed(1)}" y="${(tY+11).toFixed(1)}" font-size="10.5" fill="#1c5c38" text-anchor="middle">🎾 เทนนิส ${i+1}</text>`
+      +`<text x="${(tX+TZ_W*px/2).toFixed(1)}" y="${(tY+TZ_L*px-6).toFixed(1)}" font-size="9" fill="#1c5c38" text-anchor="middle">18.3 × 36.6 ม.</text>`;
+  }
+  /* run-off callouts */
+  s+=`<text x="${(X0+0.9*px+4).toFixed(1)}" y="${(tY+2.6*px).toFixed(1)}" font-size="8.5" fill="#2e7d4f">run-off 6.4 ม.</text>`;
+  /* ---- ม่านกั้น ---- */
+  const dvx=X0+(0.9+2*TZ_W+1)*px;
+  s+=`<line x1="${dvx.toFixed(1)}" y1="${Y0}" x2="${dvx.toFixed(1)}" y2="${Y0+HW}" stroke="#a33" stroke-width="2" stroke-dasharray="8 5"/>`
+    +`<text x="${dvx.toFixed(1)}" y="${Y0-8}" font-size="10" fill="#a33" text-anchor="middle">ม่านกั้น 2 ม.</text>`;
+  /* ---- ล็อบบี้ท้ายโถง ---- */
   const LOB=8*px;
   s+=`<rect x="${X0+HL-LOB}" y="${Y0}" width="${LOB}" height="${HW}" fill="#fdf3e3" stroke="#c9a35c" stroke-dasharray="6 3"/>`
     +`<text x="${X0+HL-LOB/2}" y="${Y0+HW/2}" font-size="11" fill="#8a6d2f" text-anchor="middle" transform="rotate(90 ${X0+HL-LOB/2} ${Y0+HW/2})">ทางเข้า · เคาน์เตอร์ · นั่งพัก (8 ม.)</text>`;
-  const TZL=36.6*px, TCW=18.3*px, tx=X0+0.8*px;
-  for(let i=0;i<2;i++){
-    const ty=Y0+(1.7+i*18.3)*px;
-    s+=`<rect x="${tx}" y="${ty}" width="${TZL}" height="${TCW}" fill="#dcefdb" stroke="#2e7d4f" stroke-width="1.4"/>`;
-    const cx=tx+(36.6-23.77)/2*px, cy=ty+(18.3-10.97)/2*px, cl=23.77*px, cw=10.97*px;
-    s+=`<rect x="${cx}" y="${cy}" width="${cl}" height="${cw}" fill="#5e9e77" stroke="#fff" stroke-width="1.6"/>`
-      +`<line x1="${cx+cl/2}" y1="${ty+8}" x2="${cx+cl/2}" y2="${ty+TCW-8}" stroke="#fff" stroke-width="2.2"/>`
-      +`<rect x="${cx}" y="${(cy+(10.97-8.23)/2*px).toFixed(1)}" width="${cl}" height="${8.23*px}" fill="none" stroke="#fff" stroke-width="1"/>`
-      +`<text x="${tx+TZL/2}" y="${ty+14}" font-size="11" fill="#1c5c38" text-anchor="middle">🎾 เทนนิส ${i+1} (36.6 × 18.3 ม.)</text>`;
-  }
-  const dvx=X0+38.4*px;
-  s+=`<line x1="${dvx}" y1="${Y0}" x2="${dvx}" y2="${Y0+HW}" stroke="#a33" stroke-width="2" stroke-dasharray="8 5"/>`
-    +`<text x="${dvx}" y="${Y0-8}" font-size="10" fill="#a33" text-anchor="middle">ม่านกั้น 2 ม.</text>`;
-  const bz0=X0+40.4*px, bzL=(80-40.4-8)*px, pitch=bzL/5, bw=6.1*px, bl=13.4*px;
+  /* ---- แบด 10 คอร์ท แนวตั้ง เหมือนแผน 1 ---- */
+  const bz0=dvx+1*px, bzL=X0+HL-LOB-bz0, pitch=bzL/5, bw=6.1*px, bl=13.4*px;
   const EDGE=(40-2*13.4-3.6)/2;
   for(let i=0;i<5;i++){
     [[Y0+EDGE*px,1],[Y0+HW-EDGE*px-bl,2]].forEach(([y,row])=>{
@@ -3388,7 +3400,8 @@ function drawPlan2(){
         +`<text x="${(x+bw/2).toFixed(1)}" y="${(y+bl/2-4).toFixed(1)}" font-size="10" fill="#0e3d6b" text-anchor="middle">${row===1?i+1:i+6}</text>`;
     });
   }
-  s+=`<text x="${bz0+bzL/2}" y="${Y0+HW/2+4}" font-size="11" fill="#28527e" text-anchor="middle">🏸 แบด 10 คอร์ท (ช่องกลาง 3.6 ม.)</text>`;
+  s+=`<text x="${(bz0+bzL/2).toFixed(1)}" y="${(Y0+HW/2+4).toFixed(1)}" font-size="11" fill="#28527e" text-anchor="middle">🏸 แบด 10 คอร์ท (ช่องกลาง 3.6 ม.)</text>`;
+  /* ---- โซนเพิง ---- */
   const AY=Y0+HW+18, AH=12*px;
   s+=`<rect x="${X0}" y="${AY}" width="${HL}" height="${AH}" fill="#fdf7ef" stroke="#b98a3c" stroke-width="1.6" stroke-dasharray="7 4"/>`
     +`<text x="${X0-12}" y="${AY+AH/2}" font-size="11" fill="#8a6d2f" text-anchor="middle" transform="rotate(-90 ${X0-12} ${AY+AH/2})">โซนเพิง</text>`;
@@ -3402,12 +3415,13 @@ function drawPlan2(){
   s+=`<rect x="${bbx}" y="${bby.toFixed(1)}" width="${bbl}" height="${bbw}" fill="#fde3d2" stroke="#c25e1e" stroke-width="1.4"/>`
     +`<circle cx="${(bbx+bbl/2).toFixed(1)}" cy="${(bby+2.2*px).toFixed(1)}" r="${1.8*px}" fill="none" stroke="#c25e1e" stroke-width="1.2"/>`
     +`<text x="${(bbx+bbl/2).toFixed(1)}" y="${(bby+bbw-8).toFixed(1)}" font-size="10" fill="#7c3a0e" text-anchor="middle">🏀 3x3</text>`;
-  s+=`<text x="${X0+HL/2}" y="${Y0-24}" font-size="12" fill="#28527e" text-anchor="middle" font-weight="700">โถงหลัก 80 × 40 ม. (แผน 2 — 4 กีฬา)</text>`
-    +`<text x="${X0+18.5*px}" y="${AY-6}" font-size="10" fill="#2e7d4f">← โซนเทนนิส 38.4 ม. →</text>`
-    +`<text x="${bz0+bzL/2-40}" y="${AY-6}" font-size="10" fill="#185fa5">← โซนแบด 31.6 ม. →</text>`;
+  /* ---- เส้นบอกระยะ ---- */
+  s+=`<text x="${X0+HL/2}" y="${Y0-24}" font-size="12" fill="#28527e" text-anchor="middle" font-weight="700">โถงหลัก 80 × 40 ม. (แผน 2 — 4 กีฬา) · คอร์ททุกชนิดวางแนวตั้งเหมือนแผน 1</text>`
+    +`<text x="${(X0+18.3*px).toFixed(1)}" y="${AY-6}" font-size="10" fill="#2e7d4f" text-anchor="middle">← โซนเทนนิส 36.6 ม. →</text>`
+    +`<text x="${(bz0+bzL/2).toFixed(1)}" y="${AY-6}" font-size="10" fill="#185fa5" text-anchor="middle">← โซนแบด ${(bzL/px).toFixed(1)} ม. →</text>`;
   svg.innerHTML=s; svg.dataset.done='1';
   const cap=el('plan2Caption');
-  if(cap) cap.textContent='ทุกระยะเป็นเมตรจริงตามสัดส่วน · เทนนิสฝั่งตะวันตก (แนวกลางโถงคือจุดเพดานสูงสุด 9.42 ม.) · แบดอัดแน่น 10 คอร์ทฝั่งตะวันออก · โซนเพิงใส่ Pickleball 4 คอร์ท + บาส 3x3';
+  if(cap) cap.innerHTML='ทุกระยะเป็นเมตรจริงตามสัดส่วน · <b>คอร์ททุกชนิดวางแนวตั้ง</b> (ด้านยาวขวางความกว้างโถง 40 ม.) เหมือนผังแผน 1 — เทนนิส 1 คอร์ทกินความยาวโถง 18.3 ม. สองคอร์ทเรียงกันได้ 36.6 ม. เหลือ 33.4 ม. ให้แบด 10 คอร์ท · <b>run-off หลังเส้นเทนนิส 6.4 ม./ข้าง ตรงตามมาตรฐาน ITF พอดี</b> (ข้างสนาม 3.67 ม. ITF ขอ 3.66)';
 }
 function mkColor(v){
   const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
@@ -3982,29 +3996,32 @@ function buildCourts(n){
   cur.rotation.y=Math.PI/2;cur.position.set(0,2.9,0);courtGroup.add(cur);
 }
 /* ================= แผน 2 — แบด 10 + เทนนิส 2 ในโถงเดียว ================= */
-const T_L=23.77, T_W=10.97, T_ZONE=36.6, T_LANE=18.3;
+const T_L=23.77, T_W=10.97, TZ_L=36.6, TZ_W=18.3;
 function buildCourtsPlan2(){
   const hl=HALL_L/2, hw=HALL_W/2;
-  /* --- เทนนิส 2 คอร์ท: ยาวตามแกน Z ฝั่ง -Z (ตะวันตก), เรียงตามแกน X --- */
-  const tzZ=-hl+0.8+T_ZONE/2;                      // จุดกลางโซนเทนนิสตามยาว
-  const TF=[],TN=[],TP=[];
+  /* --- เทนนิส 2 คอร์ท "แนวตั้ง": ด้านยาว 36.6 ม. ขวางความกว้างโถง (แกน X) เหมือนคอร์ทแบด
+         แต่ละคอร์ทกินความยาวโถง 18.3 ม. (แกน Z) เรียงต่อกัน 2 คอร์ท = 36.6 ม. --- */
+  const TF=[],TN=[],TP=[],TL=[];
+  const tz0=-hl+1.0;                                  // เริ่มจากผนังฝั่ง -Z
   for(let i=0;i<2;i++){
-    const cx=-hw+T_LANE/2+i*T_LANE;
-    TF.push([cx,.06,tzZ,-Math.PI/2,0,Math.PI/2]);  // หมุนให้ด้านยาวขนานแกน Z
-    TN.push([cx,.55,tzZ,0,0,0]);
-    TP.push([cx-T_W/2-.3,.53,tzZ]);TP.push([cx+T_W/2+.3,.53,tzZ]);
+    const cz=tz0+TZ_W/2+i*TZ_W;                       // จุดกลางคอร์ทตามแกน Z
+    TF.push([0,.06,cz,-Math.PI/2]);                   // ด้านยาว geometry อยู่บนแกน X = แนวตั้ง
+    TN.push([0,.53,cz]);                              // เน็ตขวางกลางคอร์ท (ยาวตามแกน Z)
+    TP.push([0,.53,cz-T_W/2-.35]);TP.push([0,.53,cz+T_W/2+.35]);
+    for(let k=-1;k<=1;k++) TL.push([k*11,RIDGE-.8,cz]);
   }
-  const tg=new THREE.PlaneGeometry(T_L+1.2,T_W+1.2);
-  inst(courtGroup,tg,new THREE.MeshStandardMaterial({map:tennisTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}),TF);
-  inst(courtGroup,new THREE.BoxGeometry(.06,1.07,T_W+.6),MT.net,TN);
+  inst(courtGroup,new THREE.PlaneGeometry(T_L+1.5,T_W+1.2),
+    new THREE.MeshStandardMaterial({map:tennisTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}),TF);
+  inst(courtGroup,new THREE.BoxGeometry(.06,1.07,T_W+.7),MT.net,TN);
   inst(courtGroup,new THREE.CylinderGeometry(.06,.06,1.07,8),MT.dark,TP);
-  /* --- ม่านกั้นเทนนิส/แบด --- */
-  const divZ=-hl+T_ZONE+2.0;
+  inst(courtGroup,GE.lampBar,MT.lamp,TL);
+  /* --- ม่านกั้นเทนนิส/แบด (ขวางความกว้างโถง) --- */
+  const divZ=tz0+2*TZ_W+1.0;
   const cur=new THREE.Mesh(new THREE.PlaneGeometry(HALL_W-1,5.2),
     mat(0xa33322,{transparent:true,opacity:.62,side:THREE.DoubleSide}));
   cur.position.set(0,3.3,divZ);courtGroup.add(cur);
-  /* --- แบด 10 คอร์ท: 5 ต่อฝั่ง เหมือนแผน 1 แต่เริ่มหลังม่าน --- */
-  const pitch=6.6, per=5, z0=divZ+2.2;
+  /* --- แบด 10 คอร์ท แนวตั้ง เหมือนแผน 1 --- */
+  const pitch=6.6, per=5, z0=divZ+1.2;
   const cxA=hw-EDGE-COURT_L/2;
   const matW=Math.min(COURT_W+.7,pitch-.2);
   const cm=new THREE.MeshStandardMaterial({map:courtTex(),polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2});
@@ -4026,14 +4043,9 @@ function buildCourtsPlan2(){
   inst(courtGroup,GE.post,MT.dark,P);
   inst(courtGroup,GE.seat,MT.chair,S,true);
   inst(courtGroup,GE.lampBar,MT.lamp,L);
-  const cur2=new THREE.Mesh(new THREE.PlaneGeometry(HALL_L-T_ZONE-6,4.4),
+  const cur2=new THREE.Mesh(new THREE.PlaneGeometry(per*pitch,4.4),
     mat(0x14406e,{transparent:true,opacity:.7,side:THREE.DoubleSide}));
   cur2.rotation.y=Math.PI/2;cur2.position.set(0,2.9,z0+(per*pitch)/2);courtGroup.add(cur2);
-  /* --- ไฟเทนนิส --- */
-  const TL=[];
-  for(let i=0;i<2;i++){const cx=-hw+T_LANE/2+i*T_LANE;
-    for(let k=-1;k<=1;k++) TL.push([cx,RIDGE-.6,tzZ+k*10]);}
-  inst(courtGroup,GE.lampBar,MT.lamp,TL);
 }
 /* ================= Pickleball 4 คอร์ท (โซนเพิง แผน 2) ================= */
 let pbGroup=null;
