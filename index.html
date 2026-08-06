@@ -927,6 +927,7 @@
     <h3 style="margin-top:0">🗺️ อัตราการจองทั้งกรุงเทพฯ &amp; ปริมณฑล — <span id="mkHead">กำลังโหลด…</span></h3>
     <p class="sub" style="margin-bottom:10px">ไม่ใช่ตัวเลขที่เราเดา — อ่านสถานะรายคอร์ทราย 30 นาทีตรงจากระบบจองของทุกสนามที่เปิดจองออนไลน์ใน กทม.–ปริมณฑล พร้อมกันในนาทีเดียว <span id="mkUpdated"></span></p>
 
+    <div class="sptabs" id="mkTabs"></div>
     <div class="kpis" id="mkKpis"></div>
 
     <h4 style="margin:20px 0 6px">⏰ เส้นอุปสงค์จริงของตลาด — ค่ากลางอัตราการจองรายชั่วโมง</h4>
@@ -1156,6 +1157,22 @@
     <div class="note" id="dbdCompareNote"></div>
   </div>
   <div class="pagenav"><button class="btn ghost" onclick="go('p17')">← งบจริงคู่แข่ง (แบด)</button><span></span></div>
+</section>
+
+<!-- ================= P28 ขนาดสนามมาตรฐาน ================= -->
+<section class="page" id="p28">
+  <h2>ขนาดสนามมาตรฐาน — ทุกระยะของทั้ง 4 กีฬา</h2>
+  <div class="card">
+    <h3 style="margin-top:0">📐 เลือกกีฬาที่ต้องการดูระยะ</h3>
+    <div class="sptabs" id="dimTabs"></div>
+    <div id="dimBody"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">📊 เทียบขนาดทั้ง 4 กีฬาในตารางเดียว</h3>
+    <div style="overflow-x:auto"><table id="dimCompare"></table></div>
+    <div class="note" id="dimCompareNote"></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p23')">← ผัง 4 กีฬา</button><button class="btn" onclick="go('p26')">ถัดไป: ราคาสร้างสนาม →</button></div>
 </section>
 
 <section class="page" id="p10">
@@ -2517,14 +2534,14 @@ const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mo
 
 /* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
 const GROUPS=[
-  {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
+  {id:'g1',n:'🏗️ โครงการ',  pages:[['p1','ผัง & จำนวนคอร์ท'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
   {id:'g2',n:'📊 ตลาด',      pages:[['p9','คู่แข่ง & ราคา'],['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p27','บริษัทในวงการ 4 กีฬา'],['p8','Business Canvas']]},
   {id:'g5',n:'🏆 3 เสารายได้',pages:[['p15','แข่งขัน & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const GROUPS2=[
-  {id:'h1',n:'🏗️ โครงการ',   pages:[['p23','ผัง 4 กีฬา'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
+  {id:'h1',n:'🏗️ โครงการ',   pages:[['p23','ผัง 4 กีฬา'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
   {id:'g2',n:'📊 ตลาด',      pages:[['p20','จองสดวันนี้'],['p21','ย้อนหลัง & ล่วงหน้า'],['p9','คู่แข่ง & ราคา'],['p22','รีวิว & สำรวจ'],['p17','งบจริงคู่แข่ง'],['p27','บริษัทในวงการ 4 กีฬา'],['p8','Business Canvas']]},
   {id:'h3',n:'🏆 เสารายได้',  pages:[['p25','Event 4 กีฬา'],['p15','แข่งแบด & Event'],['p16','โค้ช & อคาเดมี'],['p7','รายได้รวม & คืนทุน']]},
   {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
@@ -3246,6 +3263,7 @@ async function loadHistory(){
     hsState.date=HIST.today;
     hsRenderSeries();
     hsSetWin('all');
+    if(SPSUM) renderMarketSport();
   }catch(e){ intro.textContent=''; el('hsFallback').style.display=''; }
 }
 function hsDates(){
@@ -3357,7 +3375,7 @@ async function loadSportSummary(){
     const r=await fetch('data/sport-summary.json',{cache:'no-store'});
     if(!r.ok) throw 0;
     SPSUM=await r.json();
-    renderP24(); renderSportCompare();
+    renderP24(); renderSportCompare(); renderMarketSport();
   }catch(e){}
 }
 const SPMETA={badminton:['🏸 แบดมินตัน',10],tennis:['🎾 เทนนิส',2],pickleball:['🥒 Pickleball',4],basketball:['🏀 บาส 3x3',1]};
@@ -3412,6 +3430,100 @@ function renderSportCompare(){
   if(n) n.innerHTML=`💡 <b>เรียงจากแน่นสุด (ทั้งวัน):</b> เทนนิส ${S.tennis?.a}% → บาส ${S.basketball?.a}% → แบด ${S.badminton?.a}% → pickleball ${S.pickleball?.a}%<br>`+
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
+}
+/* ================= ขนาดสนามมาตรฐาน (p28) ================= */
+const DIM={
+ badminton:{ic:'🏸',th:'แบดมินตัน',body:'BWF (สหพันธ์แบดมินตันโลก)',ours:10,
+  court:'13.40 × 6.10 ม. (คู่) · 13.40 × 5.18 ม. (เดี่ยว)',
+  zone:'ต้องการ 13.40 × 6.10 + run-off',
+  rows:[
+   ['ความยาวคอร์ท','13.40 ม.','13.40 ม.','เท่ากันทั้งเดี่ยวและคู่',1],
+   ['ความกว้าง (ประเภทคู่)','6.10 ม.','6.10 ม.','',1],
+   ['ความกว้าง (ประเภทเดี่ยว)','5.18 ม.','5.18 ม.','เส้นในของเขตคู่',1],
+   ['run-off หลังเส้นท้าย','2.30 ม. (สากล) · 1.50 ทั่วไป','<b>1.80 ม.</b>','ผังเราวัดจากเส้นหลังถึงม่านกลาง — <b>ต่ำกว่ามาตรฐานสากล 0.50 ม.</b> แต่เกินเกณฑ์สนามให้เช่าทั่วไป',0],
+   ['ระยะระหว่างคอร์ท','2.00 ม. (สากล) · 0.50 ทั่วไป','<b>1.21 ม.</b>','แผน 2 กว้างกว่าแผน 1 (0.50) เพราะแถวเดียวยาวเต็มโถง',0],
+   ['ความสูงเพดานเหนือคอร์ท','9.00 ม. (สากล) · 7.50 ขั้นต่ำ','6.33–9.42 ม.','<b>คอร์ทวางกลางโถงที่เพดานสูงสุด</b> — ริมโถง 6.33 ม. ใช้เป็นที่นั่ง ไม่ใช่คอร์ท',1],
+   ['ความสูงเน็ต (กลาง / เสา)','1.524 / 1.55 ม.','ตามมาตรฐาน','',1],
+   ['ความกว้างเส้น','40 มม.','40 มม.','',1],
+  ]},
+ tennis:{ic:'🎾',th:'เทนนิส',body:'ITF (สหพันธ์เทนนิสนานาชาติ)',ours:2,
+  court:'23.77 × 10.97 ม. (คู่) · 23.77 × 8.23 ม. (เดี่ยว)',
+  zone:'พื้นที่ใช้จริงรวม run-off 36.57 × 18.29 ม.',
+  rows:[
+   ['ความยาวคอร์ท','23.77 ม.','23.77 ม.','',1],
+   ['ความกว้าง (ประเภทคู่)','10.97 ม.','10.97 ม.','',1],
+   ['ความกว้าง (ประเภทเดี่ยว)','8.23 ม.','8.23 ม.','',1],
+   ['run-off หลังเส้นท้าย','<b>6.40 ม.</b> (สโมสร) · 8.23 (แข่งใหญ่)','<b>6.42 ม.</b>','<b>เกินขั้นต่ำแค่ 2 ซม.</b> — ไม่มีเผื่อเลย ต้องวัดโถงจริงยืนยันก่อนลงเงิน',1],
+   ['run-off ข้างคอร์ท','<b>3.66 ม.</b> (สโมสร) · 4.27 (แข่งใหญ่)','<b>3.67 ม.</b>','เกินขั้นต่ำ 1 ซม.',1],
+   ['พื้นที่ใช้จริงต่อคอร์ท','36.57 × 18.29 = <b>668.9 ตร.ม.</b>','668.9 ตร.ม.','<b>ใหญ่กว่าคอร์ทแบด 6.5 เท่า</b> — เป็นเหตุผลที่งบเทนนิสสูงสุด',1],
+   ['ความสูงเพดาน','<b>9.00 ม.</b> เหนือเน็ต · 6.40 เหนือเส้นท้าย','6.33–9.42 ม.','⚠️ <b>ข้อจำกัดใหญ่สุดของแผน 2</b> — โถงเราสูงพอตรงกลาง แต่ริมคอร์ทเตี้ยกว่าเกณฑ์ → <b>เล่น/ซ้อม/สอนได้ แต่จัดแข่งทางการไม่ได้</b>',0],
+   ['ความสูงเน็ต (กลาง / เสา)','0.914 / 1.07 ม.','ตามมาตรฐาน','',1],
+   ['ความกว้างเส้น','25–50 มม. (เส้นท้าย ≤100)','ตามมาตรฐาน','',1],
+  ]},
+ pickleball:{ic:'🥒',th:'Pickleball',body:'USA Pickleball / IFP',ours:4,
+  court:'13.41 × 6.10 ม. (เท่าคอร์ทแบดพอดี)',
+  zone:'พื้นที่แนะนำรวม run-off 18.29 × 9.14 ม.',
+  rows:[
+   ['ความยาวคอร์ท','13.41 ม.','13.41 ม.','<b>เท่าคอร์ทแบดเป๊ะ</b> (แบด 13.40) — ตีเส้นทับกันได้ถ้าอยากใช้ร่วม',1],
+   ['ความกว้างคอร์ท','6.10 ม.','6.10 ม.','เท่าคอร์ทแบดคู่พอดีเช่นกัน',1],
+   ['เขตห้ามวอลเลย์ (kitchen)','2.13 ม. จากเน็ตทั้ง 2 ฝั่ง','2.13 ม.','เส้นที่คนเล่นใหม่มักไม่รู้',1],
+   ['พื้นที่แนะนำรวม run-off','18.29 × 9.14 = <b>167.2 ตร.ม.</b>','167.2 ตร.ม.','ขั้นต่ำที่ยอมรับได้ 15.24 × 7.32',1],
+   ['พื้นที่แข่งขัน (แนะนำ)','19.51 × 10.36 ม.','—','เราใช้ขนาดแนะนำทั่วไป ไม่ใช่ขนาดแข่ง',0],
+   ['ความสูงเพดาน','<b>5.50 ม.</b> ขั้นต่ำ · 6.10 แนะนำ','โซนเพิงยกหลังคา 9.00 ม.','<b>เกินสบาย</b> — pickleball ต้องการเพดานต่ำสุดในทั้ง 4 กีฬา',1],
+   ['ความสูงเน็ต (กลาง / เสา)','0.86 / 0.914 ม.','ตามมาตรฐาน','เตี้ยกว่าเน็ตเทนนิสเล็กน้อย',1],
+   ['ความกว้างเส้น','50 มม.','50 มม.','',1],
+  ]},
+ basketball:{ic:'🏀',th:'บาส 3x3',body:'FIBA 3x3',ours:1,
+  court:'15 × 11 ม. (ครึ่งคอร์ทเต็มรูปแบบ)',
+  zone:'รวม run-off 2 ม.รอบด้าน ≈ 19 × 15 ม.',
+  rows:[
+   ['ขนาดคอร์ท 3x3','<b>15 × 11 ม.</b>','15 × 11 ม.','ครึ่งหนึ่งของคอร์ทเต็ม 28 × 15',1],
+   ['run-off รอบคอร์ท','2.00 ม.','2.00 ม.','โซนเพิงลึก 19 ม. รองรับได้',1],
+   ['เส้น 3 คะแนน (3x3)','6.75 ม. จากใต้ห่วง','6.75 ม.','ต่างจากบาส 5x5 ที่ใช้ 6.75/6.60',1],
+   ['เส้นโยนโทษ','5.80 ม.','5.80 ม.','',1],
+   ['ความสูงห่วง','<b>3.05 ม.</b>','3.05 ม.','มาตรฐานเดียวกันทุกระดับ',1],
+   ['แบ็คบอร์ด','1.80 × 1.05 ม.','1.80 × 1.05 ม.','กระจกนิรภัยสำหรับเกรดแข่ง',1],
+   ['ความสูงเพดาน','<b>7.00 ม.</b> ขั้นต่ำ (FIBA)','โซนเพิงยกหลังคา 9.00 ม.','เกินเกณฑ์ — เหตุผลที่ต้องยกหลังคาเพิงเดิม (4.5–5.6 ม.)',1],
+  ]},
+};
+let dimSport='badminton';
+function setDimSport(k){dimSport=k;renderDim();}
+function renderDim(){
+  const tabs=el('dimTabs'); if(!tabs) return;
+  tabs.innerHTML=Object.keys(DIM).map(k=>`<button class="sp-${k}${k===dimSport?' on':''}" onclick="setDimSport('${k}')">${DIM[k].ic} ${DIM[k].th}</button>`).join('');
+  const d=DIM[dimSport];
+  let t=`<div class="note blue" style="margin-top:0"><b>${d.ic} ${d.th}</b> — มาตรฐานอ้างอิง: <b>${d.body}</b><br>ขนาดคอร์ท: <b>${d.court}</b> · ${d.zone} · แผน 2 ของเรามี <b>${d.ours} คอร์ท</b></div>`;
+  t+='<div style="overflow-x:auto"><table><tr><th>รายการ</th><th>มาตรฐาน</th><th>ของเรา</th><th>หมายเหตุ</th></tr>';
+  d.rows.forEach(r=>{
+    const ok=r[4];
+    t+=`<tr${ok?'':' style="background:#fff8ec"'}><td>${r[0]}</td><td class="r">${r[1]}</td>`+
+       `<td class="r"><b style="color:${ok?'#1e6b45':'#a33'}">${r[2]}</b></td><td class="sub">${r[3]||''}</td></tr>`;
+  });
+  t+='</table></div>';
+  const bad=d.rows.filter(r=>!r[4]).length;
+  t+=`<div class="note" style="margin-top:12px">${bad?`⚠️ <b>${bad} รายการที่ต่ำกว่ามาตรฐาน</b> (แถวพื้นเหลือง) — ไม่ได้แปลว่าเล่นไม่ได้ แต่แปลว่า<b>จัดแข่งระดับที่ต้องส่งผลอย่างเป็นทางการไม่ได้</b> ต้องบอกลูกค้าตรงๆ ตั้งแต่ต้น`:`✅ <b>ผ่านมาตรฐานทุกรายการ</b> สำหรับระดับสโมสร/ให้เช่าทั่วไป`}</div>`;
+  el('dimBody').innerHTML=t;
+  renderDimCompare();
+}
+function renderDimCompare(){
+  const tb=el('dimCompare'); if(!tb) return;
+  const rows=[
+   ['ขนาดคอร์ท (ม.)','13.40 × 6.10','23.77 × 10.97','13.41 × 6.10','15 × 11'],
+   ['พื้นที่ใช้จริง/คอร์ท (ตร.ม.)','103.7','<b>668.9</b>','167.2','~200'],
+   ['run-off ท้ายคอร์ท (ม.)','1.50–2.30','<b>6.40</b>','~2.44','2.00'],
+   ['เพดานขั้นต่ำ (ม.)','7.50–9.00','<b>9.00</b>','<b>5.50</b>','7.00'],
+   ['ความสูงเน็ต/ห่วง (ม.)','1.524','0.914','0.86','3.05 (ห่วง)'],
+   ['คอร์ทในแผน 2 ของเรา','<b>10</b>','<b>2</b>','<b>4</b>','<b>1</b>'],
+   ['พื้นที่รวมที่ใช้ (ตร.ม.)','1,037','<b>1,338</b>','669','200'],
+  ];
+  let t='<tr><th>รายการ</th><th class="r">🏸 แบดมินตัน</th><th class="r">🎾 เทนนิส</th><th class="r">🥒 Pickleball</th><th class="r">🏀 บาส 3x3</th></tr>';
+  rows.forEach(r=>{ t+=`<tr><td>${r[0]}</td>`+r.slice(1).map(x=>`<td class="r">${x}</td>`).join('')+'</tr>'; });
+  tb.innerHTML=t;
+  el('dimCompareNote').innerHTML=
+    `📌 <b>3 ข้อที่ตารางนี้อธิบายทั้งโครงการ:</b><br>`+
+    `(1) <b>เทนนิสกินพื้นที่ 6.5 เท่าของแบด</b> (668.9 vs 103.7 ตร.ม.) เพราะ run-off ท้ายคอร์ทต้องการถึง 6.40 ม. — นี่คือเหตุผลเดียวที่ทำให้บริษัทเทนนิส 61% ขาดทุน ทั้งที่คอร์ทเต็ม<br>`+
+    `(2) <b>Pickleball คอร์ทเท่าแบดเป๊ะ</b> (13.41 × 6.10 vs 13.40 × 6.10) และต้องการเพดานแค่ 5.50 ม. — <b>ยัดลงโซนเพิงได้ และตีเส้นทับคอร์ทแบดก็ยังได้</b> ถ้าอยากยืดหยุ่น<br>`+
+    `(3) <b>เพดานคือตัวตัดสินว่าทำอะไรได้บ้าง</b> — โถง 6.33–9.42 ม. ของเราพอสำหรับแบด (วางกลางโถง) และ pickleball สบายๆ แต่<b>เทนนิสได้แค่เกรดซ้อม</b> ส่วนบาสต้องยกหลังคาเพิงจาก 4.5–5.6 เป็น 9 ม.`;
 }
 /* ================= DBD แยกกีฬา (p27) ================= */
 let DBD=null, dbdSport='tennis';
@@ -3632,12 +3744,60 @@ function mkColor(v){
   const r=Math.round(238+(14-238)*v/100),g=Math.round(244+(61-244)*v/100),b=Math.round(251+(107-251)*v/100);
   return `rgb(${r},${g},${b})`;
 }
+let MKT=null, mkSport='badminton';
+function setMkSport(k){mkSport=k;renderMarketSport();}
+function renderMarketSport(){
+  if(!HIST||!SPSUM) return;
+  const D=HIST.today;
+  el('mkTabs').innerHTML=Object.keys(DBDTH).map(k=>{
+    const [i2,t2]=DBDTH[k], s=SPSUM.sports[k]||{n:0};
+    return `<button class="sp-${k}${k===mkSport?' on':''}" onclick="setMkSport('${k}')">${i2} ${t2} (${s.n} สนาม)</button>`;
+  }).join('');
+  const vs=HIST.venues.filter(v=>(v.sport||'badminton')===mkSport && v.days[D]);
+  const live=vs.filter(v=>v.days[D].a>0);
+  const s=SPSUM.sports[mkSport]||{};
+  const [ic,th]=DBDTH[mkSport];
+  el('mkHead').textContent=`${ic} ${th} — ${live.length} สนาม ${live.reduce((a,v)=>a+v.courts,0)} คอร์ท`;
+  const md=f=>hsMedian(live.map(f).filter(x=>x!=null));
+  const prices=live.map(v=>typeof v.price==='number'?v.price:null).filter(Boolean);
+  el('mkKpis').innerHTML=
+    kpi('ค่ากลาง เย็น 18:00–22:00',(md(v=>v.days[D].e)??'—')+'%','ช่วงที่ทุกสนามแย่งกัน')+
+    kpi('ค่ากลาง กลางวัน 10:00–17:00',(md(v=>v.days[D].d)??'—')+'%','ช่องว่างที่ยังไม่มีใครกิน',true)+
+    kpi('ค่ากลาง ทั้งวัน',(md(v=>v.days[D].a)??'—')+'%','ตัวเลขที่แผนเราต้องเทียบ')+
+    kpi('ค่ากลาง ราคา/ชม.',(prices.length?hsMedian(prices):'—')+' ฿','จาก '+prices.length+' สนาม')+
+    kpi('ค่ากลาง ขนาดสนาม',(md(v=>v.courts)??'—')+' คอร์ท','ของเรา '+({badminton:10,tennis:2,pickleball:4,basketball:1}[mkSport])+' คอร์ทในแผน 2');
+  const agg={};
+  live.forEach(v=>{const bh=v.days[D].bh;for(const hh in bh){(agg[hh]=agg[hh]||[]).push(bh[hh]);}});
+  const hrs=Object.keys(agg).map(Number).sort((a,b)=>a-b).filter(x=>agg[x].length>=Math.min(4,live.length));
+  let c='<table style="min-width:640px"><tr>'+hrs.map(x=>`<th class="r" style="font-size:.74rem;padding:2px 4px">${String(x).padStart(2,'0')}</th>`).join('')+'</tr><tr>';
+  hrs.forEach(x=>{const m=hsMedian(agg[x]);c+=`<td style="vertical-align:bottom;padding:2px 4px"><div title="${m}%" style="height:${Math.max(3,Math.round(m*1.05))}px;background:${mkColor(m)};border-radius:3px 3px 0 0;min-width:26px"></div></td>`;});
+  c+='</tr><tr>'+hrs.map(x=>`<td class="r" style="font-size:.72rem;padding:3px 4px"><b>${hsMedian(agg[x])}%</b><br><span class="sub">(${agg[x].length})</span></td>`).join('')+'</tr></table>';
+  el('mkChart').innerHTML=c;
+  let t='<tr><th>สนาม</th><th>ทำเล</th><th class="r">คอร์ท</th><th class="r">฿/ชม.</th><th>เวลาเปิด</th><th class="r">เย็น</th><th class="r">กลางวัน</th><th class="r">ทั้งวัน</th></tr>';
+  const pc=x=>x==null?'<span class="sub">—</span>':`<span style="display:inline-block;min-width:44px;padding:1px 6px;border-radius:5px;background:${mkColor(x)};color:${x>=55?'#fff':'#22302a'}">${x}%</span>`;
+  [...vs].sort((a,b)=>(b.days[D].e??-1)-(a.days[D].e??-1)).forEach(v=>{
+    const x=v.days[D], dead=x.a===0;
+    t+=`<tr${dead?' style="opacity:.45"':''}><td>${v.venue}${v.src?' <span class="sub">('+v.src+')</span>':''}${dead?' <span class="sub">ระบบจองไม่ได้ใช้</span>':''}</td>`+
+       `<td class="sub">${v.district}${v.prov!=='กรุงเทพมหานคร'?' · '+v.prov:''}</td><td class="r">${v.courts}</td>`+
+       `<td class="r">${v.price??'—'}</td><td class="sub">${v.open}–${v.close}</td>`+
+       `<td class="r">${pc(x.e)}</td><td class="r">${pc(x.d)}</td><td class="r">${pc(x.a)}</td></tr>`;
+  });
+  el('mkTable').innerHTML=t;
+  const S=SPSUM.sports;
+  el('mkNote').innerHTML=`🔍 <b>${ic} ${th}:</b> เย็น <b>${s.e}%</b> · กลางวัน <b>${s.d}%</b> · ทั้งวัน <b>${s.a}%</b> (ค่ากลางจาก ${SPSUM.days} วันที่เก็บได้) — `+
+    (mkSport==='badminton'?`ตลาดใหญ่สุด ${s.n} สนาม แต่<b>กลางวันตาย ${s.d}%</b> ขายได้จริงแค่ 4–5 ชม./วัน`:
+     mkSport==='tennis'?`<b>กลางวันเต็ม ${s.d}%</b> สวนทางแบดโดยสิ้นเชิง — แต่ทั้งกรุงเทพมีแค่ ${s.n} สนามที่จองออนไลน์ได้ ค่ากลางจึงหยาบ`:
+     mkSport==='pickleball'?`ราคาแพงกว่าแบดเท่าตัว (${s.price} ฿) แต่จองแค่ ${s.a}% ทั้งวัน — <b>คอร์ทผุดเร็วกว่าคนเล่น</b>`:
+     `กลุ่มตัวอย่างเล็ก ${s.n} สนาม — บาสส่วนใหญ่อยู่ในโรงเรียน/หน่วยงาน ไม่ได้เปิดจองออนไลน์`)+
+    `<br>📊 <b>เทียบทั้ง 4 กีฬา (ทั้งวัน):</b> เทนนิส ${S.tennis?.a}% · บาส ${S.basketball?.a}% · แบด ${S.badminton?.a}% · pickleball ${S.pickleball?.a}%`;
+}
 async function loadMarket(){
   const head=el('mkHead'); if(!head) return;
   try{
     const r=await fetch('data/market-latest.json',{cache:'no-store'});
     if(!r.ok) throw new Error('http '+r.status);
     const d=await r.json();
+    MKT=d;
     head.textContent=`${d.n_venues} สนาม ${d.n_courts} คอร์ท`;
     el('mkUpdated').innerHTML='· เก็บเมื่อ <b>'+d.collected+'</b> (วัน'+d.weekday+')';
     const m=d.median;
@@ -3721,6 +3881,7 @@ loadHistory();
 loadSportSummary();
 renderCost();
 loadDBD();
+renderDim();
 setDeal('rent');
 setSide('b2');
 setMode('dense');
@@ -3993,7 +4154,7 @@ window.init3D=function(){
   }
 
   buildSite(); buildHall(); buildOffice(); buildAmenities(); buildDorm();
-  buildCourts(curCourts); buildBask(curBask); buildPB();
+  buildCourts(curCourts); buildBask(curBask); buildPB(); squeezeInterior();
   applyVis(); applyNight();
   
 
@@ -4204,7 +4365,7 @@ function buildCourts(n){
 }
 /* ================= แผน 2 — แบด 10 + เทนนิส 2 ในโถงเดียว ================= */
 const T_L=23.77, T_W=10.97, TZ_L=36.57, TZ_W=18.29, RO_E=6.40, RO_S=3.66;
-const SERV2=HALL_L-2*TZ_L, USE2=HALL_L-SERV2;       // อาคาร 6.86 · โซนคอร์ท 73.14
+const SERV2=HALL_L-2*TZ_L, USE2=HALL_L-SERV2;   // 6.86 · 73.14       // อาคาร 6.86 · โซนคอร์ท 73.14
 function buildCourtsPlan2(){
   const hl=HALL_L/2, hw=HALL_W/2;
   /* แกน X = ความกว้างโถง 40 ม. · แกน Z = ความยาวโถง 80 ม.
@@ -4337,14 +4498,24 @@ function buildBask(n){
   inst(baskGroup,new THREE.BoxGeometry(2.2,.08,.45),MT.wood,BN,true);
 }
 window.rebuildBask=function(n){curBask=n;if(started){buildBask(n);applyVis();applyNight();}};
-window.replan3D=function(){if(started){buildCourts(curCourts);buildPB();applyVis();applyNight();}};
+window.replan3D=function(){if(started){buildCourts(curCourts);buildBask(curBask);buildPB();squeezeInterior();applyVis();applyNight();}};
 
 /* ================= อาคาร 2 ชั้น (แอดมิน/ร้านแบด/ที่พัก) ================= */
+const INTERIOR=[];
+function squeezeInterior(){
+  /* แผน 2 ให้อาคารบริการลึกแค่ 6.86 ม. (ผัง 2D) แทน 10 ม. ของแผน 1 — บีบห้องภายในให้อยู่ในแถบนั้น ไม่ล้ำเข้าคอร์ท */
+  const hl=HALL_L/2, k=(window.__plan==='2')?6.86/10.5:1;
+  INTERIOR.forEach(o=>{
+    if(o.userData.z0===undefined) o.userData.z0=o.position.z;
+    o.scale.z=k;
+    o.position.z=hl-(hl-o.userData.z0)*k;
+  });
+}
 function buildOffice(){
   const hw=HALL_W/2,hl=HALL_L/2,OW=18,OD=OFFICE_L,H1=3.2,H2=2.9;
   const ox=-hw+OW/2+1, oz=hl-OD/2-.5;
-  const g=new THREE.Group();g.position.set(ox,0,oz);scene.add(g);
-  officeShell=new THREE.Group();officeShell.position.set(ox,0,oz);scene.add(officeShell);
+  const g=new THREE.Group();g.position.set(ox,0,oz);scene.add(g);INTERIOR.push(g);
+  officeShell=new THREE.Group();officeShell.position.set(ox,0,oz);scene.add(officeShell);INTERIOR.push(officeShell);
   [[0,0x9a8f7d],[H1,0xcfc7b8]].forEach(([y,c])=>{
     const f=new THREE.Mesh(new THREE.PlaneGeometry(OW,OD),mat(c));
     f.rotation.x=-Math.PI/2;f.position.y=y+.02;f.receiveShadow=true;g.add(f);
@@ -4418,7 +4589,7 @@ function buildOffice(){
 function buildAmenities(){
   const hl=HALL_L/2;
   /* คาเฟ่ */
-  const c=new THREE.Group();c.position.set(14,0,hl-4.2);scene.add(c);
+  const c=new THREE.Group();c.position.set(14,0,hl-4.2);scene.add(c);INTERIOR.push(c);
   const pad=new THREE.Mesh(new THREE.PlaneGeometry(10.5,7.4),mat(0xcbb99a));
   pad.rotation.x=-Math.PI/2;pad.position.y=.03;pad.receiveShadow=true;c.add(pad);
   box(c,new THREE.BoxGeometry(4.6,1.05,.72),mat(0x7a4a2a),0,.53,2.6,0,true);
@@ -4437,7 +4608,7 @@ function buildAmenities(){
   cs.position.set(14,3.1,hl-.15);cs.rotation.y=Math.PI;roofGroup.add(cs);
 
   /* ห้องน้ำ + อาบน้ำ 8×9 ม. */
-  const r=new THREE.Group();r.position.set(5,0,hl-5.4);scene.add(r);
+  const r=new THREE.Group();r.position.set(5,0,hl-5.4);scene.add(r);INTERIOR.push(r);
   const tf=new THREE.Mesh(new THREE.PlaneGeometry(7.8,8.8),MT.tile);
   tf.rotation.x=-Math.PI/2;tf.position.y=.04;tf.receiveShadow=true;r.add(tf);
   const wm=mat(0xeceff0,{side:THREE.DoubleSide});
