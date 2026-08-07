@@ -4322,8 +4322,9 @@ function renderCostTotal(){
   });
   t+=`<tr style="background:#eef7f1"><td><b>รวมงบสนามแผน 2</b></td><td class="r"><b>23</b></td><td class="r"><b>${B(SPORTS.reduce((a,s)=>a+s.area*s.n,0))}</b></td><td></td><td class="r"><b>${B(TL)}–${B(TH)}</b></td><td class="r">100%</td></tr>`;
   tb.innerHTML=t;
-  const badm=rows.find(r=>r.sp.k==='badminton'), ten=rows.find(r=>r.sp.k==='tennis');
-  const p1lo=badm.c.lo*18, p1hi=badm.c.hi*18;
+  const badmSp=SPORTS.find(s=>s.k==='badminton'), tenSp=SPORTS.find(s=>s.k==='tennis');
+  const badmC=costOf(badmSp), ten={c:costOf(tenSp), lo:costOf(tenSp).lo*2, hi:costOf(tenSp).hi*2};
+  const p1lo=badmC.lo*18, p1hi=badmC.hi*18;
   el('costTotalNote').innerHTML=
     `📌 <b>เทียบกับแผน 1 (แบด 18 คอร์ทล้วน):</b> งบสนามแผน 1 = <b>${B(p1lo)}–${B(p1hi)} ฿</b> · แผน 2 = <b>${B(TL)}–${B(TH)} ฿</b> → แผน 2 แพงกว่าราว <b>${B((TL+TH)/2-(p1lo+p1hi)/2)} ฿</b><br>`+
     `⚠️ <b>ตัวเลขนี้แก้จากที่เคยประเมินไว้หน้า "งบ & รายได้แผน 2"</b> ซึ่งต่ำเกินไป (เคยใส่เทนนิส 0.9–1.4 ล. สำหรับ 2 คอร์ท) — ของจริงคือ <b>${B(ten.lo)}–${B(ten.hi)} ฿</b> เพราะคอร์ทเทนนิสกินพื้นที่ 668.9 ตร.ม. ไม่ใช่ขนาดเท่าคอร์ทแบด<br>`+
