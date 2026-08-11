@@ -5430,6 +5430,10 @@ function buildPB(){
   inst(pbGroup,new THREE.BoxGeometry(.05,.86,PW+.5),MT.net,N);
   inst(pbGroup,new THREE.CylinderGeometry(.05,.05,.86,8),MT.dark,P);
   inst(pbGroup,GE.lampBar,MT.lamp,L);
+
+  /* แผน 2: ย้ายโซนเพิง (Pickleball + บาส) ไปฝั่งขวา (+X) ให้ตรงผัง — ฝั่งซ้ายเว้นไว้เป็นที่จอด/Commercial */
+  const _sx=(window.__plan==='2')?-1:1;
+  [baskGroup,bayGroup,shedColGroup,pbGroup].forEach(g=>{ if(g) g.scale.x=_sx; });
 }
 window.rebuild3D=function(n){curCourts=n;if(started){buildCourts(n);buildPB();applyNight();}};
 
