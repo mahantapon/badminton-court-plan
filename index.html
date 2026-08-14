@@ -1697,6 +1697,102 @@
   <div class="pagenav"><button class="btn ghost" onclick="go('p32')">← Sponsor แบรนด์ไม้</button><span></span></div>
 </section>
 
+<!-- ============ P35 สรุปผู้บริหาร ============ -->
+<section class="page" id="p35">
+  <h2>📋 สรุปผู้บริหาร — อ่านจบใน 2 นาที</h2>
+  <p class="sub" style="margin:-8px 0 16px">โครงการศูนย์กีฬา แปลงโรงงานเดิม บางขุนเทียน-ชายทะเล · ที่ดิน 4-0-49 ไร่ (6,596 ตร.ม.) · ทุกตัวเลขคิดสดจากข้อมูลจริงในเว็บนี้</p>
+  <div class="card">
+    <h3 style="margin-top:0">💰 ตัวเลขหลัก</h3>
+    <div class="kpis" id="execKpi"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">✅ 3 จุดขายที่คู่แข่งในเมืองไม่มี</h3>
+    <div class="steps">
+      <div class="step"><span class="n"></span><div><b>ที่จอด 93 คัน + ลานหน้าเปิดโล่งริมคลอง</b> — คู่แข่งในเมืองพื้นที่แน่น จอดไม่พอ ทำ landmark ถ่ายรูปไม่ได้</div></div>
+      <div class="step"><span class="n"></span><div><b>เปิดกลางวัน + mixed-use</b> (คาเฟ่ · ที่พัก · มวย) — คู่แข่งเปิดบ่าย 3 กลางวันตาย เราเอาคนมาเติมได้</div></div>
+      <div class="step"><span class="n"></span><div><b>18 คอร์ทจบงานแข่งใน 1 วัน</b> — ในโซนเราไม่มีสนามไหนใหญ่พอรับงานแข่งได้</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">⚠️ 3 ความเสี่ยงใหญ่ (พูดตรงๆ)</h3>
+    <div style="overflow-x:auto"><table>
+      <tr><th>ความเสี่ยง</th><th>ข้อมูลจริง</th><th>ทางรับมือ</th></tr>
+      <tr><td><b>กลางวันตาย</b></td><td>ทั้งตลาด กทม. จองกลางวันแค่ 11% (เย็นเต็ม 96%)</td><td>อคาเดมี · บุฟเฟต์ · มวย · คาเฟ่ · บาส เติมกลางวัน</td></tr>
+      <tr><td><b>ตลาดเย็นอิ่มตัว</b></td><td>เย็นทุกสนามเต็มอยู่แล้ว ไม่มีที่ให้โต</td><td>ชนะด้วยกลางวัน + บริการ ไม่ใช่แย่งเย็น</td></tr>
+      <tr><td><b>ตัวเลขยังต้องยืนยัน</b></td><td>ความกว้างโถงวัดได้ 39.16 (ไม่ใช่ 40) · ยังไม่รู้ระบบไฟ</td><td>วัดหน้างานเพิ่ม + ขอใบเสนอราคาจริงก่อนลงเงิน</td></tr>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">📊 หลักฐานที่ยืนยันดีมานด์ (ไม่ใช่ตัวเลขเดา)</h3>
+    <div class="note blue" id="execProof">กำลังโหลด…</div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">🔎 อยากดูลึกไปที่ไหน</h3>
+    <p class="sub" style="margin-bottom:10px">
+      <button class="btn ghost" onclick="go('p34')">🗺️ ผังรวมโครงการ</button>
+      <button class="btn ghost" onclick="go('p20')">📊 อัตราจองสด</button>
+      <button class="btn ghost" onclick="go('p7')">💰 รายได้รวม</button>
+      <button class="btn ghost" onclick="go('p36')">🧪 ทดสอบความทน</button>
+      <button class="btn ghost" onclick="go('p11')">📈 IRR 10 ปี</button></p>
+  </div>
+  <div class="pagenav"><span></span><button class="btn" onclick="go('p34')">ถัดไป: ผังรวมโครงการ →</button></div>
+</section>
+
+<!-- ============ P36 ทดสอบความทน ============ -->
+<section class="page" id="p36">
+  <h2>🧪 ทดสอบความทน — ถ้าจองไม่ถึงเป้าจะรอดมั้ย</h2>
+  <p class="sub" style="margin:-8px 0 16px">ธนาคาร/นักลงทุนถามเสมอ "ถ้าไม่เป็นตามแผนล่ะ?" · หน้านี้ตอบด้วย 3 ฉากทัศน์ + ปรับอัตราจองดูผลสดได้</p>
+  <div class="card">
+    <h3 style="margin-top:0">🎚️ ลองปรับอัตราการจองเฉลี่ยทั้งวัน</h3>
+    <div class="controls">
+      <div class="ctrl"><label>อัตราจองเฉลี่ยทั้งวัน (ทุกกีฬา): <span class="val" id="sensOccVal">45%</span></label>
+        <input type="range" id="sensOcc" min="25" max="70" step="1" value="45" oninput="renderSens()"></div>
+    </div>
+    <div class="kpis" id="sensKpi"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">📉 3 ฉากทัศน์ — แย่ / ปกติ / ดี</h3>
+    <div style="overflow-x:auto"><table id="sensTable"></table></div>
+    <div class="note" id="sensNote"></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p11')">← IRR 10 ปี</button><span></span></div>
+</section>
+
+<!-- ============ P37 ดึงคน & รักษาลูกค้า ============ -->
+<section class="page" id="p37">
+  <h2>🎯 ดึงคน &amp; รักษาลูกค้า — ทำให้คนมาและอยู่</h2>
+  <p class="sub" style="margin:-8px 0 16px">4 หน้าก่อนหน้าคือ "พาใครเข้ามา" · หน้านี้คือ "ทำให้คนเดินเข้าประตูและกลับมาอีก" ซึ่งเป็นกลไกที่สำคัญที่สุดของสนามแบดไทย</p>
+  <div class="card">
+    <h3 style="margin-top:0">👥 ก๊วน &amp; ลีกในสนาม — ตัวเติมชั่วโมงเบอร์ 1</h3>
+    <div class="note blue" style="margin-top:0">คนไทยเล่นแบดเป็น<b>ก๊วนประจำ</b> ไม่ใช่จองเดี่ยว · สนามที่รอดคือสนามที่มีก๊วนแน่น — นี่คือคำตอบตรงที่สุดของ "กลางวันตาย"</div>
+    <div style="overflow-x:auto"><table>
+      <tr><th>วิธี</th><th>ทำไมเวิร์ค</th></tr>
+      <tr><td><b>เปิดก๊วนประจำของสนามเอง</b> (จ.-ศ. กลางวัน/เย็น)</td><td>ล็อกคอร์ทเป็นก้อน · คนมาสม่ำเสมอ · เก็บเหมาเดือน 800–1,000/คน</td></tr>
+      <tr><td><b>ลีกภายใน</b> (แบ่งดิวิชั่น เก็บแต้มรายเดือน)</td><td>สร้างเหตุผลให้กลับมาทุกสัปดาห์ · แข่งกันเอง = community เหนียว</td></tr>
+      <tr><td><b>ก๊วนบริษัท / ดีลองค์กร</b></td><td>บริษัทเช่าจัด sport day / ก๊วนพนักงานประจำ = เติม<b>กลางวันวันธรรมดา</b></td></tr>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">📱 การตลาดออนไลน์ + จองผ่าน LINE — ต้นทุนเกือบศูนย์</h3>
+    <div style="overflow-x:auto"><table>
+      <tr><th>ช่องทาง</th><th>ทำอะไร</th></tr>
+      <tr><td><b>LINE OA เช็คคิว + จอง</b></td><td>รีวิวบอกเองว่า Racket One ให้เช็คคิวผ่าน LINE = จุดขาย · แก้ปัญหา "จองยาก" ที่ลูกค้าทุกสนามบ่น</td></tr>
+      <tr><td><b>TikTok / Reels</b></td><td>คลิปตีสวยๆ + landmark ลูกขนไก่ยักษ์ = คอนเทนต์ไวรัลต้นทุนต่ำ</td></tr>
+      <tr><td><b>รูปถ่าย Muji + ริมคลอง</b></td><td>ลูกค้าถ่ายรูปแล้วติดแท็ก = โฆษณาฟรี (คู่แข่งในเมืองไม่มีวิวแบบนี้)</td></tr>
+    </table></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">🎫 สมาชิก — ล็อกลูกค้าไม่ให้ไปไหน</h3>
+    <div class="note">CDC ใช้ระบบสมาชิกจนคนทั่วไปจองไม่ได้ (เราเจอมากับตา) · พัฒนาฯ ใช้ "เล่น 10 ชม. แถม 1" · <b>สมาชิกทำให้ลูกค้าจ่ายล่วงหน้า (เงินสดเข้าก่อน) + ผูกให้กลับมา</b><br>
+      → แนะนำ: บัตรสมาชิกรายปี (จองล่วงหน้าก่อนคนทั่วไป + ส่วนลดคอร์ท + ส่วนลดโปรช็อป/คาเฟ่) · <b>Pre-sale สมาชิกก่อนเปิด = เงินสดก้อนแรกที่ช่วยจ่ายค่าเช่า</b></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">🔗 ทั้งหมดเชื่อมกันเป็นเรื่องเดียว</h3>
+    <div class="note blue">LINE/social <b>ดึงคนรู้จัก</b> → ก๊วน/ลีก <b>ทำให้มาประจำ</b> → สมาชิก <b>ล็อกไว้ไม่ให้ไปไหน</b> · ทุกข้อตอบโจทย์เดียวกับ 4 หน้าก่อนหน้า: <b>เติมกลางวัน + รายได้ไม่พึ่งค่าคอร์ทอย่างเดียว</b></div>
+  </div>
+  <div class="pagenav"><button class="btn ghost" onclick="go('p33')">← Mixed-use</button><span></span></div>
+</section>
+
 <section class="page" id="p10">
   <h2>กระแสเงินสดปีแรก &amp; ภาษี</h2>
   <div class="card p2only" style="display:none">
@@ -3084,19 +3180,19 @@ const maxCourts=()=>Math.min(MODES[mode].maxPerSide,Math.floor(USABLE_L/MODES[mo
 
 /* ---------- เมนู 2 ชั้น: กลุ่ม → หน้า ---------- */
 const GROUPS=[
-  {id:'g1',n:'🏗️ โครงการ',  pages:[['p34','🗺️ ผังรวมโครงการ'],['p1','ผัง & จำนวนคอร์ท'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
+  {id:'g1',n:'🏗️ โครงการ',  pages:[['p35','📋 สรุปผู้บริหาร'],['p34','🗺️ ผังรวมโครงการ'],['p1','ผัง & จำนวนคอร์ท'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
   {id:'g2',n:'📊 ตลาด',      pages:[['p9','① ใครแข่งกับเรา'],['p20','② วันนี้คอร์ทเต็มแค่ไหน'],['p21','③ ย้อนดูอดีต + จองล่วงหน้า'],['p27','④ คู่แข่งกำไรหรือขาดทุน'],['p22','⑤ ลูกค้าบ่นอะไร'],['p8','⑥ สรุปโมเดลธุรกิจ']]},
   {id:'g5',n:'💰 รายได้มาจากไหน',pages:[['p7','① รายได้รวม & คืนทุน'],['p16','② สอน & อคาเดมี'],['p15','③ งานแข่ง & Event']]},
-  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
-  {id:'h5',n:'🧲 กลยุทธ์ดึงคน',pages:[['p30','🏛️ ดีล กทม.'],['p31','⭐ Magnet โค้ชดัง'],['p32','🏸 Sponsor แบรนด์ไม้'],['p33','🏗️ Mixed-use']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR'],['p36','🧪 ทดสอบความทน']]},
+  {id:'h5',n:'🧲 กลยุทธ์ดึงคน',pages:[['p30','🏛️ ดีล กทม.'],['p31','⭐ Magnet โค้ชดัง'],['p32','🏸 Sponsor แบรนด์ไม้'],['p33','🏗️ Mixed-use'],['p37','🎯 ดึงคน & รักษาลูกค้า']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 const GROUPS2=[
-  {id:'h1',n:'🏗️ โครงการ',   pages:[['p34','🗺️ ผังรวมโครงการ'],['p23','ผังโถงแบด'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
+  {id:'h1',n:'🏗️ โครงการ',   pages:[['p35','📋 สรุปผู้บริหาร'],['p34','🗺️ ผังรวมโครงการ'],['p23','ผังโถงแบด'],['p28','ขนาดสนามมาตรฐาน'],['p2','ภาพ 3D'],['p3','ภายในอาคาร'],['p4','พื้นที่รอบนอก']]},
   {id:'g2',n:'📊 ตลาด',      pages:[['p9','① ใครแข่งกับเรา'],['p20','② วันนี้คอร์ทเต็มแค่ไหน'],['p21','③ ย้อนดูอดีต + จองล่วงหน้า'],['p27','④ คู่แข่งกำไรหรือขาดทุน'],['p22','⑤ ลูกค้าบ่นอะไร'],['p8','⑥ สรุปโมเดลธุรกิจ']]},
   {id:'h3',n:'💰 รายได้มาจากไหน',pages:[['p7','① รายได้รวมทุกกีฬา'],['p16','② สอน & อคาเดมี (4 กีฬา)'],['p25','③ งานแข่ง & Event (4 กีฬา)'],['p15','④ เจาะลึกงานแข่งแบด']]},
-  {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR']]},
-  {id:'h5',n:'🧲 กลยุทธ์ดึงคน',pages:[['p30','🏛️ ดีล กทม.'],['p31','⭐ Magnet โค้ชดัง'],['p32','🏸 Sponsor แบรนด์ไม้'],['p33','🏗️ Mixed-use']]},
+  {id:'g3',n:'💰 การเงิน',   pages:[['p24','งบ & รายได้แผน 2'],['p5','เกรดพื้นยาง'],['p26','ราคาสร้างสนาม 4 กีฬา'],['p6','งบลงทุน & เงินกู้'],['p18','Feasibility & เฟส'],['p19','ราคากลาง ต่อรองผู้รับเหมา'],['p10','กระแสเงินสด & ภาษี'],['p11','งบ 10 ปี · IRR'],['p36','🧪 ทดสอบความทน']]},
+  {id:'h5',n:'🧲 กลยุทธ์ดึงคน',pages:[['p30','🏛️ ดีล กทม.'],['p31','⭐ Magnet โค้ชดัง'],['p32','🏸 Sponsor แบรนด์ไม้'],['p33','🏗️ Mixed-use'],['p37','🎯 ดึงคน & รักษาลูกค้า']]},
   {id:'g4',n:'📋 แผนงาน',    pages:[['p13','ไทม์ไลน์ & ทีมงาน'],['p12','สัญญา & กฎหมาย'],['p14','ความเสี่ยง & ขยาย']]},
 ];
 let PLAN=localStorage.getItem('bplan')||'1';
@@ -3927,7 +4023,7 @@ async function loadSportSummary(){
     const r=await fetch('data/sport-summary.json',{cache:'no-store'});
     if(!r.ok) throw 0;
     SPSUM=await r.json();
-    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn(); renderRvn(); renderP7Plan2(); renderPlan2Fin(); renderCoach(); renderRev3();
+    renderP24(); renderSportCompare(); renderMarketSport(); renderCpDyn(); renderRvn(); renderP7Plan2(); renderExec(); renderSens(); renderPlan2Fin(); renderCoach(); renderRev3();
   }catch(e){}
 }
 const SPMETA={badminton:['🏸 แบดมินตัน',18],tennis:['🎾 เทนนิส',0],pickleball:['🥒 Pickleball',4],basketball:['🏀 บาส 3x3',1]};
@@ -3982,6 +4078,85 @@ function renderSportCompare(){
   if(n) n.innerHTML=`💡 <b>เรียงจากแน่นสุด (ทั้งวัน):</b> เทนนิส ${S.tennis?.a}% → บาส ${S.basketball?.a}% → แบด ${S.badminton?.a}% → pickleball ${S.pickleball?.a}%<br>`+
     `<b>อ่านให้ขาด:</b> แบดมีสนามเยอะสุด (${S.badminton?.n}) แต่ทั้งวันจองแค่ ${S.badminton?.a}% เพราะกลางวันตาย · เทนนิสมีแค่ ${S.tennis?.n} สนามทั้งกรุงเทพที่จองออนไลน์ได้ แต่<b>กลางวันเต็ม ${S.tennis?.d}%</b> = ของขาดตลาด · pickleball สนามผุดเร็วกว่าคนเล่น`+
     (ex?`<br>📌 ตัดออก ${ex} รายการที่ระบบจองไม่ได้ใช้จริง (ว่าง 0% หรือเต็ม 100% ตลอด)`:'');
+}
+/* ================= สรุปผู้บริหาร + ทดสอบความทน (p35/p36) ================= */
+function planEcon(occPct){
+  if(!SPSUM||typeof SPORTS==='undefined'||!window.__D) return null;
+  const D=window.__D, HRS=14, MDAYS=30;
+  let court=0;
+  ['badminton','tennis','pickleball','basketball'].forEach(k=>{
+    const s=SPSUM.sports[k], sp=SPORTS.find(x=>x.k===k); if(!s||!sp||!sp.n||s.a==null) return;
+    const price=k==='basketball'?800:(s.price||0);
+    const occ=occPct!=null?occPct/100:(s.a/100);
+    court+=Math.round(sp.n*price*HRS*occ*MDAYS);
+  });
+  const addons=70000+45000+18720+124400+66000;
+  const revMonth=court+addons;
+  const courtKit1=D.matCost+D.lightCost+D.netCost;
+  let kl=0,kh=0; SPORTS.forEach(sp=>{if(!sp.n)return;const c=costOf(sp);kl+=c.lo*sp.n;kh+=c.hi*sp.n;});
+  const kit2=(kl+kh)/2;
+  const total2=D.total-courtKit1+kit2;
+  const loanPct=D.total>0?D.loan/D.total:0.7;
+  const loan2=total2*loanPct, equity2=total2-loan2, pmt2=pmtCalc(loan2,D.rate,D.yrs);
+  const dep=Math.max(total2-kit2-1200000,0)/20+kit2/10+240000;
+  const sch=rentSched20(D.rentBase), rentOf=y=>sch.rows[Math.min(Math.floor((y-1)/4),4)].m;
+  const cf=[-equity2]; let bal=loan2, cum=-equity2, payback=null;
+  for(let y=1;y<=10;y++){
+    const ramp=y===1?0.75:y===2?0.9:1;
+    const eb=revMonth*12*ramp-D.opexNoRentAll*12-rentOf(y)*12;
+    const int=bal*D.rate, prin=Math.min(pmt2*12-int,bal); bal=Math.max(bal-prin,0);
+    const fc=eb-int-smeTax(eb-int-dep)-prin;
+    cf.push(fc); cum+=fc; if(payback===null&&cum>0)payback=y;
+  }
+  const ebM=revMonth-D.opexNoRentAll-D.rentBase;
+  const intY=loan2*D.rate;
+  const freeM=(ebM*12-intY-smeTax(ebM*12-intY-dep)-(pmt2*12-intY))/12;
+  return {revMonth,total2,equity2,pmt2,irr:irr(cf),payback,freeMonth:freeM,ebitdaM:ebM,court};
+}
+const B0=n=>Math.round(n).toLocaleString();
+function renderExec(){
+  const box=el('execKpi'); if(!box) return;
+  const P=planEcon(null); if(!P){box.innerHTML='<p class="sub">กำลังโหลดข้อมูล…</p>';return;}
+  box.innerHTML=
+    kpi('งบลงทุนรวม',B0(P.total2)+' ฿','แปลงโรงงานเดิม + 6 โซน')+
+    kpi('เงินลงทุนเอง',B0(P.equity2)+' ฿','กู้ 70% ที่เหลือ')+
+    kpi('รายได้/เดือน',B0(P.revMonth)+' ฿','ค่าคอร์ท '+B0(P.court)+' + เสริม')+
+    kpi('เงินสดเหลือ/เดือน',B0(P.freeMonth)+' ฿','หลังจ่ายหนี้+ภาษี',P.freeMonth<0)+
+    kpi('IRR 10 ปี',(P.irr!=null?(P.irr*100).toFixed(0):'—')+'%','ต่อเงินลงทุนเอง',P.irr==null||P.irr<0.12)+
+    kpi('คืนทุน',P.payback?'ปีที่ '+P.payback:'เกิน 10 ปี','นับจากเงินตัวเอง',!P.payback);
+  const pr=el('execProof'); const S=SPSUM.sports;
+  if(pr) pr.innerHTML=`🔥 <b>เย็นทั้งตลาดเต็มเกือบหมด</b> — แบดเย็น <b>${S.badminton?.e}%</b> · <b>กลางวันแทบว่าง ${S.badminton?.d}%</b> = ช่องที่เราเข้า · เก็บจริงจากระบบจอง ${SPSUM.n_venues||35}+ สนาม 4 กีฬา วันละ 2 รอบ · CDC (8 คอร์ท) ขายหมดล่วงหน้า 2 สัปดาห์จนคนทั่วไปจองไม่ได้ = ดีมานด์เทนนิสมีจริง (เก็บไว้เฟสหลัง)`;
+}
+let sensReady=false;
+function renderSens(){
+  const box=el('sensKpi'); if(!box) return;
+  const occ=+el('sensOcc').value; el('sensOccVal').textContent=occ+'%';
+  const P=planEcon(occ); if(!P){box.innerHTML='<p class="sub">กำลังโหลด…</p>';return;}
+  const ok=P.freeMonth>0 && P.irr!=null && P.irr>0.12;
+  box.innerHTML=
+    kpi('รายได้/เดือน',B0(P.revMonth)+' ฿','ที่จอง '+occ+'%')+
+    kpi('เงินสดเหลือ/เดือน',B0(P.freeMonth)+' ฿',P.freeMonth>0?'บวก — จ่ายหนี้ไหว':'ติดลบ — ต้องเติมเงิน',P.freeMonth<0)+
+    kpi('IRR 10 ปี',(P.irr!=null?(P.irr*100).toFixed(0):'—')+'%','',P.irr==null||P.irr<0.12)+
+    kpi('คืนทุน',P.payback?'ปีที่ '+P.payback:'เกิน 10 ปี','',!P.payback)+
+    kpi('ตัดสิน',ok?'✅ รอด':'⚠️ เสี่ยง',ok?'ที่จอง '+occ+'% ยังไหว':'ที่จอง '+occ+'% ต้องระวัง',!ok);
+  // ตาราง 3 ฉากทัศน์
+  const tb=el('sensTable');
+  const rows=[['😰 แย่ (35%)',35],['🙂 ปกติ (50%)',50],['😎 ดี (62%)',62]];
+  let t='<tr><th>ฉากทัศน์</th><th class="r">รายได้/เดือน</th><th class="r">เงินสดเหลือ/เดือน</th><th class="r">IRR</th><th class="r">คืนทุน</th><th>ตัดสิน</th></tr>';
+  rows.forEach(([lb,o])=>{
+    const q=planEcon(o), okk=q.freeMonth>0&&q.irr!=null&&q.irr>0.12;
+    t+=`<tr${o===50?' style="background:#eef7f1"':''}><td><b>${lb}</b></td><td class="r">${B0(q.revMonth)}</td>`+
+       `<td class="r" style="color:${q.freeMonth>0?'#1e6b45':'#a33'}"><b>${B0(q.freeMonth)}</b></td>`+
+       `<td class="r">${q.irr!=null?(q.irr*100).toFixed(0)+'%':'—'}</td><td class="r">${q.payback?'ปี '+q.payback:'>10'}</td>`+
+       `<td>${okk?'<b style="color:#1e6b45">รอด</b>':'<b style="color:#a33">เสี่ยง</b>'}</td></tr>`;
+  });
+  tb.innerHTML=t;
+  const worst=planEcon(35);
+  el('sensNote').innerHTML=`🎯 <b>คำถามที่ธนาคารถาม — ตอบแล้ว:</b> ${worst.freeMonth>0
+    ?`แม้ฉากทัศน์แย่สุด (จองแค่ 35% ทั้งวัน) <b style="color:#1e6b45">เงินสดยังบวก ${B0(worst.freeMonth)} ฿/เดือน</b> = จ่ายหนี้ไหว ไม่เจ๊ง`
+    :`ฉากทัศน์แย่สุด (35%) <b style="color:#a33">เงินสดติดลบ ${B0(worst.freeMonth)} ฿/เดือน</b> — จุดคุ้มทุนอยู่สูง ต้องมีเงินสำรองหรือลดต้นทุนคงที่`}<br>`+
+    `⚠️ <b>สมมติฐาน:</b> ปรับ<b>อัตราจองทุกกีฬาเท่ากัน</b>ตามค่าที่เลือก · ราคา/ค่าเช่า/รายได้เสริมคงเดิม · ยังไม่รวมค่าสอน/มวย/ที่พัก/คาเฟ่ที่จะเพิ่มรายได้จริง — <b>ตัวเลขนี้จึงเป็นฐานที่ระวังไว้ก่อน</b>`;
+  sensReady=true;
 }
 /* ================= Magnet โค้ชดัง (p31) ================= */
 function renderMagnet(){
@@ -4892,6 +5067,8 @@ renderCoach();
 renderRvn();
 renderP7Plan2();
 renderPlan2Fin();
+renderExec();
+renderSens();
 renderMagnet();
 renderRisk();
 renderTL();
@@ -4899,7 +5076,8 @@ setDeal('rent');
 setSide('b2');
 setMode('dense');
 bHeatRender();
-if(PLAN==='2'){setPlan('2');}else{go('p1')};
+if(PLAN==='2'){setPlan('2');}else{go('p1')}
+go('p35');
 </script>
 
 <script type="importmap">
